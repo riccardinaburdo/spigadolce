@@ -34,29 +34,25 @@ const classes = classFiles
     </div>
   </section>
 
-  <!-- Booking Platforms -->
+  <!-- Booking -->
   <section class="booking-section">
     <h2>Book Your Spot</h2>
-    <p class="subtitle">Reserve through our booking partners</p>
-    <div class="booking-platforms">
-      {booking.platforms.map((p) => (
-        p.url ? (
-          <a href={p.url} target="_blank" rel="noopener" class="platform-card">
-            <span class="platform-icon">{p.icon}</span>
-            <h3>{p.name}</h3>
-            <p>{p.description}</p>
-            <span class="btn-outline">Book Now</span>
-          </a>
-        ) : (
-          <div class="platform-card">
-            <span class="platform-icon">{p.icon}</span>
-            <h3>{p.name}</h3>
-            <p>{p.description}</p>
-            <span class="btn-outline" style="opacity: 0.5;">Coming Soon</span>
-          </div>
-        )
-      ))}
-    </div>
+    <p class="subtitle">Reserve on ClassBento</p>
+    {booking.platform.url ? (
+      <a href={booking.platform.url} target="_blank" rel="noopener" class="platform-card" style="margin: 0 auto;">
+        <span class="platform-icon">{booking.platform.icon}</span>
+        <h3>{booking.platform.name}</h3>
+        <p>{booking.platform.description}</p>
+        <span class="btn-outline">Book Now</span>
+      </a>
+    ) : (
+      <div class="platform-card" style="margin: 0 auto;">
+        <span class="platform-icon">{booking.platform.icon}</span>
+        <h3>{booking.platform.name}</h3>
+        <p>{booking.platform.description}</p>
+        <span class="btn-outline" style="opacity: 0.5;">Coming Soon</span>
+      </div>
+    )}
     <p class="booking-fallback">{booking.fallbackMessage} <a href={booking.fallbackUrl}>Contact us</a></p>
   </section>
 
