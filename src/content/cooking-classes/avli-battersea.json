@@ -1,0 +1,13 @@
+{
+  "slug": "handmade-pasta-avli-battersea",
+  "title": "Handmade Italian Pasta at Avli of Battersea",
+  "date": "2025-07-02",
+  "price": 38,
+  "currency": "GBP",
+  "location": "Avli of Battersea, London",
+  "description": "Come join us at Avli of Battersea for a fun and interactive cooking experience. Learn to make traditional Pugliese orecchiette with Greek meze and wine.",
+  "includes": ["Two-hour pasta-making class", "Greek meze and wine", "Apron and pasta tools provided"],
+  "image": "/images/cooking-classes/avli-battersea.jpg",
+  "status": "past",
+  "order": 2
+}

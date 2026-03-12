@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const press = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/content/press/press.json'), 'utf-8'));
+---
+
+<BaseLayout title="Press | Spigadolce" currentPath="/press">
+  <div class="page-header">
+    <h1>Press</h1>
+  </div>
+
+  <section class="section">
+    <div class="press-grid">
+      {press.map((p) => (
+        <a href={p.url} target="_blank" rel="noopener" class="press-card">
+          <img src={p.image} alt={p.outlet} />
+          <div class="press-card-body">
+            <p class="outlet">{p.outlet}</p>
+            <h3>{p.title}</h3>
+            <p class="date">{new Date(p.date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            <p style="font-size: 0.85rem; color: #666; margin-top: 0.3rem;">{p.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,31 @@
+{
+  "slug": "troccoli-with-octopus",
+  "title": "Troccoli with Octopus",
+  "category": "Troccoli",
+  "description": "Traditional pasta dish combining fresh troccoli with tender octopus in tomato sauce.",
+  "servings": "4 people",
+  "prepTime": "15 min",
+  "cookTime": "1h 35min",
+  "image": "/images/recipes/troccoli-octopus.jpg",
+  "ingredients": [
+    "300 g troccoli",
+    "800 g fresh octopus",
+    "300 g tomato pulp",
+    "2 tablespoons extra virgin olive oil",
+    "1 tablespoon chopped parsley",
+    "Salt",
+    "1 chili pepper (optional)"
+  ],
+  "steps": [
+    "Clean the octopus: remove eyes, beak, turn the sac inside out and clean.",
+    "Pre-cook the octopus to tenderize it.",
+    "After initial cooking, cut the octopus into pieces, reserve some tentacle tips for garnish.",
+    "In a pan with oil, add chopped octopus and cooking water; cook until liquid is absorbed.",
+    "Add tomato pulp, salt and chili; cook about 30 minutes on low heat.",
+    "Cook troccoli in salted water for about 10 minutes.",
+    "Transfer pasta to the pan with the sauce, toss together, garnish with fresh parsley."
+  ],
+  "notes": "The octopus will be rubbery if not tenderized, so pre-cooking is essential.",
+  "order": 4,
+  "date": "2024-05-19"
+}

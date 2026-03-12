@@ -1,0 +1,90 @@
+---
+import navigation from '../content/pages/navigation.json';
+import footer from '../content/pages/footer.json';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  currentPath?: string;
+}
+
+const { title, currentPath = '' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content="Spigadolce - Authentic Pugliese Cooking Experiences by Riccardina Burdo" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-brand">
+      <a href="/">
+        <div class="brand-name">Spigadolce</div>
+        <div class="brand-subtitle">Authentic Pugliese Cuisine</div>
+      </a>
+    </div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+  </header>
+
+  <nav class="site-nav closed" id="site-nav">
+    <ul>
+      {navigation.menu.map((item) => (
+        <li class={item.children ? 'has-dropdown' : ''}>
+          <a href={item.url} class={currentPath === item.url || (item.children && item.children.some(c => currentPath === c.url || currentPath.startsWith(c.url + '/'))) ? 'active' : ''}>
+            {item.label}
+          </a>
+          {item.children && (
+            <ul class="dropdown">
+              {item.children.map((child) => (
+                <li>
+                  <a href={child.url} class={currentPath === child.url ? 'active' : ''}>
+                    {child.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-social">
+      <a href={footer.social.facebook} target="_blank" rel="noopener">Facebook</a>
+      <a href={footer.social.youtube} target="_blank" rel="noopener">YouTube</a>
+      <a href={footer.social.instagram} target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <div class="footer-newsletter">
+      <p>{footer.newsletter}</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Your email address" />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+    <p class="copyright">&copy; {footer.copyright}</p>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('site-nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        nav.classList.toggle('closed');
+      });
+    }
+  </script>
+</body>
+</html>

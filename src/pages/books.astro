@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const books = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/content/books/books.json'), 'utf-8'));
+---
+
+<BaseLayout title="My Books | Spigadolce" currentPath="/books">
+  <div class="page-header">
+    <h1>My Books</h1>
+  </div>
+
+  <section class="section">
+    <div class="books-grid">
+      {books.map((book) => (
+        <a href={book.url} target="_blank" rel="noopener" class="book-card">
+          <img src={book.image} alt={book.title} />
+          <h3>{book.title}</h3>
+          <span class="book-action">{book.price === 'Free' ? 'Download Free' : 'Buy on Apple Books'}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

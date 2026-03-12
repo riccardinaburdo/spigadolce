@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const recipesDir = path.join(process.cwd(), 'src/content/recipes');
+const recipeFiles = fs.readdirSync(recipesDir).filter(f => f.endsWith('.json'));
+const recipes = recipeFiles
+  .map(f => JSON.parse(fs.readFileSync(path.join(recipesDir, f), 'utf-8')))
+  .sort((a, b) => a.order - b.order);
+
+const categories = [...new Set(recipes.map(r => r.category))];
+---
+
+<BaseLayout title="Recipes | Spigadolce" currentPath="/recipes">
+  <div class="page-header">
+    <h1>Recipes</h1>
+  </div>
+
+  {categories.map((cat) => (
+    <section class="section">
+      <h2>{cat}</h2>
+      <div class="recipes-grid" style="padding: 0 2rem;">
+        {recipes.filter(r => r.category === cat).map((r) => (
+          <a href={`/recipes/${r.slug}`} class="recipe-card">
+            <img src={r.image} alt={r.title} />
+            <div class="recipe-card-overlay">
+              <p class="category">{r.category}</p>
+              <h3>{r.title}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+</BaseLayout>

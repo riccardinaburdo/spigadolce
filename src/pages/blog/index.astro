@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Blog articles - placeholder until full content is added
+const articles = [
+  { slug: 'petresciata', title: 'A Rain of Sweet Memories in Andria', date: '2026-02-14', excerpt: 'What better time than Carnival to bring a little joy and lightheartedness to these cold, gray winter days?', image: '/images/blog/petresciata.jpg' },
+  { slug: 'remembering-november', title: 'Remembering November: Life along Cemetery Avenue', date: '2025-11-09', excerpt: 'November traditions and memories connected to olives, smoke, and chrysanthemums.', image: '/images/blog/november.jpg' },
+  { slug: 'wool-of-our-sleep', title: 'The wool of our sleep: a tradition I will never abandon', date: '2025-07-19', excerpt: 'An ancient ritual of washing sheep\'s wool from household mattresses and pillows.', image: '/images/blog/wool.jpg' },
+  { slug: 'tomato-puree', title: 'Making Tomato Puree: A Summer Ritual', date: '2025-06-26', excerpt: 'Homemade tomato preservation techniques practiced in the countryside.', image: '/images/blog/tomato-puree.jpg' },
+  { slug: 'almonds', title: 'Harvesting and Cleaning Almonds', date: '2025-05-20', excerpt: 'Childhood memories of almond harvesting and warehouse storage.', image: '/images/blog/almonds.jpg' },
+  { slug: 'fava-beans', title: 'Fava Beans: A Taste of Memory', date: '2025-05-04', excerpt: 'Mother\'s preparation of dried fava beans with wild chicory as a rustic staple dish.', image: '/images/blog/fava-beans.jpg' },
+  { slug: 'oil-past', title: 'The oil and its use in the past', date: '2024-05-19', excerpt: 'Historical perspective on olive oil\'s role in regional cuisine.', image: '/images/blog/oil.webp' },
+  { slug: 'stockfish-baccala', title: 'Stockfish and baccala', date: '2024-05-19', excerpt: 'Traditional preparation methods contrasted with modern supermarket cod.', image: '/images/blog/stockfish.webp' },
+  { slug: 'cocchia', title: 'The "Cocchia" (bunches of tomatoes hung up)', date: '2024-04-28', excerpt: 'Traditional winter storage technique for tomatoes in Apulia.', image: '/images/blog/cocchia.png' },
+  { slug: 'spigadolce-origins', title: 'The origins of the nickname "Spigadolce"', date: '2024-03-21', excerpt: 'My great-grandfather had the nickname Spigadolce, and in the village, he was known more by this nickname than by his surname.', image: '/images/blog/spigadolce-origins.jpg' },
+  { slug: 'rasaul', title: 'The "rasaul" (the dialect name from Andria for spatula)', date: '2024-02-23', excerpt: 'An object forged from ancient culinary wisdom. The traditional spatula for making orecchiette.', image: '/images/blog/rasaul.webp' },
+];
+---
+
+<BaseLayout title="Blog | Spigadolce" currentPath="/blog">
+  <div class="page-header">
+    <h1>Blog</h1>
+  </div>
+
+  <section class="section">
+    <p class="subtitle">Stories, traditions, and memories from Puglia</p>
+    <div class="blog-grid">
+      {articles.map((a) => (
+        <div class="blog-card">
+          <img src={a.image} alt={a.title} />
+          <div class="blog-card-body">
+            <p class="date">{new Date(a.date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            <h3>{a.title}</h3>
+            <p>{a.excerpt}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

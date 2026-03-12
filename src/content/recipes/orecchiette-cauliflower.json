@@ -1,0 +1,28 @@
+{
+  "slug": "orecchiette-with-cauliflower",
+  "title": "Orecchiette with Cauliflower",
+  "category": "Orecchiette",
+  "description": "A simple Italian pasta dish combining fresh orecchiette with tender cauliflower, finished with crispy breadcrumbs fried in olive oil.",
+  "servings": "4 people",
+  "prepTime": "10 min",
+  "cookTime": "20 min",
+  "image": "/images/recipes/orecchiette-cauliflower.jpg",
+  "ingredients": [
+    "200 g cauliflower",
+    "300 g fresh orecchiette",
+    "2 tablespoons extra virgin olive oil",
+    "Handful of crumbled bread crumbs",
+    "Salt",
+    "Pepper"
+  ],
+  "steps": [
+    "Separate cauliflower into florets and tender leaves; rinse thoroughly under running water.",
+    "Cook cauliflower for 10 minutes in salted boiling water.",
+    "Add fresh orecchiette and cook for 2 minutes, then drain while preserving one ladle of cooking water for moisture.",
+    "In a small pan, brown breadcrumbs in oil separately.",
+    "Plate dishes and season each with the toasted breadcrumbs and pepper."
+  ],
+  "notes": "If you use dried orecchiette, immerse them in boiling water together with the cauliflower due to extended cooking requirements.",
+  "order": 2,
+  "date": "2024-05-19"
+}

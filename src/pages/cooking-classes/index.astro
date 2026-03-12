@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const classesDir = path.join(process.cwd(), 'src/content/cooking-classes');
+const classFiles = fs.readdirSync(classesDir).filter(f => f.endsWith('.json'));
+const classes = classFiles
+  .map(f => JSON.parse(fs.readFileSync(path.join(classesDir, f), 'utf-8')))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+---
+
+<BaseLayout title="Cooking Classes | Spigadolce" currentPath="/cooking-classes">
+  <div class="page-header">
+    <h1>Cooking Classes</h1>
+  </div>
+
+  <section class="section">
+    <p class="subtitle">Join a hands-on pasta-making experience in London</p>
+    <div class="classes-grid">
+      {classes.map((c) => (
+        <a href={`/cooking-classes/${c.slug}`} class="class-card">
+          <img src={c.image} alt={c.title} />
+          <div class="class-card-body">
+            <p class="date">{new Date(c.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            <h3>{c.title}</h3>
+            <p class="location">{c.location}</p>
+            <p class="price">&pound;{c.price} / person</p>
+            {c.status === 'past' && <span class="status-past">Past Event</span>}
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section-warm" style="text-align: center;">
+    <h2>Private In-Home Classes</h2>
+    <p style="max-width: 600px; margin: 1rem auto 2rem; color: #555;">Looking for a more intimate experience? Book a private pasta-making workshop in your own kitchen.</p>
+    <a href="/cooking-classes/private" class="btn-primary">Learn More</a>
+  </section>
+</BaseLayout>

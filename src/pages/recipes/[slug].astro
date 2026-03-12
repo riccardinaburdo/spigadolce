@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export function getStaticPaths() {
+  const recipesDir = path.join(process.cwd(), 'src/content/recipes');
+  const recipeFiles = fs.readdirSync(recipesDir).filter(f => f.endsWith('.json'));
+  return recipeFiles.map(f => {
+    const data = JSON.parse(fs.readFileSync(path.join(recipesDir, f), 'utf-8'));
+    return { params: { slug: data.slug }, props: { recipe: data } };
+  });
+}
+
+const { recipe } = Astro.props;
+---
+
+<BaseLayout title={`${recipe.title} | Spigadolce`} currentPath="/recipes">
+  <div class="page-header">
+    <h1>{recipe.title}</h1>
+  </div>
+
+  <section class="recipe-detail">
+    <img src={recipe.image} alt={recipe.title} style="width: 100%; max-height: 450px; object-fit: cover;" />
+
+    <div class="recipe-meta">
+      <span><strong>Servings:</strong> {recipe.servings}</span>
+      <span><strong>Prep:</strong> {recipe.prepTime}</span>
+      <span><strong>Cook:</strong> {recipe.cookTime}</span>
+      <span><strong>Category:</strong> {recipe.category}</span>
+    </div>
+
+    <p style="margin: 1.5rem 0; font-style: italic; color: #666;">{recipe.description}</p>
+
+    <h2>Ingredients</h2>
+    <ul>
+      {recipe.ingredients.map((ing: string) => <li>{ing}</li>)}
+    </ul>
+
+    <h2>Preparation</h2>
+    <ol>
+      {recipe.steps.map((step: string) => <li>{step}</li>)}
+    </ol>
+
+    {recipe.notes && (
+      <>
+        <h2>Notes</h2>
+        <p>{recipe.notes}</p>
+      </>
+    )}
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="/recipes" class="btn-primary">Back to Recipes</a>
+    </div>
+  </section>
+</BaseLayout>

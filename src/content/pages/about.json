@@ -1,0 +1,20 @@
+{
+  "title": "About Me",
+  "image": "/images/general/about.png",
+  "bio": [
+    "I'm Riccardina Burdo — born in Puglia, based in London, and shaped by a life of flavours, stories, and flour-dusted hands.",
+    "Until 2023, I worked as an architect, but cooking has always been my true passion. In 2012, I published five iPad cookbooks on Pugliese cuisine. I continue to share recipes through my blog and YouTube channel.",
+    "I grew up in a family with deep agricultural roots. My father taught me to forage for wild herbs, while my mother taught me how to cook them. My grandfather, nicknamed \"Spigadolce\", ran a small osteria in the village back in the 1920s."
+  ],
+  "spigadolceMeaning": "\"Spigadolce\" means \"Sweet Spike\" and represents a story of land, harvest, simplicity, and the joy of sharing meals.",
+  "craft": {
+    "text": "I make handmade orecchiette using the same ancient wrought-iron spatula passed down from my grandmother.",
+    "features": [
+      "Organic semolina only",
+      "100% egg-free and vegan",
+      "True to authentic origins",
+      "Seasonal and mindful ingredients"
+    ]
+  },
+  "philosophy": "We often pay great attention to how we appear, but less to what we eat to nourish ourselves. For me, food is care, memory, and resistance."
+}

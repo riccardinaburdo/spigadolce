@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Cucina Pugliese - Agosto",
+    "author": "Riccardina Burdo",
+    "image": "/images/books/book-agosto.png",
+    "url": "https://books.apple.com/us/book/cucina-pugliese/id560154899",
+    "price": "Free"
+  },
+  {
+    "title": "Cucina Pugliese - Settembre",
+    "author": "Riccardina Burdo",
+    "image": "/images/books/book-settembre.png",
+    "url": "https://books.apple.com/us/book/cucina-pugliese-settembre/id568699419",
+    "price": null
+  },
+  {
+    "title": "Cucina Pugliese - Ottobre",
+    "author": "Riccardina Burdo",
+    "image": "/images/books/book-ottobre.png",
+    "url": "https://books.apple.com/us/book/cucina-pugliese-ottobre/id578138343",
+    "price": null
+  },
+  {
+    "title": "Cucina Pugliese - Novembre",
+    "author": "Riccardina Burdo",
+    "image": "/images/books/book-novembre.png",
+    "url": "https://books.apple.com/us/book/cucina-pugliese-novembre/id588212280",
+    "price": null
+  },
+  {
+    "title": "Cucina Pugliese - Dicembre",
+    "author": "Riccardina Burdo",
+    "image": "/images/books/book-dicembre.png",
+    "url": "https://books.apple.com/us/book/cucina-pugliese-dicembre/id629926142",
+    "price": null
+  }
+]

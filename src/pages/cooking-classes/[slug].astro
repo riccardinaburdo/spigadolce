@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export function getStaticPaths() {
+  const classesDir = path.join(process.cwd(), 'src/content/cooking-classes');
+  const classFiles = fs.readdirSync(classesDir).filter(f => f.endsWith('.json'));
+  return classFiles.map(f => {
+    const data = JSON.parse(fs.readFileSync(path.join(classesDir, f), 'utf-8'));
+    return { params: { slug: data.slug }, props: { classData: data } };
+  });
+}
+
+const { classData } = Astro.props;
+---
+
+<BaseLayout title={`${classData.title} | Spigadolce`} currentPath="/cooking-classes">
+  <div class="page-header">
+    <h1>{classData.title}</h1>
+  </div>
+
+  <section class="recipe-detail">
+    <img src={classData.image} alt={classData.title} style="width: 100%; max-height: 400px; object-fit: cover; margin-bottom: 2rem;" />
+
+    <div class="recipe-meta">
+      <span><strong>Date:</strong> {new Date(classData.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+      <span><strong>Location:</strong> {classData.location}</span>
+      <span><strong>Price:</strong> &pound;{classData.price} / person</span>
+    </div>
+
+    <p style="margin: 1.5rem 0; line-height: 1.8;">{classData.description}</p>
+
+    {classData.includes && classData.includes.length > 0 && (
+      <>
+        <h2>What's Included</h2>
+        <ul>
+          {classData.includes.map((item: string) => <li>{item}</li>)}
+        </ul>
+      </>
+    )}
+
+    <div style="text-align: center; margin-top: 3rem;">
+      {classData.status === 'past' ? (
+        <span class="status-past" style="font-size: 1rem; padding: 0.5rem 1.5rem;">Past Event</span>
+      ) : (
+        <a href="/contact" class="btn-primary">Book Now</a>
+      )}
+    </div>
+  </section>
+</BaseLayout>

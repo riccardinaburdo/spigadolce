@@ -1,0 +1,32 @@
+{
+  "slug": "orecchiette-with-cime-di-rapa",
+  "title": "Orecchiette with Cime di Rapa",
+  "category": "Orecchiette",
+  "description": "The most famous dish of Apulian cuisine.",
+  "servings": "3-4 people",
+  "prepTime": "10 min",
+  "cookTime": "20 min",
+  "image": "/images/recipes/orecchiette-cime-di-rapa.jpg",
+  "ingredients": [
+    "1 1/2 kg of cime di rapa",
+    "4 tablespoons of extra virgin olive oil",
+    "1 chili pepper",
+    "1 clove of garlic",
+    "300 grams of orecchiette pasta",
+    "Salt"
+  ],
+  "steps": [
+    "Clean the cime di rapa and tear the leaves, removing sprouts at stem base.",
+    "Use the tenderest part of the stem.",
+    "Wash thoroughly in plenty of fresh water.",
+    "Cut into large pieces.",
+    "Bring salted water to boil and add cime di rapa.",
+    "Cook for 10 minutes, then add orecchiette pasta.",
+    "Boil for another minute, then drain.",
+    "In a separate pan with oil, saute sliced garlic.",
+    "Season the dish with garlic oil and sliced chili pepper."
+  ],
+  "notes": "Fresh orecchiette follow listed times; dried pasta requires separate cooking per package directions. Alternative toppings: salted anchovies sauteed in oil or cherry tomatoes with garlic and oil.",
+  "order": 1,
+  "date": "2023-12-20"
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "outlet": "The Guardian",
+    "date": "2025-06-09",
+    "title": "Readers' kitchen treasures",
+    "description": "Kitchen spatula as a symbol of family memory and tradition.",
+    "image": "/images/press/guardian.jpg",
+    "url": "https://www.theguardian.com/lifeandstyle/2025/jun/09/readers-kitchen-treasures-pot-dish-objects"
+  },
+  {
+    "outlet": "Telebari",
+    "date": "2025-07-16",
+    "title": "Dina, signora delle orecchiette: dalla Puglia a Londra",
+    "description": "Dalla Puglia a Londra per insegnare agli stranieri l'arte della pasta fresca.",
+    "image": "/images/press/telebari.jpg",
+    "url": "https://www.telebari.it/storie/217433-dina-signora-delle-orecchiette-dalla-puglia-a-londra-per-insegnare-agli-stranieri-larte-della-pasta-fresca-foto.html"
+  },
+  {
+    "outlet": "Gambero Rosso",
+    "date": "2024-05-21",
+    "title": "L'architetta pugliese che vende orecchiette a Londra",
+    "description": "Mi sento piu inglese che italiana, ma amo le mie origini.",
+    "image": "/images/press/gambero-rosso.jpg",
+    "url": "https://www.gamberorosso.it/notizie/storie/riccardina-pugliese-orecchiette-londra/"
+  },
+  {
+    "outlet": "Londra Sera",
+    "date": "2024-05-27",
+    "title": "Da Andria a Londra con la pasta artigianale",
+    "description": "Laurea in architettura e vendita di pasta artigianale da Andria a Londra.",
+    "image": "/images/press/londra-sera.jpg",
+    "url": "https://www.facebook.com/londrasera/posts/pfbid02tPzP1MMjXuKpy6UhZbE7iMFwv8gaL1PdJe8tqguMp127ws7ybu5JnaufEib4obGtl"
+  }
+]

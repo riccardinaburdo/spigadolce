@@ -1,0 +1,34 @@
+{
+  "slug": "cavatelli-and-squid",
+  "title": "Cavatelli and Squid",
+  "category": "Cavatelli",
+  "description": "A traditional Italian pasta dish featuring stuffed squid served with cavatelli and tomato sauce.",
+  "servings": "4 people",
+  "prepTime": "20 min",
+  "cookTime": "40 min",
+  "image": "/images/recipes/cavatelli-squid.jpg",
+  "ingredients": [
+    "2 medium squids",
+    "500g tomato sauce",
+    "300g cavatelli pasta",
+    "1 garlic clove",
+    "2 tbsp extra virgin olive oil",
+    "2 eggs",
+    "3 tbsp grated pecorino cheese",
+    "3 tbsp breadcrumbs",
+    "1 tbsp chopped parsley",
+    "Salt and pepper to taste"
+  ],
+  "steps": [
+    "Clean the squid: remove heads and innards, discard the transparent bone, eyes, and mouth. Rinse thoroughly and peel off the skin.",
+    "Prepare filling: chop squid tentacles and heads. Combine with eggs, cheese, breadcrumbs, parsley, salt, and pepper.",
+    "Stuff squid bodies with mixture and secure openings using toothpicks.",
+    "Heat oil in pan, add crushed garlic and stuffed squid. Cook 5 minutes.",
+    "Pour in tomato sauce, cook 30 minutes, adding water as needed.",
+    "Boil cavatelli separately in salted water, drain well.",
+    "Toss pasta with sauce and sliced squid. Garnish with fresh parsley."
+  ],
+  "notes": "",
+  "order": 3,
+  "date": "2024-05-19"
+}
