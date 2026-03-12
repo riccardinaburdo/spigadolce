@@ -1,0 +1,13 @@
+{
+  "slug": "handmade-pasta-egro-apr-2026",
+  "title": "Handmade Italian Pasta at Egro",
+  "date": "2026-04-18",
+  "price": 38,
+  "currency": "GBP",
+  "location": "Egro, Angel Islington, London",
+  "description": "Join us at this cozy Italian bistro for a hands-on pasta-making class with bottomless prosecco.",
+  "includes": ["Two-hour pasta-making class", "Bottomless prosecco", "Apron and pasta tools provided"],
+  "image": "/images/cooking-classes/egro.jpg",
+  "status": "upcoming",
+  "order": 20
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "handmade-pasta-my-tortellini-may-2026",
+  "title": "Handmade Italian Pasta at My Tortellini",
+  "date": "2026-05-09",
+  "price": 38,
+  "currency": "GBP",
+  "location": "My Tortellini, London",
+  "description": "Dive into the art of making traditional Pugliese orecchiette pasta with chef Riccardina Burdo.",
+  "includes": ["Two-hour pasta-making class", "Complimentary antipasti and spritz", "Apron and pasta tools provided"],
+  "image": "/images/cooking-classes/my-tortellini-2.jpg",
+  "status": "upcoming",
+  "order": 21
+}

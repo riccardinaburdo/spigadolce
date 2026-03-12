@@ -6,9 +6,40 @@ import path from 'node:path';
 
 const classesDir = path.join(process.cwd(), 'src/content/cooking-classes');
 const classFiles = fs.readdirSync(classesDir).filter(f => f.endsWith('.json'));
-const classes = classFiles
+const allClasses = classFiles
   .map(f => JSON.parse(fs.readFileSync(path.join(classesDir, f), 'utf-8')))
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+const now = new Date();
+const upcoming = allClasses.filter(c => new Date(c.date) >= now);
+const past = allClasses.filter(c => new Date(c.date) < now).reverse();
+
+// Build calendar data: collect all months that have events
+const eventsByDate: Record<string, typeof allClasses> = {};
+allClasses.forEach(c => {
+  const key = c.date; // YYYY-MM-DD
+  if (!eventsByDate[key]) eventsByDate[key] = [];
+  eventsByDate[key].push(c);
+});
+
+// Get months to show in calendar (current + next 2 months)
+const calendarMonths: { year: number; month: number }[] = [];
+for (let i = 0; i < 3; i++) {
+  const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+  calendarMonths.push({ year: d.getFullYear(), month: d.getMonth() });
+}
+
+function getDaysInMonth(year: number, month: number) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function getFirstDayOfWeek(year: number, month: number) {
+  const day = new Date(year, month, 1).getDay();
+  return day === 0 ? 6 : day - 1; // Monday = 0
+}
+
+const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 ---
 
 <BaseLayout title="Cooking Classes | Spigadolce" currentPath="/cooking-classes">
@@ -16,23 +47,77 @@ const classes = classFiles
     <h1>Cooking Classes</h1>
   </div>
 
+  <!-- Calendar View -->
   <section class="section">
-    <p class="subtitle">Join a hands-on pasta-making experience in London</p>
-    <div class="classes-grid">
-      {classes.map((c) => (
-        <a href={`/cooking-classes/${c.slug}`} class="class-card">
-          <img src={c.image} alt={c.title} />
-          <div class="class-card-body">
-            <p class="date">{new Date(c.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-            <h3>{c.title}</h3>
-            <p class="location">{c.location}</p>
-            <p class="price">&pound;{c.price} / person</p>
-            {c.status === 'past' && <span class="status-past">Past Event</span>}
+    <h2>Calendar</h2>
+    <p class="subtitle">Find a date that works for you</p>
+    <div class="calendar-wrapper">
+      {calendarMonths.map(({ year, month }) => {
+        const daysInMonth = getDaysInMonth(year, month);
+        const firstDay = getFirstDayOfWeek(year, month);
+        const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+        const padStart = Array.from({ length: firstDay }, () => null);
+        const isCurrentMonth = year === now.getFullYear() && month === now.getMonth();
+
+        return (
+          <div class="calendar-month">
+            <h3 class="calendar-month-title">{monthNames[month]} {year}</h3>
+            <div class="calendar-grid">
+              {dayNames.map(d => <div class="calendar-day-name">{d}</div>)}
+              {padStart.map(() => <div class="calendar-cell empty"></div>)}
+              {days.map(day => {
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const events = eventsByDate[dateStr] || [];
+                const hasUpcoming = events.some(e => new Date(e.date) >= now);
+                const hasPast = events.some(e => new Date(e.date) < now);
+                const isToday = isCurrentMonth && day === now.getDate();
+
+                return (
+                  <div class={`calendar-cell ${isToday ? 'today' : ''} ${hasUpcoming ? 'has-upcoming' : ''} ${hasPast ? 'has-past' : ''}`}>
+                    <span class="calendar-day-number">{day}</span>
+                    {events.length > 0 && (
+                      <div class="calendar-dots">
+                        {events.map(e => (
+                          <a href={`/cooking-classes/${e.slug}`} class={`calendar-dot ${new Date(e.date) >= now ? 'upcoming' : 'past'}`} title={e.title}></a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </a>
-      ))}
+        );
+      })}
+    </div>
+    <div class="calendar-legend">
+      <span class="legend-item"><span class="legend-dot upcoming"></span> Upcoming</span>
+      <span class="legend-item"><span class="legend-dot past"></span> Past</span>
+      <span class="legend-item"><span class="legend-dot today-marker"></span> Today</span>
     </div>
   </section>
+
+  <!-- Upcoming Classes -->
+  {upcoming.length > 0 && (
+    <section class="section section-cream">
+      <h2>Upcoming Classes</h2>
+      <p class="subtitle">Book your spot before they fill up</p>
+      <div class="classes-grid">
+        {upcoming.map((c) => (
+          <a href={`/cooking-classes/${c.slug}`} class="class-card upcoming-card">
+            <img src={c.image} alt={c.title} />
+            <div class="class-card-body">
+              <p class="date">{new Date(c.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+              <h3>{c.title}</h3>
+              <p class="location">{c.location}</p>
+              <p class="price">&pound;{c.price} / person</p>
+              <span class="status-upcoming">Book Now</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 
   <!-- Booking -->
   <section class="booking-section">
@@ -62,4 +147,24 @@ const classes = classFiles
     <p style="max-width: 600px; margin: 1rem auto 2rem; color: #555;">Looking for a more intimate experience? Book a private pasta-making workshop in your own kitchen.</p>
     <a href="/cooking-classes/private" class="btn-primary">Learn More</a>
   </section>
+
+  <!-- Past Events -->
+  {past.length > 0 && (
+    <section class="section">
+      <h2>Past Events</h2>
+      <p class="subtitle">A look back at our previous classes</p>
+      <div class="past-events-grid">
+        {past.map((c) => (
+          <a href={`/cooking-classes/${c.slug}`} class="past-event-card">
+            <img src={c.image} alt={c.title} />
+            <div class="past-event-info">
+              <p class="date">{new Date(c.date).toLocaleDateString('en-GB', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+              <h4>{c.title}</h4>
+              <p class="location">{c.location}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 </BaseLayout>
