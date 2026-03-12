@@ -14,88 +14,13 @@ const now = new Date();
 const upcoming = allClasses.filter(c => new Date(c.date) >= now);
 const past = allClasses.filter(c => new Date(c.date) < now).reverse();
 
-// Build calendar data: collect all months that have events
-const eventsByDate: Record<string, typeof allClasses> = {};
-allClasses.forEach(c => {
-  const key = c.date; // YYYY-MM-DD
-  if (!eventsByDate[key]) eventsByDate[key] = [];
-  eventsByDate[key].push(c);
-});
-
-// Get months to show in calendar (current + next 2 months)
-const calendarMonths: { year: number; month: number }[] = [];
-for (let i = 0; i < 3; i++) {
-  const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
-  calendarMonths.push({ year: d.getFullYear(), month: d.getMonth() });
-}
-
-function getDaysInMonth(year: number, month: number) {
-  return new Date(year, month + 1, 0).getDate();
-}
-
-function getFirstDayOfWeek(year: number, month: number) {
-  const day = new Date(year, month, 1).getDay();
-  return day === 0 ? 6 : day - 1; // Monday = 0
-}
-
-const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const bookingUrl = booking.platform.url || '/contact';
 ---
 
 <BaseLayout title="Cooking Classes | Spigadolce" currentPath="/cooking-classes">
   <div class="page-header">
     <h1>Cooking Classes</h1>
   </div>
-
-  <!-- Calendar View -->
-  <section class="section">
-    <h2>Calendar</h2>
-    <p class="subtitle">Find a date that works for you</p>
-    <div class="calendar-wrapper">
-      {calendarMonths.map(({ year, month }) => {
-        const daysInMonth = getDaysInMonth(year, month);
-        const firstDay = getFirstDayOfWeek(year, month);
-        const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-        const padStart = Array.from({ length: firstDay }, () => null);
-        const isCurrentMonth = year === now.getFullYear() && month === now.getMonth();
-
-        return (
-          <div class="calendar-month">
-            <h3 class="calendar-month-title">{monthNames[month]} {year}</h3>
-            <div class="calendar-grid">
-              {dayNames.map(d => <div class="calendar-day-name">{d}</div>)}
-              {padStart.map(() => <div class="calendar-cell empty"></div>)}
-              {days.map(day => {
-                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const events = eventsByDate[dateStr] || [];
-                const hasUpcoming = events.some(e => new Date(e.date) >= now);
-                const hasPast = events.some(e => new Date(e.date) < now);
-                const isToday = isCurrentMonth && day === now.getDate();
-
-                return (
-                  <div class={`calendar-cell ${isToday ? 'today' : ''} ${hasUpcoming ? 'has-upcoming' : ''} ${hasPast ? 'has-past' : ''}`}>
-                    <span class="calendar-day-number">{day}</span>
-                    {events.length > 0 && (
-                      <div class="calendar-dots">
-                        {events.map(e => (
-                          <a href={`/cooking-classes/${e.slug}`} class={`calendar-dot ${new Date(e.date) >= now ? 'upcoming' : 'past'}`} title={e.title}></a>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-    <div class="calendar-legend">
-      <span class="legend-item"><span class="legend-dot upcoming"></span> Upcoming</span>
-      <span class="legend-item"><span class="legend-dot past"></span> Past</span>
-      <span class="legend-item"><span class="legend-dot today-marker"></span> Today</span>
-    </div>
-  </section>
 
   <!-- Upcoming Classes -->
   {upcoming.length > 0 && (
@@ -104,7 +29,7 @@ const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
       <p class="subtitle">Book your spot before they fill up</p>
       <div class="classes-grid">
         {upcoming.map((c) => (
-          <a href={`/cooking-classes/${c.slug}`} class="class-card upcoming-card">
+          <a href={bookingUrl} target={booking.platform.url ? '_blank' : '_self'} rel="noopener" class="class-card upcoming-card">
             <img src={c.image} alt={c.title} />
             <div class="class-card-body">
               <p class="date">{new Date(c.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
@@ -118,28 +43,6 @@ const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
       </div>
     </section>
   )}
-
-  <!-- Booking -->
-  <section class="booking-section">
-    <h2>Book Your Spot</h2>
-    <p class="subtitle">Reserve on ClassBento</p>
-    {booking.platform.url ? (
-      <a href={booking.platform.url} target="_blank" rel="noopener" class="platform-card" style="margin: 0 auto;">
-        <span class="platform-icon">{booking.platform.icon}</span>
-        <h3>{booking.platform.name}</h3>
-        <p>{booking.platform.description}</p>
-        <span class="btn-outline">Book Now</span>
-      </a>
-    ) : (
-      <div class="platform-card" style="margin: 0 auto;">
-        <span class="platform-icon">{booking.platform.icon}</span>
-        <h3>{booking.platform.name}</h3>
-        <p>{booking.platform.description}</p>
-        <span class="btn-outline" style="opacity: 0.5;">Coming Soon</span>
-      </div>
-    )}
-    <p class="booking-fallback">{booking.fallbackMessage} <a href={booking.fallbackUrl}>Contact us</a></p>
-  </section>
 
   <!-- Private Classes -->
   <section class="section section-warm" style="text-align: center;">
