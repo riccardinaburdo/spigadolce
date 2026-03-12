@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import home from '../content/pages/home.json';
+import booking from '../content/pages/booking.json';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -81,6 +82,32 @@ const pressItems = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/cont
     <div style="text-align: center; margin-top: 2rem;">
       <a href="/recipes" class="btn-primary">All Recipes</a>
     </div>
+  </section>
+
+  <!-- Book a Class -->
+  <section class="booking-section">
+    <h2>Book a Class</h2>
+    <p class="subtitle">Reserve your spot through our booking partners</p>
+    <div class="booking-platforms">
+      {booking.platforms.map((p) => (
+        p.url ? (
+          <a href={p.url} target="_blank" rel="noopener" class="platform-card">
+            <span class="platform-icon">{p.icon}</span>
+            <h3>{p.name}</h3>
+            <p>{p.description}</p>
+            <span class="btn-outline">Book Now</span>
+          </a>
+        ) : (
+          <div class="platform-card">
+            <span class="platform-icon">{p.icon}</span>
+            <h3>{p.name}</h3>
+            <p>{p.description}</p>
+            <span class="btn-outline" style="opacity: 0.5;">Coming Soon</span>
+          </div>
+        )
+      ))}
+    </div>
+    <p class="booking-fallback">{booking.fallbackMessage} <a href={booking.fallbackUrl}>Contact us</a></p>
   </section>
 
   <!-- Press -->

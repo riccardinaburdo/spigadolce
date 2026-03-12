@@ -583,6 +583,108 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-white);
 }
 
+/* ===== BOOKING SECTION ===== */
+.booking-section {
+  background: var(--color-warm);
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.booking-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-dark);
+}
+
+.booking-section .subtitle {
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+.booking-platforms {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.platform-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 2rem 2.5rem;
+  background: var(--color-white);
+  border: 1px solid rgba(0,0,0,0.06);
+  min-width: 260px;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.platform-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.platform-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: var(--font-body);
+}
+
+.platform-card h3 {
+  font-size: 1.2rem;
+  color: var(--color-dark);
+}
+
+.platform-card p {
+  font-size: 0.9rem;
+  color: #777;
+  max-width: 220px;
+}
+
+.btn-outline {
+  display: inline-block;
+  padding: 0.6rem 1.8rem;
+  border: 2px solid var(--color-gold);
+  color: var(--color-gold);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: background 0.3s, color 0.3s;
+}
+
+.btn-outline:hover {
+  background: var(--color-gold);
+  color: var(--color-white);
+}
+
+.booking-fallback {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.booking-fallback a {
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.booking-fallback a:hover {
+  text-decoration: underline;
+}
+
 /* ===== PRESS ===== */
 .press-grid {
   display: grid;

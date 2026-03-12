@@ -1,0 +1,18 @@
+{
+  "platforms": [
+    {
+      "name": "ClassBento",
+      "url": "",
+      "description": "Browse and book our group pasta-making classes",
+      "icon": "CB"
+    },
+    {
+      "name": "Eventbrite",
+      "url": "",
+      "description": "Find upcoming events and secure your spot",
+      "icon": "EB"
+    }
+  ],
+  "fallbackMessage": "New classes coming soon! Get in touch to be the first to know.",
+  "fallbackUrl": "/contact"
+}
