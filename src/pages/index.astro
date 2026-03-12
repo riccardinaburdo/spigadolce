@@ -27,7 +27,10 @@ const pressItems = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/cont
 
 <BaseLayout title={home.title} currentPath="/">
   <!-- Hero -->
-  <section class="hero" style={`background-image: url('${home.hero.backgroundImage}')`}>
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="/images/general/hero-poster.png">
+      <source src="/images/general/hero.mp4" type="video/mp4" />
+    </video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1>{home.hero.heading}</h1>
