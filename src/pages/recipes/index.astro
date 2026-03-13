@@ -9,7 +9,8 @@ const recipes = recipeFiles
   .map(f => JSON.parse(fs.readFileSync(path.join(recipesDir, f), 'utf-8')))
   .sort((a, b) => a.order - b.order);
 
-const categories = [...new Set(recipes.map(r => r.category))];
+const categoryOrder = ['Cavatelli', 'Lagane', 'Orecchiette', 'Troccoli'];
+const categories = categoryOrder.filter(cat => recipes.some(r => r.category === cat));
 ---
 
 <BaseLayout title="Recipes | Spigadolce" currentPath="/recipes">
@@ -18,17 +19,22 @@ const categories = [...new Set(recipes.map(r => r.category))];
   </div>
 
   {categories.map((cat) => (
-    <section class="section">
-      <h2>{cat}</h2>
-      <div class="recipes-grid" style="padding: 0 2rem;">
+    <section class="section" style="padding-bottom: 1rem;">
+      <h3 class="recipe-category-title">{cat}</h3>
+      <div style="max-width: var(--max-width); margin: 0 auto; padding: 0 2rem;">
         {recipes.filter(r => r.category === cat).map((r) => (
-          <a href={`/recipes/${r.slug}`} class="recipe-card">
+          <div class="recipe-list-card">
             <img src={r.image} alt={r.title} />
-            <div class="recipe-card-overlay">
-              <p class="category">{r.category}</p>
+            <div class="recipe-list-body">
               <h3>{r.title}</h3>
+              <p class="recipe-desc">{r.description}</p>
+              <p class="recipe-times">
+                {r.prepTime && <span>Prep: {r.prepTime}</span>}
+                {r.cookTime && <span>Cook: {r.cookTime}</span>}
+              </p>
+              <a href={`/recipes/${r.slug}`} class="btn-view-recipe">View Recipe</a>
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </section>

@@ -1,0 +1,32 @@
+{
+  "slug": "squid-ink-troccoli",
+  "title": "Squid Ink Troccoli",
+  "category": "Troccoli",
+  "description": "A dish extremely popular throughout Italy, featuring cuttlefish cooked with its own ink for a dramatic black sauce.",
+  "servings": "4 people",
+  "prepTime": "20 min",
+  "cookTime": "20 min",
+  "image": "/images/recipes/squid-ink-troccoli.jpg",
+  "ingredients": [
+    "500 g of cuttlefish",
+    "300 g of troccoli",
+    "300 g of tomato pulp",
+    "2 cloves of garlic",
+    "1/2 glass of white wine",
+    "Chili pepper",
+    "2 tablespoons of extra virgin olive oil",
+    "Salt"
+  ],
+  "steps": [
+    "Clean the cuttlefish by removing the bone, gently open with scissors, detach the heads with innards while protecting the ink sac. Preserve the hazelnut-colored sacs at the head's base.",
+    "Wash the sac inside and out under running water and remove the skin.",
+    "Cut the sacs into small pieces and divide the heads into 4 parts after separating from the hazelnut sacs.",
+    "Heat oil in a pan with chili pepper and crushed garlic; remove garlic once golden, then add the cuttlefish.",
+    "Cook for 2 minutes, add wine, then cook 2 more minutes before adding tomato pulp. Cook for 10 minutes total.",
+    "Add the hazelnut and ink sacs, breaking them with a fork over the pan's edge, and cook for 5 minutes.",
+    "Cook pasta separately in salted water, drain, add to the sauce, and let it absorb flavors before serving."
+  ],
+  "notes": "",
+  "order": 15,
+  "date": "2024-05-10"
+}

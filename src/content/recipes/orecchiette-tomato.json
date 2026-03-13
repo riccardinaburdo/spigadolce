@@ -1,0 +1,27 @@
+{
+  "slug": "orecchiette-with-tomato-sauce",
+  "title": "Orecchiette with Tomato Sauce",
+  "category": "Orecchiette",
+  "description": "A simple Italian pasta dish featuring orecchiette tossed with tomato sauce and finished with grated Pecorino Romano cheese.",
+  "servings": "4 people",
+  "prepTime": "5 min",
+  "cookTime": "25 min",
+  "image": "/images/recipes/orecchiette-tomato.jpg",
+  "ingredients": [
+    "400 g orecchiette pasta",
+    "500 g tomato passata",
+    "80 g Pecorino Romano cheese",
+    "1 small onion",
+    "2 tablespoons extra virgin olive oil",
+    "Salt to taste"
+  ],
+  "steps": [
+    "Heat olive oil in a saucepan with sliced onion until translucent, then add tomato passata.",
+    "Season with salt and simmer for approximately twenty minutes.",
+    "Boil salted water in a large pot and cook the orecchiette pasta.",
+    "Drain pasta, transfer to serving dish, top with tomato sauce and grated Pecorino Romano cheese."
+  ],
+  "notes": "",
+  "order": 8,
+  "date": "2024-04-10"
+}

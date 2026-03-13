@@ -1,0 +1,34 @@
+{
+  "slug": "troccoli-with-clams",
+  "title": "Troccoli with Clams",
+  "category": "Troccoli",
+  "description": "A traditional Italian pasta dish featuring clams prepared with garlic, chili pepper, white wine, and fresh tomatoes.",
+  "servings": "4 people",
+  "prepTime": "20 min + 2h soaking",
+  "cookTime": "20 min",
+  "image": "/images/recipes/troccoli-clams.jpg",
+  "ingredients": [
+    "300 g troccoli pasta",
+    "1 kg clams",
+    "2 cherry tomatoes",
+    "1 garlic clove",
+    "1 chili pepper",
+    "3 tablespoons extra virgin olive oil",
+    "1/2 glass white wine"
+  ],
+  "steps": [
+    "Soak clams in salt water for minimum 2 hours, then rinse thoroughly.",
+    "Heat 1 tablespoon oil in pan with clams over high heat until all open.",
+    "Cool slightly, remove clams from shells, discard unopened ones, filter cooking liquid.",
+    "Reserve some clams in shells for garnish.",
+    "Add 2 tablespoons oil, garlic, chili pepper, clams with liquid, parsley, halved tomatoes, and wine to pan.",
+    "Cook 5 minutes at high heat uncovered.",
+    "Add reserved clams in shells.",
+    "Cook troccoli separately until al dente, add to pan.",
+    "Sauté together 2 minutes over high heat with constant stirring.",
+    "Serve garnished with chopped parsley."
+  ],
+  "notes": "",
+  "order": 13,
+  "date": "2024-05-01"
+}

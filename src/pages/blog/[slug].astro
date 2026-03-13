@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export function getStaticPaths() {
+  const blogDir = path.join(process.cwd(), 'src/content/blog');
+  const blogFiles = fs.readdirSync(blogDir).filter(f => f.endsWith('.json'));
+  return blogFiles.map(f => {
+    const data = JSON.parse(fs.readFileSync(path.join(blogDir, f), 'utf-8'));
+    return { params: { slug: data.slug }, props: { article: data } };
+  });
+}
+
+const { article } = Astro.props;
+---
+
+<BaseLayout title={`${article.title} | Spigadolce`} currentPath="/blog">
+  <div class="page-header">
+    <h1>{article.title}</h1>
+  </div>
+
+  <article class="blog-detail">
+    <p class="date" style="text-align: center; margin-bottom: 2rem; color: #888;">
+      {new Date(article.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+    </p>
+    <img src={article.image} alt={article.title} style="width: 100%; max-height: 500px; object-fit: cover; margin-bottom: 2rem;" />
+    {article.body.map((paragraph: string) => (
+      <p>{paragraph}</p>
+    ))}
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="/blog" class="btn-primary">Back to Blog</a>
+    </div>
+  </article>
+</BaseLayout>

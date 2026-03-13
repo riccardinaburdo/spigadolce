@@ -1,0 +1,32 @@
+{
+  "slug": "orecchiette-with-cardoncelli-mushrooms",
+  "title": "Orecchiette with Cardoncelli Mushrooms",
+  "category": "Orecchiette",
+  "description": "A pasta dish featuring sautéed cardoncelli mushrooms in a tomato-based sauce, a classic combination from the Murgia plateau of Apulia.",
+  "servings": "4 people",
+  "prepTime": "20 min",
+  "cookTime": "25 min",
+  "image": "/images/recipes/orecchiette-cardoncelli.jpg",
+  "ingredients": [
+    "400 g cardoncelli mushrooms",
+    "350 g fresh orecchiette pasta",
+    "300 g tomato pulp",
+    "1 clove garlic",
+    "1 tablespoon chopped parsley",
+    "3 tablespoons extra virgin olive oil",
+    "Salt to taste",
+    "Grated pecorino cheese (optional)"
+  ],
+  "steps": [
+    "Clean mushrooms by removing soil and briefly immersing in boiling water to clean between gills.",
+    "Cut mushrooms into small pieces.",
+    "Cook mushroom pieces in oil with crushed garlic and parsley for 10 minutes.",
+    "Add tomato pulp and cook 15 minutes more, seasoning with salt near the end.",
+    "Cook orecchiette separately in salted boiling water until done.",
+    "Drain pasta and combine with mushroom sauce.",
+    "Serve topped with pecorino cheese if desired."
+  ],
+  "notes": "",
+  "order": 11,
+  "date": "2024-04-05"
+}

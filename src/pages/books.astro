@@ -17,7 +17,7 @@ const books = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/content/b
         <a href={book.url} target="_blank" rel="noopener" class="book-card">
           <img src={book.image} alt={book.title} />
           <h3>{book.title}</h3>
-          <span class="book-action">{book.price === 'Free' ? 'Download Free' : 'Buy on Apple Books'}</span>
+          <span class="book-action">View on Apple Books</span>
         </a>
       ))}
     </div>

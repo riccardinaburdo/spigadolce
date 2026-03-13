@@ -8,8 +8,7 @@ import contact from '../content/pages/contact.json';
     <h1>{contact.title}</h1>
     <p class="subtitle">{contact.subtitle}</p>
 
-    <form class="contact-form" name="contact" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="contact" />
+    <form class="contact-form" action="https://formspree.io/f/FORM_ID" method="POST">
       <div class="form-row">
         <div class="form-group">
           <label for="name">Name</label>
@@ -36,5 +35,9 @@ import contact from '../content/pages/contact.json';
       </div>
       <button type="submit">Send Message</button>
     </form>
+
+    <div class="contact-info" style="text-align: center; margin-top: 2rem; color: #666;">
+      <p>Or reach out directly at <a href="mailto:info@spigadolce.com" style="color: #5f8f8b;">info@spigadolce.com</a></p>
+    </div>
   </div>
 </BaseLayout>

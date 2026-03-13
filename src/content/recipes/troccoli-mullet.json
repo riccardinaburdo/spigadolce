@@ -1,0 +1,30 @@
+{
+  "slug": "troccoli-with-mullet-sauce",
+  "title": "Troccoli with Mullet Sauce",
+  "category": "Troccoli",
+  "description": "A traditional Italian pasta dish featuring fresh mullet in a tomato-based sauce, prepared by deboning the fish and combining it with troccoli pasta.",
+  "servings": "4 people",
+  "prepTime": "10 min",
+  "cookTime": "30 min",
+  "image": "/images/recipes/troccoli-mullet.jpg",
+  "ingredients": [
+    "500 g of mullets",
+    "300 g of troccoli",
+    "400 g of tomato pulp",
+    "2 tablespoons of extra virgin olive oil",
+    "2 cloves of garlic",
+    "1 tablespoon of parsley",
+    "Salt",
+    "Pepper (optional)"
+  ],
+  "steps": [
+    "Clean the mullets by removing innards and scales, then rinse under running water.",
+    "In a pan, combine crushed garlic, oil, and tomato pulp; cook for 10 minutes.",
+    "Add the mullets and cook for 20 minutes, turning only once; season with salt at the end.",
+    "Remove bones from the mullets and return the flesh to the pan with sauce.",
+    "Boil pasta separately in salted water, drain, and sauté briefly in the pan with mullet sauce."
+  ],
+  "notes": "",
+  "order": 14,
+  "date": "2024-04-20"
+}

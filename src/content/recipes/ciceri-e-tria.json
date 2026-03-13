@@ -1,0 +1,34 @@
+{
+  "slug": "ciceri-e-tria",
+  "title": "Ciceri e Tria",
+  "category": "Lagane",
+  "description": "An ancient recipe from Lecce with chickpeas and 'trie' — handmade pasta partly fried for a unique crispy texture.",
+  "servings": "4 people",
+  "prepTime": "40 min + 12h soaking",
+  "cookTime": "2h 30 min",
+  "image": "/images/recipes/ciceri-e-tria.jpg",
+  "ingredients": [
+    "250 g durum wheat semolina",
+    "200 g dried chickpeas",
+    "1 whole clove garlic",
+    "1 bay leaf",
+    "1 stalk celery",
+    "3 tablespoons extra virgin olive oil",
+    "Salt to taste",
+    "Black pepper to taste"
+  ],
+  "steps": [
+    "Soak chickpeas overnight in cold water with 1/2 teaspoon baking soda.",
+    "Drain, rinse, and cook with celery, garlic, and bay leaf in hot water for 2 hours on low heat; salt at end.",
+    "Add hot water midway through cooking as needed.",
+    "Mash approximately one-third of cooked chickpeas and mix with whole ones.",
+    "Make dough from semolina and lukewarm water; rest 30 minutes wrapped in cloth.",
+    "Roll dough to 2mm thickness; cut into 1-2cm wide, 10-15cm long strips.",
+    "Fry one-third of pasta strips in oil until crispy.",
+    "Boil remaining two-thirds in salted water 2 minutes; drain and add to chickpeas.",
+    "Plate and top with fried pasta, black pepper, and olive oil drizzle before serving."
+  ],
+  "notes": "",
+  "order": 7,
+  "date": "2024-01-05"
+}

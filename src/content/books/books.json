@@ -33,5 +33,19 @@
     "image": "/images/books/book-dicembre.png",
     "url": "https://books.apple.com/us/book/cucina-pugliese-dicembre/id629926142",
     "price": null
+  },
+  {
+    "title": "Italian Cuisine — Recipes for August",
+    "author": "Riccardina Burdo",
+    "image": "/images/books/book-italian-cuisine.jpg",
+    "url": "https://books.apple.com/gb/book/italian-cuisine/id563015953",
+    "price": "Free"
+  },
+  {
+    "title": "イタリア料理・8月 (Italian Cuisine — August)",
+    "author": "Riccardina Burdo",
+    "image": "/images/books/book-japanese.jpg",
+    "url": "https://books.apple.com/gb/book/%E3%82%A4%E3%82%BF%E3%83%AA%E3%82%A2%E6%96%99%E7%90%86-8%E6%9C%88/id1513798448",
+    "price": "£1.49"
   }
 ]

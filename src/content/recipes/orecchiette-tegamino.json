@@ -1,0 +1,34 @@
+{
+  "slug": "orecchiette-al-tegamino",
+  "title": "Orecchiette al Tegamino",
+  "category": "Orecchiette",
+  "description": "This Italian pasta dish combines orecchiette with a seasoned meat sauce, baked with melted cheese in traditional terracotta pans.",
+  "servings": "4 people",
+  "prepTime": "20 min",
+  "cookTime": "1h",
+  "image": "/images/recipes/orecchiette-tegamino.jpg",
+  "ingredients": [
+    "300 g orecchiette pasta",
+    "600 g tomato pulp",
+    "1 clove garlic",
+    "150 g minced meat",
+    "150 g scamorza cheese",
+    "150 g grated pecorino cheese",
+    "2 tablespoons extra virgin olive oil",
+    "1 egg",
+    "1 tablespoon chopped parsley",
+    "Salt to taste"
+  ],
+  "steps": [
+    "Form small meatballs (max 2 cm diameter) using minced meat, 100 g pecorino, parsley, egg, and salt.",
+    "Heat oil and crushed garlic in a saucepan; add tomato pulp and simmer 15 minutes, then remove garlic.",
+    "Add meatballs to sauce and cook another 15 minutes; season with salt.",
+    "Boil orecchiette in salted water until al dente; drain.",
+    "Combine pasta with sauce, adding diced scamorza and remaining pecorino; mix thoroughly.",
+    "Distribute into four terracotta pans and bake at 180°C for 20 minutes.",
+    "Serve directly in the baking vessels after a brief rest."
+  ],
+  "notes": "",
+  "order": 9,
+  "date": "2024-03-25"
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "orecchiette-with-rocket",
+  "title": "Orecchiette with Rocket",
+  "category": "Orecchiette",
+  "description": "A simple Italian pasta dish combining orecchiette pasta with fresh rocket, cherry tomatoes, garlic, and chili pepper in an olive oil-based sauce.",
+  "servings": "4 people",
+  "prepTime": "10 min",
+  "cookTime": "20 min",
+  "image": "/images/recipes/orecchiette-rocket.jpg",
+  "ingredients": [
+    "300 g orecchiette pasta",
+    "300 g rocket",
+    "8 cherry tomatoes, halved",
+    "2 cloves garlic, crushed",
+    "1 chili pepper",
+    "2 tablespoons extra virgin olive oil",
+    "Salt to taste"
+  ],
+  "steps": [
+    "Clean and wash the rocket thoroughly.",
+    "Cook rocket in plenty of salted water for 5 minutes.",
+    "Add orecchiette to the pot and continue cooking both together.",
+    "In a separate pan, heat oil with crushed garlic and chili pepper.",
+    "When garlic becomes golden, add halved cherry tomatoes and cook 5 minutes.",
+    "Combine cooked pasta and vegetables with the tomato mixture.",
+    "Serve immediately."
+  ],
+  "notes": "",
+  "order": 10,
+  "date": "2024-02-28"
+}

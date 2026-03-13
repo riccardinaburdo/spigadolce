@@ -1,0 +1,33 @@
+{
+  "slug": "cavatelli-with-beans-and-mussels",
+  "title": "Cavatelli with Beans and Mussels",
+  "category": "Cavatelli",
+  "description": "A traditional Italian pasta dish combining cavatelli with beans and black mussels in a tomato-based sauce.",
+  "servings": "4 people",
+  "prepTime": "20 min + 12h soaking",
+  "cookTime": "70 min",
+  "image": "/images/recipes/cavatelli-beans-mussels.jpg",
+  "ingredients": [
+    "300 g of cavatelli",
+    "300 g of beans",
+    "1 kg of black mussels",
+    "6 cherry tomatoes",
+    "1 clove of garlic",
+    "1 tablespoon of chopped parsley",
+    "6 basil leaves",
+    "2 tablespoons of extra virgin olive oil",
+    "Pepper (optional)"
+  ],
+  "steps": [
+    "Soak the beans overnight, then boil in unsalted water for about 1 hour.",
+    "Clean the mussels and open them raw, reserving the meat and their liquid.",
+    "Heat oil in a pan with crushed garlic, diced cherry tomatoes; cook 5 minutes.",
+    "Remove garlic, then add mussels with their water to the pan.",
+    "Once boiling, add cooked beans and turn off heat.",
+    "Boil cavatelli until cooked, drain, then sauté briefly in mussel and bean sauce.",
+    "Add chopped basil and parsley, then serve immediately."
+  ],
+  "notes": "",
+  "order": 4,
+  "date": "2024-03-15"
+}

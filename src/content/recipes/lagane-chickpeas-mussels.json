@@ -1,0 +1,34 @@
+{
+  "slug": "lagane-with-chickpeas-and-mussels",
+  "title": "Lagane with Chickpeas and Mussels",
+  "category": "Lagane",
+  "description": "A traditional Italian pasta dish combining legumes and seafood, prepared with tomato sauce and fresh herbs.",
+  "servings": "4 people",
+  "prepTime": "20 min",
+  "cookTime": "2h 20 min",
+  "image": "/images/recipes/lagane-chickpeas-mussels.jpg",
+  "ingredients": [
+    "300 g lagane pasta",
+    "200 g chickpeas",
+    "1 kg mussels",
+    "1 glass tomato sauce",
+    "1/2 glass white wine",
+    "1 clove garlic, chopped",
+    "1 small onion, chopped",
+    "1 tablespoon chopped parsley",
+    "2 tablespoons extra virgin olive oil"
+  ],
+  "steps": [
+    "Soak chickpeas overnight in water with one teaspoon baking soda.",
+    "Cook chickpeas for approximately 2 hours.",
+    "Clean mussels by scraping and removing protruding filaments; wash and open with appropriate knife; reserve in bowl with liquid.",
+    "Sauté garlic and onion in oil until lightly golden; add tomato sauce, cooked chickpeas (partially mashed), and white wine.",
+    "Simmer mixture for 10 minutes over medium heat.",
+    "Add mussels and cook 5 additional minutes.",
+    "Cook lagane separately to al dente; drain and toss briefly with sauce.",
+    "Serve topped with fresh parsley."
+  ],
+  "notes": "",
+  "order": 6,
+  "date": "2024-01-20"
+}
