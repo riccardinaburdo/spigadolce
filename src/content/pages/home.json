@@ -1,13 +1,69 @@
 {
-  "title": "Spigadolce | Authentic Pugliese Cooking Experiences",
+  "title": "Spigadolce | Authentic Pugliese Cooking Experiences in London",
   "hero": {
-    "heading": "Experience the Taste of Tradition.",
-    "subheading": "Discover fresh handmade traditional Italian pasta and immerse yourself in authentic culinary experiences.",
-    "cta": "Join a Cooking Class",
+    "heading": "Learn Fresh Pasta in the Heart of a Pugliese Home",
+    "subheading": "Three-hour hands-on classes where you knead, cook and feast — just like sitting at a family table in Southern Italy.",
+    "cta": "Explore Our Classes",
     "ctaUrl": "/cooking-classes",
+    "ctaSecondary": "Gift an Experience",
+    "ctaSecondaryUrl": "/gift-cards",
     "backgroundImage": "/images/cooking-classes/mileto-caffe.jpg"
   },
   "intro": {
-    "text": "Born in Puglia, based in London. I share the art of handmade pasta through cooking classes, recipes, and stories rooted in Southern Italian tradition."
+    "text": "Step into my kitchen and feel the warmth of a Pugliese home. I'll teach you to shape orecchiette by hand, stir a slow-simmered sugo and sit down together to enjoy every bite — the way my family has done for generations."
+  },
+  "howItWorks": {
+    "heading": "How It Works",
+    "subheading": "Three hours to learn, cook and share a complete Pugliese meal",
+    "steps": [
+      {
+        "icon": "hands",
+        "title": "Knead",
+        "description": "Learn to make fresh pasta by hand using traditional Pugliese techniques — orecchiette, cavatelli, tagliatelle and more."
+      },
+      {
+        "icon": "cook",
+        "title": "Cook",
+        "description": "Prepare a traditional sauce and complete the dish. Every class includes a starter, a pasta course and a Pugliese sweet."
+      },
+      {
+        "icon": "feast",
+        "title": "Feast",
+        "description": "Sit down at the table and savour what you've created, with a glass of Pugliese wine. Take the recipe home with you."
+      }
+    ]
+  },
+  "locations": {
+    "heading": "Where We Cook",
+    "subheading": "Intimate home classes or larger groups at our partner restaurants",
+    "home": {
+      "title": "At My Home",
+      "description": "Wimbledon, SW19 — A warm, intimate setting for up to 6 guests. Like stepping into the kitchen of a Pugliese family home."
+    },
+    "restaurant": {
+      "title": "Partner Restaurants",
+      "description": "La Pizzica, Il Circolo and more — Groups of up to 20. Perfect for team building, celebrations and special occasions."
+    }
+  },
+  "testimonials": {
+    "heading": "What Our Guests Say",
+    "subheading": "Stories from people who joined our classes",
+    "items": [
+      {
+        "text": "An absolutely wonderful experience! Riccardina makes you feel instantly at home. I learnt to make orecchiette from scratch and the meal we shared was unforgettable.",
+        "author": "Sarah M.",
+        "date": "March 2026"
+      },
+      {
+        "text": "Perfect for a birthday celebration! The pasta was delicious and Riccardina is a brilliant teacher. We all left with the recipe and new skills we can't wait to try at home.",
+        "author": "James T.",
+        "date": "February 2026"
+      },
+      {
+        "text": "The best team building we've ever done. Fun, hands-on and the food was exceptional. Everyone in the office is still talking about it weeks later!",
+        "author": "Laura C.",
+        "date": "January 2026"
+      }
+    ]
   }
 }

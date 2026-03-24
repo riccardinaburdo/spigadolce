@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Gift Cards | Spigadolce" currentPath="/gift-cards">
+  <section class="page-header">
+    <h1>Gift an Experience</h1>
+    <p>The perfect present for anyone who loves Italian food — a hands-on pasta class in London</p>
+  </section>
+
+  <section class="section">
+    <div class="gift-grid">
+
+      <div class="gift-card">
+        <div class="gift-card-top">
+          <div class="gift-icon">🎁</div>
+          <h3>Group Class</h3>
+          <p>A place in one of our scheduled fresh pasta classes</p>
+          <div class="gift-price">&pound;55</div>
+        </div>
+        <div class="gift-card-bottom">
+          <ul class="gift-features">
+            <li>Valid for 12 months</li>
+            <li>Any scheduled class</li>
+            <li>Delivered by email</li>
+            <li>Personal message included</li>
+          </ul>
+          <a href="/contact" class="btn-primary" style="display:block; text-align:center;">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="gift-card gift-featured">
+        <div class="gift-badge">Most Popular</div>
+        <div class="gift-card-top">
+          <div class="gift-icon">⭐</div>
+          <h3>Private Class for Two</h3>
+          <p>An exclusive experience for two — choose the date and the menu</p>
+          <div class="gift-price">&pound;150</div>
+        </div>
+        <div class="gift-card-bottom">
+          <ul class="gift-features">
+            <li>Valid for 12 months</li>
+            <li>Choose your date &amp; menu</li>
+            <li>Private experience</li>
+            <li>Delivered by email</li>
+            <li>Personal message included</li>
+          </ul>
+          <a href="/contact" class="btn-primary" style="display:block; text-align:center;">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="gift-card">
+        <div class="gift-card-top">
+          <div class="gift-icon">💝</div>
+          <h3>Custom Amount</h3>
+          <p>Choose the amount and let the recipient pick the class</p>
+          <div class="gift-price">From &pound;30</div>
+        </div>
+        <div class="gift-card-bottom">
+          <ul class="gift-features">
+            <li>Valid for 12 months</li>
+            <li>Any amount you choose</li>
+            <li>Delivered by email</li>
+            <li>Personal message included</li>
+          </ul>
+          <a href="/contact" class="btn-primary" style="display:block; text-align:center;">Buy Now</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="gift-how" style="margin-top: 4rem;">
+      <h2 style="text-align:center; margin-bottom: 2rem;">How It Works</h2>
+      <div class="gift-steps">
+        <div class="gift-step">
+          <div class="gift-step-num">1</div>
+          <h4>Choose &amp; Pay</h4>
+          <p>Select a gift card and complete your payment online</p>
+        </div>
+        <div class="gift-step">
+          <div class="gift-step-num">2</div>
+          <h4>Personalise</h4>
+          <p>Add a personal message for the lucky recipient</p>
+        </div>
+        <div class="gift-step">
+          <div class="gift-step-num">3</div>
+          <h4>Send</h4>
+          <p>The gift card is delivered by email, ready to give</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .gift-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .gift-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    position: relative;
+  }
+  .gift-featured {
+    border: 3px solid var(--color-gold);
+  }
+  .gift-badge {
+    background: var(--color-gold);
+    color: #fff;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .gift-card-top {
+    padding: 2.5rem 1.5rem 1.5rem;
+  }
+  .gift-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .gift-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  .gift-card p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .gift-price {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: var(--color-gold);
+    font-weight: 700;
+  }
+  .gift-card-bottom {
+    padding: 1rem 1.5rem 2rem;
+  }
+  .gift-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+  .gift-features li {
+    padding: 0.4rem 0;
+    font-size: 0.9rem;
+    color: #555;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .gift-features li::before {
+    content: '✓ ';
+    color: #27ae60;
+    font-weight: 700;
+  }
+  .gift-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .gift-step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-gold);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.8rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .gift-step h4 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .gift-step p {
+    font-size: 0.85rem;
+    color: #888;
+  }
+  @media (max-width: 768px) {
+    .gift-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+    }
+    .gift-steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

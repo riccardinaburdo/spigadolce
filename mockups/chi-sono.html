@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spigadolce - Mockup Chi Sono</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Lato', sans-serif; color: #333; }
+  .header { background: #fff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 28px; color: #8B6914; font-weight: 700; }
+  .logo span { color: #c8956c; }
+  .mockup-label { background: #8B6914; color: #fff; text-align: center; padding: 8px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+
+  .about-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
+  .about-img { background: url('https://images.unsplash.com/photo-1556909114-44e3e70034e2?w=800') center/cover; }
+  .about-text { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; background: #faf7f2; }
+  .about-text h1 { font-family: 'Playfair Display', serif; font-size: 42px; color: #333; margin-bottom: 8px; }
+  .about-text .subtitle { color: #8B6914; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; }
+  .about-text p { font-size: 16px; line-height: 1.8; color: #555; margin-bottom: 20px; }
+  .about-text .quote { font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; color: #8B6914; border-left: 3px solid #8B6914; padding-left: 20px; margin: 30px 0; line-height: 1.5; }
+
+  .press-section { padding: 60px 40px; text-align: center; background: #fff; }
+  .press-section h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 10px; }
+  .press-section .sub { color: #888; margin-bottom: 40px; }
+  .press-logos { display: flex; justify-content: center; gap: 60px; align-items: center; flex-wrap: wrap; }
+  .press-logo { font-family: 'Playfair Display', serif; font-size: 24px; color: #bbb; font-weight: 700; }
+
+  .books-section { padding: 80px 40px; background: #faf7f2; }
+  .books-section h2 { font-family: 'Playfair Display', serif; font-size: 32px; text-align: center; margin-bottom: 40px; }
+  .books-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 900px; margin: 0 auto; }
+  .book-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.06); text-align: center; padding-bottom: 25px; }
+  .book-cover { height: 250px; background: #e8ddd0; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 18px; color: #8B6914; }
+  .book-card h3 { font-family: 'Playfair Display', serif; padding: 20px 15px 5px; font-size: 18px; }
+  .book-card p { font-size: 13px; color: #888; padding: 0 15px; }
+
+  .values-section { padding: 80px 40px; max-width: 1000px; margin: 0 auto; }
+  .values-section h2 { font-family: 'Playfair Display', serif; font-size: 32px; text-align: center; margin-bottom: 50px; }
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .value { text-align: center; }
+  .value-icon { font-size: 48px; margin-bottom: 15px; }
+  .value h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 10px; color: #8B6914; }
+  .value p { font-size: 14px; color: #666; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<div class="mockup-label">MOCKUP - CHI SONO</div>
+
+<header class="header">
+  <div class="logo">Spiga<span>dolce</span></div>
+</header>
+
+<section class="about-hero">
+  <div class="about-img"></div>
+  <div class="about-text">
+    <div class="subtitle">La mia storia</div>
+    <h1>Riccardina Burdo</h1>
+    <p>Sono nata ad Andria, in Puglia, dove la pasta fatta in casa non era un'arte ma la quotidianita'. Nella cucina di mia nonna ho imparato a fare le orecchiette prima ancora di saper scrivere.</p>
+    <p>Trasferita a Londra, ho portato con me le ricette e le tradizioni della mia terra. Ho iniziato a insegnare la pasta fresca pugliese nelle cucine di casa, e quello che era un gesto familiare e' diventato la mia missione: trasmettere l'autenticita' della cucina pugliese a chiunque voglia imparare.</p>
+    <div class="quote">"La pasta fatta a mano non e' solo cibo. E' un gesto d'amore che si tramanda di generazione in generazione."</div>
+    <p>Oggi organizzo corsi di pasta fresca a Londra, a casa mia e nei ristoranti partner. Ogni corso e' un viaggio di 3 ore nella tradizione pugliese: si impasta, si cucina e si mangia insieme.</p>
+  </div>
+</section>
+
+<section class="press-section">
+  <h2>Come Visto Su</h2>
+  <p class="sub">Articoli e menzioni dalla stampa</p>
+  <div class="press-logos">
+    <div class="press-logo">The Guardian</div>
+    <div class="press-logo">Telebari</div>
+    <div class="press-logo">Fairness Magazine</div>
+    <div class="press-logo">London One Radio</div>
+  </div>
+</section>
+
+<section class="values-section">
+  <h2>I Miei Valori</h2>
+  <div class="values-grid">
+    <div class="value">
+      <div class="value-icon">🌾</div>
+      <h3>Autenticita'</h3>
+      <p>Ricette tramandate di generazione in generazione, senza scorciatoie. Gli stessi ingredienti e le stesse tecniche della cucina pugliese.</p>
+    </div>
+    <div class="value">
+      <div class="value-icon">🤝</div>
+      <h3>Condivisione</h3>
+      <p>Cucinare insieme e' il modo piu' bello per conoscersi. Ogni corso e' un momento di convivialita' e scambio culturale.</p>
+    </div>
+    <div class="value">
+      <div class="value-icon">📖</div>
+      <h3>Semplicita'</h3>
+      <p>I piatti pugliesi nascono da ingredienti semplici e genuini. Non serve essere chef per creare qualcosa di straordinario.</p>
+    </div>
+  </div>
+</section>
+
+<section class="books-section">
+  <h2>I Miei Libri</h2>
+  <div class="books-grid">
+    <div class="book-card">
+      <div class="book-cover">Copertina Libro 1</div>
+      <h3>Pasta Fresca Pugliese</h3>
+      <p>Le ricette della tradizione</p>
+    </div>
+    <div class="book-card">
+      <div class="book-cover">Copertina Libro 2</div>
+      <h3>La Cucina di Nonna</h3>
+      <p>Sapori e ricordi dalla Puglia</p>
+    </div>
+    <div class="book-card">
+      <div class="book-cover">Copertina Libro 3</div>
+      <h3>Spigadolce</h3>
+      <p>Dolci e pane della tradizione</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

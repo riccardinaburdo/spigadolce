@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import home from '../content/pages/home.json';
+
+const testimonials = home.testimonials.items;
+---
+
+<BaseLayout title="Reviews | Spigadolce" currentPath="/reviews">
+  <section class="page-header">
+    <h1>What Our Guests Say</h1>
+    <p>Real experiences from people who joined our pasta classes</p>
+  </section>
+
+  <section class="section" style="max-width: 800px; margin: 0 auto;">
+    <div class="reviews-list">
+      {testimonials.map((t) => (
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"{t.text}"</p>
+          <div class="review-author">
+            <div class="review-avatar">{t.author.charAt(0)}</div>
+            <div>
+              <p class="review-name">{t.author}</p>
+              <p class="review-date">{t.date}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--color-warm); border-radius: 12px;">
+      <h3 style="font-family: var(--font-heading); margin-bottom: 0.5rem;">Attended a class?</h3>
+      <p style="color: #666; margin-bottom: 1rem;">We'd love to hear about your experience.</p>
+      <a href="/contact" class="btn-primary">Leave a Review</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .review-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+  }
+  .review-stars {
+    color: #f1c40f;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .review-text {
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 1.2rem;
+  }
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .review-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--color-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--color-gold);
+    font-size: 1.2rem;
+  }
+  .review-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .review-date {
+    font-size: 0.8rem;
+    color: #999;
+  }
+</style>

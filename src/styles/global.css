@@ -1481,3 +1481,201 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== NEW HOME SECTIONS ===== */
+
+/* Hero buttons */
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-secondary-hero {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  border: 2px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+.btn-secondary-hero:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* How It Works */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.step-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+.step-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.2rem;
+}
+.step-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--color-gold);
+  margin-bottom: 0.8rem;
+}
+.step-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* Locations */
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.location-card {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  height: 350px;
+}
+.location-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.location-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.75));
+  padding: 2rem;
+  color: #fff;
+}
+.location-overlay h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.location-overlay p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Testimonials */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.testimonial-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+}
+.testimonial-stars {
+  color: #f1c40f;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+.testimonial-text {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.7;
+  font-style: italic;
+  margin-bottom: 1.2rem;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.testimonial-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--color-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--color-gold);
+  font-size: 1.1rem;
+}
+.testimonial-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.testimonial-date {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* Press logos row */
+.press-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 2rem auto 0;
+  padding: 0 2rem;
+}
+.press-logo-item {
+  opacity: 0.5;
+  transition: opacity 0.3s;
+  max-width: 150px;
+}
+.press-logo-item:hover {
+  opacity: 1;
+}
+.press-logo-item img {
+  max-height: 50px;
+  width: auto;
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+.press-logo-item:hover img {
+  filter: grayscale(0%);
+}
+
+/* Responsive for new sections */
+@media (max-width: 768px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .locations-grid {
+    grid-template-columns: 1fr;
+  }
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .location-card {
+    height: 280px;
+  }
+}

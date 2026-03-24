@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spigadolce - Mockup Home</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Lato', sans-serif; color: #333; }
+
+  /* Header */
+  .header { background: #fff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 28px; color: #8B6914; font-weight: 700; }
+  .logo span { color: #c8956c; }
+  .nav { display: flex; gap: 25px; align-items: center; }
+  .nav a { text-decoration: none; color: #555; font-size: 14px; font-weight: 400; text-transform: uppercase; letter-spacing: 1px; }
+  .nav a:hover { color: #8B6914; }
+  .btn-cta { background: #8B6914; color: #fff !important; padding: 10px 24px; border-radius: 25px; font-weight: 700; font-size: 13px !important; letter-spacing: 1.5px; }
+  .btn-cta:hover { background: #a07a1a; }
+
+  /* Hero */
+  .hero { height: 90vh; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1556909114-44e3e70034e2?w=1600') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: 56px; max-width: 700px; line-height: 1.2; margin-bottom: 15px; }
+  .hero p { font-size: 20px; font-weight: 300; max-width: 550px; margin: 0 auto 30px; line-height: 1.6; }
+  .hero-btns { display: flex; gap: 15px; justify-content: center; }
+  .hero-btns a { padding: 14px 32px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; }
+  .hero-btns .primary { background: #8B6914; color: #fff; }
+  .hero-btns .secondary { background: transparent; color: #fff; border: 2px solid #fff; }
+
+  /* Section */
+  .section { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 38px; text-align: center; color: #333; margin-bottom: 10px; }
+  .section-sub { text-align: center; color: #888; font-size: 16px; margin-bottom: 50px; font-weight: 300; }
+  .section-dark { background: #faf7f2; padding: 80px 0; }
+  .section-green { background: #2d5a3d; padding: 80px 0; color: #fff; }
+
+  /* How it works */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1000px; margin: 0 auto; }
+  .step { text-align: center; padding: 30px; }
+  .step-icon { font-size: 60px; margin-bottom: 20px; }
+  .step h3 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 12px; color: #8B6914; }
+  .step p { color: #666; line-height: 1.7; font-size: 15px; }
+
+  /* Course cards */
+  .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1100px; margin: 0 auto; }
+  .course-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s; }
+  .course-card:hover { transform: translateY(-5px); }
+  .course-img { height: 220px; background-size: cover; background-position: center; position: relative; }
+  .course-badge { position: absolute; top: 15px; right: 15px; background: #c0392b; color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .course-badge.available { background: #27ae60; }
+  .course-body { padding: 25px; }
+  .course-body h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 8px; color: #333; }
+  .course-meta { display: flex; gap: 15px; margin-bottom: 12px; font-size: 13px; color: #888; }
+  .course-meta span { display: flex; align-items: center; gap: 4px; }
+  .course-body p { font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 15px; }
+  .course-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid #f0f0f0; }
+  .course-price { font-family: 'Playfair Display', serif; font-size: 24px; color: #8B6914; font-weight: 700; }
+  .course-price small { font-size: 13px; color: #999; font-family: 'Lato', sans-serif; font-weight: 400; }
+  .btn-book { background: #8B6914; color: #fff; padding: 10px 22px; border-radius: 25px; text-decoration: none; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Testimonials */
+  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1100px; margin: 0 auto; }
+  .testimonial { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 15px rgba(0,0,0,0.06); }
+  .testimonial .stars { color: #f1c40f; font-size: 18px; margin-bottom: 15px; }
+  .testimonial p { font-size: 15px; color: #555; line-height: 1.7; font-style: italic; margin-bottom: 20px; }
+  .testimonial .author { display: flex; align-items: center; gap: 12px; }
+  .testimonial .avatar { width: 45px; height: 45px; border-radius: 50%; background: #ddd; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #8B6914; font-size: 18px; }
+  .testimonial .name { font-weight: 700; font-size: 14px; }
+  .testimonial .date { font-size: 12px; color: #999; }
+
+  /* Locations */
+  .locations { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1000px; margin: 0 auto; }
+  .location { border-radius: 16px; overflow: hidden; position: relative; height: 350px; background-size: cover; background-position: center; display: flex; align-items: flex-end; }
+  .location-overlay { background: linear-gradient(transparent, rgba(0,0,0,0.7)); padding: 30px; width: 100%; color: #fff; }
+  .location h3 { font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 8px; }
+  .location p { font-size: 14px; line-height: 1.6; opacity: 0.9; }
+
+  /* Newsletter */
+  .newsletter { text-align: center; padding: 60px 40px; }
+  .newsletter h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: #fff; margin-bottom: 10px; }
+  .newsletter p { color: rgba(255,255,255,0.8); margin-bottom: 25px; font-size: 16px; }
+  .newsletter-form { display: flex; gap: 10px; justify-content: center; max-width: 500px; margin: 0 auto; }
+  .newsletter-form input { padding: 14px 20px; border: none; border-radius: 30px; font-size: 15px; flex: 1; }
+  .newsletter-form button { background: #8B6914; color: #fff; border: none; padding: 14px 28px; border-radius: 30px; font-weight: 700; font-size: 14px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Instagram */
+  .insta-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; }
+  .insta-item { height: 200px; background: #eee; background-size: cover; background-position: center; position: relative; cursor: pointer; }
+  .insta-item:hover::after { content: ''; position: absolute; inset: 0; background: rgba(139,105,20,0.3); }
+  .insta-header { text-align: center; padding: 50px 40px 30px; }
+  .insta-header h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: #333; }
+  .insta-header a { color: #8B6914; text-decoration: none; font-size: 16px; }
+
+  /* Footer */
+  .footer { background: #1a1a1a; color: #ccc; padding: 60px 40px 30px; }
+  .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1100px; margin: 0 auto; }
+  .footer h4 { color: #fff; font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 20px; }
+  .footer a { color: #aaa; text-decoration: none; display: block; margin-bottom: 10px; font-size: 14px; }
+  .footer a:hover { color: #8B6914; }
+  .footer-bottom { text-align: center; padding-top: 30px; margin-top: 40px; border-top: 1px solid #333; font-size: 13px; color: #666; max-width: 1100px; margin-left: auto; margin-right: auto; }
+  .social-links { display: flex; gap: 15px; }
+  .social-links a { width: 40px; height: 40px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; }
+
+  /* Mockup label */
+  .mockup-label { background: #8B6914; color: #fff; text-align: center; padding: 8px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="mockup-label">MOCKUP - SPIGADOLCE HOME PAGE</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">Spiga<span>dolce</span></div>
+  <nav class="nav">
+    <a href="corsi.html">Corsi</a>
+    <a href="#">Ricette</a>
+    <a href="#">Blog</a>
+    <a href="chi-sono.html">Chi Sono</a>
+    <a href="gift-cards.html">Gift Cards</a>
+    <a href="#">Recensioni</a>
+    <a href="faq.html">FAQ</a>
+    <a href="#">Contatti</a>
+    <a href="corsi.html" class="btn-cta">Prenota</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <h1>Impara a fare la pasta fresca pugliese a Londra</h1>
+    <p>Corsi pratici di 3 ore: dall'impasto al piatto completo. A casa mia o nei ristoranti partner.</p>
+    <div class="hero-btns">
+      <a href="corsi.html" class="primary">Scopri i Corsi</a>
+      <a href="gift-cards.html" class="secondary">Regala un'Esperienza</a>
+    </div>
+  </div>
+</section>
+
+<!-- COME FUNZIONA -->
+<section class="section">
+  <h2 class="section-title">Come Funziona</h2>
+  <p class="section-sub">Tre ore per imparare, cucinare e gustare un piatto completo della tradizione pugliese</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-icon">🤲</div>
+      <h3>Impasta</h3>
+      <p>Impari a preparare la pasta fresca a mano con le tecniche tradizionali pugliesi: orecchiette, cavatelli, tagliatelle e molto altro.</p>
+    </div>
+    <div class="step">
+      <div class="step-icon">🍳</div>
+      <h3>Cucina</h3>
+      <p>Prepari il sugo e il condimento tradizionale. Ogni corso include un piatto completo: antipasto, primo e un dolcetto pugliese.</p>
+    </div>
+    <div class="step">
+      <div class="step-icon">🍷</div>
+      <h3>Gusta</h3>
+      <p>Ti siedi a tavola e gusti quello che hai creato, accompagnato da un bicchiere di vino pugliese. Porti a casa la ricetta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROSSIMI CORSI -->
+<div class="section-dark">
+  <section class="section" style="padding-top:0; padding-bottom:0;">
+    <h2 class="section-title">Prossimi Corsi</h2>
+    <p class="section-sub">Scegli la tua esperienza e prenota il tuo posto</p>
+    <div class="courses-grid">
+
+      <div class="course-card">
+        <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600')">
+          <span class="course-badge" style="background:#e67e22">ULTIMI 2 POSTI</span>
+        </div>
+        <div class="course-body">
+          <h3>Orecchiette con Cime di Rapa</h3>
+          <div class="course-meta">
+            <span>📅 12 Apr 2026</span>
+            <span>⏰ 18:00 - 21:00</span>
+          </div>
+          <p>Impara a formare le orecchiette a mano e preparare il condimento tradizionale con cime di rapa, aglio e acciughe.</p>
+          <div class="course-meta">
+            <span>📍 A casa mia - Wimbledon</span>
+            <span>👥 Max 6 persone</span>
+          </div>
+          <div class="course-footer">
+            <div class="course-price">£55 <small>/persona</small></div>
+            <a href="#" class="btn-book">Prenota</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600')">
+          <span class="course-badge available">DISPONIBILE</span>
+        </div>
+        <div class="course-body">
+          <h3>Cavatelli al Sugo Fresco</h3>
+          <div class="course-meta">
+            <span>📅 19 Apr 2026</span>
+            <span>⏰ 11:00 - 14:00</span>
+          </div>
+          <p>Prepara i cavatelli con il coltello e condiscili con sugo di pomodorini freschi e cacioricotta stagionato.</p>
+          <div class="course-meta">
+            <span>📍 La Pizzica Restaurant</span>
+            <span>👥 Max 12 persone</span>
+          </div>
+          <div class="course-footer">
+            <div class="course-price">£55 <small>/persona</small></div>
+            <a href="#" class="btn-book">Prenota</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-162728640460-7a94d tried-49fc-a48b-7f0a3a3e3b3a?w=600'); background-color: #e8ddd0;">
+          <span class="course-badge available">DISPONIBILE</span>
+        </div>
+        <div class="course-body">
+          <h3>Focaccia Barese & Antipasti</h3>
+          <div class="course-meta">
+            <span>📅 26 Apr 2026</span>
+            <span>⏰ 15:00 - 18:00</span>
+          </div>
+          <p>L'autentica focaccia barese alta e soffice con pomodorini e olive, accompagnata da un antipasto misto pugliese.</p>
+          <div class="course-meta">
+            <span>📍 A casa mia - Wimbledon</span>
+            <span>👥 Max 6 persone</span>
+          </div>
+          <div class="course-footer">
+            <div class="course-price">£55 <small>/persona</small></div>
+            <a href="#" class="btn-book">Prenota</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p style="text-align:center; margin-top:35px;"><a href="corsi.html" style="color:#8B6914; font-weight:700; text-decoration:none; font-size:15px; text-transform:uppercase; letter-spacing:1.5px;">Vedi tutti i corsi →</a></p>
+  </section>
+</div>
+
+<!-- DOVE CI TROVI -->
+<section class="section">
+  <h2 class="section-title">Dove ci trovi</h2>
+  <p class="section-sub">Corsi intimi a casa mia o esperienze di gruppo nei ristoranti partner</p>
+  <div class="locations">
+    <div class="location" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800')">
+      <div class="location-overlay">
+        <h3>A Casa Mia</h3>
+        <p>Wimbledon, SW19 — Atmosfera intima e familiare. Max 6 persone. Come essere nella cucina di una nonna pugliese.</p>
+      </div>
+    </div>
+    <div class="location" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800')">
+      <div class="location-overlay">
+        <h3>Ristoranti Partner</h3>
+        <p>La Pizzica, Il Circolo e altri — Gruppi fino a 20 persone. Ideale per team building, feste e eventi speciali.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALI -->
+<div class="section-dark">
+  <section class="section" style="padding-top:0; padding-bottom:0;">
+    <h2 class="section-title">Cosa Dicono i Partecipanti</h2>
+    <p class="section-sub">Le esperienze di chi ha partecipato ai nostri corsi</p>
+    <div class="testimonials">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Un'esperienza incredibile! Riccardina ti fa sentire subito a casa. Ho imparato a fare le orecchiette e il sugo era fantastico. Torneremo sicuramente!"</p>
+        <div class="author">
+          <div class="avatar">S</div>
+          <div><div class="name">Sarah M.</div><div class="date">Marzo 2026</div></div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Perfect for a birthday celebration! The pasta was delicious and Riccardina is an amazing teacher. We all left with the recipe and new skills."</p>
+        <div class="author">
+          <div class="avatar">J</div>
+          <div><div class="name">James T.</div><div class="date">Febbraio 2026</div></div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Il miglior team building che abbiamo mai fatto. Divertente, educativo e il cibo era eccezionale. Tutti i colleghi ne parlano ancora!"</p>
+        <div class="author">
+          <div class="avatar">L</div>
+          <div><div class="name">Laura C.</div><div class="date">Gennaio 2026</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="section-green">
+  <div class="newsletter">
+    <h2>Ricevi Ricette e Date dei Prossimi Corsi</h2>
+    <p>Iscriviti alla newsletter per non perdere le nuove date e ricevere ricette pugliesi esclusive</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="La tua email...">
+      <button>Iscriviti</button>
+    </div>
+  </div>
+</div>
+
+<!-- INSTAGRAM -->
+<div class="insta-header">
+  <h2>Seguici su Instagram</h2>
+  <a href="#">@spigadolce</a>
+</div>
+<div class="insta-grid">
+  <div class="insta-item" style="background-image: url('https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400')"></div>
+  <div class="insta-item" style="background-image: url('https://images.unsplash.com/photo-1556909114-44e3e70034e2?w=400')"></div>
+  <div class="insta-item" style="background-image: url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400')"></div>
+  <div class="insta-item" style="background-image: url('https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400')"></div>
+  <div class="insta-item" style="background-image: url('https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=400')"></div>
+  <div class="insta-item" style="background-image: url('https://images.unsplash.com/photo-1528712306091-ed0763094c98?w=400')"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="logo" style="margin-bottom:15px;">Spiga<span>dolce</span></div>
+      <p style="font-size:14px; line-height:1.7; color:#888;">Autentiche esperienze di cucina pugliese a Londra. Impara a fare la pasta fresca con le ricette della tradizione.</p>
+    </div>
+    <div>
+      <h4>Link Rapidi</h4>
+      <a href="corsi.html">Corsi</a>
+      <a href="gift-cards.html">Gift Cards</a>
+      <a href="faq.html">FAQ</a>
+      <a href="#">Contatti</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div>
+      <h4>Corsi Popolari</h4>
+      <a href="#">Orecchiette</a>
+      <a href="#">Cavatelli</a>
+      <a href="#">Focaccia Barese</a>
+      <a href="#">Ravioli</a>
+      <a href="#">Corso Privato</a>
+    </div>
+    <div>
+      <h4>Seguici</h4>
+      <div class="social-links">
+        <a href="#">IG</a>
+        <a href="#">FB</a>
+        <a href="#">YT</a>
+      </div>
+      <p style="margin-top:20px; font-size:13px; color:#888;">info@spigadolce.com<br>+44 7903 903651</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Spigadolce. Tutti i diritti riservati. | As seen in The Guardian</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spigadolce - Mockup Corsi</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Lato', sans-serif; color: #333; background: #faf7f2; }
+
+  .header { background: #fff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 28px; color: #8B6914; font-weight: 700; }
+  .logo span { color: #c8956c; }
+  .nav { display: flex; gap: 25px; align-items: center; }
+  .nav a { text-decoration: none; color: #555; font-size: 14px; font-weight: 400; text-transform: uppercase; letter-spacing: 1px; }
+  .nav a.active { color: #8B6914; font-weight: 700; }
+  .btn-cta { background: #8B6914; color: #fff !important; padding: 10px 24px; border-radius: 25px; font-weight: 700; font-size: 13px !important; }
+
+  .page-hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1556909114-44e3e70034e2?w=1600') center/cover; padding: 100px 40px; text-align: center; color: #fff; }
+  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; margin-bottom: 10px; }
+  .page-hero p { font-size: 18px; font-weight: 300; max-width: 600px; margin: 0 auto; }
+
+  .filters { display: flex; gap: 12px; justify-content: center; padding: 30px 40px; flex-wrap: wrap; }
+  .filter-btn { padding: 10px 22px; border-radius: 25px; border: 2px solid #ddd; background: #fff; font-size: 14px; cursor: pointer; color: #555; font-weight: 600; }
+  .filter-btn.active { background: #8B6914; color: #fff; border-color: #8B6914; }
+
+  .courses-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1100px; margin: 0 auto; padding: 20px 40px 60px; }
+
+  .course-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: grid; grid-template-columns: 280px 1fr; }
+  .course-card-img { background-size: cover; background-position: center; position: relative; min-height: 280px; }
+  .course-badge { position: absolute; top: 15px; left: 15px; padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
+  .badge-sold { background: #c0392b; }
+  .badge-last { background: #e67e22; }
+  .badge-ok { background: #27ae60; }
+
+  .course-body { padding: 25px; display: flex; flex-direction: column; }
+  .course-category { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #8B6914; font-weight: 700; margin-bottom: 8px; }
+  .course-body h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 10px; }
+  .course-desc { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 15px; flex: 1; }
+
+  .course-details { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px; font-size: 13px; color: #777; }
+  .course-details span { display: flex; align-items: center; gap: 6px; }
+
+  .course-menu { background: #faf7f2; border-radius: 8px; padding: 12px 15px; margin-bottom: 15px; }
+  .course-menu h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #8B6914; margin-bottom: 8px; }
+  .course-menu p { font-size: 13px; color: #666; line-height: 1.6; }
+
+  .course-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid #f0f0f0; }
+  .course-price { font-family: 'Playfair Display', serif; font-size: 26px; color: #8B6914; font-weight: 700; }
+  .course-price small { font-size: 13px; color: #999; font-family: 'Lato'; font-weight: 400; }
+  .btn-book { background: #8B6914; color: #fff; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border: none; cursor: pointer; }
+  .btn-book.disabled { background: #ccc; cursor: not-allowed; }
+
+  .private-section { background: #2d5a3d; padding: 60px 40px; text-align: center; color: #fff; margin: 40px 0; }
+  .private-section h2 { font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 12px; }
+  .private-section p { font-size: 16px; max-width: 600px; margin: 0 auto 25px; line-height: 1.7; opacity: 0.9; }
+  .btn-white { background: #fff; color: #2d5a3d; padding: 14px 30px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; }
+
+  .mockup-label { background: #8B6914; color: #fff; text-align: center; padding: 8px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="mockup-label">MOCKUP - PAGINA CORSI</div>
+
+<header class="header">
+  <div class="logo">Spiga<span>dolce</span></div>
+  <nav class="nav">
+    <a href="corsi.html" class="active">Corsi</a>
+    <a href="#">Ricette</a>
+    <a href="#">Blog</a>
+    <a href="chi-sono.html">Chi Sono</a>
+    <a href="gift-cards.html">Gift Cards</a>
+    <a href="#">Recensioni</a>
+    <a href="faq.html">FAQ</a>
+    <a href="#">Contatti</a>
+    <a href="#" class="btn-cta">Prenota</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <h1>I Nostri Corsi</h1>
+  <p>Esperienze di cucina pugliese di 3 ore: impara, cucina e gusta un piatto completo</p>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active">Tutti</button>
+  <button class="filter-btn">Pasta Fresca</button>
+  <button class="filter-btn">Focacce</button>
+  <button class="filter-btn">A Casa</button>
+  <button class="filter-btn">Al Ristorante</button>
+  <button class="filter-btn">Corso Privato</button>
+</div>
+
+<div class="courses-grid">
+
+  <!-- Corso 1 -->
+  <div class="course-card">
+    <div class="course-card-img" style="background-image: url('https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600')">
+      <span class="course-badge badge-last">ULTIMI 2 POSTI</span>
+    </div>
+    <div class="course-body">
+      <div class="course-category">Pasta Fresca</div>
+      <h3>Orecchiette con Cime di Rapa</h3>
+      <p class="course-desc">Impara a formare le orecchiette a mano con il coltello, come si fa in Puglia. Prepara il condimento tradizionale con cime di rapa, aglio e acciughe.</p>
+      <div class="course-details">
+        <span>📅 Sab 12 Apr 2026</span>
+        <span>⏰ 18:00 - 21:00</span>
+        <span>📍 A casa mia, Wimbledon</span>
+        <span>👥 Max 6 persone</span>
+      </div>
+      <div class="course-menu">
+        <h4>Il menu del corso</h4>
+        <p>Bruschetta pugliese · Orecchiette con cime di rapa · Cartellate con vincotto</p>
+      </div>
+      <div class="course-footer">
+        <div class="course-price">£55 <small>/persona</small></div>
+        <button class="btn-book">Prenota</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Corso 2 -->
+  <div class="course-card">
+    <div class="course-card-img" style="background-image: url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600')">
+      <span class="course-badge badge-ok">DISPONIBILE</span>
+    </div>
+    <div class="course-body">
+      <div class="course-category">Pasta Fresca</div>
+      <h3>Cavatelli al Sugo Fresco</h3>
+      <p class="course-desc">Prepara i cavatelli con il coltello e condiscili con un sugo di pomodorini freschi e cacioricotta stagionato. Un piatto semplice e perfetto.</p>
+      <div class="course-details">
+        <span>📅 Sab 19 Apr 2026</span>
+        <span>⏰ 11:00 - 14:00</span>
+        <span>📍 La Pizzica Restaurant</span>
+        <span>👥 Max 12 persone</span>
+      </div>
+      <div class="course-menu">
+        <h4>Il menu del corso</h4>
+        <p>Taralli e formaggi pugliesi · Cavatelli al sugo con cacioricotta · Pasticciotto leccese</p>
+      </div>
+      <div class="course-footer">
+        <div class="course-price">£55 <small>/persona</small></div>
+        <button class="btn-book">Prenota</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Corso 3 -->
+  <div class="course-card">
+    <div class="course-card-img" style="background-image: url('https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600')">
+      <span class="course-badge badge-ok">DISPONIBILE</span>
+    </div>
+    <div class="course-body">
+      <div class="course-category">Focacce</div>
+      <h3>Focaccia Barese & Antipasti</h3>
+      <p class="course-desc">L'autentica focaccia barese alta e soffice con pomodorini, olive e origano. Un classico imperdibile della cucina pugliese.</p>
+      <div class="course-details">
+        <span>📅 Sab 26 Apr 2026</span>
+        <span>⏰ 15:00 - 18:00</span>
+        <span>📍 A casa mia, Wimbledon</span>
+        <span>👥 Max 6 persone</span>
+      </div>
+      <div class="course-menu">
+        <h4>Il menu del corso</h4>
+        <p>Antipasto misto pugliese · Focaccia barese con pomodorini e olive · Sporcamuss</p>
+      </div>
+      <div class="course-footer">
+        <div class="course-price">£55 <small>/persona</small></div>
+        <button class="btn-book">Prenota</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Corso 4 -->
+  <div class="course-card">
+    <div class="course-card-img" style="background-image: url('https://images.unsplash.com/photo-1587657565520-6c9e8b0a8b0a?w=600'); background-color: #e8ddd0;">
+      <span class="course-badge badge-sold">SOLD OUT</span>
+    </div>
+    <div class="course-body">
+      <div class="course-category">Pasta Fresca</div>
+      <h3>Ravioli di Ricotta e Spinaci</h3>
+      <p class="course-desc">Impara a fare la sfoglia all'uovo, il ripieno di ricotta fresca e spinaci, e due condimenti: burro e salvia oppure pomodoro fresco.</p>
+      <div class="course-details">
+        <span>📅 Dom 3 Mag 2026</span>
+        <span>⏰ 11:00 - 14:00</span>
+        <span>📍 A casa mia, Wimbledon</span>
+        <span>👥 Max 6 persone</span>
+      </div>
+      <div class="course-menu">
+        <h4>Il menu del corso</h4>
+        <p>Bruschetta con pomodori · Ravioli di ricotta con burro e salvia · Bocconotto</p>
+      </div>
+      <div class="course-footer">
+        <div class="course-price">£55 <small>/persona</small></div>
+        <button class="btn-book disabled">Esaurito</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Corso 5 -->
+  <div class="course-card">
+    <div class="course-card-img" style="background-image: url('https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600')">
+      <span class="course-badge badge-ok">DISPONIBILE</span>
+    </div>
+    <div class="course-body">
+      <div class="course-category">Pasta Fresca</div>
+      <h3>Tagliatelle al Ragu'</h3>
+      <p class="course-desc">La sfoglia tirata a mano e tagliata a tagliatelle, con un ragu' di carne alla pugliese cotto lentamente. Il comfort food perfetto.</p>
+      <div class="course-details">
+        <span>📅 Sab 10 Mag 2026</span>
+        <span>⏰ 18:00 - 21:00</span>
+        <span>📍 Il Circolo Restaurant</span>
+        <span>👥 Max 15 persone</span>
+      </div>
+      <div class="course-menu">
+        <h4>Il menu del corso</h4>
+        <p>Frise con pomodoro e origano · Tagliatelle al ragu' pugliese · Mandorle pralinate</p>
+      </div>
+      <div class="course-footer">
+        <div class="course-price">£55 <small>/persona</small></div>
+        <button class="btn-book">Prenota</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Corso 6 -->
+  <div class="course-card">
+    <div class="course-card-img" style="background-image: url('https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=600')">
+      <span class="course-badge badge-ok">DISPONIBILE</span>
+    </div>
+    <div class="course-body">
+      <div class="course-category">Pasta Fresca</div>
+      <h3>La Pasta Mista Pugliese</h3>
+      <p class="course-desc">Impara due formati in un solo corso: orecchiette e cavatelli. Conditi con sugo di pomodoro fresco fatto in casa. Il corso perfetto per principianti.</p>
+      <div class="course-details">
+        <span>📅 Dom 17 Mag 2026</span>
+        <span>⏰ 11:00 - 14:00</span>
+        <span>📍 A casa mia, Wimbledon</span>
+        <span>👥 Max 6 persone</span>
+      </div>
+      <div class="course-menu">
+        <h4>Il menu del corso</h4>
+        <p>Taralli e olive · Orecchiette e cavatelli al sugo · Dolcetto della casa</p>
+      </div>
+      <div class="course-footer">
+        <div class="course-price">£55 <small>/persona</small></div>
+        <button class="btn-book">Prenota</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CORSI PRIVATI -->
+<div class="private-section">
+  <h2>Corsi Privati & Team Building</h2>
+  <p>Vuoi un'esperienza su misura? Organizzo corsi privati per compleanni, addii al nubilato, team building aziendali e occasioni speciali. Da 2 a 20 persone.</p>
+  <a href="#" class="btn-white">Richiedi un Preventivo</a>
+</div>
+
+</body>
+</html>

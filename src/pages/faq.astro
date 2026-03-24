@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="FAQ | Spigadolce" currentPath="/faq">
+  <section class="page-header">
+    <h1>Frequently Asked Questions</h1>
+    <p>Everything you need to know before booking a class</p>
+  </section>
+
+  <section class="section" style="max-width: 750px; margin: 0 auto;">
+
+    <h3 class="faq-category">The Class</h3>
+
+    <details class="faq-item">
+      <summary class="faq-question">Do I need any cooking experience?</summary>
+      <p class="faq-answer">Not at all! Our classes are designed for all levels, from complete beginners to experienced home cooks. I'll guide you through every step — just like I would in my family kitchen back in Puglia.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">How long is a class?</summary>
+      <p class="faq-answer">Each class lasts three hours. In the first part you learn to make fresh pasta by hand, then we cook the sauce and complete dish together, and finally we sit down at the table to enjoy everything we've prepared.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">What's included?</summary>
+      <p class="faq-answer">Everything you need: all ingredients, an apron, a complete meal (starter, pasta course and a Pugliese sweet), a glass of Pugliese wine, and a printed recipe card to take home.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">How many people are in a class?</summary>
+      <p class="faq-answer">Home classes are limited to 6 guests to keep the atmosphere warm and intimate. Restaurant partner classes can host up to 15–20 guests.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">What language are the classes in?</summary>
+      <p class="faq-answer">Classes are conducted in English. I'm a native Italian speaker and happy to switch between both languages if the group prefers.</p>
+    </details>
+
+    <h3 class="faq-category">Dietary Requirements</h3>
+
+    <details class="faq-item">
+      <summary class="faq-question">Can you cater for allergies?</summary>
+      <p class="faq-answer">Yes — I can adapt most recipes to accommodate common allergies and intolerances. Please let me know when you book so I can prepare everything in advance.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">Are there vegetarian or vegan options?</summary>
+      <p class="faq-answer">Absolutely! Many traditional Pugliese recipes are naturally vegetarian. Vegan adaptations are also available — simply mention it when booking.</p>
+    </details>
+
+    <h3 class="faq-category">Booking &amp; Payment</h3>
+
+    <details class="faq-item">
+      <summary class="faq-question">How do I book a class?</summary>
+      <p class="faq-answer">You can book directly through our website by clicking 'Book Now' on the class you'd like to join. Payment is taken online at the time of booking.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">What is your cancellation policy?</summary>
+      <p class="faq-answer">You may cancel free of charge up to 48 hours before the class. Within 48 hours, you can transfer your booking to another date. No refunds are given for no-shows.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">Can I give a class as a gift?</summary>
+      <p class="faq-answer">Yes! We offer gift cards — the perfect present for birthdays, anniversaries and special occasions. They're delivered by email with a personal message and are valid for 12 months.</p>
+    </details>
+
+    <h3 class="faq-category">Private Classes</h3>
+
+    <details class="faq-item">
+      <summary class="faq-question">Can I book a private class?</summary>
+      <p class="faq-answer">Of course! I organise private classes for birthdays, hen parties, corporate team building and special celebrations. From 2 to 20 guests. Get in touch for a tailored quote.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-question">Do you offer team building experiences?</summary>
+      <p class="faq-answer">Absolutely — it's one of our most popular formats. Cooking together is a wonderful way to build team spirit. We can host larger groups at our partner restaurants across London.</p>
+    </details>
+
+    <div class="faq-cta">
+      <h3>Still have a question?</h3>
+      <p>Drop me a message — I'm always happy to help.</p>
+      <a href="/contact" class="btn-primary">Get in Touch</a>
+    </div>
+
+  </section>
+</BaseLayout>
+
+<style>
+  .faq-category {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--color-gold);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--color-warm);
+  }
+  .faq-item {
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    overflow: hidden;
+  }
+  .faq-question {
+    padding: 1.2rem 1.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-question::after {
+    content: '+';
+    font-size: 1.4rem;
+    color: var(--color-gold);
+    font-weight: 300;
+    transition: transform 0.2s;
+  }
+  details[open] .faq-question::after {
+    content: '−';
+  }
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+  .faq-answer {
+    padding: 0 1.5rem 1.2rem;
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.8;
+  }
+  .faq-cta {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--color-dark);
+    color: #fff;
+    margin-top: 3rem;
+    border-radius: 12px;
+  }
+  .faq-cta h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .faq-cta p {
+    opacity: 0.8;
+    margin-bottom: 1.2rem;
+  }
+</style>
