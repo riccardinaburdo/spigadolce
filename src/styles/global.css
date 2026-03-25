@@ -1259,84 +1259,97 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.1rem;
 }
 
-/* ===== FOOTER ===== */
+/* ===== FOOTER (4 columns) ===== */
 .site-footer {
-  background: var(--color-dark);
-  color: var(--color-text-light);
-  padding: 3rem 2rem;
-  text-align: center;
+  background: #1a1a1a;
+  color: #ccc;
+  padding: 60px 40px 30px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  height: 60px;
+  width: auto;
+  margin-bottom: 15px;
+  filter: brightness(0) invert(1);
+}
+
+.footer-tagline {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #888;
+}
+
+.footer-col h4 {
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+}
+
+.footer-col a {
+  color: #aaa;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.footer-col a:hover {
+  color: var(--color-gold);
 }
 
 .footer-social {
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 12px;
+  margin-bottom: 1.2rem;
 }
 
 .footer-social a {
-  color: var(--color-text-light);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
   font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  transition: color 0.3s;
+  font-weight: 700;
+  margin-bottom: 0;
 }
 
 .footer-social a:hover {
-  color: var(--color-gold);
-}
-
-.footer-newsletter {
-  margin-bottom: 1.5rem;
-}
-
-.footer-newsletter p {
-  margin-bottom: 0.8rem;
-  font-size: 0.9rem;
-}
-
-.newsletter-form {
-  display: flex;
-  justify-content: center;
-  gap: 0;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.newsletter-form input {
-  flex: 1;
-  padding: 0.7rem 1rem;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: transparent;
-  color: var(--color-white);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-}
-
-.newsletter-form input::placeholder {
-  color: rgba(255,255,255,0.4);
-}
-
-.newsletter-form button {
-  padding: 0.7rem 1.5rem;
   background: var(--color-gold);
-  color: var(--color-white);
-  border: none;
-  font-family: var(--font-body);
+}
+
+.footer-contact-info {
   font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  transition: background 0.3s;
+  color: #888;
+  line-height: 1.6;
 }
 
-.newsletter-form button:hover {
-  background: var(--color-accent);
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  margin-top: 40px;
+  border-top: 1px solid #333;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.site-footer .copyright {
+.footer-bottom p {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.5);
+  color: #666;
 }
 
 /* ===== PAGE HEADER ===== */
@@ -1659,6 +1672,176 @@ h1, h2, h3, h4, h5, h6 {
   filter: grayscale(0%);
 }
 
+/* ===== NAV CTA BUTTON ===== */
+.nav-cta {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+
+.btn-nav-cta {
+  background: var(--color-gold) !important;
+  color: #fff !important;
+  padding: 0.5rem 1.5rem !important;
+  border-radius: 25px;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: background 0.3s;
+}
+
+.btn-nav-cta:hover {
+  background: #a07a1a !important;
+}
+
+/* ===== CLASS CARD BADGES ===== */
+.class-card-img-wrapper {
+  position: relative;
+}
+
+.class-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.badge-available {
+  background: #27ae60;
+}
+
+.badge-last {
+  background: #e67e22;
+}
+
+/* ===== TEXT LINK ===== */
+.btn-text-link {
+  color: var(--color-gold);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: color 0.3s;
+}
+
+.btn-text-link:hover {
+  color: #a07a1a;
+}
+
+/* ===== NEWSLETTER SECTION ===== */
+.section-newsletter {
+  background: #2d5a3d;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.newsletter-content h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.newsletter-content p {
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 25px;
+  font-size: 1rem;
+}
+
+.newsletter-signup-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.newsletter-signup-form input {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  flex: 1;
+  outline: none;
+}
+
+.newsletter-signup-form button {
+  background: var(--color-gold);
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.3s;
+}
+
+.newsletter-signup-form button:hover {
+  background: #a07a1a;
+}
+
+/* ===== INSTAGRAM SECTION ===== */
+.insta-section {
+  padding: 0;
+}
+
+.insta-header-home {
+  text-align: center;
+  padding: 50px 40px 30px;
+}
+
+.insta-header-home h2 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.insta-header-home a {
+  color: var(--color-gold);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.insta-header-home a:hover {
+  text-decoration: underline;
+}
+
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+}
+
+.insta-item {
+  height: 200px;
+  background: #eee;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.insta-item:hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(200, 169, 110, 0.3);
+}
+
 /* Responsive for new sections */
 @media (max-width: 768px) {
   .steps-grid {
@@ -1677,5 +1860,31 @@ h1, h2, h3, h4, h5, h6 {
   }
   .location-card {
     height: 280px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .insta-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .insta-item {
+    height: 130px;
+  }
+  .newsletter-signup-form {
+    flex-direction: column;
+  }
+  .newsletter-signup-form input,
+  .newsletter-signup-form button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .insta-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

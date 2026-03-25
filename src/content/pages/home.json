@@ -1,8 +1,8 @@
 {
   "title": "Spigadolce | Authentic Pugliese Cooking Experiences in London",
   "hero": {
-    "heading": "Learn Fresh Pasta in the Heart of a Pugliese Home",
-    "subheading": "Three-hour hands-on classes where you knead, cook and feast — just like sitting at a family table in Southern Italy.",
+    "heading": "Learn to Make Fresh Pugliese Pasta in London",
+    "subheading": "Hands-on 3-hour classes: from kneading to a complete meal. At my home or at our partner restaurants.",
     "cta": "Explore Our Classes",
     "ctaUrl": "/cooking-classes",
     "ctaSecondary": "Gift an Experience",
@@ -65,5 +65,10 @@
         "date": "January 2026"
       }
     ]
+  },
+  "newsletter": {
+    "heading": "Get Recipes & Upcoming Class Dates",
+    "subheading": "Subscribe to our newsletter so you never miss new dates and receive exclusive Pugliese recipes",
+    "buttonText": "Subscribe"
   }
 }

@@ -8,36 +8,25 @@ import contact from '../content/pages/contact.json';
     <h1>{contact.title}</h1>
     <p class="subtitle">{contact.subtitle}</p>
 
-    <form class="contact-form" action="https://formspree.io/f/FORM_ID" method="POST">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input type="tel" id="phone" name="phone" />
-        </div>
-        <div class="form-group">
-          <label for="subject">Subject</label>
-          <input type="text" id="subject" name="subject" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
-      </div>
-      <button type="submit">Send Message</button>
-    </form>
+    <div style="max-width: 600px; margin: 2rem auto; text-align: center;">
+      <p style="font-size: 1.1rem; line-height: 1.8; color: var(--color-dark); margin-bottom: 2rem;">
+        For bookings, collaborations, private classes, or any enquiry, send me an email and I'll get back to you as soon as possible.
+      </p>
 
-    <div class="contact-info" style="text-align: center; margin-top: 2rem; color: #666;">
-      <p>Or reach out directly at <a href="mailto:info@spigadolce.com" style="color: #5f8f8b;">info@spigadolce.com</a></p>
+      <a href="mailto:info@spigadolce.com" class="btn-primary" style="font-size: 1rem; padding: 1rem 3rem;">
+        Email Me
+      </a>
+
+      <p style="margin-top: 2rem; color: #888;">info@spigadolce.com</p>
+
+      <hr style="margin: 2.5rem 0; border: none; border-top: 1px solid #ddd;" />
+
+      <p style="font-size: 1rem; color: var(--color-dark); margin-bottom: 1rem;">Follow me on social media</p>
+      <div style="display: flex; justify-content: center; gap: 1.5rem;">
+        <a href="https://instagram.com/spigadolce" target="_blank" rel="noopener" style="color: #5f8f8b; font-weight: 600;">Instagram</a>
+        <a href="https://facebook.com/spigadolce" target="_blank" rel="noopener" style="color: #5f8f8b; font-weight: 600;">Facebook</a>
+        <a href="https://youtube.com/channel/UCv2jM3fCf42eru3XK86nSrQ" target="_blank" rel="noopener" style="color: #5f8f8b; font-weight: 600;">YouTube</a>
+      </div>
     </div>
   </div>
 </BaseLayout>

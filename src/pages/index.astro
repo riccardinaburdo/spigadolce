@@ -15,17 +15,6 @@ const classes = classFiles
   .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
   .slice(0, 3);
 
-// Load recipes
-const recipesDir = path.join(process.cwd(), 'src/content/recipes');
-const recipeFiles = fs.readdirSync(recipesDir).filter(f => f.endsWith('.json'));
-const recipes = recipeFiles
-  .map(f => JSON.parse(fs.readFileSync(path.join(recipesDir, f), 'utf-8')))
-  .sort((a, b) => a.order - b.order)
-  .slice(0, 3);
-
-// Load press
-const pressItems = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/content/press/press.json'), 'utf-8')).slice(0, 4);
-
 const bookingUrl = booking.platform.url || '/contact';
 const steps = home.howItWorks.steps;
 const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
@@ -33,10 +22,7 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
 
 <BaseLayout title={home.title} currentPath="/">
   <!-- Hero -->
-  <section class="hero">
-    <video class="hero-video" autoplay muted loop playsinline poster="/images/general/hero-poster.jpg">
-      <source src="/images/general/hero.mp4" type="video/mp4" />
-    </video>
+  <section class="hero" style="background-image: url('/images/general/hero-bg.jpg');">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1>{home.hero.heading}</h1>
@@ -53,7 +39,7 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
     <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8; color: var(--color-dark);">{home.intro.text}</p>
   </section>
 
-  <!-- How It Works -->
+  <!-- Come Funziona -->
   <section class="section">
     <h2>{home.howItWorks.heading}</h2>
     <p class="subtitle">{home.howItWorks.subheading}</p>
@@ -68,20 +54,25 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
     </div>
   </section>
 
-  <!-- Upcoming Classes -->
+  <!-- Prossimi Corsi -->
   <section class="section section-cream">
     <h2>Upcoming Classes</h2>
-    <p class="subtitle">Book your seat at the table</p>
+    <p class="subtitle">Choose your experience and book your spot</p>
     {classes.length > 0 ? (
       <div class="classes-grid">
-        {classes.map((c) => (
+        {classes.map((c, i) => (
           <a href={booking.platform.url || `/cooking-classes/${c.slug}`} target={booking.platform.url ? '_blank' : '_self'} rel="noopener" class="class-card upcoming-card">
-            <img src={c.image} alt={c.title} />
+            <div class="class-card-img-wrapper">
+              <img src={c.image} alt={c.title} />
+              <span class={`class-badge ${i === 0 ? 'badge-last' : 'badge-available'}`}>
+                {i === 0 ? 'LAST SPOTS' : 'AVAILABLE'}
+              </span>
+            </div>
             <div class="class-card-body">
               <p class="date">{new Date(c.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
               <h3>{c.title}</h3>
               <p class="location">{c.location}</p>
-              <p class="price">&pound;{c.price} / person</p>
+              <p class="price">&pound;{c.price} <small>/person</small></p>
               <span class="status-upcoming">Book Now</span>
             </div>
           </a>
@@ -91,24 +82,24 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
       <p style="text-align: center; color: var(--color-dark); opacity: 0.7;">New dates coming soon. Sign up to our newsletter to be the first to know.</p>
     )}
     <div style="text-align: center; margin-top: 2rem;">
-      <a href="/cooking-classes" class="btn-primary">View All Classes</a>
+      <a href="/cooking-classes" class="btn-text-link">View all classes &rarr;</a>
     </div>
   </section>
 
-  <!-- Where We Cook -->
+  <!-- Dove ci trovi -->
   <section class="section">
     <h2>{home.locations.heading}</h2>
     <p class="subtitle">{home.locations.subheading}</p>
     <div class="locations-grid">
       <div class="location-card">
-        <img src="/images/general/about-riccardina.jpg" alt="Home kitchen" />
+        <img src="/images/general/about-riccardina.jpg" alt="Casa mia" />
         <div class="location-overlay">
           <h3>{home.locations.home.title}</h3>
           <p>{home.locations.home.description}</p>
         </div>
       </div>
       <div class="location-card">
-        <img src="/images/cooking-classes/mileto-caffe.jpg" alt="Partner restaurant" />
+        <img src="/images/cooking-classes/mileto-caffe.jpg" alt="Ristorante partner" />
         <div class="location-overlay">
           <h3>{home.locations.restaurant.title}</h3>
           <p>{home.locations.restaurant.description}</p>
@@ -117,7 +108,7 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
     </div>
   </section>
 
-  <!-- Testimonials -->
+  <!-- Testimoniali -->
   <section class="section section-warm">
     <h2>{home.testimonials.heading}</h2>
     <p class="subtitle">{home.testimonials.subheading}</p>
@@ -138,35 +129,31 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
     </div>
   </section>
 
-  <!-- Recipes -->
-  <section class="section section-cream">
-    <h2>Recipes</h2>
-    <p class="subtitle">Traditional Pugliese pasta recipes to try at home</p>
-    <div class="recipes-grid" style="max-width: var(--max-width); margin: 0 auto; padding: 0 2rem;">
-      {recipes.map((r) => (
-        <a href={`/recipes/${r.slug}`} class="recipe-card">
-          <img src={r.image} alt={r.title} />
-          <div class="recipe-card-overlay">
-            <p class="category">{r.category}</p>
-            <h3>{r.title}</h3>
-          </div>
-        </a>
-      ))}
-    </div>
-    <div style="text-align: center; margin-top: 2rem;">
-      <a href="/recipes" class="btn-primary">All Recipes</a>
+  <!-- Newsletter -->
+  <section class="section-newsletter">
+    <div class="newsletter-content">
+      <h2>{home.newsletter.heading}</h2>
+      <p>{home.newsletter.subheading}</p>
+      <form class="newsletter-signup-form">
+        <input type="email" placeholder="Your email..." required />
+        <button type="submit">{home.newsletter.buttonText}</button>
+      </form>
     </div>
   </section>
 
-  <!-- Press -->
-  <section class="section">
-    <h2>As Seen In</h2>
-    <div class="press-logos">
-      {pressItems.map((p) => (
-        <a href={p.url} target="_blank" rel="noopener" class="press-logo-item">
-          <img src={p.image} alt={p.outlet} />
-        </a>
-      ))}
+  <!-- Instagram -->
+  <section class="insta-section">
+    <div class="insta-header-home">
+      <h2>Follow Us on Instagram</h2>
+      <a href="https://instagram.com/spigadolce" target="_blank" rel="noopener">@spigadolce</a>
+    </div>
+    <div class="insta-grid">
+      <div class="insta-item" style="background-image: url('/images/cooking-classes/mileto-caffe.jpg')"></div>
+      <div class="insta-item" style="background-image: url('/images/cooking-classes/avli-battersea.jpg')"></div>
+      <div class="insta-item" style="background-image: url('/images/cooking-classes/my-tortellini-1.jpg')"></div>
+      <div class="insta-item" style="background-image: url('/images/cooking-classes/egro.jpg')"></div>
+      <div class="insta-item" style="background-image: url('/images/cooking-classes/mileto-2.jpg')"></div>
+      <div class="insta-item" style="background-image: url('/images/cooking-classes/my-tortellini-2.jpg')"></div>
     </div>
   </section>
 </BaseLayout>
