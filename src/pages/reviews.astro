@@ -8,30 +8,30 @@ const pressItems = [
   {
     publication: "Gambero Rosso",
     date: "21 May 2024",
-    title: "L'architetta pugliese che vende orecchiette a Londra",
-    quote: "Mi sento più inglese che italiana, ma amo le mie origini",
-    url: "https://www.gamberorosso.it"
+    title: "The Puglian architect selling orecchiette in London",
+    quote: "I feel more English than Italian, but I love my roots.",
+    url: "https://www.gamberorosso.it/notizie/storie/riccardina-pugliese-orecchiette-londra/"
   },
   {
     publication: "The Guardian",
     date: "9 June 2025",
     title: "Readers' most treasured kitchen objects",
     quote: "My humble spatula made it to the spotlight… a piece of my roots — and of my family's story.",
-    url: "https://www.theguardian.com"
+    url: "https://www.theguardian.com/lifeandstyle/2025/jun/09/readers-kitchen-treasures-pot-dish-objects"
   },
   {
     publication: "Londra Sera",
     date: "27 May 2024",
-    title: "Dalla Puglia a Londra con la passione per la cucina",
-    quote: "Dal diploma in architettura alla pasta fatta a mano: il viaggio da Andria a Londra.",
-    url: "https://www.londrasera.com"
+    title: "From Puglia to London with a passion for cooking",
+    quote: "From an architecture degree to handmade pasta: the journey from Andria to London.",
+    url: "https://www.facebook.com/londrasera/posts/pfbid02tPzP1MMjXuKpy6UhZbE7iMFwv8gaL1PdJe8tqguMp127ws7ybu5JnaufEib4obGtl"
   },
   {
     publication: "Telebari",
     date: "16 July 2025",
-    title: "Dina, signora delle orecchiette: dalla Puglia a Londra",
-    quote: "Insegna la tradizione della pasta fresca pugliese a studenti internazionali.",
-    url: "https://www.telebari.it"
+    title: "Dina, the queen of orecchiette: from Puglia to London",
+    quote: "She teaches the tradition of fresh Puglian pasta to international students.",
+    url: "https://www.telebari.it/storie/217433-dina-signora-delle-orecchiette-dalla-puglia-a-londra-per-insegnare-agli-stranieri-larte-della-pasta-fresca-foto.html"
   }
 ];
 ---
@@ -56,6 +56,7 @@ const pressItems = [
           </div>
           <p class="press-title">{item.title}</p>
           <p class="press-quote">"{item.quote}"</p>
+          <a href={item.url} target="_blank" rel="noopener noreferrer" class="press-link">Read the full article →</a>
         </div>
       ))}
     </div>
@@ -139,7 +140,18 @@ const pressItems = [
     color: #555;
     font-size: 0.95rem;
     line-height: 1.7;
-    margin: 0;
+    margin: 0 0 0.8rem 0;
+  }
+  .press-link {
+    display: inline-block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-gold);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .press-link:hover {
+    text-decoration: underline;
   }
 
   /* REVIEWS */
