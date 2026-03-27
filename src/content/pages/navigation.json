@@ -12,7 +12,7 @@
     { "label": "Blog", "url": "/blog" },
     { "label": "About", "url": "/about" },
     { "label": "Gift Cards", "url": "/gift-cards" },
-    { "label": "Reviews", "url": "/reviews" },
+    { "label": "Press & Reviews", "url": "/reviews" },
     { "label": "FAQ", "url": "/faq" },
     { "label": "Contact", "url": "/contact" }
   ],
