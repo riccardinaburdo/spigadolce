@@ -112,20 +112,11 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
   <section class="section section-warm">
     <h2>{home.testimonials.heading}</h2>
     <p class="subtitle">{home.testimonials.subheading}</p>
-    <div class="testimonials-grid">
-      {home.testimonials.items.map((t) => (
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">{t.text}</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">{t.author.charAt(0)}</div>
-            <div>
-              <p class="testimonial-name">{t.author}</p>
-              <p class="testimonial-date">{t.date}</p>
-            </div>
-          </div>
-        </div>
-      ))}
+    <div class="first-review-home">
+      <div class="first-review-icon">✍️</div>
+      <h3>Be the first to share your experience</h3>
+      <p>Every class is a small journey into the flavours and traditions of Puglia. If you've joined one of our sessions, we'd love to hear what you thought — your words help others discover what Spigadolce is all about.</p>
+      <a href="/reviews" class="btn-primary">Leave a Review</a>
     </div>
   </section>
 
@@ -157,3 +148,32 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .first-review-home {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+    border: 2px dashed var(--color-gold);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .first-review-home .first-review-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .first-review-home h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--color-dark);
+    margin-bottom: 0.8rem;
+  }
+  .first-review-home p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin: 0 auto 1.5rem auto;
+  }
+</style>
