@@ -130,7 +130,8 @@ const hasReviews = reviews.length > 0;
             </div>
           ))}
         </div>
-        <div style="text-align: center; margin-top: 2rem;">
+        <div class="add-review-invite">
+          <p>Enjoyed a class? We'd love to hear from you.</p>
           <button class="btn-primary" id="openReviewModal">Leave a Review</button>
         </div>
       </div>
@@ -223,6 +224,19 @@ const hasReviews = reviews.length > 0;
     font-size: 1rem;
     line-height: 1.8;
     margin: 0 auto 1.5rem auto;
+  }
+
+  /* ADD REVIEW INVITE (when reviews exist) */
+  .add-review-invite {
+    text-align: center;
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .add-review-invite p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1rem;
   }
 
   /* REVIEW CARDS (home) */
