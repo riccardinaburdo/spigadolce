@@ -48,26 +48,7 @@
   "testimonials": {
     "heading": "What Our Guests Say",
     "subheading": "Stories from people who joined our classes",
-    "items": [
-      {
-        "text": "An absolutely wonderful experience! Riccardina makes you feel instantly at home. I learnt to make orecchiette from scratch and the meal we shared was unforgettable.",
-        "author": "Sarah M.",
-        "date": "March 2026",
-        "rating": 5
-      },
-      {
-        "text": "Perfect for a birthday celebration! The pasta was delicious and Riccardina is a brilliant teacher. We all left with the recipe and new skills we can't wait to try at home.",
-        "author": "James T.",
-        "date": "February 2026",
-        "rating": 5
-      },
-      {
-        "text": "The best team building we've ever done. Fun, hands-on and the food was exceptional. Everyone in the office is still talking about it weeks later!",
-        "author": "Laura C.",
-        "date": "January 2026",
-        "rating": 5
-      }
-    ]
+    "items": []
   },
   "newsletter": {
     "heading": "Get Recipes & Upcoming Class Dates",
