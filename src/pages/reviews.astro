@@ -34,6 +34,15 @@ const pressItems = [
     quote: "She teaches the tradition of fresh Puglian pasta to international students.",
     url: "https://www.telebari.it/storie/217433-dina-signora-delle-orecchiette-dalla-puglia-a-londra-per-insegnare-agli-stranieri-larte-della-pasta-fresca-foto.html",
     image: "https://spigadolce.com/cdn/shop/files/Screenshot-2025-07-16-at-08.30.32.jpg?v=1752651189"
+  },
+  {
+    publication: "Priscio Podcast",
+    date: "1 May 2025",
+    title: "Le orecchiette volano a Londra — Riccardina Burdo di Spigadolce",
+    quote: "She brought the art of handmade Pugliese pasta to London, teaching authentic orecchiette and sharing the flavours of Southern Italy.",
+    url: "https://www.youtube.com/watch?v=ORfugMMZW9o",
+    image: "https://img.youtube.com/vi/ORfugMMZW9o/maxresdefault.jpg",
+    isVideo: true
   }
 ];
 
@@ -55,7 +64,14 @@ const hasReviews = reviews.length > 0;
     <div class="press-list">
       {pressItems.map((item) => (
         <div class="press-card">
-          <img src={item.image} alt={item.publication} class="press-thumb" />
+          <div class="press-thumb-wrapper">
+            <img src={item.image} alt={item.publication} class="press-thumb" />
+            {item.isVideo && (
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="press-play-overlay" aria-label="Watch video">
+                <svg viewBox="0 0 68 48" width="48" height="34"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+              </a>
+            )}
+          </div>
           <div class="press-body">
             <div class="press-header">
               <span class="press-publication">{item.publication}</span>
@@ -63,7 +79,7 @@ const hasReviews = reviews.length > 0;
             </div>
             <p class="press-title">{item.title}</p>
             <p class="press-quote">"{item.quote}"</p>
-            <a href={item.url} target="_blank" rel="noopener noreferrer" class="press-link">Read the full article →</a>
+            <a href={item.url} target="_blank" rel="noopener noreferrer" class="press-link">{item.isVideo ? 'Watch the video →' : 'Read the full article →'}</a>
           </div>
         </div>
       ))}
@@ -159,12 +175,28 @@ const hasReviews = reviews.length > 0;
     align-items: stretch;
     overflow: hidden;
   }
-  .press-thumb {
+  .press-thumb-wrapper {
+    position: relative;
     width: 140px;
     min-width: 140px;
+    flex-shrink: 0;
+  }
+  .press-thumb {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
   }
+  .press-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.2);
+    transition: background 0.2s;
+  }
+  .press-play-overlay:hover { background: rgba(0,0,0,0.35); }
   .press-body {
     padding: 1.5rem 1.8rem;
     display: flex;
@@ -214,7 +246,7 @@ const hasReviews = reviews.length > 0;
   .press-link:hover { text-decoration: underline; }
   @media (max-width: 600px) {
     .press-card { flex-direction: column; }
-    .press-thumb { width: 100%; height: 160px; min-width: unset; }
+    .press-thumb-wrapper { width: 100%; height: 160px; min-width: unset; }
   }
 
   /* ADD REVIEW INVITE (when reviews exist) */
