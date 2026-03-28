@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import home from '../content/pages/home.json';
 
 const pressItems = [
   {
@@ -35,6 +36,9 @@ const pressItems = [
     image: "https://spigadolce.com/cdn/shop/files/Screenshot-2025-07-16-at-08.30.32.jpg?v=1752651189"
   }
 ];
+
+const reviews = home.testimonials.items;
+const hasReviews = reviews.length > 0;
 ---
 
 <BaseLayout title="Press & Reviews | Spigadolce" currentPath="/reviews">
@@ -68,18 +72,65 @@ const pressItems = [
     <!-- GUEST REVIEWS SECTION -->
     <h2 class="section-title" style="margin-top: 3.5rem;">What Our Guests Say</h2>
 
-    <div class="first-review-box">
-      <div class="first-review-icon">✍️</div>
-      <h3>Be the first to share your experience</h3>
-      <p>
-        Every class is a small journey into the flavours and traditions of Puglia.
-        If you've joined one of our sessions, we'd love to hear what you thought —
-        your words help others discover what Spigadolce is all about.
-      </p>
-      <a href="/contact" class="btn-primary">Leave a Review</a>
-    </div>
+    {hasReviews ? (
+      <div>
+        <div class="reviews-grid">
+          {reviews.map((r: any) => (
+            <div class="review-card">
+              <div class="review-stars">
+                {'★'.repeat(r.rating ?? 5)}{'☆'.repeat(5 - (r.rating ?? 5))}
+              </div>
+              <p class="review-text">"{r.text}"</p>
+              <div class="review-author">
+                <span class="review-name">{r.author}</span>
+                {r.date && <span class="review-date">{r.date}</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <button class="btn-primary" id="openReviewModal">Leave a Review</button>
+        </div>
+      </div>
+    ) : (
+      <div class="first-review-box">
+        <div class="first-review-icon">✍️</div>
+        <h3>Be the first to share your experience</h3>
+        <p>
+          Every class is a small journey into the flavours and traditions of Puglia.
+          If you've joined one of our sessions, we'd love to hear what you thought —
+          your words help others discover what Spigadolce is all about.
+        </p>
+        <button class="btn-primary" id="openReviewModal">Leave a Review</button>
+      </div>
+    )}
 
   </section>
+
+  <!-- Review Modal -->
+  <div class="review-modal-overlay" id="reviewModal">
+    <div class="review-modal">
+      <button class="review-modal-close" id="reviewModalClose">&times;</button>
+      <h3>Share Your Experience</h3>
+      <p class="review-modal-desc">Your words help others discover what Spigadolce is all about.</p>
+      <form id="reviewForm">
+        <label>Your rating</label>
+        <div class="star-rating" id="starRating">
+          <span class="star" data-value="1">★</span>
+          <span class="star" data-value="2">★</span>
+          <span class="star" data-value="3">★</span>
+          <span class="star" data-value="4">★</span>
+          <span class="star" data-value="5">★</span>
+        </div>
+        <input type="hidden" id="ratingValue" value="0" />
+        <input type="text" id="reviewName" placeholder="Your name" required />
+        <textarea id="reviewText" placeholder="Tell us about your experience..." rows="4" required></textarea>
+        <p class="review-modal-note">We'll review your submission before publishing it.</p>
+        <button type="submit" class="btn-primary" style="width:100%">Send Review</button>
+      </form>
+    </div>
+  </div>
+
 </BaseLayout>
 
 <style>
@@ -159,18 +210,53 @@ const pressItems = [
     text-decoration: none;
     letter-spacing: 0.02em;
   }
-  .press-link:hover {
-    text-decoration: underline;
-  }
+  .press-link:hover { text-decoration: underline; }
   @media (max-width: 600px) {
-    .press-card {
-      flex-direction: column;
-    }
-    .press-thumb {
-      width: 100%;
-      height: 160px;
-      min-width: unset;
-    }
+    .press-card { flex-direction: column; }
+    .press-thumb { width: 100%; height: 160px; min-width: unset; }
+  }
+
+  /* REVIEW CARDS */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .review-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .review-stars {
+    color: #f1c40f;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+  .review-text {
+    font-style: italic;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    flex: 1;
+    margin: 0;
+  }
+  .review-author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .review-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--color-dark);
+  }
+  .review-date {
+    font-size: 0.8rem;
+    color: #999;
   }
 
   /* FIRST REVIEW INVITATION */
@@ -182,10 +268,7 @@ const pressItems = [
     box-shadow: 0 2px 15px rgba(0,0,0,0.06);
     border: 2px dashed var(--color-gold);
   }
-  .first-review-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
+  .first-review-icon { font-size: 2.5rem; margin-bottom: 1rem; }
   .first-review-box h3 {
     font-family: var(--font-heading);
     font-size: 1.4rem;
@@ -199,4 +282,132 @@ const pressItems = [
     max-width: 540px;
     margin: 0 auto 1.5rem auto;
   }
+
+  /* MODAL */
+  .review-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .review-modal-overlay.active { display: flex; }
+  .review-modal {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+  }
+  .review-modal h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-dark);
+    margin-bottom: 0.3rem;
+  }
+  .review-modal-desc {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  .review-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+    line-height: 1;
+  }
+  .review-modal label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 0.4rem;
+  }
+  .star-rating {
+    display: flex;
+    gap: 0.3rem;
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+  }
+  .star {
+    font-size: 2rem;
+    color: #ddd;
+    transition: color 0.15s;
+    user-select: none;
+  }
+  .star.active { color: #f1c40f; }
+  .review-modal input[type="text"],
+  .review-modal textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+  .review-modal-note {
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
 </style>
+
+<script>
+  const openBtn = document.getElementById('openReviewModal');
+  const modal = document.getElementById('reviewModal');
+  const closeBtn = document.getElementById('reviewModalClose');
+  const form = document.getElementById('reviewForm') as HTMLFormElement;
+  const stars = document.querySelectorAll('.star');
+  const ratingInput = document.getElementById('ratingValue') as HTMLInputElement;
+
+  openBtn?.addEventListener('click', () => modal?.classList.add('active'));
+  closeBtn?.addEventListener('click', () => modal?.classList.remove('active'));
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+  });
+
+  // Star interaction
+  stars.forEach((star) => {
+    star.addEventListener('click', () => {
+      const val = parseInt((star as HTMLElement).dataset.value || '0');
+      ratingInput.value = String(val);
+      stars.forEach((s, i) => s.classList.toggle('active', i < val));
+    });
+    star.addEventListener('mouseenter', () => {
+      const val = parseInt((star as HTMLElement).dataset.value || '0');
+      stars.forEach((s, i) => s.classList.toggle('active', i < val));
+    });
+  });
+  document.getElementById('starRating')?.addEventListener('mouseleave', () => {
+    const current = parseInt(ratingInput.value);
+    stars.forEach((s, i) => s.classList.toggle('active', i < current));
+  });
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const rating = parseInt(ratingInput.value);
+    if (rating === 0) { alert('Please select a star rating.'); return; }
+    const name = (document.getElementById('reviewName') as HTMLInputElement).value;
+    const text = (document.getElementById('reviewText') as HTMLTextAreaElement).value;
+    const starsStr = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    const body = `Rating: ${starsStr} (${rating}/5)\nName: ${name}\n\nReview:\n${text}`;
+    window.open(`mailto:spigadolce@gmail.com?subject=${encodeURIComponent('New Review from ' + name)}&body=${encodeURIComponent(body)}`);
+    modal?.classList.remove('active');
+    form.reset();
+    ratingInput.value = '0';
+    stars.forEach(s => s.classList.remove('active'));
+  });
+</script>

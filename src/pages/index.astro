@@ -390,7 +390,7 @@ const hasReviews = reviews.length > 0;
     const text = (document.getElementById('reviewText') as HTMLTextAreaElement).value;
     const starsStr = '★'.repeat(rating) + '☆'.repeat(5 - rating);
     const body = `Rating: ${starsStr} (${rating}/5)\nName: ${name}\n\nReview:\n${text}`;
-    window.open(`mailto:info@spigadolce.com?subject=${encodeURIComponent('New Review from ' + name)}&body=${encodeURIComponent(body)}`);
+    window.open(`mailto:spigadolce@gmail.com?subject=${encodeURIComponent('New Review from ' + name)}&body=${encodeURIComponent(body)}`);
     modal?.classList.remove('active');
     form.reset();
     ratingInput.value = '0';
