@@ -48,14 +48,7 @@
   "testimonials": {
     "heading": "What Our Guests Say",
     "subheading": "Stories from people who joined our classes",
-    "items": [
-      {
-        "text": "Esperienza fantastica! Ho imparato a fare le orecchiette e la pasta era deliziosa. Riccardina è una maestra straordinaria.",
-        "author": "Test Utente",
-        "date": "March 2026",
-        "rating": 5
-      }
-    ]
+    "items": []
   },
   "newsletter": {
     "heading": "Get Recipes & Upcoming Class Dates",
