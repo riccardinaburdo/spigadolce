@@ -72,7 +72,7 @@ const hasReviews = reviews.length > 0;
             </div>
             <div class="class-card-body">
               <p class="date">{new Date(c.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-              <h3>{c.title}</h3>
+              <h3>{c.subtitle ?? c.title}</h3>
               <p class="location">{c.location}</p>
               <p class="price">&pound;{c.price} <small>/person</small></p>
               <span class="status-upcoming">Book Now</span>

@@ -32,16 +32,10 @@
   ],
   "occasions": ["Date nights", "Birthdays", "Hen parties", "Friends' nights out", "Team building"],
   "closingNote": "We'll finish by sitting down together to enjoy the pasta you've made. Buon appetito!",
-  "gallery": [
-    "/images/cooking-classes/egro.jpg",
-    "/images/cooking-classes/egro-2.jpg",
-    "/images/cooking-classes/my-tortellini-1.jpg",
-    "/images/cooking-classes/my-tortellini-2.jpg",
-    "/images/cooking-classes/my-tortellini-3.jpg",
-    "/images/cooking-classes/mileto-caffe.jpg"
-  ],
-  "image": "/images/cooking-classes/egro.jpg",
-  "coverImage": "/images/cooking-classes/egro.jpg",
+  "gallery": [],
+  "galleryCount": 6,
+  "image": "/images/cooking-classes/private-cover.jpg",
+  "coverImage": "/images/cooking-classes/private-cover.jpg",
   "status": "upcoming",
   "order": 20
 }
