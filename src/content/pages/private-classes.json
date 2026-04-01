@@ -1,23 +1,34 @@
 {
-  "title": "Experience Authentic Italian Pasta Making in Your Own Kitchen",
-  "description": "Join an intimate in-home cooking workshop and learn the time-honored techniques of creating authentic water-based pasta using only semolina flour and water – no eggs needed.",
-  "groupSize": "2-10 participants",
+  "title": "Private In-Home Pasta Workshop",
+  "subtitle": "Experience Authentic Italian Pasta Making in Your Own Kitchen",
+  "intro": "Love the rustic texture of traditional pasta with its perfect ridges that capture every drop of sauce? Join our intimate in-home cooking workshop and master the art of handcrafted Italian pasta! I'll bring generations of Southern Italian culinary heritage directly to your home — perfect for all skill levels, no previous experience required.",
+  "groupSize": "2–10 participants",
   "whatYouCreate": [
-    "Handmade water-based pasta dough",
-    "Traditional shapes (orecchiette, cavatelli, busiate, etc.)",
-    "Complementary sauce with seasonal ingredients"
+    "Handmade water-based pasta dough from scratch",
+    "Traditional shapes: orecchiette, cavatelli, busiate, and more",
+    "A complementary sauce using fresh, seasonal ingredients"
   ],
   "skills": [
-    "Dough consistency and texture perfection",
-    "Hand-shaping techniques using household tools",
+    "Perfecting dough consistency and texture",
+    "Hand-shaping techniques using simple household tools",
     "Proper cooking and storage methods"
   ],
   "included": [
     "All ingredients and professional-grade equipment",
-    "QR code with complete recipe",
-    "Expert instruction",
-    "Prepared meal conclusion"
+    "QR code with the complete recipe you've mastered",
+    "Expert instruction from a passionate Italian cook",
+    "A relaxed, joyful atmosphere — no prior experience needed!"
   ],
-  "occasions": ["Dinner parties", "Birthdays", "Team building", "Date nights"],
-  "bookingUrl": "/contact"
+  "occasions": ["Dinner parties", "Birthdays", "Team building", "Date nights", "Anniversary celebrations", "Hen parties"],
+  "closingNote": "We'll conclude by enjoying the delicious meal you've all prepared together.",
+  "bookingUrl": "/contact",
+  "gallery": [
+    "/images/cooking-classes/my-tortellini-1.jpg",
+    "/images/cooking-classes/my-tortellini-2.jpg",
+    "/images/cooking-classes/my-tortellini-3.jpg",
+    "/images/cooking-classes/mileto-caffe.jpg",
+    "/images/cooking-classes/mileto-2.jpg",
+    "/images/general/about.jpg"
+  ],
+  "coverImage": "/images/cooking-classes/private-cover.jpg"
 }

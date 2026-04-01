@@ -1,44 +1,118 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import data from '../../content/pages/private-classes.json';
+
+const galleryImages = data.gallery;
+const coverFallback = galleryImages[0];
 ---
 
-<BaseLayout title="Private In-Home Classes | Spigadolce" currentPath="/cooking-classes/private">
-  <section class="private-hero">
-    <h1>{data.title}</h1>
-    <p>{data.description}</p>
-  </section>
+<BaseLayout title="Private In-Home Pasta Workshop | Spigadolce" currentPath="/cooking-classes/private">
 
-  <section class="private-details">
-    <div class="detail-card">
-      <h3>What You Create</h3>
-      <ul>
-        {data.whatYouCreate.map((item) => <li>{item}</li>)}
-      </ul>
+  <!-- Cover image -->
+  <div class="private-cover">
+    <img
+      src={data.coverImage}
+      alt="Fresh handmade orecchiette on a wooden board"
+      onerror={`this.src='${coverFallback}'`}
+    />
+    <div class="private-cover-overlay">
+      <span class="private-cover-label">Private Workshop</span>
     </div>
-    <div class="detail-card">
-      <h3>Skills You Learn</h3>
-      <ul>
-        {data.skills.map((item) => <li>{item}</li>)}
-      </ul>
-    </div>
-    <div class="detail-card">
-      <h3>What's Included</h3>
-      <ul>
-        {data.included.map((item) => <li>{item}</li>)}
-      </ul>
-    </div>
-  </section>
-
-  <div class="occasions">
-    {data.occasions.map((o, i) => (
-      <span>{o}{i < data.occasions.length - 1 ? ' \u2022' : ''}</span>
-    ))}
   </div>
 
-  <section class="section" style="text-align: center;">
-    <h2>Book Your Experience</h2>
-    <p style="max-width: 500px; margin: 1rem auto 2rem; color: #555;">Group size: {data.groupSize}. Get in touch to arrange your private workshop.</p>
-    <a href={data.bookingUrl} class="btn-primary">Contact Us</a>
-  </section>
+  <!-- Main layout: gallery + content -->
+  <div class="private-layout">
+
+    <!-- Gallery -->
+    <div class="private-gallery">
+      <div class="gallery-main">
+        <img id="gallery-main-img" src={galleryImages[0]} alt="Pasta making class" />
+      </div>
+      <div class="gallery-thumbs">
+        {galleryImages.map((img, i) => (
+          <button
+            class={`gallery-thumb${i === 0 ? ' active' : ''}`}
+            data-src={img}
+            aria-label={`View image ${i + 1}`}
+          >
+            <img src={img} alt={`Gallery image ${i + 1}`} />
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="private-content">
+      <p class="private-tag">In-Home Experience</p>
+      <h1>{data.subtitle}</h1>
+      <p class="private-intro">{data.intro}</p>
+
+      <div class="private-meta">
+        <div class="private-meta-item">
+          <span class="meta-icon">👥</span>
+          <div>
+            <strong>Group Size</strong>
+            <span>{data.groupSize}</span>
+          </div>
+        </div>
+        <div class="private-meta-item">
+          <span class="meta-icon">✅</span>
+          <div>
+            <strong>All-Inclusive</strong>
+            <span>Equipment &amp; ingredients provided</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="private-detail-block">
+        <h3>What You'll Create</h3>
+        <ul>
+          {data.whatYouCreate.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <div class="private-detail-block">
+        <h3>Skills You'll Master</h3>
+        <ul>
+          {data.skills.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <div class="private-detail-block">
+        <h3>What's Included</h3>
+        <ul>
+          {data.included.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <div class="private-occasions">
+        <h3>Perfect For</h3>
+        <div class="occasions-tags">
+          {data.occasions.map((o) => <span class="occasion-tag">{o}</span>)}
+        </div>
+      </div>
+
+      <p class="private-closing-note">🍽️ {data.closingNote}</p>
+
+      <a href={data.bookingUrl} class="btn-primary private-cta">Book Your Workshop</a>
+    </div>
+
+  </div>
+
 </BaseLayout>
+
+<script>
+  const thumbs = document.querySelectorAll<HTMLButtonElement>('.gallery-thumb');
+  const mainImg = document.getElementById('gallery-main-img') as HTMLImageElement;
+
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const src = thumb.dataset.src;
+      if (src && mainImg) {
+        mainImg.src = src;
+        thumbs.forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+      }
+    });
+  });
+</script>
