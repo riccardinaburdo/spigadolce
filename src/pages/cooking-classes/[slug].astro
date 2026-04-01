@@ -23,18 +23,8 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
 
 <BaseLayout title={`${c.title} | Spigadolce`} currentPath="/cooking-classes">
 
-  <!-- Cover -->
-  <div class="private-cover">
-    <img src={coverImage} alt={c.title} />
-    <div class="private-cover-overlay">
-      <span class="private-cover-label">
-        {c.status === 'past' ? 'Past Event' : 'Upcoming Class'}
-      </span>
-    </div>
-  </div>
-
   <!-- Main layout -->
-  <div class="private-layout">
+  <div class="private-layout" style="padding-top: 5rem;">
 
     <!-- Gallery -->
     <div class="private-gallery">
@@ -74,35 +64,25 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
       <p class="private-intro">{c.description}</p>
 
       <!-- Meta info -->
-      <div class="private-meta">
-        <div class="private-meta-item">
-          <span class="meta-icon">📅</span>
-          <div>
-            <strong>Date</strong>
-            <span>{formattedDate}{c.time ? ` · ${c.time}` : ''}</span>
-          </div>
+      <div class="class-meta-grid">
+        <div class="class-meta-cell">
+          <span class="class-meta-label">Date</span>
+          <span class="class-meta-value">{formattedDate}</span>
+          {c.time && <span class="class-meta-sub">{c.time}</span>}
         </div>
-        <div class="private-meta-item">
-          <span class="meta-icon">📍</span>
-          <div>
-            <strong>Location</strong>
-            <span>{c.location}</span>
-          </div>
+        <div class="class-meta-cell">
+          <span class="class-meta-label">Location</span>
+          <span class="class-meta-value">{c.location}</span>
+          {c.address && <span class="class-meta-sub">{c.address}</span>}
         </div>
-        <div class="private-meta-item">
-          <span class="meta-icon">💷</span>
-          <div>
-            <strong>Price</strong>
-            <span>£{c.price} / person</span>
-          </div>
+        <div class="class-meta-cell">
+          <span class="class-meta-label">Price</span>
+          <span class="class-meta-value">£{c.price} <small>/ person</small></span>
         </div>
         {c.duration && (
-          <div class="private-meta-item">
-            <span class="meta-icon">⏱️</span>
-            <div>
-              <strong>Duration</strong>
-              <span>{c.duration}</span>
-            </div>
+          <div class="class-meta-cell">
+            <span class="class-meta-label">Duration</span>
+            <span class="class-meta-value">{c.duration}</span>
           </div>
         )}
       </div>

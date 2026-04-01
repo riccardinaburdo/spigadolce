@@ -1325,35 +1325,45 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-/* Meta info */
-.private-meta {
-  display: flex;
-  gap: 1.5rem;
-  background: var(--color-warm);
+/* Class meta grid (2×2) */
+.class-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(200,169,110,0.25);
+  border: 1px solid rgba(200,169,110,0.25);
   border-radius: 10px;
-  padding: 1.2rem 1.5rem;
+  overflow: hidden;
 }
-.private-meta-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.meta-icon {
-  font-size: 1.4rem;
-}
-.private-meta-item div {
+.class-meta-cell {
+  background: var(--color-cream);
+  padding: 1.1rem 1.4rem;
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
 }
-.private-meta-item strong {
-  font-size: 0.8rem;
+.class-meta-label {
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--color-dark);
+  letter-spacing: 1.5px;
+  color: var(--color-gold);
 }
-.private-meta-item span {
-  font-size: 0.9rem;
-  color: #666;
+.class-meta-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  line-height: 1.3;
+}
+.class-meta-value small {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: #777;
+}
+.class-meta-sub {
+  font-size: 0.82rem;
+  color: #888;
+  line-height: 1.4;
 }
 
 /* Detail blocks */
