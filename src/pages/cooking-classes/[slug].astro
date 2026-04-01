@@ -12,40 +12,166 @@ export function getStaticPaths() {
   });
 }
 
-const { classData } = Astro.props;
+const { classData: c } = Astro.props;
+
+const gallery = c.gallery ?? [c.image];
+const coverImage = c.coverImage ?? c.image;
+const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
+  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+});
 ---
 
-<BaseLayout title={`${classData.title} | Spigadolce`} currentPath="/cooking-classes">
-  <div class="page-header">
-    <h1>{classData.title}</h1>
+<BaseLayout title={`${c.title} | Spigadolce`} currentPath="/cooking-classes">
+
+  <!-- Cover -->
+  <div class="private-cover">
+    <img src={coverImage} alt={c.title} />
+    <div class="private-cover-overlay">
+      <span class="private-cover-label">
+        {c.status === 'past' ? 'Past Event' : 'Upcoming Class'}
+      </span>
+    </div>
   </div>
 
-  <section class="recipe-detail">
-    <img src={classData.image} alt={classData.title} style="width: 100%; max-height: 400px; object-fit: cover; margin-bottom: 2rem;" />
+  <!-- Main layout -->
+  <div class="private-layout">
 
-    <div class="recipe-meta">
-      <span><strong>Date:</strong> {new Date(classData.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
-      <span><strong>Location:</strong> {classData.location}</span>
-      <span><strong>Price:</strong> &pound;{classData.price} / person</span>
-    </div>
-
-    <p style="margin: 1.5rem 0; line-height: 1.8;">{classData.description}</p>
-
-    {classData.includes && classData.includes.length > 0 && (
-      <>
-        <h2>What's Included</h2>
-        <ul>
-          {classData.includes.map((item: string) => <li>{item}</li>)}
-        </ul>
-      </>
-    )}
-
-    <div style="text-align: center; margin-top: 3rem;">
-      {classData.status === 'past' ? (
-        <span class="status-past" style="font-size: 1rem; padding: 0.5rem 1.5rem;">Past Event</span>
-      ) : (
-        <a href="/contact" class="btn-primary">Book Now</a>
+    <!-- Gallery -->
+    <div class="private-gallery">
+      <div class="gallery-main">
+        <img id="gallery-main-img" src={gallery[0]} alt={c.title} />
+      </div>
+      {gallery.length > 1 && (
+        <div class="gallery-thumbs">
+          {gallery.map((img: string, i: number) => (
+            <button
+              class={`gallery-thumb${i === 0 ? ' active' : ''}`}
+              data-src={img}
+              aria-label={`View image ${i + 1}`}
+            >
+              <img src={img} alt={`${c.title} — image ${i + 1}`} />
+            </button>
+          ))}
+        </div>
       )}
     </div>
-  </section>
+
+    <!-- Content -->
+    <div class="private-content">
+      <p class="private-tag">Cooking Class</p>
+      <h1>{c.subtitle ?? c.title}</h1>
+      <p class="private-intro">{c.description}</p>
+
+      <!-- Meta info -->
+      <div class="private-meta">
+        <div class="private-meta-item">
+          <span class="meta-icon">📅</span>
+          <div>
+            <strong>Date</strong>
+            <span>{formattedDate}{c.time ? ` · ${c.time}` : ''}</span>
+          </div>
+        </div>
+        <div class="private-meta-item">
+          <span class="meta-icon">📍</span>
+          <div>
+            <strong>Location</strong>
+            <span>{c.location}</span>
+          </div>
+        </div>
+        <div class="private-meta-item">
+          <span class="meta-icon">💷</span>
+          <div>
+            <strong>Price</strong>
+            <span>£{c.price} / person</span>
+          </div>
+        </div>
+        {c.duration && (
+          <div class="private-meta-item">
+            <span class="meta-icon">⏱️</span>
+            <div>
+              <strong>Duration</strong>
+              <span>{c.duration}</span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <!-- Long description -->
+      {c.longDescription && c.longDescription.map((para: string) => (
+        <p class="private-intro">{para}</p>
+      ))}
+
+      <!-- What you'll create -->
+      {c.whatYouCreate && (
+        <div class="private-detail-block">
+          <h3>What You'll Create</h3>
+          <ul>
+            {c.whatYouCreate.map((item: string) => <li>{item}</li>)}
+          </ul>
+        </div>
+      )}
+
+      <!-- Skills -->
+      {c.skills && (
+        <div class="private-detail-block">
+          <h3>Skills You'll Master</h3>
+          <ul>
+            {c.skills.map((item: string) => <li>{item}</li>)}
+          </ul>
+        </div>
+      )}
+
+      <!-- Included -->
+      {(c.included ?? c.includes) && (
+        <div class="private-detail-block">
+          <h3>What's Included</h3>
+          <ul>
+            {(c.included ?? c.includes).map((item: string) => <li>{item}</li>)}
+          </ul>
+        </div>
+      )}
+
+      <!-- Occasions -->
+      {c.occasions && (
+        <div class="private-occasions">
+          <h3>Perfect For</h3>
+          <div class="occasions-tags">
+            {c.occasions.map((o: string) => <span class="occasion-tag">{o}</span>)}
+          </div>
+        </div>
+      )}
+
+      <!-- Closing note -->
+      {c.closingNote && (
+        <p class="private-closing-note">🍽️ {c.closingNote}</p>
+      )}
+
+      <!-- CTA -->
+      <div>
+        {c.status === 'past' ? (
+          <span class="status-past">Past Event</span>
+        ) : (
+          <a href="/contact" class="btn-primary private-cta">Book Your Spot</a>
+        )}
+      </div>
+
+    </div>
+  </div>
+
 </BaseLayout>
+
+<script>
+  const thumbs = document.querySelectorAll<HTMLButtonElement>('.gallery-thumb');
+  const mainImg = document.getElementById('gallery-main-img') as HTMLImageElement;
+
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const src = thumb.dataset.src;
+      if (src && mainImg) {
+        mainImg.src = src;
+        thumbs.forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+      }
+    });
+  });
+</script>

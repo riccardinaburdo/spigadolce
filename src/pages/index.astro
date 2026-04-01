@@ -63,7 +63,7 @@ const hasReviews = reviews.length > 0;
     {classes.length > 0 ? (
       <div class="classes-grid">
         {classes.map((c, i) => (
-          <a href={booking.platform.url || `/cooking-classes/${c.slug}`} target={booking.platform.url ? '_blank' : '_self'} rel="noopener" class="class-card upcoming-card">
+          <a href={`/cooking-classes/${c.slug}`} class="class-card upcoming-card">
             <div class="class-card-img-wrapper">
               <img src={c.image} alt={c.title} />
               <span class={`class-badge ${i === 0 ? 'badge-last' : 'badge-available'}`}>
