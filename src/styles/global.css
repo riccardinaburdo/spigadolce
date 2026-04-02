@@ -1487,7 +1487,6 @@ h1, h2, h3, h4, h5, h6 {
   height: 60px;
   width: auto;
   margin-bottom: 15px;
-  filter: brightness(0) invert(1);
 }
 
 .footer-tagline {
