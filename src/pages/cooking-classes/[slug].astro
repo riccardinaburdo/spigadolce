@@ -29,7 +29,7 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
     <!-- Gallery -->
     <div class="private-gallery">
       <div class="gallery-main">
-        <img id="gallery-main-img" src={gallery[0] ?? coverImage} alt={c.title} />
+        <img id="gallery-main-img" src={coverImage} alt={c.title} />
       </div>
       {/* Real thumbnails */}
       {gallery.length > 1 && (
