@@ -32,7 +32,12 @@
   ],
   "occasions": ["Date nights", "Birthdays", "Hen parties", "Friends' nights out", "Team building"],
   "closingNote": "We'll finish by sitting down together to enjoy the pasta you've made. Buon appetito!",
-  "gallery": [],
+  "gallery": [
+    "/images/cooking-classes/gallery-cavatelli-rigati.jpg",
+    "/images/cooking-classes/gallery-orecchiette-polpette.jpg",
+    "/images/cooking-classes/gallery-pasta-ferretto.jpg",
+    "/images/cooking-classes/gallery-orecchiette-sugo.jpg"
+  ],
   "galleryCount": 4,
   "image": "/images/cooking-classes/private-cover.jpg",
   "coverImage": "/images/cooking-classes/private-cover.jpg",
