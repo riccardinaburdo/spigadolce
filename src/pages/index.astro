@@ -62,7 +62,7 @@ const hasReviews = reviews.length > 0;
     <p class="subtitle">Choose your experience and book your spot</p>
     {classes.length > 0 ? (
       <div class="classes-grid">
-        {classes.map((c, i) => (
+        {classes.slice(0, 1).map((c, i) => (
           <a href={`/cooking-classes/${c.slug}`} class="class-card upcoming-card">
             <div class="class-card-img-wrapper">
               <img src={c.image} alt={c.title} />
