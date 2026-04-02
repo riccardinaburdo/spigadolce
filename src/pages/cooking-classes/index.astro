@@ -28,7 +28,7 @@ const bookingUrl = booking.platform.url || '/contact';
       <h2>Upcoming Classes</h2>
       <p class="subtitle">Book your spot before they fill up</p>
       <div class="classes-grid">
-        {upcoming.map((c) => (
+        {upcoming.slice(0, 1).map((c) => (
           <a href={bookingUrl} target={booking.platform.url ? '_blank' : '_self'} rel="noopener" class="class-card upcoming-card">
             <img src={c.image} alt={c.title} />
             <div class="class-card-body">
