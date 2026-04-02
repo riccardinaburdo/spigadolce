@@ -292,11 +292,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== COOKING CLASSES GRID ===== */
 .classes-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
   max-width: var(--max-width);
   margin: 0 auto;
+}
+.classes-grid .class-card,
+.classes-grid .upcoming-card {
+  flex: 0 1 340px;
 }
 
 .class-card {
@@ -1622,7 +1627,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .classes-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
+  }
+  .classes-grid .class-card,
+  .classes-grid .upcoming-card {
+    flex: 0 1 100%;
   }
 
   .recipes-grid {
