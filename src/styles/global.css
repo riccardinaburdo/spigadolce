@@ -1473,12 +1473,13 @@ h1, h2, h3, h4, h5, h6 {
   gap: 0.5rem;
 }
 .occasion-tag {
-  background: var(--color-warm);
-  border: 1px solid rgba(200,169,110,0.4);
+  background: #fff;
+  border: 1px solid #ddd;
   color: var(--color-dark);
   font-size: 0.85rem;
   padding: 0.3rem 0.9rem;
   border-radius: 20px;
+  display: inline-block;
 }
 
 /* Closing note */
