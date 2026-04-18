@@ -143,20 +143,22 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
           <span class="status-past">Past Event</span>
         ) : (
           <div class="quantity-booking">
-            <label for="qty">Spots:</label>
-            <select id="qty" name="qty">
-              {[1,2,3,4,5,6].map(n => <option value={n}>{n}</option>)}
-            </select>
-            <button
+            <a
               class="btn-primary private-cta"
-              id="bookBtn"
-              data-slug={c.slug}
+              href={`mailto:spigadolce@gmail.com?subject=Booking request: ${encodeURIComponent(c.title)}&body=Hi Riccardina,%0A%0AI'd like to book a spot for "${c.title}" on ${formattedDate}.%0A%0ANumber of people: %0AName: %0APhone: %0A%0AThank you!`}
             >
-              Book Now · £{c.price}<span id="qtyLabel">/person</span>
-            </button>
+              Book Now · £{c.price}/person
+            </a>
+            <a
+              class="btn-whatsapp"
+              href={`https://wa.me/447903903651?text=Hi Riccardina, I'd like to book a spot for "${c.title}" on ${formattedDate}.`}
+              target="_blank"
+              rel="noopener"
+            >
+              Book via WhatsApp
+            </a>
           </div>
         )}
-        <p id="bookError" class="book-error" style="display:none;">Something went wrong. Please try again.</p>
       </div>
 
     </div>
@@ -184,10 +186,21 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
     background: #fff;
     cursor: pointer;
   }
-  .book-error {
-    color: #c0392b;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #25D366;
+    color: #fff;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-whatsapp:hover {
+    background: #1ebe5d;
   }
 </style>
 
@@ -206,36 +219,4 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
     });
   });
 
-  // Stripe checkout
-  const bookBtn = document.getElementById('bookBtn') as HTMLButtonElement | null;
-  const qtySelect = document.getElementById('qty') as HTMLSelectElement | null;
-  const bookError = document.getElementById('bookError') as HTMLElement | null;
-
-  if (bookBtn) {
-    bookBtn.addEventListener('click', async () => {
-      const slug = bookBtn.dataset.slug;
-      const quantity = qtySelect?.value ?? '1';
-      bookBtn.disabled = true;
-      bookBtn.textContent = 'Redirecting…';
-      if (bookError) bookError.style.display = 'none';
-
-      try {
-        const res = await fetch('/api/create-checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ slug, quantity: parseInt(quantity) }),
-        });
-        const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          throw new Error(data.error ?? 'Unknown error');
-        }
-      } catch (err) {
-        if (bookError) bookError.style.display = 'block';
-        bookBtn.disabled = false;
-        bookBtn.textContent = 'Book Now';
-      }
-    });
-  }
 </script>

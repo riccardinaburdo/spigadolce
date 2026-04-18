@@ -1,5 +1,4 @@
 ---
-export const prerender = false;
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -26,7 +25,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <li>Delivered by email</li>
             <li>Personal message included</li>
           </ul>
-          <button class="btn-primary gift-buy-btn" style="display:block; width:100%; text-align:center;" data-type="group">Buy Now</button>
+          <a class="btn-primary gift-buy-btn" href="mailto:spigadolce@gmail.com?subject=Gift Card: Group Class (£55)&body=Hi Riccardina,%0A%0AI'd like to purchase a Group Class Gift Card (£55).%0A%0ARecipient name: %0APersonal message: %0AMy name: %0AMy phone: %0A%0AThank you!" style="display:block; width:100%; text-align:center; text-decoration:none;">Buy Now</a>
         </div>
       </div>
 
@@ -46,7 +45,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <li>Delivered by email</li>
             <li>Personal message included</li>
           </ul>
-          <button class="btn-primary gift-buy-btn" style="display:block; width:100%; text-align:center;" data-type="private">Buy Now</button>
+          <a class="btn-primary gift-buy-btn" href="mailto:spigadolce@gmail.com?subject=Gift Card: Private Class for Two (£150)&body=Hi Riccardina,%0A%0AI'd like to purchase a Private Class Gift Card (£150).%0A%0ARecipient name: %0APersonal message: %0AMy name: %0AMy phone: %0A%0AThank you!" style="display:block; width:100%; text-align:center; text-decoration:none;">Buy Now</a>
         </div>
       </div>
 
@@ -64,11 +63,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <li>Delivered by email</li>
             <li>Personal message included</li>
           </ul>
-          <div class="custom-amount-wrap">
-            <label for="customAmount">Amount (£)</label>
-            <input id="customAmount" type="number" min="30" step="5" placeholder="e.g. 50" />
-          </div>
-          <button class="btn-primary gift-buy-btn" style="display:block; width:100%; text-align:center;" data-type="custom">Buy Now</button>
+          <a class="btn-primary gift-buy-btn" href="mailto:spigadolce@gmail.com?subject=Gift Card: Custom Amount&body=Hi Riccardina,%0A%0AI'd like to purchase a Custom Gift Card.%0A%0AAmount I'd like: £%0ARecipient name: %0APersonal message: %0AMy name: %0AMy phone: %0A%0AThank you!" style="display:block; width:100%; text-align:center; text-decoration:none;">Buy Now</a>
         </div>
       </div>
 
@@ -79,8 +74,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="gift-steps">
         <div class="gift-step">
           <div class="gift-step-num">1</div>
-          <h4>Choose &amp; Pay</h4>
-          <p>Select a gift card and complete your payment online</p>
+          <h4>Choose &amp; Email</h4>
+          <p>Click "Buy Now" and send your request — we'll reply with payment details</p>
         </div>
         <div class="gift-step">
           <div class="gift-step-num">2</div>
@@ -229,40 +224,3 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 </style>
 
-<script>
-  document.querySelectorAll<HTMLButtonElement>('.gift-buy-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const type = btn.dataset.type as string;
-      const body: Record<string, any> = { type };
-
-      if (type === 'custom') {
-        const input = document.getElementById('customAmount') as HTMLInputElement;
-        const val = parseFloat(input?.value ?? '0');
-        if (!val || val < 30) { alert('Please enter an amount of at least £30.'); return; }
-        body.customAmount = val;
-      }
-
-      btn.disabled = true;
-      const original = btn.textContent;
-      btn.textContent = 'Redirecting…';
-
-      try {
-        const res = await fetch('/api/create-gift-checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        });
-        const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          throw new Error(data.error ?? 'Unknown error');
-        }
-      } catch {
-        alert('Something went wrong. Please try again or contact us directly.');
-        btn.disabled = false;
-        btn.textContent = original ?? 'Buy Now';
-      }
-    });
-  });
-</script>
