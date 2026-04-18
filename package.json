@@ -14,7 +14,9 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.7.1",
     "@astrojs/vercel": "^10.0.0",
+    "@stripe/stripe-js": "^9.2.0",
     "astro": "^6.0.3",
-    "decap-cms-app": "^3.10.1"
+    "decap-cms-app": "^3.10.1",
+    "stripe": "^22.0.2"
   }
 }

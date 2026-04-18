@@ -182,10 +182,11 @@ const hasReviews = reviews.length > 0;
     <div class="newsletter-content">
       <h2>{home.newsletter.heading}</h2>
       <p>{home.newsletter.subheading}</p>
-      <form class="newsletter-signup-form">
-        <input type="email" placeholder="Your email..." required />
-        <button type="submit">{home.newsletter.buttonText}</button>
+      <form class="newsletter-signup-form" id="newsletterForm">
+        <input type="email" id="newsletterEmail" placeholder="Your email..." required />
+        <button type="submit" id="newsletterBtn">{home.newsletter.buttonText}</button>
       </form>
+      <p id="newsletterMsg" style="display:none; margin-top:0.75rem; font-size:0.95rem;"></p>
     </div>
   </section>
 
@@ -375,6 +376,45 @@ const hasReviews = reviews.length > 0;
 </style>
 
 <script>
+  // Newsletter
+  const newsletterForm = document.getElementById('newsletterForm') as HTMLFormElement;
+  const newsletterMsg = document.getElementById('newsletterMsg') as HTMLElement;
+  const newsletterBtn = document.getElementById('newsletterBtn') as HTMLButtonElement;
+
+  newsletterForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = (document.getElementById('newsletterEmail') as HTMLInputElement).value;
+    newsletterBtn.disabled = true;
+    newsletterBtn.textContent = '…';
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      newsletterMsg.style.display = 'block';
+      if (data.success) {
+        newsletterMsg.style.color = '#27ae60';
+        newsletterMsg.textContent = data.alreadySubscribed
+          ? 'You\'re already subscribed — great to have you!'
+          : 'You\'re subscribed! Thank you.';
+        newsletterForm.reset();
+      } else {
+        newsletterMsg.style.color = '#c0392b';
+        newsletterMsg.textContent = 'Something went wrong. Please try again.';
+        newsletterBtn.disabled = false;
+        newsletterBtn.textContent = 'Subscribe';
+      }
+    } catch {
+      newsletterMsg.style.display = 'block';
+      newsletterMsg.style.color = '#c0392b';
+      newsletterMsg.textContent = 'Something went wrong. Please try again.';
+      newsletterBtn.disabled = false;
+      newsletterBtn.textContent = 'Subscribe';
+    }
+  });
+
   const openBtn = document.getElementById('openReviewModal');
   const modal = document.getElementById('reviewModal');
   const closeBtn = document.getElementById('reviewModalClose');

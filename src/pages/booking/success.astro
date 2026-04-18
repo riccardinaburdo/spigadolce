@@ -1,0 +1,117 @@
+---
+export const prerender = false;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Stripe from 'stripe';
+
+const sessionId = Astro.url.searchParams.get('session_id');
+const type = Astro.url.searchParams.get('type'); // 'gift' or undefined
+
+let customerEmail = '';
+let classTitle = '';
+let isGift = type === 'gift';
+
+if (sessionId && import.meta.env.STRIPE_SECRET_KEY) {
+  try {
+    const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    customerEmail = session.customer_details?.email ?? '';
+    classTitle = session.metadata?.classTitle ?? '';
+  } catch {
+    // fail silently — just show generic success message
+  }
+}
+---
+
+<BaseLayout title="Booking Confirmed | Spigadolce" currentPath="/booking/success">
+  <section class="success-section">
+    <div class="success-card">
+      <div class="success-icon">🍝</div>
+      <h1>{isGift ? 'Gift Card Purchased!' : 'You\'re Booked!'}</h1>
+      {isGift ? (
+        <>
+          <p class="success-message">
+            Thank you for your gift card purchase.
+            {customerEmail && <> A confirmation has been sent to <strong>{customerEmail}</strong>.</>}
+          </p>
+          <p class="success-detail">The gift card will be delivered by email — check your inbox (and spam folder, just in case).</p>
+        </>
+      ) : (
+        <>
+          <p class="success-message">
+            {classTitle ? `Your spot in <strong>${classTitle}</strong> is confirmed.` : 'Your booking is confirmed.'}
+            {customerEmail && <> A confirmation has been sent to <strong>{customerEmail}</strong>.</>}
+          </p>
+          <p class="success-detail">
+            I'll be in touch before the class with the full address and any details you need to know. Get ready to get your hands in the dough!
+          </p>
+        </>
+      )}
+      <div class="success-actions">
+        <a href="/cooking-classes" class="btn-primary">Browse More Classes</a>
+        <a href="/" class="btn-outline">Back to Home</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .success-section {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: var(--color-warm);
+  }
+  .success-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    max-width: 560px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+  }
+  .success-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+  }
+  .success-card h1 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-dark);
+    margin-bottom: 1rem;
+  }
+  .success-message {
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+  }
+  .success-detail {
+    font-size: 0.95rem;
+    color: #888;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  .success-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-outline {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    border: 2px solid var(--color-gold);
+    color: var(--color-gold);
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-outline:hover {
+    background: var(--color-gold);
+    color: #fff;
+  }
+</style>

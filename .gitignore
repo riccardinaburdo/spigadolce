@@ -2,3 +2,5 @@ node_modules
 .vercel
 dist
 .astro
+.env
+.env.local

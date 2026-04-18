@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { title, description = 'Spigadolce - Authentic Pugliese Cooking Experiences by Riccardina Burdo. Handmade pasta classes, traditional recipes, and stories from Puglia.', image = '/images/general/hero-poster.jpg', currentPath = '' } = Astro.props;
-const canonicalUrl = `https://spigadolce.vercel.app${currentPath}`;
+const canonicalUrl = `https://spigadolce.com${currentPath}`;
 ---
 
 <!doctype html>
@@ -52,16 +52,20 @@ const canonicalUrl = `https://spigadolce.vercel.app${currentPath}`;
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="site-brand">
-      <a href="/">
-        <img src="/images/general/logo.png" alt="Spigadolce" />
-      </a>
-    </div>
-    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">&#9776;</button>
-  </header>
+  <div class="header-bg">
+    <header class="site-header">
+      <div class="site-brand">
+        <a href="/" aria-label="Spigadolce home">
+          <img src="/images/general/logo.png" alt="Spigadolce" width="525" height="auto" />
+        </a>
+      </div>
+      <div class="header-actions">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+      </div>
+    </header>
+  </div>
 
-  <nav class="site-nav closed" id="site-nav">
+  <nav class="site-nav closed" id="site-nav" aria-label="Main navigation">
     <ul>
       {navigation.menu.map((item) => (
         <li class={item.children ? 'has-dropdown' : ''}>

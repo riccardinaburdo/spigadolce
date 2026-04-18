@@ -138,18 +138,58 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
       )}
 
       <!-- CTA -->
-      <div>
+      <div class="booking-cta-block">
         {c.status === 'past' ? (
           <span class="status-past">Past Event</span>
         ) : (
-          <a href="/contact" class="btn-primary private-cta">Book Your Spot</a>
+          <div class="quantity-booking">
+            <label for="qty">Spots:</label>
+            <select id="qty" name="qty">
+              {[1,2,3,4,5,6].map(n => <option value={n}>{n}</option>)}
+            </select>
+            <button
+              class="btn-primary private-cta"
+              id="bookBtn"
+              data-slug={c.slug}
+            >
+              Book Now · £{c.price}<span id="qtyLabel">/person</span>
+            </button>
+          </div>
         )}
+        <p id="bookError" class="book-error" style="display:none;">Something went wrong. Please try again.</p>
       </div>
 
     </div>
   </div>
 
 </BaseLayout>
+
+<style>
+  .quantity-booking {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .quantity-booking label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-dark);
+  }
+  .quantity-booking select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #fff;
+    cursor: pointer;
+  }
+  .book-error {
+    color: #c0392b;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+</style>
 
 <script>
   const thumbs = document.querySelectorAll<HTMLButtonElement>('.gallery-thumb');
@@ -165,4 +205,37 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
       }
     });
   });
+
+  // Stripe checkout
+  const bookBtn = document.getElementById('bookBtn') as HTMLButtonElement | null;
+  const qtySelect = document.getElementById('qty') as HTMLSelectElement | null;
+  const bookError = document.getElementById('bookError') as HTMLElement | null;
+
+  if (bookBtn) {
+    bookBtn.addEventListener('click', async () => {
+      const slug = bookBtn.dataset.slug;
+      const quantity = qtySelect?.value ?? '1';
+      bookBtn.disabled = true;
+      bookBtn.textContent = 'Redirecting…';
+      if (bookError) bookError.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, quantity: parseInt(quantity) }),
+        });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error ?? 'Unknown error');
+        }
+      } catch (err) {
+        if (bookError) bookError.style.display = 'block';
+        bookBtn.disabled = false;
+        bookBtn.textContent = 'Book Now';
+      }
+    });
+  }
 </script>
