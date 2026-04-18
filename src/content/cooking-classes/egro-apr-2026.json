@@ -41,6 +41,7 @@
   "galleryCount": 4,
   "image": "/images/cooking-classes/egro-cover.jpg",
   "coverImage": "/images/cooking-classes/egro-cover.jpg",
+  "type": "private",
   "status": "upcoming",
   "order": 20
 }

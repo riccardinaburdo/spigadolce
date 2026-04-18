@@ -5,8 +5,8 @@
       "label": "Classes",
       "url": "/cooking-classes",
       "children": [
-        { "label": "Group Classes", "url": "/cooking-classes" },
-        { "label": "Private Classes", "url": "/cooking-classes/private" }
+        { "label": "Restaurant Classes", "url": "/cooking-classes" },
+        { "label": "Private In-Home Classes", "url": "/cooking-classes/private" }
       ]
     },
     { "label": "Blog", "url": "/blog" },
