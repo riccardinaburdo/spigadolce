@@ -2,12 +2,14 @@
 export const prerender = false;
 
 const cookieHeader = Astro.request.headers.get('cookie') || '';
-const cookies = Object.fromEntries(
-  cookieHeader.split(';')
-    .map(c => c.trim().split('='))
-    .filter(([k]) => k)
-    .map(([k, v]) => [k.trim(), decodeURIComponent((v || '').trim())])
-);
+const cookies: Record<string, string> = {};
+for (const part of cookieHeader.split(';')) {
+  const idx = part.indexOf('=');
+  if (idx < 1) continue;
+  const k = part.slice(0, idx).trim();
+  const v = part.slice(idx + 1).trim();
+  try { cookies[k] = decodeURIComponent(v); } catch { cookies[k] = v; }
+}
 const adminPassword = process.env.ADMIN_PASSWORD;
 const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
 ---

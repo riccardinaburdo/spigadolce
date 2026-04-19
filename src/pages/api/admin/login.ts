@@ -16,7 +16,7 @@ export const POST: APIRoute = async ({ request }) => {
   return new Response(JSON.stringify({ ok: true }), {
     status: 200,
     headers: {
-      'Set-Cookie': `admin_auth=${encodeURIComponent(adminPassword)}; Path=/admin; HttpOnly; SameSite=Strict; Max-Age=86400`,
+      'Set-Cookie': `admin_auth=${encodeURIComponent(adminPassword)}; Path=/; HttpOnly; SameSite=Strict; Max-Age=86400`,
       'Content-Type': 'application/json',
     },
   });
