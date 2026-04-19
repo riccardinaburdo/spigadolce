@@ -1,23 +1,6 @@
 ---
-export const prerender = false;
-
-const cookieHeader = Astro.request.headers.get('cookie') || '';
-const cookies: Record<string, string> = {};
-for (const part of cookieHeader.split(';')) {
-  const idx = part.indexOf('=');
-  if (idx < 1) continue;
-  const k = part.slice(0, idx).trim();
-  const v = part.slice(idx + 1).trim();
-  try { cookies[k] = decodeURIComponent(v); } catch { cookies[k] = v; }
-}
-const adminPassword = process.env.ADMIN_PASSWORD;
-const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
-
-if (!isAuthed) {
-  return Astro.redirect('/gestione');
-}
+// Static page — auth checked client-side via /api/admin/classes
 ---
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,8 +14,6 @@ if (!isAuthed) {
     :root {
       --accent: #ff7800;
       --dark: #3B1A0E;
-      --gold: #f5c211;
-      --cream: #fdf9f5;
       --green: #27ae60;
       --red: #e74c3c;
       --font-h: 'Playfair Display', serif;
@@ -49,19 +30,16 @@ if (!isAuthed) {
     .btn-cancel { background: #eee; color: #555; }
     .btn-save { background: var(--green); color: #fff; }
 
-    /* ── LAYOUT ── */
     .admin-header { background: var(--dark); color: #fff; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
     .admin-header h1 { font-family: var(--font-h); font-size: 1.4rem; }
     .admin-header a { color: rgba(255,255,255,0.6); font-size: 0.85rem; text-decoration: none; }
     .admin-header a:hover { color: #fff; }
     .admin-body { max-width: 1100px; margin: 0 auto; padding: 2rem; }
 
-    /* ── TOOLBAR ── */
     .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
     .toolbar h2 { font-family: var(--font-h); font-size: 1.4rem; }
     .status-bar { font-size: 0.85rem; color: #888; }
 
-    /* ── TABLE ── */
     .table-wrap { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
     table { width: 100%; border-collapse: collapse; }
     th { background: #f7f4ef; padding: 0.75rem 1rem; text-align: left; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: #888; font-weight: 700; }
@@ -75,7 +53,6 @@ if (!isAuthed) {
     .actions { display: flex; gap: 0.5rem; }
     .empty-row td { text-align: center; padding: 3rem; color: #aaa; }
 
-    /* ── MODAL ── */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; display: none; align-items: flex-start; justify-content: center; padding: 2rem 1rem; overflow-y: auto; backdrop-filter: blur(2px); }
     .modal-overlay.open { display: flex; }
     .modal { background: #fff; border-radius: 16px; width: 100%; max-width: 680px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); margin: auto; }
@@ -86,7 +63,6 @@ if (!isAuthed) {
     .modal-body { padding: 1.75rem 2rem; display: flex; flex-direction: column; gap: 1.25rem; max-height: 70vh; overflow-y: auto; }
     .modal-foot { padding: 1.25rem 2rem; border-top: 1px solid #f0ece6; display: flex; gap: 0.75rem; justify-content: flex-end; }
 
-    /* ── FORM ── */
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .field-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
     .field { display: flex; flex-direction: column; gap: 0.35rem; }
@@ -102,13 +78,11 @@ if (!isAuthed) {
     .field-hint { font-size: 0.75rem; color: #aaa; margin-top: 0.2rem; }
     .section-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); padding-bottom: 0.4rem; border-bottom: 1px solid #f0ece6; margin-top: 0.5rem; }
 
-    /* ── TOAST ── */
     .toast { position: fixed; bottom: 2rem; right: 2rem; padding: 0.9rem 1.5rem; border-radius: 10px; color: #fff; font-weight: 700; font-size: 0.9rem; z-index: 200; transform: translateY(8px); opacity: 0; transition: all 0.25s; pointer-events: none; }
     .toast.show { transform: translateY(0); opacity: 1; }
     .toast-ok { background: var(--green); }
     .toast-err { background: var(--red); }
 
-    /* ── DEPLOY NOTICE ── */
     .deploy-notice { background: #fff8e1; border: 1px solid #ffe082; border-radius: 10px; padding: 0.85rem 1.25rem; font-size: 0.85rem; color: #7b5800; margin-bottom: 1.5rem; display: none; }
     .deploy-notice.show { display: block; }
 
@@ -121,207 +95,217 @@ if (!isAuthed) {
 <body>
 
 <header class="admin-header">
-    <h1>Classes Dashboard</h1>
-    <a href="/" target="_blank">← View Site</a>
-  </header>
+  <h1>Classes Dashboard</h1>
+  <a href="/" target="_blank">← View Site</a>
+</header>
 
-  <div class="admin-body">
-    <div class="deploy-notice" id="deploy-notice">
-      ✅ Changes saved and committed to GitHub. Vercel will redeploy in ~2 minutes.
-    </div>
+<div class="admin-body">
+  <div class="deploy-notice" id="deploy-notice">
+    Changes saved and committed to GitHub. Vercel will redeploy in ~2 minutes.
+  </div>
 
-    <div class="toolbar">
-      <h2>All Classes</h2>
-      <div style="display:flex; gap:0.75rem; align-items:center;">
-        <span class="status-bar" id="status-bar">Loading…</span>
-        <button class="btn btn-sm btn-new" id="new-btn">+ New Class</button>
-      </div>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Title</th>
-            <th>Location</th>
-            <th>Price</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="classes-tbody">
-          <tr class="empty-row"><td colspan="7">Loading classes…</td></tr>
-        </tbody>
-      </table>
+  <div class="toolbar">
+    <h2>All Classes</h2>
+    <div style="display:flex; gap:0.75rem; align-items:center;">
+      <span class="status-bar" id="status-bar">Loading…</span>
+      <button class="btn btn-sm btn-new" id="new-btn">+ New Class</button>
     </div>
   </div>
 
-  <!-- MODAL -->
-  <div class="modal-overlay" id="modal">
-    <div class="modal">
-      <div class="modal-head">
-        <h3 id="modal-title">New Class</h3>
-        <button class="modal-close" id="modal-close">&times;</button>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Title</th>
+          <th>Location</th>
+          <th>Price</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="classes-tbody">
+        <tr class="empty-row"><td colspan="7">Loading classes…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-title">New Class</h3>
+      <button class="modal-close" id="modal-close">&times;</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="section-title">Basic Info</div>
+      <div class="field-row">
+        <div class="field">
+          <label>Title <span class="req">*</span></label>
+          <input type="text" id="f-title" placeholder="Handmade Italian Pasta at…" />
+        </div>
+        <div class="field">
+          <label>Subtitle</label>
+          <input type="text" id="f-subtitle" placeholder="e.g. Fresh Pasta at My Tortellini" />
+        </div>
       </div>
-      <div class="modal-body">
-
-        <div class="section-title">Basic Info</div>
-        <div class="field-row">
-          <div class="field">
-            <label>Title <span class="req">*</span></label>
-            <input type="text" id="f-title" placeholder="Handmade Italian Pasta at…" />
-          </div>
-          <div class="field">
-            <label>Subtitle <span style="font-weight:400;text-transform:none;">(shown on cards)</span></label>
-            <input type="text" id="f-subtitle" placeholder="e.g. Fresh Pasta at My Tortellini" />
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Slug <span class="req">*</span></label>
-            <input type="text" id="f-slug" placeholder="handmade-pasta-venue-month-year" />
-            <span class="field-hint">URL: /cooking-classes/{slug} · auto-generated from title</span>
-          </div>
-          <div class="field">
-            <label>Type</label>
-            <select id="f-type">
-              <option value="">Restaurant (public)</option>
-              <option value="private">Private (in-home)</option>
-            </select>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Status <span class="req">*</span></label>
-            <select id="f-status">
-              <option value="upcoming">Upcoming</option>
-              <option value="coming-soon">Coming Soon</option>
-              <option value="past">Past</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Order</label>
-            <input type="number" id="f-order" placeholder="e.g. 30" />
-            <span class="field-hint">Higher = more recent</span>
-          </div>
-        </div>
-
-        <div class="section-title">Schedule & Location</div>
-        <div class="field-row cols-3">
-          <div class="field">
-            <label>Date <span class="req">*</span></label>
-            <input type="date" id="f-date" />
-          </div>
-          <div class="field">
-            <label>Time</label>
-            <input type="text" id="f-time" placeholder="e.g. 6:30pm" />
-          </div>
-          <div class="field">
-            <label>Duration</label>
-            <input type="text" id="f-duration" placeholder="e.g. 2 hours" />
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Location <span class="req">*</span></label>
-            <input type="text" id="f-location" placeholder="My Tortellini, London" />
-          </div>
-          <div class="field">
-            <label>Address</label>
-            <input type="text" id="f-address" placeholder="Full address (optional)" />
-          </div>
-        </div>
-
-        <div class="section-title">Pricing</div>
-        <div class="field-row cols-3">
-          <div class="field">
-            <label>Price (£) <span class="req">*</span></label>
-            <input type="number" id="f-price" placeholder="38" min="0" />
-          </div>
-          <div class="field">
-            <label>Currency</label>
-            <select id="f-currency">
-              <option value="GBP">GBP (£)</option>
-              <option value="EUR">EUR (€)</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="section-title">Content</div>
+      <div class="field-row">
         <div class="field">
-          <label>Short Description <span class="req">*</span></label>
-          <textarea id="f-description" rows="2" placeholder="Shown on the class card and in the booking email"></textarea>
+          <label>Slug <span class="req">*</span></label>
+          <input type="text" id="f-slug" placeholder="handmade-pasta-venue-month-year" />
+          <span class="field-hint">URL: /cooking-classes/{slug}</span>
         </div>
         <div class="field">
-          <label>What's Included <span style="font-weight:400;text-transform:none;">(one item per line)</span></label>
-          <textarea id="f-includes" rows="3" placeholder="Two-hour pasta-making class&#10;Antipasti and bottomless prosecco&#10;Apron and pasta tools provided"></textarea>
+          <label>Type</label>
+          <select id="f-type">
+            <option value="">Restaurant (public)</option>
+            <option value="private">Private (in-home)</option>
+          </select>
         </div>
-        <div class="field">
-          <label>What You'll Create <span style="font-weight:400;text-transform:none;">(one per line, optional)</span></label>
-          <textarea id="f-whatYouCreate" rows="2" placeholder="Orecchiette&#10;Cavatelli"></textarea>
-        </div>
-        <div class="field">
-          <label>Skills You'll Master <span style="font-weight:400;text-transform:none;">(one per line, optional)</span></label>
-          <textarea id="f-skills" rows="2" placeholder="Hand-rolling technique&#10;Shaping without a machine"></textarea>
-        </div>
-        <div class="field">
-          <label>Perfect For <span style="font-weight:400;text-transform:none;">(one per line, optional)</span></label>
-          <textarea id="f-occasions" rows="2" placeholder="Birthdays&#10;Date nights&#10;Team building"></textarea>
-        </div>
-
-        <div class="section-title">Images</div>
-        <div class="field-row">
-          <div class="field">
-            <label>Main Image <span class="req">*</span></label>
-            <input type="text" id="f-image" placeholder="/images/cooking-classes/my-tortellini-2.jpg" />
-          </div>
-          <div class="field">
-            <label>Cover Image <span style="font-weight:400;text-transform:none;">(optional, defaults to main)</span></label>
-            <input type="text" id="f-coverImage" placeholder="/images/cooking-classes/…" />
-          </div>
-        </div>
-        <div class="field">
-          <label>Gallery Images <span style="font-weight:400;text-transform:none;">(one path per line, optional)</span></label>
-          <textarea id="f-gallery" rows="2" placeholder="/images/cooking-classes/img1.jpg&#10;/images/cooking-classes/img2.jpg"></textarea>
-        </div>
-
       </div>
-      <div class="modal-foot">
-        <button class="btn btn-sm btn-cancel" id="modal-cancel">Cancel</button>
-        <button class="btn btn-sm btn-save" id="modal-save">Save Class</button>
+      <div class="field-row">
+        <div class="field">
+          <label>Status <span class="req">*</span></label>
+          <select id="f-status">
+            <option value="upcoming">Upcoming</option>
+            <option value="coming-soon">Coming Soon</option>
+            <option value="past">Past</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Order</label>
+          <input type="number" id="f-order" placeholder="e.g. 30" />
+          <span class="field-hint">Higher = more recent</span>
+        </div>
       </div>
+
+      <div class="section-title">Schedule &amp; Location</div>
+      <div class="field-row cols-3">
+        <div class="field">
+          <label>Date <span class="req">*</span></label>
+          <input type="date" id="f-date" />
+        </div>
+        <div class="field">
+          <label>Time</label>
+          <input type="text" id="f-time" placeholder="e.g. 6:30pm" />
+        </div>
+        <div class="field">
+          <label>Duration</label>
+          <input type="text" id="f-duration" placeholder="e.g. 2 hours" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Location <span class="req">*</span></label>
+          <input type="text" id="f-location" placeholder="My Tortellini, London" />
+        </div>
+        <div class="field">
+          <label>Address</label>
+          <input type="text" id="f-address" placeholder="Full address (optional)" />
+        </div>
+      </div>
+
+      <div class="section-title">Pricing</div>
+      <div class="field-row cols-3">
+        <div class="field">
+          <label>Price (£) <span class="req">*</span></label>
+          <input type="number" id="f-price" placeholder="38" min="0" />
+        </div>
+        <div class="field">
+          <label>Currency</label>
+          <select id="f-currency">
+            <option value="GBP">GBP (£)</option>
+            <option value="EUR">EUR (€)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-title">Content</div>
+      <div class="field">
+        <label>Short Description <span class="req">*</span></label>
+        <textarea id="f-description" rows="2" placeholder="Shown on the class card and in the booking email"></textarea>
+      </div>
+      <div class="field">
+        <label>What's Included (one item per line)</label>
+        <textarea id="f-includes" rows="3" placeholder="Two-hour pasta-making class&#10;Antipasti and bottomless prosecco&#10;Apron and pasta tools provided"></textarea>
+      </div>
+      <div class="field">
+        <label>What You'll Create (one per line)</label>
+        <textarea id="f-whatYouCreate" rows="2" placeholder="Orecchiette&#10;Cavatelli"></textarea>
+      </div>
+      <div class="field">
+        <label>Skills You'll Master (one per line)</label>
+        <textarea id="f-skills" rows="2" placeholder="Hand-rolling technique&#10;Shaping without a machine"></textarea>
+      </div>
+      <div class="field">
+        <label>Perfect For (one per line)</label>
+        <textarea id="f-occasions" rows="2" placeholder="Birthdays&#10;Date nights&#10;Team building"></textarea>
+      </div>
+
+      <div class="section-title">Images</div>
+      <div class="field-row">
+        <div class="field">
+          <label>Main Image <span class="req">*</span></label>
+          <input type="text" id="f-image" placeholder="/images/cooking-classes/my-tortellini-2.jpg" />
+        </div>
+        <div class="field">
+          <label>Cover Image (optional)</label>
+          <input type="text" id="f-coverImage" placeholder="/images/cooking-classes/…" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Gallery Images (one path per line)</label>
+        <textarea id="f-gallery" rows="2" placeholder="/images/cooking-classes/img1.jpg&#10;/images/cooking-classes/img2.jpg"></textarea>
+      </div>
+
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-sm btn-cancel" id="modal-cancel">Cancel</button>
+      <button class="btn btn-sm btn-save" id="modal-save">Save Class</button>
     </div>
   </div>
+</div>
 
-  <div class="toast" id="toast"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-  // ── DASHBOARD ──
+  // Auth check: if /api/admin/classes returns 401, redirect to login
+  async function init() {
+    const res = await fetch('/api/admin/classes');
+    if (res.status === 401) {
+      window.location.href = '/gestione';
+      return;
+    }
+    const allClassesInit = await res.json();
+    allClasses = Array.isArray(allClassesInit) ? allClassesInit : [];
+    statusBar.textContent = allClasses.length + ' classes';
+    renderTable();
+  }
+
   type ClassItem = Record<string, any> & { _sha?: string; _filename?: string };
 
   let allClasses: ClassItem[] = [];
   let editingSlug: string | null = null;
   let editingSha: string | null = null;
 
-  const tbody       = document.getElementById('classes-tbody')!;
-  const statusBar   = document.getElementById('status-bar')!;
-  const newBtn      = document.getElementById('new-btn')!;
-  const modal       = document.getElementById('modal')!;
-  const modalTitle  = document.getElementById('modal-title')!;
-  const modalClose  = document.getElementById('modal-close')!;
-  const modalCancel = document.getElementById('modal-cancel')!;
-  const modalSave   = document.getElementById('modal-save')!;
-  const toastEl     = document.getElementById('toast')!;
-  const deployNote  = document.getElementById('deploy-notice')!;
+  const tbody      = document.getElementById('classes-tbody') as HTMLTableSectionElement;
+  const statusBar  = document.getElementById('status-bar') as HTMLElement;
+  const newBtn     = document.getElementById('new-btn') as HTMLButtonElement;
+  const modal      = document.getElementById('modal') as HTMLElement;
+  const modalTitle = document.getElementById('modal-title') as HTMLElement;
+  const modalClose = document.getElementById('modal-close') as HTMLButtonElement;
+  const modalCancel= document.getElementById('modal-cancel') as HTMLButtonElement;
+  const modalSave  = document.getElementById('modal-save') as HTMLButtonElement;
+  const toastEl    = document.getElementById('toast') as HTMLElement;
+  const deployNote = document.getElementById('deploy-notice') as HTMLElement;
 
   function toast(msg: string, ok = true) {
-    if (!toastEl) return;
     toastEl.textContent = msg;
-    toastEl.className = `toast ${ok ? 'toast-ok' : 'toast-err'}`;
+    toastEl.className = 'toast ' + (ok ? 'toast-ok' : 'toast-err');
     toastEl.classList.add('show');
-    setTimeout(() => toastEl!.classList.remove('show'), 3500);
+    setTimeout(() => toastEl.classList.remove('show'), 3500);
   }
 
   function slugify(str: string) {
@@ -338,66 +322,61 @@ if (!isAuthed) {
       'coming-soon': '<span class="badge badge-coming-soon">Coming Soon</span>',
       past: '<span class="badge badge-past">Past</span>',
     };
-    return (map[status] || `<span class="badge">${status}</span>`) + (typeBadge ? ' ' + typeBadge : '');
+    return (map[status] || '<span class="badge">' + status + '</span>') + (typeBadge ? ' ' + typeBadge : '');
   }
 
   function renderTable() {
-    if (!tbody) return;
     if (allClasses.length === 0) {
       tbody.innerHTML = '<tr class="empty-row"><td colspan="7">No classes yet. Click "+ New Class" to add one.</td></tr>';
       return;
     }
-    tbody.innerHTML = allClasses.map(c => `
-      <tr>
-        <td>${c.date ? new Date(c.date).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}) : '—'}</td>
-        <td><strong>${c.subtitle || c.title || '—'}</strong></td>
-        <td>${c.location || '—'}</td>
-        <td>${c.price ? '£' + c.price : '—'}</td>
-        <td>${c.type === 'private' ? 'Private' : 'Restaurant'}</td>
-        <td>${badgeHtml(c.status, c.type || '')}</td>
-        <td>
-          <div class="actions">
-            <button class="btn btn-sm btn-edit" data-slug="${c.slug}">Edit</button>
-            <button class="btn btn-sm btn-delete" data-slug="${c.slug}" data-sha="${c._sha || ''}">Delete</button>
-          </div>
-        </td>
-      </tr>
-    `).join('');
+    tbody.innerHTML = allClasses.map(c =>
+      '<tr>' +
+      '<td>' + (c.date ? new Date(c.date).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}) : '—') + '</td>' +
+      '<td><strong>' + (c.subtitle || c.title || '—') + '</strong></td>' +
+      '<td>' + (c.location || '—') + '</td>' +
+      '<td>' + (c.price ? '£' + c.price : '—') + '</td>' +
+      '<td>' + (c.type === 'private' ? 'Private' : 'Restaurant') + '</td>' +
+      '<td>' + badgeHtml(c.status, c.type || '') + '</td>' +
+      '<td><div class="actions">' +
+        '<button class="btn btn-sm btn-edit" data-slug="' + c.slug + '">Edit</button>' +
+        '<button class="btn btn-sm btn-delete" data-slug="' + c.slug + '" data-sha="' + (c._sha || '') + '">Delete</button>' +
+      '</div></td>' +
+      '</tr>'
+    ).join('');
 
-    tbody.querySelectorAll('[data-slug][class*="btn-edit"]').forEach(btn => {
-      btn.addEventListener('click', () => openEdit((btn as HTMLElement).dataset.slug!));
+    tbody.querySelectorAll<HTMLElement>('.btn-edit[data-slug]').forEach(btn => {
+      btn.addEventListener('click', () => openEdit(btn.dataset.slug!));
     });
-    tbody.querySelectorAll('[data-slug][class*="btn-delete"]').forEach(btn => {
-      btn.addEventListener('click', () => deleteClass((btn as HTMLElement).dataset.slug!, (btn as HTMLElement).dataset.sha!));
+    tbody.querySelectorAll<HTMLElement>('.btn-delete[data-slug]').forEach(btn => {
+      btn.addEventListener('click', () => deleteClass(btn.dataset.slug!, btn.dataset.sha!));
     });
   }
 
   async function loadClasses() {
-    if (!statusBar) return;
     statusBar.textContent = 'Loading…';
     const res = await fetch('/api/admin/classes');
+    if (res.status === 401) { window.location.href = '/gestione'; return; }
     if (!res.ok) { statusBar.textContent = 'Error loading classes'; return; }
     allClasses = await res.json();
-    statusBar.textContent = `${allClasses.length} classes`;
+    statusBar.textContent = allClasses.length + ' classes';
     renderTable();
   }
 
-  // ── MODAL ──
   function openModal(title: string) {
-    if (!modal || !modalTitle) return;
     modalTitle.textContent = title;
     modal.classList.add('open');
   }
 
   function closeModal() {
-    modal?.classList.remove('open');
+    modal.classList.remove('open');
     editingSlug = null;
     editingSha = null;
   }
 
-  modalClose?.addEventListener('click', closeModal);
-  modalCancel?.addEventListener('click', closeModal);
-  modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  modalClose.addEventListener('click', closeModal);
+  modalCancel.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
   function getField(id: string): string {
@@ -421,14 +400,11 @@ if (!isAuthed) {
     setField('f-currency', 'GBP');
   }
 
-  // Auto-slug from title
   document.getElementById('f-title')?.addEventListener('input', (e) => {
-    if (!editingSlug) {
-      setField('f-slug', slugify((e.target as HTMLInputElement).value));
-    }
+    if (!editingSlug) setField('f-slug', slugify((e.target as HTMLInputElement).value));
   });
 
-  newBtn?.addEventListener('click', () => {
+  newBtn.addEventListener('click', () => {
     clearForm();
     editingSlug = null;
     editingSha = null;
@@ -441,7 +417,6 @@ if (!isAuthed) {
     editingSlug = slug;
     editingSha = cls._sha || null;
     clearForm();
-
     setField('f-title', cls.title || '');
     setField('f-subtitle', cls.subtitle || '');
     setField('f-slug', cls.slug || '');
@@ -463,11 +438,10 @@ if (!isAuthed) {
     setField('f-image', cls.image || '');
     setField('f-coverImage', cls.coverImage || '');
     setField('f-gallery', (cls.gallery || []).join('\n'));
-
     openModal('Edit Class');
   }
 
-  modalSave?.addEventListener('click', async () => {
+  modalSave.addEventListener('click', async () => {
     const title = getField('f-title');
     const slug  = getField('f-slug');
     const date  = getField('f-date');
@@ -477,25 +451,23 @@ if (!isAuthed) {
     const image = getField('f-image');
 
     if (!title || !slug || !date || !price || !loc || !desc || !image) {
-      toast('Please fill in all required fields (*)', false);
+      toast('Fill in all required fields (*)', false);
       return;
     }
 
     const classData: ClassItem = {
-      slug,
-      title,
-      ...(getField('f-subtitle') && { subtitle: getField('f-subtitle') }),
-      date,
-      ...(getField('f-time') && { time: getField('f-time') }),
-      ...(getField('f-duration') && { duration: getField('f-duration') }),
+      slug, title, date,
       price: parseFloat(price),
       currency: getField('f-currency') || 'GBP',
       location: loc,
-      ...(getField('f-address') && { address: getField('f-address') }),
       description: desc,
       image,
-      ...(getField('f-coverImage') && { coverImage: getField('f-coverImage') }),
       status: getField('f-status') || 'upcoming',
+      ...(getField('f-subtitle') && { subtitle: getField('f-subtitle') }),
+      ...(getField('f-time') && { time: getField('f-time') }),
+      ...(getField('f-duration') && { duration: getField('f-duration') }),
+      ...(getField('f-address') && { address: getField('f-address') }),
+      ...(getField('f-coverImage') && { coverImage: getField('f-coverImage') }),
       ...(getField('f-type') && { type: getField('f-type') }),
       ...(getField('f-order') && { order: parseInt(getField('f-order')) }),
     };
@@ -511,31 +483,24 @@ if (!isAuthed) {
     const gallery = toLines(getField('f-gallery'));
     if (gallery.length) classData.gallery = gallery;
 
-    (modalSave as HTMLButtonElement).disabled = true;
-    modalSave!.textContent = 'Saving…';
+    modalSave.disabled = true;
+    modalSave.textContent = 'Saving…';
 
-    let res: Response;
-    if (editingSlug) {
-      res = await fetch('/api/admin/classes', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...classData, _sha: editingSha, _oldSlug: editingSlug }),
-      });
-    } else {
-      res = await fetch('/api/admin/classes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(classData),
-      });
-    }
+    const res = await fetch('/api/admin/classes', {
+      method: editingSlug ? 'PATCH' : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(editingSlug
+        ? { ...classData, _sha: editingSha, _oldSlug: editingSlug }
+        : classData),
+    });
 
-    (modalSave as HTMLButtonElement).disabled = false;
-    modalSave!.textContent = 'Save Class';
+    modalSave.disabled = false;
+    modalSave.textContent = 'Save Class';
 
     if (res.ok) {
       toast(editingSlug ? 'Class updated!' : 'Class created!');
       closeModal();
-      deployNote?.classList.add('show');
+      deployNote.classList.add('show');
       await loadClasses();
     } else {
       const d = await res.json().catch(() => ({}));
@@ -544,7 +509,7 @@ if (!isAuthed) {
   });
 
   async function deleteClass(slug: string, sha: string) {
-    if (!confirm(`Delete "${slug}"? This cannot be undone.`)) return;
+    if (!confirm('Delete "' + slug + '"? This cannot be undone.')) return;
     const res = await fetch('/api/admin/classes', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -552,15 +517,14 @@ if (!isAuthed) {
     });
     if (res.ok) {
       toast('Class deleted.');
-      deployNote?.classList.add('show');
+      deployNote.classList.add('show');
       await loadClasses();
     } else {
       toast('Delete failed.', false);
     }
   }
 
-  // ── INIT ──
-  if (tbody) loadClasses();
+  init();
 </script>
 
 </body>
