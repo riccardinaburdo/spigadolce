@@ -18,62 +18,69 @@ function checkAuth(request: Request): boolean {
   return !!pw && cookies['admin_auth'] === pw;
 }
 
-function ghHeaders() {
-  return {
-    'Authorization': `token ${process.env.GITHUB_TOKEN}`,
-    'Accept': 'application/vnd.github.v3+json',
-    'Content-Type': 'application/json',
-  };
+function json(data: unknown, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  if (!checkAuth(request)) {
-    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
+  if (!checkAuth(request)) return json({ error: 'Unauthorized' }, 401);
+
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) return json({ error: 'GITHUB_TOKEN non configurato nelle variabili Vercel' }, 500);
+
+  let body: { filename?: string; content?: string };
+  try {
+    body = await request.json();
+  } catch {
+    return json({ error: 'Invalid JSON' }, 400);
   }
 
-  const { filename, content } = await request.json();
+  const { filename, content } = body;
+  if (!filename || !content) return json({ error: 'filename e content sono richiesti' }, 400);
 
-  if (!filename || !content) {
-    return new Response(JSON.stringify({ error: 'filename and content required' }), { status: 400 });
-  }
-
-  // Sanitize filename
-  const safeName = filename.replace(/[^a-z0-9.\-_]/gi, '-').toLowerCase();
+  // Sanitize: keep extension, lowercase, replace unsafe chars
+  const ext = filename.includes('.') ? filename.split('.').pop()!.toLowerCase() : 'jpg';
+  const base = filename.replace(/\.[^.]+$/, '').replace(/[^a-z0-9]/gi, '-').toLowerCase().slice(0, 60);
+  const safeName = base + '.' + ext;
   const filePath = `${UPLOAD_PATH}/${safeName}`;
 
-  // Check if file already exists (to get sha for update)
+  const ghHeaders = {
+    Authorization: `token ${token}`,
+    Accept: 'application/vnd.github.v3+json',
+    'Content-Type': 'application/json',
+    'User-Agent': 'spigadolce-admin',
+  };
+
+  // Check if file already exists (need sha to overwrite)
   let sha: string | undefined;
   const checkRes = await fetch(
     `https://api.github.com/repos/${REPO}/contents/${filePath}`,
-    { headers: ghHeaders() }
+    { headers: ghHeaders }
   );
   if (checkRes.ok) {
     const existing = await checkRes.json();
     sha = existing.sha;
   }
 
-  const body: Record<string, string> = {
-    message: `Admin: upload image ${safeName}`,
-    content, // already base64
+  const payload: Record<string, string> = {
+    message: `Admin: upload ${safeName}`,
+    content,
   };
-  if (sha) body.sha = sha;
+  if (sha) payload.sha = sha;
 
-  const res = await fetch(
+  const putRes = await fetch(
     `https://api.github.com/repos/${REPO}/contents/${filePath}`,
-    {
-      method: 'PUT',
-      headers: ghHeaders(),
-      body: JSON.stringify(body),
-    }
+    { method: 'PUT', headers: ghHeaders, body: JSON.stringify(payload) }
   );
 
-  if (!res.ok) {
-    const err = await res.json();
-    return new Response(JSON.stringify({ error: 'Upload failed', detail: err }), { status: 500 });
+  if (!putRes.ok) {
+    const err = await putRes.json().catch(() => ({}));
+    const msg = (err as any).message || putRes.statusText;
+    return json({ error: `GitHub API error (${putRes.status}): ${msg}` }, 500);
   }
 
-  return new Response(JSON.stringify({ path: `/images/cooking-classes/${safeName}` }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  return json({ path: `/images/cooking-classes/${safeName}` });
 };
