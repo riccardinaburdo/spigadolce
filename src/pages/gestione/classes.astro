@@ -14,7 +14,7 @@ const adminPassword = process.env.ADMIN_PASSWORD;
 const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
 
 if (!isAuthed) {
-  return Astro.redirect('/admin');
+  return Astro.redirect('/gestione');
 }
 ---
 

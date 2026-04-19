@@ -46,7 +46,7 @@
         body: JSON.stringify({ password: pw.value }),
       });
       if (res.ok) {
-        window.location.href = '/admin/classes';
+        window.location.href = '/gestione/classes';
       } else {
         err.style.display = 'block';
         btn.disabled = false;
