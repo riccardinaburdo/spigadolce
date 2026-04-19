@@ -1,0 +1,61 @@
+---
+// Static login page — no SSR needed
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login · Spigadolce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Lato', sans-serif; background: #f4f1ed; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .card { background: #fff; border-radius: 16px; padding: 3rem 2.5rem; max-width: 380px; width: 100%; box-shadow: 0 8px 40px rgba(0,0,0,0.12); text-align: center; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.5rem; color: #3B1A0E; }
+    p { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }
+    input { width: 100%; padding: 0.85rem 1rem; border: 1.5px solid #ddd; border-radius: 8px; font-size: 1rem; margin-bottom: 1rem; font-family: 'Lato', sans-serif; }
+    input:focus { outline: none; border-color: #ff7800; }
+    button { width: 100%; padding: 0.85rem; background: #ff7800; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: 'Lato', sans-serif; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .err { color: #e74c3c; font-size: 0.88rem; margin-top: 0.75rem; display: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Spigadolce</h1>
+    <p>Admin — Classes Dashboard</p>
+    <input type="password" id="pw" placeholder="Password" autocomplete="current-password" />
+    <button id="btn">Sign In</button>
+    <div class="err" id="err">Wrong password.</div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('btn') as HTMLButtonElement;
+    const pw  = document.getElementById('pw') as HTMLInputElement;
+    const err = document.getElementById('err') as HTMLElement;
+
+    async function doLogin() {
+      btn.disabled = true;
+      btn.textContent = 'Signing in…';
+      err.style.display = 'none';
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pw.value }),
+      });
+      if (res.ok) {
+        window.location.href = '/admin/classes';
+      } else {
+        err.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Sign In';
+      }
+    }
+
+    btn.addEventListener('click', doLogin);
+    pw.addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
+  </script>
+</body>
+</html>

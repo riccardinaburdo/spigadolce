@@ -12,6 +12,10 @@ for (const part of cookieHeader.split(';')) {
 }
 const adminPassword = process.env.ADMIN_PASSWORD;
 const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
+
+if (!isAuthed) {
+  return Astro.redirect('/admin');
+}
 ---
 
 <!doctype html>
@@ -36,23 +40,14 @@ const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
     }
     body { font-family: var(--font-b); background: #f4f1ed; color: var(--dark); min-height: 100vh; }
 
-    /* ── LOGIN ── */
-    .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-    .login-card { background: #fff; border-radius: 16px; padding: 3rem 2.5rem; max-width: 380px; width: 100%; box-shadow: 0 8px 40px rgba(0,0,0,0.12); text-align: center; }
-    .login-card h1 { font-family: var(--font-h); font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--dark); }
-    .login-card p { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }
-    .login-card input { width: 100%; padding: 0.85rem 1rem; border: 1.5px solid #ddd; border-radius: 8px; font-size: 1rem; margin-bottom: 1rem; }
-    .login-card input:focus { outline: none; border-color: var(--accent); }
     .btn { display: inline-block; padding: 0.8rem 1.75rem; border-radius: 6px; font-size: 0.92rem; font-weight: 700; cursor: pointer; border: none; font-family: var(--font-b); transition: opacity 0.15s; }
     .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    .btn-primary { background: var(--accent); color: #fff; width: 100%; }
     .btn-sm { padding: 0.4rem 0.9rem; font-size: 0.82rem; border-radius: 5px; }
     .btn-edit { background: var(--dark); color: #fff; }
     .btn-delete { background: var(--red); color: #fff; }
     .btn-new { background: var(--accent); color: #fff; }
     .btn-cancel { background: #eee; color: #555; }
     .btn-save { background: var(--green); color: #fff; }
-    .login-error { color: var(--red); font-size: 0.88rem; margin-top: 0.5rem; }
 
     /* ── LAYOUT ── */
     .admin-header { background: var(--dark); color: #fff; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
@@ -125,19 +120,7 @@ const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
 </head>
 <body>
 
-{!isAuthed ? (
-  <div class="login-wrap">
-    <div class="login-card">
-      <h1>Spigadolce</h1>
-      <p>Admin — Classes Dashboard</p>
-      <input type="password" id="login-pw" placeholder="Password" autocomplete="current-password" />
-      <button class="btn btn-primary" id="login-btn">Sign In</button>
-      <div class="login-error" id="login-err" style="display:none;"></div>
-    </div>
-  </div>
-) : (
-  <Fragment>
-  <header class="admin-header">
+<header class="admin-header">
     <h1>Classes Dashboard</h1>
     <a href="/" target="_blank">← View Site</a>
   </header>
@@ -313,37 +296,8 @@ const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
   </div>
 
   <div class="toast" id="toast"></div>
-  </Fragment>
-)}
 
 <script>
-  // ── LOGIN ──
-  const loginBtn = document.getElementById('login-btn');
-  const loginPw  = document.getElementById('login-pw') as HTMLInputElement | null;
-  const loginErr = document.getElementById('login-err');
-
-  if (loginBtn && loginPw) {
-    async function doLogin() {
-      loginBtn!.disabled = true;
-      loginBtn!.textContent = 'Signing in…';
-      const res = await fetch('/api/admin/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: loginPw!.value }),
-      });
-      if (res.ok) {
-        window.location.reload();
-      } else {
-        loginErr!.style.display = 'block';
-        loginErr!.textContent = 'Wrong password.';
-        loginBtn!.disabled = false;
-        loginBtn!.textContent = 'Sign In';
-      }
-    }
-    loginBtn.addEventListener('click', doLogin);
-    loginPw.addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
-  }
-
   // ── DASHBOARD ──
   type ClassItem = Record<string, any> & { _sha?: string; _filename?: string };
 
@@ -351,18 +305,16 @@ const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
   let editingSlug: string | null = null;
   let editingSha: string | null = null;
 
-  const tbody       = document.getElementById('classes-tbody');
-  const statusBar   = document.getElementById('status-bar');
-  const newBtn      = document.getElementById('new-btn');
-  const modal       = document.getElementById('modal');
-  const modalTitle  = document.getElementById('modal-title');
-  const modalClose  = document.getElementById('modal-close');
-  const modalCancel = document.getElementById('modal-cancel');
-  const modalSave   = document.getElementById('modal-save');
-  const toastEl     = document.getElementById('toast');
-  const deployNote  = document.getElementById('deploy-notice');
-
-  if (!tbody) { /* login page — stop here */ (window as any).__adminStop = true; }
+  const tbody       = document.getElementById('classes-tbody')!;
+  const statusBar   = document.getElementById('status-bar')!;
+  const newBtn      = document.getElementById('new-btn')!;
+  const modal       = document.getElementById('modal')!;
+  const modalTitle  = document.getElementById('modal-title')!;
+  const modalClose  = document.getElementById('modal-close')!;
+  const modalCancel = document.getElementById('modal-cancel')!;
+  const modalSave   = document.getElementById('modal-save')!;
+  const toastEl     = document.getElementById('toast')!;
+  const deployNote  = document.getElementById('deploy-notice')!;
 
   function toast(msg: string, ok = true) {
     if (!toastEl) return;
