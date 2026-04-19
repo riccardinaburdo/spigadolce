@@ -112,6 +112,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     text-align: center;
     position: relative;
+    display: flex;
+    flex-direction: column;
   }
   .gift-featured {
     border: 3px solid var(--color-gold);
@@ -148,6 +150,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 2.2rem;
     color: var(--color-gold);
     font-weight: 700;
+  }
+  .gift-card-top {
+    flex: 1;
   }
   .gift-card-bottom {
     padding: 1rem 1.5rem 2rem;
