@@ -76,6 +76,12 @@
     input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
     textarea { resize: vertical; min-height: 80px; }
     .field-hint { font-size: 0.75rem; color: #aaa; margin-top: 0.2rem; }
+    .img-field-wrap { display: flex; gap: 0.5rem; align-items: center; }
+    .img-field-wrap input { flex: 1; }
+    .btn-upload { background: #f0ece6; color: var(--dark); border: 1.5px solid #ddd; border-radius: 7px; padding: 0.6rem 0.85rem; font-size: 0.82rem; font-weight: 700; cursor: pointer; white-space: nowrap; font-family: var(--font-b); transition: background 0.15s; flex-shrink: 0; }
+    .btn-upload:hover { background: #e5e0d8; }
+    .btn-upload:disabled { opacity: 0.5; cursor: not-allowed; }
+    .gallery-upload-row { display: flex; flex-direction: column; gap: 0.5rem; }
     .section-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); padding-bottom: 0.4rem; border-bottom: 1px solid #f0ece6; margin-top: 0.5rem; }
 
     .toast { position: fixed; bottom: 2rem; right: 2rem; padding: 0.9rem 1.5rem; border-radius: 10px; color: #fff; font-weight: 700; font-size: 0.9rem; z-index: 200; transform: translateY(8px); opacity: 0; transition: all 0.25s; pointer-events: none; }
@@ -144,18 +150,18 @@
       <div class="field-row">
         <div class="field">
           <label>Title <span class="req">*</span></label>
-          <input type="text" id="f-title" placeholder="Handmade Italian Pasta at…" />
+          <input type="text" id="f-title" placeholder="e.g. Handmade Pasta Evening" />
         </div>
         <div class="field">
           <label>Subtitle</label>
-          <input type="text" id="f-subtitle" placeholder="e.g. Fresh Pasta at My Tortellini" />
+          <input type="text" id="f-subtitle" placeholder="e.g. Fresh Pasta Workshop" />
         </div>
       </div>
       <div class="field-row">
         <div class="field">
           <label>Slug <span class="req">*</span></label>
-          <input type="text" id="f-slug" placeholder="handmade-pasta-venue-month-year" />
-          <span class="field-hint">URL: /cooking-classes/&#123;slug&#125;</span>
+          <input type="text" id="f-slug" placeholder="e.g. handmade-pasta-jan-2026" />
+          <span class="field-hint">URL: /cooking-classes/&#123;slug&#125; · auto-generated from title</span>
         </div>
         <div class="field">
           <label>Type</label>
@@ -199,7 +205,7 @@
       <div class="field-row">
         <div class="field">
           <label>Location <span class="req">*</span></label>
-          <input type="text" id="f-location" placeholder="My Tortellini, London" />
+          <input type="text" id="f-location" placeholder="e.g. Venue Name, London" />
         </div>
         <div class="field">
           <label>Address</label>
@@ -248,16 +254,30 @@
       <div class="field-row">
         <div class="field">
           <label>Main Image <span class="req">*</span></label>
-          <input type="text" id="f-image" placeholder="/images/cooking-classes/my-tortellini-2.jpg" />
+          <div class="img-field-wrap">
+            <input type="text" id="f-image" placeholder="/images/cooking-classes/photo.jpg" />
+            <button type="button" class="btn-upload" id="upload-image-btn">Upload</button>
+          </div>
+          <input type="file" id="upload-image-file" accept="image/*" style="display:none" />
         </div>
         <div class="field">
           <label>Cover Image (optional)</label>
-          <input type="text" id="f-coverImage" placeholder="/images/cooking-classes/…" />
+          <div class="img-field-wrap">
+            <input type="text" id="f-coverImage" placeholder="/images/cooking-classes/cover.jpg" />
+            <button type="button" class="btn-upload" id="upload-cover-btn">Upload</button>
+          </div>
+          <input type="file" id="upload-cover-file" accept="image/*" style="display:none" />
         </div>
       </div>
       <div class="field">
         <label>Gallery Images (one path per line)</label>
-        <textarea id="f-gallery" rows="2" placeholder="/images/cooking-classes/img1.jpg&#10;/images/cooking-classes/img2.jpg"></textarea>
+        <div class="gallery-upload-row">
+          <textarea id="f-gallery" rows="2" placeholder="/images/cooking-classes/img1.jpg&#10;/images/cooking-classes/img2.jpg"></textarea>
+          <div>
+            <button type="button" class="btn-upload" id="upload-gallery-btn">Upload &amp; Add to Gallery</button>
+            <input type="file" id="upload-gallery-file" accept="image/*" multiple style="display:none" />
+          </div>
+        </div>
       </div>
 
     </div>
@@ -523,6 +543,65 @@
       toast('Delete failed.', false);
     }
   }
+
+  // ── IMAGE UPLOAD ──
+  function fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result as string;
+        resolve(result.split(',')[1]); // strip data:...;base64,
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function uploadFile(file: File): Promise<string | null> {
+    const base64 = await fileToBase64(file);
+    const res = await fetch('/api/admin/upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filename: file.name, content: base64 }),
+    });
+    if (!res.ok) {
+      const d = await res.json().catch(() => ({}));
+      toast('Upload failed: ' + (d.error || res.status), false);
+      return null;
+    }
+    const { path } = await res.json();
+    return path;
+  }
+
+  function bindUpload(btnId: string, fileInputId: string, targetFieldId: string, multi = false) {
+    const btn = document.getElementById(btnId) as HTMLButtonElement;
+    const fileInput = document.getElementById(fileInputId) as HTMLInputElement;
+    btn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', async () => {
+      const files = Array.from(fileInput.files || []);
+      if (!files.length) return;
+      btn.disabled = true;
+      btn.textContent = 'Uploading…';
+      for (const file of files) {
+        const path = await uploadFile(file);
+        if (path) {
+          if (multi) {
+            const ta = document.getElementById(targetFieldId) as HTMLTextAreaElement;
+            ta.value = ta.value ? ta.value + '\n' + path : path;
+          } else {
+            setField(targetFieldId, path);
+          }
+        }
+      }
+      btn.disabled = false;
+      btn.textContent = multi ? 'Upload & Add to Gallery' : 'Upload';
+      fileInput.value = '';
+    });
+  }
+
+  bindUpload('upload-image-btn',   'upload-image-file',   'f-image');
+  bindUpload('upload-cover-btn',   'upload-cover-file',   'f-coverImage');
+  bindUpload('upload-gallery-btn', 'upload-gallery-file', 'f-gallery', true);
 
   init();
 </script>
