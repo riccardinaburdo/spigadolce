@@ -126,7 +126,6 @@ const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
 <body>
 
 {!isAuthed ? (
-  <!-- LOGIN FORM -->
   <div class="login-wrap">
     <div class="login-card">
       <h1>Spigadolce</h1>
@@ -137,7 +136,6 @@ const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
     </div>
   </div>
 ) : (
-  <!-- DASHBOARD -->
   <header class="admin-header">
     <h1>Classes Dashboard</h1>
     <a href="/" target="_blank">← View Site</a>
