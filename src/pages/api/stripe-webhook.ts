@@ -4,8 +4,8 @@ import Stripe from 'stripe';
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
-  const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
-  const webhookSecret = import.meta.env.STRIPE_WEBHOOK_SECRET;
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   const payload = await request.text();
   const sig = request.headers.get('stripe-signature');

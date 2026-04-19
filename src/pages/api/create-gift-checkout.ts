@@ -24,7 +24,7 @@ const json = (data: object, status = 200) =>
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const key = import.meta.env.STRIPE_SECRET_KEY;
+    const key = process.env.STRIPE_SECRET_KEY;
     if (!key) return json({ error: 'Stripe key not configured' }, 500);
 
     const stripe = new Stripe(key);

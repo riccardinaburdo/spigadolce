@@ -20,7 +20,7 @@ function loadClassBySlug(slug: string) {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
   const origin = new URL(request.url).origin;
 
   let body: any;
