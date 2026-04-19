@@ -76,8 +76,8 @@ const past = allClasses.filter(c => c.status === 'past' || new Date(c.date) < no
     <section class="section">
       <h2>Past Classes</h2>
       <p class="subtitle">A look back at our previous classes</p>
-      <div class="classes-grid">
-        {past.map((c) => (
+      <div class="classes-grid" id="past-grid">
+        {past.slice(0, 3).map((c) => (
           <a href={`/cooking-classes/${c.slug}`} class="class-card">
             <div class="class-card-img-wrapper">
               <img src={c.image} alt={c.title} width="640" height="220" loading="lazy" />
@@ -93,6 +93,30 @@ const past = allClasses.filter(c => c.status === 'past' || new Date(c.date) < no
           </a>
         ))}
       </div>
+      {past.length > 3 && (
+        <div id="past-hidden" style="display:none;">
+          {past.slice(3).map((c) => (
+            <a href={`/cooking-classes/${c.slug}`} class="class-card">
+              <div class="class-card-img-wrapper">
+                <img src={c.image} alt={c.title} width="640" height="220" loading="lazy" />
+              </div>
+              <div class="class-card-body">
+                <p class="date">{new Date(c.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                <h3>{c.subtitle ?? c.title}</h3>
+                <p class="location">{c.location}</p>
+              </div>
+              <div class="class-card-actions">
+                <span class="status-past">Past Event</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+      {past.length > 3 && (
+        <div id="show-more-wrap" style="text-align:center; margin-top: 2rem;">
+          <button class="btn-text-link" id="show-more-btn">View all past classes →</button>
+        </div>
+      )}
     </section>
   )}
 
@@ -166,3 +190,17 @@ const past = allClasses.filter(c => c.status === 'past' || new Date(c.date) < no
     margin-top: 1rem !important;
   }
 </style>
+
+<script>
+  const btn = document.getElementById('show-more-btn');
+  const hidden = document.getElementById('past-hidden');
+  const grid = document.getElementById('past-grid');
+  const wrap = document.getElementById('show-more-wrap');
+
+  if (btn && hidden && grid) {
+    btn.addEventListener('click', () => {
+      Array.from(hidden.children).forEach(el => grid.appendChild(el));
+      if (wrap) wrap.style.display = 'none';
+    });
+  }
+</script>
