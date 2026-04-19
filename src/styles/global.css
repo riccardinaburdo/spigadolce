@@ -221,7 +221,7 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 
-/* Header actions (cart + hamburger) */
+/* Header actions (hamburger) */
 .header-actions {
   display: flex;
   align-items: center;
@@ -232,10 +232,17 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-50%);
 }
 
+/* Cart icon in nav */
+.nav-cart {
+  display: flex;
+  align-items: center;
+}
+
 .cart-icon-link {
   position: relative;
   display: flex;
   align-items: center;
+  padding: 0.8rem 1rem;
   color: #fff;
   text-decoration: none;
 }
@@ -246,19 +253,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .cart-badge {
   position: absolute;
-  top: -6px;
-  right: -8px;
+  top: 4px;
+  right: 2px;
   background: var(--color-dark);
   color: #fff;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  min-width: 18px;
-  height: 18px;
-  border-radius: 9px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 4px;
+  padding: 0 3px;
   line-height: 1;
 }
 

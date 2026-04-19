@@ -16,6 +16,6 @@
     { "label": "FAQ", "url": "/faq" },
     { "label": "Contact", "url": "/contact" }
   ],
-  "ctaLabel": "Book Now",
-  "ctaUrl": "/cooking-classes"
+  "ctaLabel": null,
+  "ctaUrl": "/cart"
 }
