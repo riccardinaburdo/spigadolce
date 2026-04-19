@@ -143,12 +143,24 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
           <span class="status-past">Past Event</span>
         ) : (
           <div class="quantity-booking">
-            <a
+            <div class="qty-selector">
+              <label for="qty-select">Spots:</label>
+              <select id="qty-select">
+                {[1,2,3,4,5,6].map((n) => <option value={n}>{n}</option>)}
+              </select>
+            </div>
+            <button
               class="btn-primary private-cta"
-              href={`mailto:spigadolce@gmail.com?subject=Booking request: ${encodeURIComponent(c.title)}&body=Hi Riccardina,%0A%0AI'd like to book a spot for "${c.title}" on ${formattedDate}.%0A%0ANumber of people: %0AName: %0APhone: %0A%0AThank you!`}
+              id="add-to-cart-btn"
+              data-slug={c.slug}
+              data-title={c.subtitle ?? c.title}
+              data-date={c.date}
+              data-location={c.location}
+              data-price={c.price}
+              data-image={c.image}
             >
-              Book Now · £{c.price}/person
-            </a>
+              Add to Cart · £{c.price}/person
+            </button>
             <a
               class="btn-whatsapp"
               href={`https://wa.me/447903903651?text=Hi Riccardina, I'd like to book a spot for "${c.title}" on ${formattedDate}.`}
@@ -173,12 +185,17 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
     gap: 1rem;
     flex-wrap: wrap;
   }
-  .quantity-booking label {
+  .qty-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .qty-selector label {
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--color-dark);
   }
-  .quantity-booking select {
+  .qty-selector select {
     padding: 0.5rem 0.75rem;
     border: 1px solid #ddd;
     border-radius: 6px;
@@ -205,6 +222,7 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
 </style>
 
 <script>
+  // Gallery
   const thumbs = document.querySelectorAll<HTMLButtonElement>('.gallery-thumb');
   const mainImg = document.getElementById('gallery-main-img') as HTMLImageElement;
 
@@ -219,4 +237,40 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
     });
   });
 
+  // Add to cart
+  const addBtn = document.getElementById('add-to-cart-btn') as HTMLButtonElement | null;
+  if (addBtn) {
+    addBtn.addEventListener('click', () => {
+      const qty = parseInt((document.getElementById('qty-select') as HTMLSelectElement)?.value || '1');
+      const item = {
+        slug: addBtn.dataset.slug!,
+        title: addBtn.dataset.title!,
+        date: addBtn.dataset.date!,
+        location: addBtn.dataset.location!,
+        price: parseFloat(addBtn.dataset.price!),
+        image: addBtn.dataset.image!,
+        quantity: qty,
+      };
+
+      let cart: typeof item[] = [];
+      try { cart = JSON.parse(localStorage.getItem('spigadolce_cart') || '[]'); } catch {}
+
+      const existing = cart.find(i => i.slug === item.slug);
+      if (existing) {
+        existing.quantity += qty;
+      } else {
+        cart.push(item);
+      }
+
+      localStorage.setItem('spigadolce_cart', JSON.stringify(cart));
+      window.dispatchEvent(new Event('cart-updated'));
+
+      addBtn.textContent = '✓ Added to Cart';
+      addBtn.style.background = '#27ae60';
+      setTimeout(() => {
+        addBtn.textContent = `Add to Cart · £${item.price}/person`;
+        addBtn.style.background = '';
+      }, 2000);
+    });
+  }
 </script>

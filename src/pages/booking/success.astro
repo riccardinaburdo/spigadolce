@@ -115,3 +115,8 @@ if (sessionId && import.meta.env.STRIPE_SECRET_KEY) {
     color: #fff;
   }
 </style>
+
+<script>
+  localStorage.removeItem('spigadolce_cart');
+  window.dispatchEvent(new Event('cart-updated'));
+</script>
