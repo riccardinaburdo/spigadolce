@@ -11,8 +11,8 @@ const allClasses = classFiles
   .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
 const now = new Date();
-const upcoming = allClasses.filter(c => new Date(c.date) >= now);
-const past = allClasses.filter(c => new Date(c.date) < now).reverse();
+const upcoming = allClasses.filter(c => c.status === 'upcoming' && new Date(c.date) >= now);
+const past = allClasses.filter(c => c.status === 'past' || new Date(c.date) < now).reverse();
 ---
 
 <BaseLayout title="Restaurant Classes | Spigadolce" currentPath="/cooking-classes">
