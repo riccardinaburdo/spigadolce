@@ -25,7 +25,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <li>Delivered by email</li>
             <li>Personal message included</li>
           </ul>
-          <button class="btn-primary gift-buy-btn" data-gift-type="group">Buy Now</button>
+          <button class="btn-primary gift-buy-btn" data-gift-type="group" data-gift-label="Group Class" data-gift-price="55">Buy Now</button>
         </div>
       </div>
 
@@ -45,7 +45,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <li>Delivered by email</li>
             <li>Personal message included</li>
           </ul>
-          <button class="btn-primary gift-buy-btn" data-gift-type="private">Buy Now</button>
+          <button class="btn-primary gift-buy-btn" data-gift-type="private" data-gift-label="Private Class for Two" data-gift-price="150">Buy Now</button>
         </div>
       </div>
 
@@ -67,7 +67,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <label for="custom-amount">Amount (£)</label>
             <input type="number" id="custom-amount" min="30" max="500" placeholder="e.g. 75" />
           </div>
-          <button class="btn-primary gift-buy-btn" data-gift-type="custom">Buy Now</button>
+          <button class="btn-primary gift-buy-btn" data-gift-type="custom" data-gift-label="Custom Gift Card" data-gift-price="">Buy Now</button>
         </div>
       </div>
 
@@ -78,22 +78,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="gift-steps">
         <div class="gift-step">
           <div class="gift-step-num">1</div>
-          <h4>Choose &amp; Email</h4>
-          <p>Click "Buy Now" and send your request — we'll reply with payment details</p>
+          <h4>Choose</h4>
+          <p>Pick the gift card that suits the occasion and click "Buy Now"</p>
         </div>
         <div class="gift-step">
           <div class="gift-step-num">2</div>
           <h4>Personalise</h4>
-          <p>Add a personal message for the lucky recipient</p>
+          <p>Add the recipient's name and a personal message</p>
         </div>
         <div class="gift-step">
           <div class="gift-step-num">3</div>
-          <h4>Send</h4>
-          <p>The gift card is delivered by email, ready to give</p>
+          <h4>Pay &amp; Send</h4>
+          <p>Complete the secure payment — the gift card is delivered by email</p>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Personalisation Modal -->
+  <div class="gift-modal-overlay" id="gift-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="gift-modal">
+      <button class="gift-modal-close" id="gift-modal-close" aria-label="Close">&times;</button>
+
+      <div class="gift-modal-header">
+        <div class="gift-modal-icon" id="modal-icon">🎁</div>
+        <h2 id="modal-title">Personalise Your Gift</h2>
+        <p id="modal-subtitle">Group Class · £55</p>
+      </div>
+
+      <div class="gift-modal-body">
+        <div class="gift-modal-field">
+          <label for="modal-recipient">To <span class="required">*</span></label>
+          <input type="text" id="modal-recipient" placeholder="Recipient's name" autocomplete="off" />
+        </div>
+        <div class="gift-modal-field">
+          <label for="modal-message">Personal message <span class="optional">(optional)</span></label>
+          <textarea id="modal-message" rows="3" placeholder="e.g. Happy birthday! Enjoy this pasta class 🍝"></textarea>
+        </div>
+      </div>
+
+      <div class="gift-modal-footer">
+        <button class="btn-primary gift-modal-pay" id="gift-modal-pay">
+          Continue to Payment →
+        </button>
+        <p class="gift-modal-secure">🔒 Secure payment via Stripe</p>
+      </div>
+    </div>
+  </div>
+
 </BaseLayout>
 
 <style>
@@ -129,6 +161,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
   .gift-card-top {
     padding: 2.5rem 1.5rem 1.5rem;
+    flex: 1;
   }
   .gift-icon {
     font-size: 3rem;
@@ -150,9 +183,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 2.2rem;
     color: var(--color-gold);
     font-weight: 700;
-  }
-  .gift-card-top {
-    flex: 1;
   }
   .gift-card-bottom {
     padding: 1rem 1.5rem 2rem;
@@ -230,6 +260,123 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border: none;
   }
 
+  /* ===== MODAL ===== */
+  .gift-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    backdrop-filter: blur(2px);
+  }
+  .gift-modal {
+    background: #fff;
+    border-radius: 20px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+    animation: modal-in 0.2s ease;
+  }
+  @keyframes modal-in {
+    from { opacity: 0; transform: translateY(16px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .gift-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.15s;
+  }
+  .gift-modal-close:hover { color: var(--color-dark); }
+
+  .gift-modal-header {
+    background: var(--color-cream);
+    padding: 2rem 2rem 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid #f0ece4;
+  }
+  .gift-modal-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .gift-modal-header h2 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-dark);
+    margin-bottom: 0.25rem;
+  }
+  .gift-modal-header p {
+    color: #888;
+    font-size: 0.9rem;
+  }
+
+  .gift-modal-body {
+    padding: 1.75rem 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .gift-modal-field label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .required { color: var(--color-accent); }
+  .optional { font-weight: 400; color: #aaa; text-transform: none; letter-spacing: 0; }
+
+  .gift-modal-field input,
+  .gift-modal-field textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #e0dbd4;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: var(--font-body);
+    color: var(--color-dark);
+    background: #fdfcfb;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+    resize: vertical;
+  }
+  .gift-modal-field input:focus,
+  .gift-modal-field textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .gift-modal-footer {
+    padding: 1.5rem 2rem 2rem;
+    text-align: center;
+  }
+  .gift-modal-pay {
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    margin-bottom: 0.75rem;
+  }
+  .gift-modal-secure {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin: 0;
+  }
+
   @media (max-width: 768px) {
     .gift-grid {
       grid-template-columns: 1fr;
@@ -242,10 +389,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </style>
 
 <script>
+  let pendingType = '';
+  let pendingCustomAmount = '';
+
+  const overlay = document.getElementById('gift-modal')!;
+  const closeBtn = document.getElementById('gift-modal-close')!;
+  const payBtn = document.getElementById('gift-modal-pay')!;
+  const recipientInput = document.getElementById('modal-recipient') as HTMLInputElement;
+  const messageInput = document.getElementById('modal-message') as HTMLTextAreaElement;
+  const modalIcon = document.getElementById('modal-icon')!;
+  const modalSubtitle = document.getElementById('modal-subtitle')!;
+
+  const ICONS: Record<string, string> = { group: '🎁', private: '⭐', custom: '💝' };
+
+  function openModal(type: string, label: string, price: string, customAmount: string) {
+    pendingType = type;
+    pendingCustomAmount = customAmount;
+    modalIcon.textContent = ICONS[type] ?? '🎁';
+    const displayPrice = type === 'custom' ? `£${customAmount}` : `£${price}`;
+    modalSubtitle.textContent = `${label} · ${displayPrice}`;
+    recipientInput.value = '';
+    messageInput.value = '';
+    (payBtn as HTMLButtonElement).disabled = false;
+    payBtn.textContent = 'Continue to Payment →';
+    overlay.style.display = 'flex';
+    setTimeout(() => recipientInput.focus(), 100);
+  }
+
+  function closeModal() {
+    overlay.style.display = 'none';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // Buy Now buttons
   document.querySelectorAll<HTMLButtonElement>('[data-gift-type]').forEach(btn => {
-    btn.addEventListener('click', async () => {
+    btn.addEventListener('click', () => {
       const type = btn.dataset.giftType!;
-      let customAmount: string | undefined;
+      const label = btn.dataset.giftLabel!;
+      const price = btn.dataset.giftPrice!;
 
       if (type === 'custom') {
         const input = document.getElementById('custom-amount') as HTMLInputElement;
@@ -256,34 +440,52 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           input?.reportValidity();
           return;
         }
-        customAmount = String(val);
-      }
-
-      btn.textContent = 'Redirecting…';
-      btn.disabled = true;
-
-      try {
-        const res = await fetch('/api/create-gift-checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type, customAmount }),
-        });
-        const text = await res.text();
-        let data: any = {};
-        try { data = JSON.parse(text); } catch {}
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          alert(data.error ?? 'Could not start checkout. Please try again.');
-          btn.textContent = 'Buy Now';
-          btn.disabled = false;
-        }
-      } catch (e) {
-        alert('Network error. Please try again.');
-        btn.textContent = 'Buy Now';
-        btn.disabled = false;
+        openModal(type, label, price, String(val));
+      } else {
+        openModal(type, label, price, '');
       }
     });
   });
-</script>
 
+  // Pay button inside modal
+  payBtn.addEventListener('click', async () => {
+    const recipient = recipientInput.value.trim();
+    if (!recipient) {
+      recipientInput.focus();
+      recipientInput.style.borderColor = 'var(--color-accent)';
+      recipientInput.placeholder = 'Please enter a name';
+      return;
+    }
+    recipientInput.style.borderColor = '';
+
+    (payBtn as HTMLButtonElement).disabled = true;
+    payBtn.textContent = 'Redirecting to Stripe…';
+
+    try {
+      const res = await fetch('/api/create-gift-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: pendingType,
+          customAmount: pendingCustomAmount || undefined,
+          recipientName: recipient,
+          message: messageInput.value.trim() || undefined,
+        }),
+      });
+      const text = await res.text();
+      let data: any = {};
+      try { data = JSON.parse(text); } catch {}
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert(data.error ?? 'Could not start checkout. Please try again.');
+        (payBtn as HTMLButtonElement).disabled = false;
+        payBtn.textContent = 'Continue to Payment →';
+      }
+    } catch {
+      alert('Network error. Please try again.');
+      (payBtn as HTMLButtonElement).disabled = false;
+      payBtn.textContent = 'Continue to Payment →';
+    }
+  });
+</script>
