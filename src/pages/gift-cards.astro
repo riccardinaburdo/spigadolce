@@ -25,7 +25,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <li>Delivered by email</li>
             <li>Personal message included</li>
           </ul>
-          <a class="btn-primary gift-buy-btn" href="mailto:spigadolce@gmail.com?subject=Gift Card: Group Class (£55)&body=Hi Riccardina,%0A%0AI'd like to purchase a Group Class Gift Card (£55).%0A%0ARecipient name: %0APersonal message: %0AMy name: %0AMy phone: %0A%0AThank you!" style="display:block; width:100%; text-align:center; text-decoration:none;">Buy Now</a>
+          <button class="btn-primary gift-buy-btn" data-gift-type="group">Buy Now</button>
         </div>
       </div>
 
@@ -45,7 +45,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <li>Delivered by email</li>
             <li>Personal message included</li>
           </ul>
-          <a class="btn-primary gift-buy-btn" href="mailto:spigadolce@gmail.com?subject=Gift Card: Private Class for Two (£150)&body=Hi Riccardina,%0A%0AI'd like to purchase a Private Class Gift Card (£150).%0A%0ARecipient name: %0APersonal message: %0AMy name: %0AMy phone: %0A%0AThank you!" style="display:block; width:100%; text-align:center; text-decoration:none;">Buy Now</a>
+          <button class="btn-primary gift-buy-btn" data-gift-type="private">Buy Now</button>
         </div>
       </div>
 
@@ -63,7 +63,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <li>Delivered by email</li>
             <li>Personal message included</li>
           </ul>
-          <a class="btn-primary gift-buy-btn" href="mailto:spigadolce@gmail.com?subject=Gift Card: Custom Amount&body=Hi Riccardina,%0A%0AI'd like to purchase a Custom Gift Card.%0A%0AAmount I'd like: £%0ARecipient name: %0APersonal message: %0AMy name: %0AMy phone: %0A%0AThank you!" style="display:block; width:100%; text-align:center; text-decoration:none;">Buy Now</a>
+          <div class="custom-amount-wrap">
+            <label for="custom-amount">Amount (£)</label>
+            <input type="number" id="custom-amount" min="30" max="500" placeholder="e.g. 75" />
+          </div>
+          <button class="btn-primary gift-buy-btn" data-gift-type="custom">Buy Now</button>
         </div>
       </div>
 
@@ -213,6 +217,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     width: 100%;
     box-sizing: border-box;
   }
+  .gift-buy-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+  }
+
   @media (max-width: 768px) {
     .gift-grid {
       grid-template-columns: 1fr;
@@ -223,4 +235,48 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-gift-type]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const type = btn.dataset.giftType!;
+      let customAmount: string | undefined;
+
+      if (type === 'custom') {
+        const input = document.getElementById('custom-amount') as HTMLInputElement;
+        const val = parseFloat(input?.value);
+        if (!val || val < 30) {
+          input?.focus();
+          input?.setCustomValidity('Please enter an amount of at least £30');
+          input?.reportValidity();
+          return;
+        }
+        customAmount = String(val);
+      }
+
+      btn.textContent = 'Redirecting…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/api/create-gift-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type, customAmount }),
+        });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          alert('Could not start checkout. Please try again.');
+          btn.textContent = 'Buy Now';
+          btn.disabled = false;
+        }
+      } catch {
+        alert('Network error. Please try again.');
+        btn.textContent = 'Buy Now';
+        btn.disabled = false;
+      }
+    });
+  });
+</script>
 
