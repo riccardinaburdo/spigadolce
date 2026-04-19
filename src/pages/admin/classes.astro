@@ -136,6 +136,7 @@ const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
     </div>
   </div>
 ) : (
+  <Fragment>
   <header class="admin-header">
     <h1>Classes Dashboard</h1>
     <a href="/" target="_blank">← View Site</a>
@@ -312,6 +313,7 @@ const isAuthed = !!adminPassword && cookies['admin_auth'] === adminPassword;
   </div>
 
   <div class="toast" id="toast"></div>
+  </Fragment>
 )}
 
 <script>
