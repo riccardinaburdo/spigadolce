@@ -59,23 +59,32 @@ export const POST: APIRoute = async ({ request }) => {
   if (recipientEmail) metadata.recipientEmail = recipientEmail;
   if (message) metadata.message = message.slice(0, 500);
 
-  const session = await stripe.checkout.sessions.create({
-    mode: 'payment',
-    line_items: [
-      {
-        quantity: 1,
-        price_data: {
-          currency: 'gbp',
-          unit_amount: unitAmount,
-          product_data: { name: productName, description: productDescription },
+  let session;
+  try {
+    session = await stripe.checkout.sessions.create({
+      mode: 'payment',
+      line_items: [
+        {
+          quantity: 1,
+          price_data: {
+            currency: 'gbp',
+            unit_amount: unitAmount,
+            product_data: { name: productName, description: productDescription },
+          },
         },
-      },
-    ],
-    metadata,
-    success_url: `${origin}/booking/success?session_id={CHECKOUT_SESSION_ID}&type=gift`,
-    cancel_url: `${origin}/gift-cards`,
-    allow_promotion_codes: true,
-  });
+      ],
+      metadata,
+      success_url: `${origin}/booking/success?session_id={CHECKOUT_SESSION_ID}&type=gift`,
+      cancel_url: `${origin}/gift-cards`,
+      allow_promotion_codes: true,
+    });
+  } catch (err: any) {
+    console.error('Stripe error:', err?.message ?? err);
+    return new Response(JSON.stringify({ error: err?.message ?? 'Stripe error' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 
   return new Response(JSON.stringify({ url: session.url }), {
     status: 200,

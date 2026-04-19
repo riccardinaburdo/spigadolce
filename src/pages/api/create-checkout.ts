@@ -64,18 +64,27 @@ export const POST: APIRoute = async ({ request }) => {
   const primarySlug = cartItems[0].slug;
   const primaryClass = loadClassBySlug(primarySlug);
 
-  const session = await stripe.checkout.sessions.create({
-    mode: 'payment',
-    line_items: lineItems,
-    metadata: {
-      slugs: cartItems.map(i => i.slug).join(','),
-      classTitle: primaryClass?.title ?? '',
-      classDate: primaryClass?.date ?? '',
-    },
-    success_url: `${origin}/booking/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: cartItems.length === 1 ? `${origin}/cooking-classes/${primarySlug}` : `${origin}/cart`,
-    allow_promotion_codes: true,
-  });
+  let session;
+  try {
+    session = await stripe.checkout.sessions.create({
+      mode: 'payment',
+      line_items: lineItems,
+      metadata: {
+        slugs: cartItems.map(i => i.slug).join(','),
+        classTitle: primaryClass?.title ?? '',
+        classDate: primaryClass?.date ?? '',
+      },
+      success_url: `${origin}/booking/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: cartItems.length === 1 ? `${origin}/cooking-classes/${primarySlug}` : `${origin}/cart`,
+      allow_promotion_codes: true,
+    });
+  } catch (err: any) {
+    console.error('Stripe error:', err?.message ?? err);
+    return new Response(JSON.stringify({ error: err?.message ?? 'Stripe error' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 
   return new Response(JSON.stringify({ url: session.url }), {
     status: 200,

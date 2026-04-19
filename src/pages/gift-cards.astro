@@ -263,15 +263,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ type, customAmount }),
         });
-        const data = await res.json();
+        const text = await res.text();
+        let data: any = {};
+        try { data = JSON.parse(text); } catch {}
         if (data.url) {
           window.location.href = data.url;
         } else {
-          alert('Could not start checkout. Please try again.');
+          alert(data.error ?? 'Could not start checkout. Please try again.');
           btn.textContent = 'Buy Now';
           btn.disabled = false;
         }
-      } catch {
+      } catch (e) {
         alert('Network error. Please try again.');
         btn.textContent = 'Buy Now';
         btn.disabled = false;
