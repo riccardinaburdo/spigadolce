@@ -1662,14 +1662,20 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== PAGE HEADER ===== */
 .page-header {
-  background: var(--color-dark-bg);
-  color: var(--color-white);
+  background: var(--color-white);
+  color: var(--color-dark);
   padding: 3rem 2rem;
   text-align: center;
 }
 
 .page-header h1 {
   font-size: 2.5rem;
+  color: var(--color-dark);
+}
+
+.page-header p {
+  color: var(--color-text);
+  margin-top: 0.75rem;
 }
 
 /* ===== RESPONSIVE ===== */
