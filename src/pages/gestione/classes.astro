@@ -373,6 +373,7 @@
     modal.classList.remove('open');
     editingSlug = null;
     editingSha = null;
+    setSlugReadonly(false);
   }
 
   modalClose.addEventListener('click', closeModal);
@@ -404,8 +405,17 @@
     if (!editingSlug) setField('f-slug', slugify((e.target as HTMLInputElement).value));
   });
 
+  function setSlugReadonly(readonly: boolean) {
+    const el = document.getElementById('f-slug') as HTMLInputElement | null;
+    if (!el) return;
+    el.readOnly = readonly;
+    el.style.background = readonly ? '#f0ece6' : '';
+    el.style.cursor = readonly ? 'not-allowed' : '';
+  }
+
   newBtn.addEventListener('click', () => {
     clearForm();
+    setSlugReadonly(false);
     editingSlug = null;
     editingSha = null;
     openModal('New Class');
@@ -413,7 +423,6 @@
 
   function openEdit(slug: string) {
     const cls = allClasses.find(c => c.slug === slug);
-    console.log('[edit] slug:', slug, '| found:', !!cls, '| sha:', cls?._sha);
     if (!cls) { toast('Classe non trovata: ' + slug, false); return; }
     editingSlug = slug;
     editingSha = cls._sha || null;
@@ -421,6 +430,7 @@
     setField('f-title', cls.title || '');
     setField('f-subtitle', cls.subtitle || '');
     setField('f-slug', cls.slug || '');
+    setSlugReadonly(true);
     setField('f-type', cls.type || '');
     setField('f-status', cls.status || 'upcoming');
     setField('f-order', String(cls.order ?? ''));

@@ -105,10 +105,11 @@ export const PATCH: APIRoute = async ({ request }) => {
   const { _sha, _filename, _oldSlug, ...classData } = body;
   const { slug } = classData;
 
+  // When editing, _oldSlug is always sent and is the source of truth
   const oldSlug = _oldSlug || slug;
 
   // If slug changed: delete old file, create new one
-  if (oldSlug !== slug) {
+  if (_oldSlug && _oldSlug !== slug) {
     const oldSha = await getFileSha(oldSlug);
     if (oldSha) {
       await fetch(
