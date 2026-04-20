@@ -35,7 +35,7 @@ const galleryImages = data.gallery;
   </section>
 
   <!-- Upcoming Classes -->
-  {upcomingPrivate.length > 0 && (
+  {upcomingPrivate.length > 0 ? (
     <section class="section section-cream">
       <h2>Upcoming Classes</h2>
       <p class="subtitle">Book your spot before they fill up</p>
@@ -57,6 +57,18 @@ const galleryImages = data.gallery;
             </div>
           </a>
         ))}
+      </div>
+    </section>
+  ) : (
+    <section class="section">
+      <div class="coming-soon-box">
+        <div class="coming-soon-icon">🍝</div>
+        <h2>New Dates Coming Soon</h2>
+        <p>I'm preparing a new round of private in-home pasta workshops. Each session is intimate, hands-on, and brought directly to your kitchen — at a time that works for you.</p>
+        <p class="coming-soon-tagline">Stay tuned — or get in touch to arrange your own date.</p>
+        <a href={`mailto:spigadolce@gmail.com?subject=Private Class Enquiry`} class="btn-primary" style="margin-top:1.25rem; display:inline-block;">
+          Enquire Now
+        </a>
       </div>
     </section>
   )}
@@ -202,6 +214,37 @@ const galleryImages = data.gallery;
     gap: 1rem;
     flex-wrap: wrap;
     margin-top: 2rem;
+  }
+  .coming-soon-box {
+    max-width: 540px;
+    margin: 0 auto;
+    border: 2px dashed var(--color-accent);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    background: #fff;
+  }
+  .coming-soon-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .coming-soon-box h2 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--color-dark);
+    margin-bottom: 0.8rem;
+  }
+  .coming-soon-box p {
+    color: #555;
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 0 auto 0.5rem;
+  }
+  .coming-soon-tagline {
+    color: var(--color-accent) !important;
+    font-style: italic;
+    font-weight: 600;
+    margin-top: 0.75rem !important;
   }
   .private-mobile-header {
     display: none;
