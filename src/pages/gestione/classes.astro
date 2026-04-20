@@ -233,19 +233,6 @@
         <label>Short Description <span class="req">*</span></label>
         <textarea id="f-description" rows="2" placeholder="A brief description shown on the class card"></textarea>
       </div>
-      <div class="field">
-        <label>What's Included (one item per line)</label>
-        <textarea id="f-includes" rows="3" placeholder="Two-hour pasta-making class&#10;Welcome drink and antipasti&#10;Apron and tools provided"></textarea>
-      </div>
-      <div class="field">
-        <label>What You'll Create (one per line)</label>
-        <textarea id="f-whatYouCreate" rows="2" placeholder="Fresh pasta shape 1&#10;Fresh pasta shape 2"></textarea>
-      </div>
-      <div class="field">
-        <label>Skills You'll Master (one per line)</label>
-        <textarea id="f-skills" rows="2" placeholder="Hand-rolling technique&#10;Shaping without a machine"></textarea>
-      </div>
-
       <div class="section-title">Images</div>
       <div class="field-row">
         <div class="field">
@@ -408,8 +395,7 @@
   function clearForm() {
     ['f-title','f-subtitle','f-slug','f-type','f-order',
      'f-date','f-time','f-duration','f-location','f-address',
-     'f-price','f-description','f-includes',
-     'f-whatYouCreate','f-skills','f-image','f-coverImage','f-gallery'].forEach(id => setField(id, ''));
+     'f-price','f-description','f-image','f-coverImage','f-gallery'].forEach(id => setField(id, ''));
     setField('f-status', 'upcoming');
     setField('f-currency', 'GBP');
   }
@@ -445,9 +431,6 @@
     setField('f-price', String(cls.price ?? ''));
     setField('f-currency', cls.currency || 'GBP');
     setField('f-description', cls.description || '');
-    setField('f-includes', (cls.includes || cls.included || []).join('\n'));
-    setField('f-whatYouCreate', (cls.whatYouCreate || []).join('\n'));
-    setField('f-skills', (cls.skills || []).join('\n'));
     setField('f-image', cls.image || '');
     setField('f-coverImage', cls.coverImage || '');
     setField('f-gallery', (cls.gallery || []).join('\n'));
@@ -486,12 +469,6 @@
       ...(getField('f-order') && { order: parseInt(getField('f-order')) }),
     };
 
-    const includes = toLines(getField('f-includes'));
-    if (includes.length) classData.includes = includes;
-    const whatYouCreate = toLines(getField('f-whatYouCreate'));
-    if (whatYouCreate.length) classData.whatYouCreate = whatYouCreate;
-    const skills = toLines(getField('f-skills'));
-    if (skills.length) classData.skills = skills;
     const gallery = toLines(getField('f-gallery'));
     if (gallery.length) classData.gallery = gallery;
 

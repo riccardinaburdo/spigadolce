@@ -92,30 +92,6 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
         <p class="private-intro">{para}</p>
       ))}
 
-      <!-- What you'll create + Skills + Included -->
-      {(c.whatYouCreate || c.skills || c.included || c.includes) && (
-        <div class="private-detail-block">
-          {c.whatYouCreate && (
-            <div class="detail-sub">
-              <h4>What You'll Create</h4>
-              <ul>{c.whatYouCreate.map((item: string) => <li>{item}</li>)}</ul>
-            </div>
-          )}
-          {c.skills && (
-            <div class="detail-sub">
-              <h4>Skills You'll Master</h4>
-              <ul>{c.skills.map((item: string) => <li>{item}</li>)}</ul>
-            </div>
-          )}
-          {(c.included ?? c.includes) && (
-            <div class="detail-sub">
-              <h4>What's Included</h4>
-              <ul>{(c.included ?? c.includes).map((item: string) => <li>{item}</li>)}</ul>
-            </div>
-          )}
-        </div>
-      )}
-
       <!-- Occasions -->
       {c.occasions && (
         <div class="private-occasions">
