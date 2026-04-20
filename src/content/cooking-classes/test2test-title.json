@@ -1,0 +1,27 @@
+{
+  "slug": "test2test-title",
+  "title": "Test title",
+  "date": "2026-04-30",
+  "price": 35,
+  "currency": "GBP",
+  "location": "test location",
+  "description": "test description",
+  "image": "/images/cooking-classes/foto-home.jpg",
+  "status": "upcoming",
+  "subtitle": "test subtitle",
+  "time": "6;3 pm",
+  "duration": "2 hours",
+  "address": "test address",
+  "type": "private",
+  "order": 6,
+  "includes": [
+    "test What's Included (one item per line)"
+  ],
+  "whatYouCreate": [
+    "test",
+    "What You'll Create (one per line)"
+  ],
+  "skills": [
+    "test Skills You'll Master (one per line)"
+  ]
+}
