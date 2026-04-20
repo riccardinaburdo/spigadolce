@@ -413,7 +413,8 @@
 
   function openEdit(slug: string) {
     const cls = allClasses.find(c => c.slug === slug);
-    if (!cls) return;
+    console.log('[edit] slug:', slug, '| found:', !!cls, '| sha:', cls?._sha);
+    if (!cls) { toast('Classe non trovata: ' + slug, false); return; }
     editingSlug = slug;
     editingSha = cls._sha || null;
     clearForm();
@@ -493,7 +494,9 @@
       await loadClasses();
     } else {
       const d = await res.json().catch(() => ({}));
-      toast(d.error || 'Errore nel salvataggio. Riprova.', false);
+      const errMsg = d.error || d.message || JSON.stringify(d) || 'Errore nel salvataggio.';
+      console.error('[save] status:', res.status, '| error:', errMsg);
+      toast('Errore ' + res.status + ': ' + errMsg, false);
     }
   });
 
