@@ -1,0 +1,17 @@
+{
+  "slug": "handmade-pasta-mileto-may-2026",
+  "title": "Handmade Italian Pasta at Mileto Caffe",
+  "date": "2026-04-23",
+  "price": 38,
+  "currency": "GBP",
+  "location": "Mileto Caffe, Hampstead, London",
+  "description": "Two-hour pasta-making class with antipasti and bottomless prosecco at the charming Mileto Caffe.",
+  "image": "/images/cooking-classes/mileto-2.jpg",
+  "status": "coming-soon",
+  "order": 22,
+  "includes": [
+    "Two-hour pasta-making class",
+    "Antipasti and bottomless prosecco",
+    "Apron and pasta tools provided"
+  ]
+}
