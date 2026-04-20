@@ -17,6 +17,7 @@
     "@stripe/stripe-js": "^9.2.0",
     "astro": "^6.0.3",
     "decap-cms-app": "^3.10.1",
+    "resend": "^6.12.1",
     "stripe": "^22.0.2"
   }
 }

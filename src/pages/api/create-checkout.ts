@@ -71,8 +71,11 @@ export const POST: APIRoute = async ({ request }) => {
       line_items: lineItems,
       metadata: {
         slugs: cartItems.map(i => i.slug).join(','),
-        classTitle: primaryClass?.title ?? '',
+        quantities: cartItems.map(i => i.quantity).join(','),
+        classTitle: primaryClass?.subtitle ?? primaryClass?.title ?? '',
         classDate: primaryClass?.date ?? '',
+        classLocation: primaryClass?.location ?? '',
+        classTime: primaryClass?.time ?? '',
       },
       success_url: `${origin}/booking/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: cartItems.length === 1 ? `${origin}/cooking-classes/${primarySlug}` : `${origin}/cart`,
