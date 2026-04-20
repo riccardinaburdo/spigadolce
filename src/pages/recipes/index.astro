@@ -32,11 +32,194 @@ const categories = categoryOrder.filter(cat => recipes.some(r => r.category === 
                 {r.prepTime && <span>Prep: {r.prepTime}</span>}
                 {r.cookTime && <span>Cook: {r.cookTime}</span>}
               </p>
-              <a href={`/recipes/${r.slug}`} class="btn-view-recipe">View Recipe</a>
+              <a href={`/recipes/${r.slug}`} class="btn-view-recipe recipe-unlock-btn" data-href={`/recipes/${r.slug}`}>View Recipe</a>
             </div>
           </div>
         ))}
       </div>
     </section>
   ))}
+  <!-- Newsletter Unlock Modal -->
+  <div id="recipe-unlock-modal" class="unlock-modal-overlay" aria-hidden="true">
+    <div class="unlock-modal-box" role="dialog" aria-modal="true" aria-labelledby="unlock-modal-title">
+      <button class="unlock-modal-close" id="unlock-modal-close" aria-label="Close">&times;</button>
+      <div class="unlock-modal-icon">🍝</div>
+      <h2 id="unlock-modal-title" class="unlock-modal-heading">Unlock This Recipe</h2>
+      <p class="unlock-modal-sub">Subscribe to our free newsletter and get access to all our authentic Pugliese recipes — straight to your inbox.</p>
+      <form id="unlock-modal-form" novalidate>
+        <input type="email" id="unlock-modal-email" class="unlock-modal-input" placeholder="Your email address" required autocomplete="email" />
+        <p id="unlock-modal-error" class="unlock-modal-error" style="display:none;"></p>
+        <button type="submit" class="unlock-modal-submit" id="unlock-modal-btn">SUBSCRIBE &amp; VIEW RECIPE</button>
+      </form>
+      <p class="unlock-modal-note">No spam, ever. Unsubscribe anytime.</p>
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+  .unlock-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .unlock-modal-overlay.open {
+    display: flex;
+  }
+  .unlock-modal-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2.5rem 2rem 2rem;
+    max-width: 480px;
+    width: calc(100% - 2rem);
+    position: relative;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  }
+  .unlock-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+  }
+  .unlock-modal-close:hover { color: #555; }
+  .unlock-modal-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .unlock-modal-heading {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--color-dark);
+    margin-bottom: 0.9rem;
+  }
+  .unlock-modal-sub {
+    color: #555;
+    line-height: 1.6;
+    max-width: 380px;
+    margin: 0 auto 1.5rem;
+    font-size: 1rem;
+  }
+  .unlock-modal-input {
+    width: 100%;
+    padding: 0.9rem 1.1rem;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    box-sizing: border-box;
+    color: var(--color-dark);
+  }
+  .unlock-modal-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+  .unlock-modal-error {
+    color: #c0392b;
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem;
+  }
+  .unlock-modal-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .unlock-modal-submit:hover { background: #c96b1a; }
+  .unlock-modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .unlock-modal-note {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #aaa;
+  }
+</style>
+
+<script>
+  const SUBSCRIBED_KEY = 'spigadolce_subscribed';
+  const overlay = document.getElementById('recipe-unlock-modal')!;
+  const closeBtn = document.getElementById('unlock-modal-close')!;
+  const form = document.getElementById('unlock-modal-form') as HTMLFormElement;
+  const emailInput = document.getElementById('unlock-modal-email') as HTMLInputElement;
+  const submitBtn = document.getElementById('unlock-modal-btn') as HTMLButtonElement;
+  const errorMsg = document.getElementById('unlock-modal-error')!;
+
+  let pendingHref = '';
+
+  function openModal(href: string) {
+    pendingHref = href;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    emailInput.value = '';
+    errorMsg.style.display = 'none';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'SUBSCRIBE & VIEW RECIPE';
+    setTimeout(() => emailInput.focus(), 50);
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  // Intercept View Recipe clicks
+  document.querySelectorAll<HTMLAnchorElement>('.recipe-unlock-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      if (localStorage.getItem(SUBSCRIBED_KEY) === 'true') return; // already subscribed — navigate normally
+      e.preventDefault();
+      openModal(btn.dataset.href || btn.href);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if (!email) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = '…';
+    errorMsg.style.display = 'none';
+
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        localStorage.setItem(SUBSCRIBED_KEY, 'true');
+        window.location.href = pendingHref;
+      } else {
+        errorMsg.textContent = data.error ?? 'Something went wrong. Please try again.';
+        errorMsg.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'SUBSCRIBE & VIEW RECIPE';
+      }
+    } catch {
+      errorMsg.textContent = 'Something went wrong. Please try again.';
+      errorMsg.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'SUBSCRIBE & VIEW RECIPE';
+    }
+  });
+</script>
