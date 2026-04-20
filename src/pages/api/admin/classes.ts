@@ -24,9 +24,11 @@ function ghHeaders() {
   };
 }
 
-async function getFileSha(slug: string): Promise<string | null> {
+// filename = actual file name (e.g. "mileto-may-2026.json"); slug used as fallback
+async function getFileSha(slug: string, filename?: string): Promise<string | null> {
+  const name = filename || `${slug}.json`;
   const res = await fetch(
-    `https://api.github.com/repos/${REPO}/contents/${CLASSES_PATH}/${slug}.json`,
+    `https://api.github.com/repos/${REPO}/contents/${CLASSES_PATH}/${name}`,
     { headers: ghHeaders() }
   );
   if (!res.ok) return null;
@@ -136,13 +138,14 @@ export const PATCH: APIRoute = async ({ request }) => {
     });
   }
 
-  // Same slug: always fetch fresh SHA from GitHub to avoid stale-SHA errors
-  const sha = await getFileSha(slug);
-  if (!sha) return new Response(JSON.stringify({ error: 'File not found' }), { status: 404 });
+  // Same slug: use _filename (actual file on disk) to avoid slug/filename mismatch
+  const fname = _filename || `${slug}.json`;
+  const sha = await getFileSha(slug, _filename);
+  if (!sha) return new Response(JSON.stringify({ error: 'File not found: ' + fname }), { status: 404 });
 
   const content = Buffer.from(JSON.stringify(classData, null, 2)).toString('base64');
   const res = await fetch(
-    `https://api.github.com/repos/${REPO}/contents/${CLASSES_PATH}/${slug}.json`,
+    `https://api.github.com/repos/${REPO}/contents/${CLASSES_PATH}/${fname}`,
     {
       method: 'PUT',
       headers: ghHeaders(),
@@ -160,12 +163,13 @@ export const PATCH: APIRoute = async ({ request }) => {
 export const DELETE: APIRoute = async ({ request }) => {
   if (!checkAuth(request)) return new Response('Unauthorized', { status: 401 });
 
-  const { slug } = await request.json();
-  const fileSha = await getFileSha(slug);
-  if (!fileSha) return new Response(JSON.stringify({ error: 'File not found' }), { status: 404 });
+  const { slug, filename } = await request.json();
+  const fileSha = await getFileSha(slug, filename);
+  if (!fileSha) return new Response(JSON.stringify({ error: 'File not found: ' + (filename || slug + '.json') }), { status: 404 });
 
+  const fname = filename || `${slug}.json`;
   const res = await fetch(
-    `https://api.github.com/repos/${REPO}/contents/${CLASSES_PATH}/${slug}.json`,
+    `https://api.github.com/repos/${REPO}/contents/${CLASSES_PATH}/${fname}`,
     {
       method: 'DELETE',
       headers: ghHeaders(),
@@ -173,8 +177,15 @@ export const DELETE: APIRoute = async ({ request }) => {
     }
   );
 
-  return new Response(JSON.stringify({ ok: res.ok }), {
-    status: res.ok ? 200 : 400,
+  const ghData = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    return new Response(JSON.stringify({ error: ghData.message || `GitHub ${res.status}` }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  return new Response(JSON.stringify({ ok: true }), {
+    status: 200,
     headers: { 'Content-Type': 'application/json' },
   });
 };

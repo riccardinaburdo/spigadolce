@@ -289,6 +289,7 @@
   let allClasses: ClassItem[] = [];
   let editingSlug: string | null = null;
   let editingSha: string | null = null;
+  let editingFilename: string | null = null;
 
   const tbody      = document.getElementById('classes-tbody') as HTMLTableSectionElement;
   const statusBar  = document.getElementById('status-bar') as HTMLElement;
@@ -340,7 +341,7 @@
       '<td>' + badgeHtml(c.status, c.type || '') + '</td>' +
       '<td><div class="actions">' +
         '<button class="btn btn-sm btn-edit" data-slug="' + c.slug + '">Edit</button>' +
-        '<button class="btn btn-sm btn-delete" data-slug="' + c.slug + '" data-sha="' + (c._sha || '') + '">Delete</button>' +
+        '<button class="btn btn-sm btn-delete" data-slug="' + c.slug + '" data-filename="' + (c._filename || '') + '">Delete</button>' +
       '</div></td>' +
       '</tr>'
     ).join('');
@@ -349,7 +350,7 @@
       btn.addEventListener('click', () => openEdit(btn.dataset.slug!));
     });
     tbody.querySelectorAll<HTMLElement>('.btn-delete[data-slug]').forEach(btn => {
-      btn.addEventListener('click', () => deleteClass(btn.dataset.slug!, btn.dataset.sha!));
+      btn.addEventListener('click', () => deleteClass(btn.dataset.slug!, btn.dataset.filename || ''));
     });
   }
 
@@ -373,6 +374,7 @@
     modal.classList.remove('open');
     editingSlug = null;
     editingSha = null;
+    editingFilename = null;
     setSlugReadonly(false);
   }
 
@@ -426,6 +428,7 @@
     if (!cls) { toast('Classe non trovata: ' + slug, false); return; }
     editingSlug = slug;
     editingSha = cls._sha || null;
+    editingFilename = cls._filename || null;
     clearForm();
     setField('f-title', cls.title || '');
     setField('f-subtitle', cls.subtitle || '');
@@ -490,7 +493,7 @@
       method: editingSlug ? 'PATCH' : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(editingSlug
-        ? { ...classData, _sha: editingSha, _oldSlug: editingSlug }
+        ? { ...classData, _sha: editingSha, _oldSlug: editingSlug, _filename: editingFilename }
         : classData),
     });
 
@@ -510,12 +513,12 @@
     }
   });
 
-  async function deleteClass(slug: string, sha: string) {
+  async function deleteClass(slug: string, filename: string) {
     if (!confirm('Eliminare "' + slug + '"? L\'operazione non è reversibile.')) return;
     const res = await fetch('/api/admin/classes', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ slug, sha }),
+      body: JSON.stringify({ slug, filename }),
     });
     if (res.ok) {
       toast('Classe eliminata.');
