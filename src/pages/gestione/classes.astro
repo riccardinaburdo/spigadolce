@@ -83,6 +83,15 @@
     .btn-upload:hover { background: #e5e0d8; }
     .btn-upload:disabled { opacity: 0.5; cursor: not-allowed; }
     .gallery-upload-row { display: flex; flex-direction: column; gap: 0.5rem; }
+    .img-preview-wrap { margin-top: 0.4rem; }
+    .img-preview-wrap:empty { display: none; }
+    .img-preview-item { position: relative; display: inline-block; }
+    .img-preview-item img { width: 100%; max-height: 90px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd; display: block; }
+    .img-preview-remove { position: absolute; top: 3px; right: 3px; background: rgba(0,0,0,0.65); color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; line-height: 20px; text-align: center; cursor: pointer; padding: 0; }
+    .img-preview-remove:hover { background: var(--red); }
+    .gallery-preview-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.3rem; }
+    .gallery-preview-list:empty { display: none; }
+    .gallery-preview-list .img-preview-item img { width: 70px; height: 70px; }
 
     .toast { position: fixed; bottom: 2rem; right: 2rem; padding: 0.9rem 1.5rem; border-radius: 10px; color: #fff; font-weight: 700; font-size: 0.9rem; z-index: 200; transform: translateY(8px); opacity: 0; transition: all 0.25s; pointer-events: none; max-width: 360px; }
     .toast.show { transform: translateY(0); opacity: 1; }
@@ -232,6 +241,7 @@
             <button type="button" class="btn-upload" id="upload-image-btn">Upload</button>
           </div>
           <input type="file" id="upload-image-file" accept="image/*" style="display:none" />
+          <div class="img-preview-wrap" id="preview-image"></div>
         </div>
         <div class="field">
           <label>Cover Image (optional)</label>
@@ -240,11 +250,13 @@
             <button type="button" class="btn-upload" id="upload-cover-btn">Upload</button>
           </div>
           <input type="file" id="upload-cover-file" accept="image/*" style="display:none" />
+          <div class="img-preview-wrap" id="preview-coverImage"></div>
         </div>
       </div>
       <div class="field">
-        <label>Gallery Images (one path per line)</label>
+        <label>Gallery Images</label>
         <div class="gallery-upload-row">
+          <div id="gallery-preview-list" class="gallery-preview-list"></div>
           <textarea id="f-gallery" rows="2" placeholder="/images/cooking-classes/img1.jpg&#10;/images/cooking-classes/img2.jpg"></textarea>
           <div>
             <button type="button" class="btn-upload" id="upload-gallery-btn">Upload &amp; Add to Gallery</button>
@@ -394,6 +406,7 @@
      'f-date','f-time','f-duration','f-location','f-address',
      'f-price','f-description','f-image','f-coverImage','f-gallery'].forEach(id => setField(id, ''));
     setField('f-currency', 'GBP');
+    clearAllPreviews();
   }
 
   document.getElementById('f-title')?.addEventListener('input', (e) => {
@@ -440,6 +453,7 @@
     setField('f-image', cls.image || '');
     setField('f-coverImage', cls.coverImage || '');
     setField('f-gallery', (cls.gallery || []).join('\n'));
+    refreshAllPreviews();
     openModal('Edit Class');
   }
 
@@ -598,12 +612,72 @@
       btn.disabled = false;
       btn.textContent = origLabel;
       fileInput.value = '';
+      refreshAllPreviews();
     });
   }
 
   bindUpload('upload-image-btn',   'upload-image-file',   'f-image');
   bindUpload('upload-cover-btn',   'upload-cover-file',   'f-coverImage');
   bindUpload('upload-gallery-btn', 'upload-gallery-file', 'f-gallery', true);
+
+  // ── IMAGE PREVIEWS ──
+  function renderSinglePreview(fieldId: string, previewId: string) {
+    const input = document.getElementById(fieldId) as HTMLInputElement | null;
+    const wrap = document.getElementById(previewId);
+    if (!wrap || !input) return;
+    const src = input.value.trim();
+    if (!src) { wrap.innerHTML = ''; return; }
+    wrap.innerHTML =
+      '<div class="img-preview-item">' +
+        '<img src="' + src + '" onerror="this.parentElement.style.display=\'none\'">' +
+        '<button type="button" class="img-preview-remove" title="Rimuovi">&times;</button>' +
+      '</div>';
+    (wrap.querySelector('.img-preview-remove') as HTMLButtonElement).onclick = () => {
+      if (input) input.value = '';
+      wrap.innerHTML = '';
+    };
+  }
+
+  function renderGalleryPreview() {
+    const ta = document.getElementById('f-gallery') as HTMLTextAreaElement | null;
+    const list = document.getElementById('gallery-preview-list');
+    if (!ta || !list) return;
+    const paths = ta.value.split('\n').map(s => s.trim()).filter(Boolean);
+    list.innerHTML = paths.map((src, i) =>
+      '<div class="img-preview-item">' +
+        '<img src="' + src + '" onerror="this.parentElement.style.display=\'none\'">' +
+        '<button type="button" class="img-preview-remove" data-i="' + i + '" title="Rimuovi">&times;</button>' +
+      '</div>'
+    ).join('');
+    list.querySelectorAll<HTMLButtonElement>('.img-preview-remove').forEach(btn => {
+      btn.onclick = () => {
+        const lines = ta.value.split('\n').map(s => s.trim()).filter(Boolean);
+        lines.splice(parseInt(btn.dataset.i || '0'), 1);
+        ta.value = lines.join('\n');
+        renderGalleryPreview();
+      };
+    });
+  }
+
+  function refreshAllPreviews() {
+    renderSinglePreview('f-image', 'preview-image');
+    renderSinglePreview('f-coverImage', 'preview-coverImage');
+    renderGalleryPreview();
+  }
+
+  function clearAllPreviews() {
+    ['preview-image','preview-coverImage'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '';
+    });
+    const gl = document.getElementById('gallery-preview-list');
+    if (gl) gl.innerHTML = '';
+  }
+
+  // Refresh on manual input
+  document.getElementById('f-image')?.addEventListener('input', () => renderSinglePreview('f-image', 'preview-image'));
+  document.getElementById('f-coverImage')?.addEventListener('input', () => renderSinglePreview('f-coverImage', 'preview-coverImage'));
+  document.getElementById('f-gallery')?.addEventListener('input', () => renderGalleryPreview());
 
   init();
 </script>
