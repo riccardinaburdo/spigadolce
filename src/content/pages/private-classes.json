@@ -23,12 +23,7 @@
   "closingNote": "We'll conclude by enjoying the delicious meal you've all prepared together.",
   "bookingUrl": "/contact",
   "gallery": [
-    "/images/cooking-classes/my-tortellini-1.jpg",
-    "/images/cooking-classes/my-tortellini-2.jpg",
-    "/images/cooking-classes/my-tortellini-3.jpg",
-    "/images/cooking-classes/mileto-caffe.jpg",
-    "/images/cooking-classes/mileto-2.jpg",
-    "/images/general/about.jpg"
+    "/images/cooking-classes/course1.webp"
   ],
-  "coverImage": "/images/cooking-classes/private-cover.jpg"
+  "coverImage": "/images/cooking-classes/course1.webp"
 }
