@@ -312,14 +312,13 @@
     return new Date(date) >= new Date() ? 'upcoming' : 'past';
   }
 
-  function badgeHtml(date: string, type: string) {
+  function badgeHtml(date: string, _type: string) {
     const status = computeStatus(date);
-    const typeBadge = type === 'private' ? '<span class="badge badge-private">Private</span>' : '';
     const map: Record<string, string> = {
       upcoming: '<span class="badge badge-upcoming">Upcoming</span>',
       past: '<span class="badge badge-past">Past</span>',
     };
-    return map[status] + (typeBadge ? ' ' + typeBadge : '');
+    return map[status] ?? '';
   }
 
   function renderTable() {
