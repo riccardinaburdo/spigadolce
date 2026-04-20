@@ -1472,13 +1472,16 @@ h1, h2, h3, h4, h5, h6 {
   border-left: 4px solid var(--color-gold);
   border-radius: 10px;
   padding: 1.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
 }
-.private-detail-block h3 {
+.detail-sub h4 {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--color-dark);
-  margin-bottom: 1rem;
-  padding-bottom: 0.6rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
   border-bottom: 1px solid rgba(200,169,110,0.2);
 }
 .private-detail-block ul {
