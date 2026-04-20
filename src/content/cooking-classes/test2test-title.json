@@ -8,7 +8,7 @@
   "description": "test description",
   "image": "/images/cooking-classes/foto-home.jpg",
   "subtitle": "test subtitle",
-  "time": "6;3 pm",
+  "time": "6:30 pm",
   "duration": "2 hours",
   "address": "test address",
   "type": "private",
