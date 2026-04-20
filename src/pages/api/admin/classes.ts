@@ -51,9 +51,14 @@ export const GET: APIRoute = async ({ request }) => {
     files
       .filter((f: any) => f.name.endsWith('.json'))
       .map(async (f: any) => {
-        const fileRes = await fetch(f.download_url);
-        const data = await fileRes.json();
-        return { ...data, _sha: f.sha, _filename: f.name };
+        // Use contents API (not download_url) to avoid CDN caching stale content
+        const fileRes = await fetch(
+          `https://api.github.com/repos/${REPO}/contents/${CLASSES_PATH}/${f.name}`,
+          { headers: ghHeaders() }
+        );
+        const fileData = await fileRes.json();
+        const data = JSON.parse(Buffer.from(fileData.content, 'base64').toString('utf-8'));
+        return { ...data, _sha: fileData.sha, _filename: f.name };
       })
   );
 
