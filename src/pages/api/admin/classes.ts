@@ -130,8 +130,8 @@ export const PATCH: APIRoute = async ({ request }) => {
     });
   }
 
-  // Same slug: update in place (need sha)
-  const sha = _sha || await getFileSha(slug);
+  // Same slug: always fetch fresh SHA from GitHub to avoid stale-SHA errors
+  const sha = await getFileSha(slug);
   if (!sha) return new Response(JSON.stringify({ error: 'File not found' }), { status: 404 });
 
   const content = Buffer.from(JSON.stringify(classData, null, 2)).toString('base64');
