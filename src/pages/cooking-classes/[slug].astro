@@ -120,7 +120,7 @@ const formattedDate = new Date(c.date).toLocaleDateString('en-GB', {
 
       <!-- CTA -->
       <div class="booking-cta-block">
-        {c.status === 'past' ? (
+        {new Date(c.date) < new Date() ? (
           <span class="status-past">Past Event</span>
         ) : (
           <div class="quantity-booking">
