@@ -160,8 +160,8 @@ export const PATCH: APIRoute = async ({ request }) => {
 export const DELETE: APIRoute = async ({ request }) => {
   if (!checkAuth(request)) return new Response('Unauthorized', { status: 401 });
 
-  const { slug, sha } = await request.json();
-  const fileSha = sha || await getFileSha(slug);
+  const { slug } = await request.json();
+  const fileSha = await getFileSha(slug);
   if (!fileSha) return new Response(JSON.stringify({ error: 'File not found' }), { status: 404 });
 
   const res = await fetch(
