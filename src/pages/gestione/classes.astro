@@ -449,7 +449,7 @@
   // ── SAVE ──
   modalSave.addEventListener('click', async () => {
     const title = getField('f-title');
-    const slug  = getField('f-slug');
+    const slug  = getField('f-slug') || slugify(title);
     const date  = getField('f-date');
     const price = getField('f-price');
     const loc   = getField('f-location');
