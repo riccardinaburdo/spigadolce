@@ -2119,54 +2119,6 @@ h1, h2, h3, h4, h5, h6 {
   background: #a07a1a;
 }
 
-/* ===== INSTAGRAM SECTION ===== */
-.insta-section {
-  padding: 0;
-}
-
-.insta-header-home {
-  text-align: center;
-  padding: 50px 40px 30px;
-}
-
-.insta-header-home h2 {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.insta-header-home a {
-  color: var(--color-gold);
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-.insta-header-home a:hover {
-  text-decoration: underline;
-}
-
-.insta-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 5px;
-}
-
-.insta-item {
-  height: 200px;
-  background: #eee;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  cursor: pointer;
-}
-
-.insta-item:hover::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(200, 169, 110, 0.3);
-}
 
 /* Responsive for new sections */
 @media (max-width: 768px) {
@@ -2187,12 +2139,6 @@ h1, h2, h3, h4, h5, h6 {
   .footer-grid {
     gap: 1.5rem;
   }
-  .insta-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .insta-item {
-    height: 130px;
-  }
   .newsletter-signup-form {
     flex-direction: column;
   }
@@ -2202,9 +2148,3 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media (max-width: 480px) {
-  .footer-grid {
-  .insta-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
