@@ -380,6 +380,7 @@ const hasReviews = reviews.length > 0;
       const data = await res.json();
       newsletterMsg.style.display = 'block';
       if (data.success) {
+        localStorage.setItem('spigadolce_subscribed', 'true');
         newsletterMsg.style.color = '#27ae60';
         newsletterMsg.textContent = data.alreadySubscribed
           ? 'You\'re already subscribed — great to have you!'
