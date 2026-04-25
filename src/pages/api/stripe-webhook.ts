@@ -108,8 +108,9 @@ function bookingConfirmationHtml(opts: {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  const stripeKey = import.meta.env.STRIPE_SECRET_KEY ?? process.env.STRIPE_SECRET_KEY;
+  const webhookSecret = import.meta.env.STRIPE_WEBHOOK_SECRET ?? process.env.STRIPE_WEBHOOK_SECRET;
+  const stripe = new Stripe(stripeKey);
 
   const payload = await request.text();
   const sig = request.headers.get('stripe-signature');
@@ -137,9 +138,9 @@ export const POST: APIRoute = async ({ request }) => {
     const quantities = (meta.quantities ?? '').split(',').map(Number);
     const totalSpots = quantities.reduce((a, b) => a + (b || 1), 0) || 1;
 
-    const resendKey = process.env.RESEND_API_KEY;
-    const fromAddress = process.env.RESEND_FROM ?? 'Spigadolce <hello@spigadolce.com>';
-    const notifyAddress = process.env.NOTIFY_EMAIL ?? 'spigadolce@gmail.com';
+    const resendKey = import.meta.env.RESEND_API_KEY ?? process.env.RESEND_API_KEY;
+    const fromAddress = import.meta.env.RESEND_FROM ?? process.env.RESEND_FROM ?? 'Spigadolce <hello@spigadolce.com>';
+    const notifyAddress = import.meta.env.NOTIFY_EMAIL ?? process.env.NOTIFY_EMAIL ?? 'spigadolce@gmail.com';
 
     if (resendKey && customerEmail) {
       const resend = new Resend(resendKey);
