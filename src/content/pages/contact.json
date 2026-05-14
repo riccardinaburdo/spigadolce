@@ -1,5 +1,5 @@
 {
   "title": "Contact",
-  "subtitle": "Get in touch for bookings, collaborations, or just to say hello.",
+  "subtitle": "Get in touch to host a demonstration, collaborate, or simply to say hello.",
   "fields": ["Name", "Email", "Phone", "Subject", "Message"]
 }
