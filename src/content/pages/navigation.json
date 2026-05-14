@@ -1,22 +1,13 @@
 {
   "menu": [
     { "label": "Home", "url": "/" },
-    {
-      "label": "Classes",
-      "url": "/cooking-classes",
-      "children": [
-        { "label": "Restaurant Classes", "url": "/cooking-classes" },
-        { "label": "Private In-Home Classes", "url": "/cooking-classes/private" }
-      ]
-    },
     { "label": "Recipes", "url": "/recipes" },
     { "label": "Blog", "url": "/blog" },
     { "label": "About", "url": "/about" },
-    { "label": "Gift Cards", "url": "/gift-cards" },
     { "label": "Press & Reviews", "url": "/reviews" },
     { "label": "FAQ", "url": "/faq" },
     { "label": "Contact", "url": "/contact" }
   ],
   "ctaLabel": null,
-  "ctaUrl": "/cart"
+  "ctaUrl": null
 }

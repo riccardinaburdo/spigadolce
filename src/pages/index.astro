@@ -1,21 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import home from '../content/pages/home.json';
-import booking from '../content/pages/booking.json';
-import fs from 'node:fs';
-import path from 'node:path';
 
-// Load cooking classes
-const classesDir = path.join(process.cwd(), 'src/content/cooking-classes');
-const classFiles = fs.readdirSync(classesDir).filter(f => f.endsWith('.json'));
-const now = new Date();
-const classes = classFiles
-  .map(f => JSON.parse(fs.readFileSync(path.join(classesDir, f), 'utf-8')))
-  .filter(c => new Date(c.date) >= now)
-  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-  .slice(0, 3);
-
-const bookingUrl = booking.platform.url || '/contact';
 const steps = home.howItWorks.steps;
 const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
 const reviews = home.testimonials.items;
@@ -31,7 +17,6 @@ const hasReviews = reviews.length > 0;
       <p>{home.hero.subheading}</p>
       <div class="hero-buttons">
         <a href={home.hero.ctaUrl} class="btn-primary">{home.hero.cta}</a>
-        <a href={home.hero.ctaSecondaryUrl} class="btn-secondary-hero">{home.hero.ctaSecondary}</a>
       </div>
     </div>
   </section>
@@ -41,7 +26,7 @@ const hasReviews = reviews.length > 0;
     <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8; color: var(--color-dark);">{home.intro.text}</p>
   </section>
 
-  <!-- Come Funziona -->
+  <!-- What to Expect -->
   <section class="section">
     <h2>{home.howItWorks.heading}</h2>
     <p class="subtitle">{home.howItWorks.subheading}</p>
@@ -56,69 +41,7 @@ const hasReviews = reviews.length > 0;
     </div>
   </section>
 
-  <!-- Prossimi Corsi -->
-  <section class="section section-cream">
-    <h2>Upcoming Classes</h2>
-    <p class="subtitle">Choose your experience and book your spot</p>
-    {classes.length > 0 ? (
-      <div class="classes-grid">
-        {classes.slice(0, 1).map((c, i) => (
-          <a href={`/cooking-classes/${c.slug}`} class="class-card upcoming-card">
-            <div class="class-card-img-wrapper">
-              <img src={c.image} alt={c.title} />
-              <span class={`class-badge ${i === 0 ? 'badge-last' : 'badge-available'}`}>
-                {i === 0 ? 'LAST SPOTS' : 'AVAILABLE'}
-              </span>
-            </div>
-            <div class="class-card-body">
-              <p class="date">{new Date(c.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-              <h3>{c.subtitle ?? c.title}</h3>
-              <p class="location">{c.location}</p>
-              <p class="price">&pound;{c.price} <small>/person</small></p>
-              <span class="status-upcoming">Book Now</span>
-            </div>
-          </a>
-        ))}
-      </div>
-    ) : (
-      <p style="text-align: center; color: var(--color-dark); opacity: 0.7;">New dates coming soon. Sign up to our newsletter to be the first to know.</p>
-    )}
-    <div style="text-align: center; margin-top: 2rem;">
-      <a href="/cooking-classes" class="btn-text-link">View all classes &rarr;</a>
-    </div>
-  </section>
-
-  <!-- Come vuoi cucinare -->
-  <section class="section">
-    <h2>Your Class, Your Way</h2>
-    <p class="subtitle">Every experience is tailored to you. Choose the setting that suits you best — I'll bring the passion, the recipes, and everything you need.</p>
-    <div class="booking-options-grid">
-
-      <div class="booking-option-card">
-        <div class="booking-option-icon">🏠</div>
-        <h3>At Your Home</h3>
-        <p>I come to you, wherever you are in London. A personal, relaxed experience in your own kitchen — for you, your family, or a small group of friends. No fuss, just good food and great company.</p>
-        <a href="/contact" class="btn-primary">Enquire Now</a>
-      </div>
-
-      <div class="booking-option-card">
-        <div class="booking-option-icon">🫶</div>
-        <h3>In a Home Setting</h3>
-        <p>Cook together in a warm, welcoming kitchen with a family feel. Small groups, genuine atmosphere, hands in the dough. The most authentic way to experience Pugliese cooking.</p>
-        <a href="/contact" class="btn-primary">Enquire Now</a>
-      </div>
-
-      <div class="booking-option-card">
-        <div class="booking-option-icon">🎉</div>
-        <h3>Private Venue</h3>
-        <p>Organise a class in a rented space — ideal for team building, birthdays, hen parties, or any group celebration. I take care of the food and the fun; you bring the appetite.</p>
-        <a href="/contact" class="btn-primary">Enquire Now</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Testimoniali -->
+  <!-- Testimonials -->
   <section class="section section-warm">
     <h2>{home.testimonials.heading}</h2>
     <p class="subtitle">{home.testimonials.subheading}</p>
@@ -139,7 +62,7 @@ const hasReviews = reviews.length > 0;
           ))}
         </div>
         <div class="add-review-invite">
-          <p>Enjoyed a class? We'd love to hear from you.</p>
+          <p>Attended a demonstration? We'd love to hear from you.</p>
           <button class="btn-primary" id="openReviewModal">Leave a Review</button>
         </div>
       </div>
@@ -147,7 +70,7 @@ const hasReviews = reviews.length > 0;
       <div class="first-review-home">
         <div class="first-review-icon">✍️</div>
         <h3>Be the first to share your experience</h3>
-        <p>Every class is a small journey into the flavours and traditions of Puglia. If you've joined one of our sessions, we'd love to hear what you thought — your words help others discover what Spigadolce is all about.</p>
+        <p>Every demonstration is a small journey into the flavours and traditions of Puglia. If you've joined one of our sessions, we'd love to hear what you thought — your words help others discover what Spigadolce is all about.</p>
         <button class="btn-primary" id="openReviewModal">Leave a Review</button>
       </div>
     )}
@@ -220,7 +143,6 @@ const hasReviews = reviews.length > 0;
     margin: 0 auto 1.5rem auto;
   }
 
-  /* ADD REVIEW INVITE (when reviews exist) */
   .add-review-invite {
     text-align: center;
     margin-top: 2.5rem;
@@ -233,7 +155,6 @@ const hasReviews = reviews.length > 0;
     margin-bottom: 1rem;
   }
 
-  /* REVIEW CARDS (home) */
   .reviews-grid-home {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -278,7 +199,6 @@ const hasReviews = reviews.length > 0;
     color: #999;
   }
 
-  /* MODAL */
   .review-modal-overlay {
     display: none;
     position: fixed;
@@ -361,7 +281,6 @@ const hasReviews = reviews.length > 0;
 </style>
 
 <script>
-  // Newsletter
   const newsletterForm = document.getElementById('newsletterForm') as HTMLFormElement;
   const newsletterMsg = document.getElementById('newsletterMsg') as HTMLElement;
   const newsletterBtn = document.getElementById('newsletterBtn') as HTMLButtonElement;

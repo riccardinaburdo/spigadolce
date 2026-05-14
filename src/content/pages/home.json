@@ -1,58 +1,44 @@
 {
-  "title": "Spigadolce | Authentic Pugliese Cooking Experiences in London",
+  "title": "Spigadolce | Pugliese Pasta Traditions — Voluntary Demonstrations by Riccardina Burdo",
   "hero": {
-    "heading": "Learn to Cook Authentic Pugliese Food in London",
-    "subheading": "Hands-on 3-hour classes: pasta, sauces and traditional dishes. In a warm, welcoming atmosphere or at our partner restaurants.",
-    "cta": "Explore Our Classes",
-    "ctaUrl": "/cooking-classes",
-    "ctaSecondary": "Gift an Experience",
-    "ctaSecondaryUrl": "/gift-cards",
-    "backgroundImage": "/images/cooking-classes/mileto-caffe.jpg"
+    "heading": "Keeping Pugliese Pasta Traditions Alive",
+    "subheading": "Voluntary demonstrations and workshops on handmade Puglian pasta — orecchiette, cavatelli, strascinati and more. Shared freely, for the joy of passing on a living tradition.",
+    "cta": "About Me",
+    "ctaUrl": "/about",
+    "backgroundImage": "/images/general/hero-bg.jpg"
   },
   "intro": {
-    "text": "Immerse yourself in the warmth and flavours of Pugliese cuisine. I'll guide you through authentic recipes — hand-shaped pasta, slow-simmered sauces and traditional dishes — and we'll sit down together to enjoy every bite, the way families in Puglia have done for generations."
+    "text": "Orecchiette, cavatelli, strascinati, troccoli — the handmade pasta forms of Puglia have been shaped on wooden boards for generations, passed down through families without a recipe ever written down. I learnt them at my grandparents' side in Andria, and I share them today with the same spirit: freely, with joy, and with great love for this living heritage."
   },
   "howItWorks": {
-    "heading": "How It Works",
-    "subheading": "Three hours to learn, cook and share a complete Pugliese meal",
+    "heading": "What to Expect",
+    "subheading": "A hands-on experience in the ancient art of Pugliese pasta-making — shared freely and with joy",
     "steps": [
       {
         "icon": "hands",
-        "title": "Knead",
-        "description": "Learn to make fresh pasta by hand using traditional Pugliese techniques — orecchiette, cavatelli, tagliatelle and more."
+        "title": "Watch & Learn",
+        "description": "I demonstrate each pasta form by hand — orecchiette, cavatelli, strascinati and more — sharing the gestures and rhythms passed down through generations of Apulian women."
       },
       {
         "icon": "cook",
-        "title": "Cook",
-        "description": "Prepare a traditional sauce and complete the dish. Every class includes a starter, a pasta course and a Pugliese sweet."
+        "title": "Try It Yourself",
+        "description": "You shape the dough alongside me. No experience needed — the technique lives in the hands, and there is no better way to learn than by doing."
       },
       {
         "icon": "feast",
-        "title": "Feast",
-        "description": "Sit down at the table and savour what you've created, with a glass of Pugliese wine. Take the recipe home with you."
+        "title": "Share the Tradition",
+        "description": "We cook and taste together. You leave with the knowledge, the feel of the dough, and the recipes to carry on the tradition at home."
       }
     ]
   },
-  "locations": {
-    "heading": "Where We Cook",
-    "subheading": "Intimate home classes or larger groups at our partner restaurants",
-    "home": {
-      "title": "At My Home",
-      "description": "Wimbledon, SW19 — A warm, intimate setting for up to 6 guests. Like stepping into the kitchen of a Pugliese family home."
-    },
-    "restaurant": {
-      "title": "Partner Restaurants",
-      "description": "La Pizzica, Il Circolo and more — Groups of up to 20. Perfect for team building, celebrations and special occasions."
-    }
-  },
   "testimonials": {
-    "heading": "What Our Guests Say",
-    "subheading": "Stories from people who joined our classes",
+    "heading": "What People Say",
+    "subheading": "Stories from people who attended a demonstration",
     "items": []
   },
   "newsletter": {
     "heading": "Get Recipes",
-    "subheading": "Subscribe to our newsletter so you never miss new dates and receive exclusive Pugliese recipes",
+    "subheading": "Subscribe to receive authentic Pugliese recipes and stories from the tradition",
     "buttonText": "Subscribe"
   }
 }
