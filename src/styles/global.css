@@ -1692,7 +1692,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .site-brand img {
     width: auto;
-    max-width: calc(100vw - 80px);
+    max-width: calc(100vw - 110px);
     height: auto;
   }
 
