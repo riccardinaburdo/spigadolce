@@ -1685,7 +1685,15 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .site-header {
-    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  .site-brand img {
+    width: auto;
+    max-width: 200px;
   }
 
   .site-nav {
