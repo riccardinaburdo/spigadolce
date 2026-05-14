@@ -1695,12 +1695,11 @@ h1, h2, h3, h4, h5, h6 {
   .site-brand {
     flex: 1;
     min-width: 0;
-    padding-right: 0.75rem;
   }
 
   .site-brand img {
-    width: 100%;
-    max-width: 100%;
+    width: auto;
+    max-width: calc(100vw - 100px);
   }
 
   .header-actions {
