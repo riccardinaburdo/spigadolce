@@ -1,6 +1,7 @@
 {
   "menu": [
     { "label": "Home", "url": "/" },
+    { "label": "Demonstrations", "url": "/demonstrations" },
     { "label": "Recipes", "url": "/recipes" },
     { "label": "Blog", "url": "/blog" },
     { "label": "About", "url": "/about" },

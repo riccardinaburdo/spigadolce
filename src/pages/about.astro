@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import about from '../content/pages/about.json';
+
+const assoc = about.association;
 ---
 
 <BaseLayout title="About | Spigadolce" currentPath="/about">
@@ -22,6 +24,10 @@ import about from '../content/pages/about.json';
       </ul>
 
       <blockquote class="quote">{about.philosophy}</blockquote>
+
+      <h2 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 0.5rem;">{assoc.heading}</h2>
+      <p>{assoc.text}</p>
+      <a href={assoc.url} class="btn-text-link" target="_blank" rel="noopener" style="display:inline-block; margin-top: 0.8rem;">Visit Pugliesi nel Mondo UK &rarr;</a>
     </div>
   </div>
 </BaseLayout>
