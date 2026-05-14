@@ -1731,6 +1731,10 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.85rem;
   }
 
+  .hero {
+    background-position: 70% center;
+  }
+
   .hero h1 {
     font-size: 2rem;
   }
