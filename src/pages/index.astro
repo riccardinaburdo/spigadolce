@@ -4,8 +4,6 @@ import home from '../content/pages/home.json';
 
 const steps = home.howItWorks.steps;
 const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
-const reviews = home.testimonials.items;
-const hasReviews = reviews.length > 0;
 ---
 
 <BaseLayout title={home.title} currentPath="/">
@@ -61,65 +59,6 @@ const hasReviews = reviews.length > 0;
       <a href="/demonstrations" class="btn-text-link">See upcoming demonstrations &rarr;</a>
     </div>
   </section>
-
-  <!-- Testimonials -->
-  <section class="section section-warm">
-    <h2>{home.testimonials.heading}</h2>
-    <p class="subtitle">{home.testimonials.subheading}</p>
-    {hasReviews ? (
-      <div>
-        <div class="reviews-grid-home">
-          {reviews.map((r: any) => (
-            <div class="review-card-home">
-              <div class="review-stars-home">
-                {'★'.repeat(r.rating ?? 5)}{'☆'.repeat(5 - (r.rating ?? 5))}
-              </div>
-              <p class="review-text-home">"{r.text}"</p>
-              <div class="review-author-home">
-                <span class="review-name-home">{r.author}</span>
-                {r.date && <span class="review-date-home">{r.date}</span>}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div class="add-review-invite">
-          <p>Attended a demonstration? We'd love to hear from you.</p>
-          <button class="btn-primary" id="openReviewModal">Leave a Review</button>
-        </div>
-      </div>
-    ) : (
-      <div class="first-review-home">
-        <div class="first-review-icon">✍️</div>
-        <h3>Be the first to share your experience</h3>
-        <p>Every demonstration is a small journey into the flavours and traditions of Puglia. If you've joined one of our sessions, we'd love to hear what you thought — your words help others discover what Spigadolce is all about.</p>
-        <button class="btn-primary" id="openReviewModal">Leave a Review</button>
-      </div>
-    )}
-  </section>
-
-  <!-- Review Modal -->
-  <div class="review-modal-overlay" id="reviewModal">
-    <div class="review-modal">
-      <button class="review-modal-close" id="reviewModalClose">&times;</button>
-      <h3>Share Your Experience</h3>
-      <p class="review-modal-desc">Your words help others discover what Spigadolce is all about.</p>
-      <form id="reviewForm">
-        <label>Your rating</label>
-        <div class="star-rating" id="starRating">
-          <span class="star" data-value="1">★</span>
-          <span class="star" data-value="2">★</span>
-          <span class="star" data-value="3">★</span>
-          <span class="star" data-value="4">★</span>
-          <span class="star" data-value="5">★</span>
-        </div>
-        <input type="hidden" id="ratingValue" value="0" />
-        <input type="text" id="reviewName" placeholder="Your name" required />
-        <textarea id="reviewText" placeholder="Tell us about your experience..." rows="4" required></textarea>
-        <p class="review-modal-note">We'll review your submission before publishing it.</p>
-        <button type="submit" class="btn-primary" style="width:100%">Send Review</button>
-      </form>
-    </div>
-  </div>
 
   <!-- Newsletter -->
   <section class="section-newsletter">
