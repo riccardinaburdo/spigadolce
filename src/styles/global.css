@@ -1685,27 +1685,22 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .site-header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
+    position: relative;
     padding: 0.75rem 1rem;
-  }
-
-  .site-brand {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
+    align-items: center;
   }
 
   .site-brand img {
-    width: 100%;
+    width: auto;
+    max-width: calc(100vw - 80px);
     height: auto;
   }
 
   .header-actions {
-    flex-shrink: 0;
-    margin-left: 0.5rem;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .site-nav {
