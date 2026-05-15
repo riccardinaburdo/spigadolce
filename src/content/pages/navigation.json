@@ -1,10 +1,10 @@
 {
   "menu": [
     { "label": "Home", "url": "/" },
+    { "label": "About Me", "url": "/about" },
     { "label": "Demonstrations", "url": "/demonstrations" },
     { "label": "Recipes", "url": "/recipes" },
     { "label": "Blog", "url": "/blog" },
-    { "label": "About", "url": "/about" },
     { "label": "Press", "url": "/reviews" },
     { "label": "Contact", "url": "/contact" }
   ],
