@@ -35,21 +35,6 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
     </div>
   </section>
 
-  <!-- What to Expect -->
-  <section class="section">
-    <h2>{home.howItWorks.heading}</h2>
-    <p class="subtitle">{home.howItWorks.subheading}</p>
-    <div class="steps-grid">
-      {steps.map((step) => (
-        <div class="step-card">
-          <div class="step-icon">{stepIcons[step.icon]}</div>
-          <h3>{step.title}</h3>
-          <p>{step.description}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
   <!-- Pugliesi nel Mondo UK -->
   <section class="section section-warm">
     <div class="assoc-block">
