@@ -7,17 +7,17 @@
     "At the centre of this heritage is orecchiette: the little ears of durum wheat semolina that generations of Apulian women have shaped on wooden boards since time immemorial. Along with cavatelli, strascinati, troccoli and other traditional Puglian pasta forms, orecchiette are not just food — they are a living expression of a culture, a landscape, and a way of life.",
     "I now share this knowledge freely and with joy. I offer voluntary demonstrations and workshops on handmade Puglian pasta — in private homes, at community events, and in cultural settings — with no commercial purpose, simply for the pleasure of keeping this tradition alive and passing it on to new hands."
   ],
-  "spigadolceMeaning": "\"Spigadolce\" means \"Sweet Spike\" and represents a story of land, harvest, simplicity, and the joy of sharing meals. Spigadolce is not a business. It is an act of love.",
-  "craft": {
-    "text": "I make handmade orecchiette using the same ancient wrought-iron spatula passed down from my grandmother.",
-    "features": [
-      "Organic semolina only",
-      "100% egg-free and vegan",
-      "True to authentic origins",
-      "Seasonal and mindful ingredients"
-    ]
+  "spigadolce": {
+    "intro": "\"Spigadolce\" is more than a name: it's a legacy.",
+    "paragraphs": [
+      "It all began as a nickname passed down through the generations of my family, from my great-grandfather to my grandfather. In their town, people didn't know them by their surname, Fortunato, but as Spigadolce. The name itself is rooted in the land and their way of life.",
+      "My great-grandparents owned a fleet of horse-drawn carts, which they used to transport grain from one village to another. From those golden fields and the sweetness of the harvest, the name \"Spigadolce\" was born.",
+      "In the 1920s, my grandparents carried on that spirit by running a modest tavern, or \"ciddaro\". It was a place of warmth and conviviality. Guests often brought their own raw food — sausages, cuts of meat — and my grandmother cooked it for them, while my grandfather served wine drawn directly from the cellar beneath the tavern.",
+      "It wasn't just a business. It was a way of sharing, of bringing people together around simple food and genuine hospitality.",
+      "Today, Spigadolce continues this story."
+    ],
+    "closing": "It's not a business. It's an act of love."
   },
-  "philosophy": "We often pay great attention to how we appear, but less to what we eat to nourish ourselves. For me, food is care, memory, and resistance.",
   "association": {
     "heading": "Pugliesi nel Mondo UK",
     "text": "I am an active volunteer member of Pugliesi nel Mondo UK, a non-profit association dedicated to preserving and promoting the cultural heritage of Apulia within the United Kingdom. Through cultural events, community gatherings, and a shared love for the region, the association creates a bridge between Puglia and Britain. I am proud to bring my pasta demonstrations to their events — and to keep passing on this living tradition to new hands.",

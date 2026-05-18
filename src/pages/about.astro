@@ -14,10 +14,10 @@ const assoc = about.association;
       <h1>{about.title}</h1>
       {about.bio.map((p) => <p>{p}</p>)}
 
-      <h2 style="font-size: 1.5rem; margin-top: 2rem; margin-bottom: 0.5rem;">Spigadolce</h2>
-      <p>{about.spigadolceMeaning}</p>
-
-      <blockquote class="quote">{about.philosophy}</blockquote>
+      <h2 style="font-size: 1.5rem; margin-top: 2rem; margin-bottom: 0.8rem;">Spigadolce</h2>
+      <p style="font-style: italic; font-weight: 600; margin-bottom: 1rem;">{about.spigadolce.intro}</p>
+      {about.spigadolce.paragraphs.map((p) => <p>{p}</p>)}
+      <blockquote class="quote">{about.spigadolce.closing}</blockquote>
 
       <h2 style="font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 0.5rem;">{assoc.heading}</h2>
       <p>{assoc.text}</p>
