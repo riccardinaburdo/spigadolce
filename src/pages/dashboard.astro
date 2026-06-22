@@ -177,7 +177,7 @@ export const prerender = false;
     <div class="topbar">
       <h1>SPIGADOLCE</h1>
       <div class="topbar-links">
-        <a href="/" target="_blank">View Site</a>
+        <a href="/" target="_blank" id="viewSiteLink">View Site</a>
         <a href="/admin" target="_blank">Sveltia CMS</a>
       </div>
     </div>
@@ -280,9 +280,22 @@ export const prerender = false;
     }
 
     // --- Select collection (show entries) ---
+    const collectionPaths = { blog: '/blog', recipes: '/recipes', 'cooking-classes': '/demonstrations' };
+
+    function updateViewSiteLink() {
+      const link = document.getElementById('viewSiteLink');
+      if (currentView?.type === 'entries') {
+        const c = collections[currentView.index];
+        link.href = collectionPaths[c.name] || '/' + c.name;
+      } else {
+        link.href = '/';
+      }
+    }
+
     async function selectCollection(index) {
       currentView = { type: 'entries', index };
       renderSidebar();
+      updateViewSiteLink();
       const c = collections[index];
       const content = document.getElementById('content');
       content.innerHTML = `
@@ -637,6 +650,7 @@ export const prerender = false;
     function showCollectionsView() {
       currentView = { type: 'collections' };
       renderSidebar();
+      updateViewSiteLink();
       const content = document.getElementById('content');
       content.innerHTML = `
         <div class="content-header">
