@@ -7,13 +7,13 @@ const FILE_PATH = 'public/admin/collections.json';
 const BRANCH = 'main';
 
 function getToken() {
-  return import.meta.env.GITHUB_TOKEN;
+  return process.env.GITHUB_TOKEN;
 }
 
 function checkAuth(request: Request): boolean {
   const auth = request.headers.get('Authorization');
   if (!auth) return false;
-  const password = import.meta.env.ADMIN_PASSWORD;
+  const password = process.env.ADMIN_PASSWORD;
   return auth === `Bearer ${password}`;
 }
 

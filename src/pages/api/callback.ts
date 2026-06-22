@@ -17,8 +17,8 @@ export const GET: APIRoute = async ({ request }) => {
       Accept: 'application/json',
     },
     body: JSON.stringify({
-      client_id: import.meta.env.GITHUB_CLIENT_ID,
-      client_secret: import.meta.env.GITHUB_CLIENT_SECRET,
+      client_id: process.env.GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_CLIENT_SECRET,
       code,
     }),
   });
