@@ -7,70 +7,125 @@ export const prerender = false;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-  <title>Spigadolce — Collections Dashboard</title>
+  <title>Spigadolce — Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Lato', sans-serif; background: #f5f0eb; color: #3a2a1a; min-height: 100vh; }
     h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
 
     /* Login */
     .login-wrap { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-    .login-box { background: #fff; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,.08); max-width: 380px; width: 100%; }
+    .login-box { background: #fff; padding: 2.5rem; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.08); max-width: 380px; width: 90%; }
     .login-box h1 { font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
     .login-box input { width: 100%; padding: .75rem 1rem; border: 1px solid #d4c5b0; border-radius: 8px; font-size: 1rem; margin-bottom: 1rem; }
-    .login-box button { width: 100%; padding: .75rem; background: #b8860b; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+    .login-box button { width: 100%; padding: .75rem; background: #b8860b; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .2s; }
     .login-box button:hover { background: #9a7209; }
-    .login-error { color: #c0392b; font-size: .875rem; margin-bottom: .75rem; display: none; }
+    .login-error { color: #c0392b; font-size: .875rem; margin-bottom: .75rem; display: none; text-align: center; }
 
-    /* Dashboard */
-    .dashboard { display: none; max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
-    .dashboard.active { display: block; }
-    .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
-    .dash-header h1 { font-size: 1.75rem; }
-    .dash-header .links a { margin-left: 1rem; color: #b8860b; text-decoration: none; font-weight: 700; }
-    .dash-header .links a:hover { text-decoration: underline; }
+    /* Shell */
+    .shell { display: none; height: 100vh; grid-template-columns: 260px 1fr; grid-template-rows: 56px 1fr; }
+    .shell.active { display: grid; }
 
-    /* Collection cards */
-    .coll-list { display: grid; gap: 1rem; }
-    .coll-card { background: #fff; border-radius: 10px; padding: 1.25rem 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,.06); display: flex; align-items: center; justify-content: space-between; }
-    .coll-card .info h3 { font-size: 1.1rem; font-family: 'Lato', sans-serif; font-weight: 700; }
-    .coll-card .info p { font-size: .85rem; color: #7a6a5a; margin-top: .25rem; }
-    .coll-card .actions { display: flex; gap: .5rem; flex-shrink: 0; }
+    /* Top bar */
+    .topbar { grid-column: 1 / -1; background: #3a2a1a; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; }
+    .topbar h1 { font-size: 1.1rem; font-family: 'Lato', sans-serif; font-weight: 700; letter-spacing: .5px; }
+    .topbar-links a { color: #d4a849; text-decoration: none; font-size: .85rem; font-weight: 700; margin-left: 1.25rem; }
+    .topbar-links a:hover { color: #f0c050; }
+
+    /* Sidebar */
+    .sidebar { background: #fff; border-right: 1px solid #e8e0d4; overflow-y: auto; padding: 1rem 0; }
+    .sidebar-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #9a8a7a; padding: .75rem 1.25rem .4rem; }
+    .sidebar-item { display: flex; align-items: center; justify-content: space-between; padding: .65rem 1.25rem; cursor: pointer; transition: background .15s; border-left: 3px solid transparent; }
+    .sidebar-item:hover { background: #fdf6e8; }
+    .sidebar-item.active { background: #fdf6e8; border-left-color: #b8860b; font-weight: 700; }
+    .sidebar-item .name { font-size: .9rem; }
+    .sidebar-item .count { font-size: .75rem; background: #eee; padding: .15rem .5rem; border-radius: 10px; color: #7a6a5a; }
+    .sidebar-item.active .count { background: #b8860b; color: #fff; }
+    .sidebar-sep { height: 1px; background: #e8e0d4; margin: .75rem 1.25rem; }
+    .sidebar-item.settings .name { color: #9a8a7a; font-size: .85rem; }
+
+    /* Content */
+    .content { overflow-y: auto; padding: 1.5rem 2rem; background: #f5f0eb; }
+    .content-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+    .content-header h2 { font-size: 1.5rem; }
+    .content-actions { display: flex; gap: .5rem; }
 
     /* Buttons */
-    .btn { padding: .5rem 1rem; border: none; border-radius: 6px; font-size: .875rem; font-weight: 700; cursor: pointer; }
+    .btn { padding: .5rem 1.1rem; border: none; border-radius: 8px; font-size: .85rem; font-weight: 700; cursor: pointer; transition: all .15s; display: inline-flex; align-items: center; gap: .4rem; }
     .btn-primary { background: #b8860b; color: #fff; }
     .btn-primary:hover { background: #9a7209; }
-    .btn-outline { background: transparent; border: 1.5px solid #b8860b; color: #b8860b; }
-    .btn-outline:hover { background: #fdf6e8; }
+    .btn-outline { background: #fff; border: 1.5px solid #d4c5b0; color: #3a2a1a; }
+    .btn-outline:hover { border-color: #b8860b; color: #b8860b; }
     .btn-danger { background: #e74c3c; color: #fff; }
     .btn-danger:hover { background: #c0392b; }
-    .btn-add { margin-top: 1rem; }
+    .btn-sm { padding: .35rem .75rem; font-size: .8rem; }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    /* Entry cards */
+    .entries-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+    .entry-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.05); overflow: hidden; cursor: pointer; transition: transform .15s, box-shadow .15s; border: 2px solid transparent; }
+    .entry-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+    .entry-card.selected { border-color: #b8860b; }
+    .entry-img { width: 100%; height: 160px; object-fit: cover; background: #eee; display: block; }
+    .entry-img-placeholder { width: 100%; height: 80px; background: linear-gradient(135deg, #e8e0d4, #d4c5b0); display: flex; align-items: center; justify-content: center; color: #9a8a7a; font-size: .85rem; }
+    .entry-body { padding: 1rem 1.15rem; }
+    .entry-title { font-size: 1rem; font-weight: 700; margin-bottom: .35rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .entry-meta { font-size: .8rem; color: #9a8a7a; display: flex; gap: .75rem; flex-wrap: wrap; }
+    .entry-meta span { display: inline-flex; align-items: center; gap: .25rem; }
+    .entry-actions { padding: .5rem 1.15rem .85rem; display: flex; gap: .5rem; }
+
+    /* Empty state */
+    .empty-state { text-align: center; padding: 4rem 2rem; color: #9a8a7a; }
+    .empty-state h3 { font-family: 'Lato', sans-serif; font-size: 1.1rem; margin-bottom: .5rem; color: #7a6a5a; }
+
+    /* Loading */
+    .loading { text-align: center; padding: 3rem; color: #9a8a7a; }
+    .spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid #e8e0d4; border-top-color: #b8860b; border-radius: 50%; animation: spin .6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     /* Modal */
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.4); z-index: 100; align-items: center; justify-content: center; }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.45); z-index: 100; align-items: flex-start; justify-content: center; padding: 3vh 1rem; overflow-y: auto; }
     .modal-overlay.active { display: flex; }
-    .modal { background: #fff; border-radius: 12px; padding: 2rem; max-width: 700px; width: 95%; max-height: 85vh; overflow-y: auto; box-shadow: 0 8px 40px rgba(0,0,0,.15); }
-    .modal h2 { margin-bottom: 1.5rem; font-size: 1.3rem; }
-    .modal label { display: block; font-weight: 700; margin-bottom: .25rem; margin-top: 1rem; font-size: .9rem; }
-    .modal input, .modal select { width: 100%; padding: .6rem .75rem; border: 1px solid #d4c5b0; border-radius: 6px; font-size: .9rem; }
-    .modal select { background: #fff; }
-    .modal-actions { display: flex; gap: .75rem; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee; }
+    .modal { background: #fff; border-radius: 16px; padding: 0; max-width: 680px; width: 100%; box-shadow: 0 12px 48px rgba(0,0,0,.2); overflow: hidden; }
+    .modal-head { padding: 1.25rem 1.5rem; border-bottom: 1px solid #eee; display: flex; align-items: center; justify-content: space-between; }
+    .modal-head h2 { font-size: 1.2rem; }
+    .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; padding: .25rem; }
+    .modal-close:hover { color: #333; }
+    .modal-body { padding: 1.5rem; max-height: 65vh; overflow-y: auto; }
+    .modal-foot { padding: 1rem 1.5rem; border-top: 1px solid #eee; display: flex; gap: .75rem; justify-content: flex-end; }
 
-    /* Fields table */
-    .fields-section { margin-top: 1.5rem; }
-    .fields-section h3 { font-size: 1rem; margin-bottom: .75rem; font-family: 'Lato', sans-serif; }
-    .field-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: .5rem; align-items: end; margin-bottom: .5rem; }
-    .field-row input, .field-row select { font-size: .85rem; padding: .5rem; }
-    .field-row .btn { padding: .4rem .6rem; font-size: .8rem; }
-    .field-header { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: .5rem; margin-bottom: .25rem; }
-    .field-header span { font-size: .75rem; font-weight: 700; color: #7a6a5a; text-transform: uppercase; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-weight: 700; font-size: .85rem; margin-bottom: .3rem; color: #5a4a3a; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: .6rem .75rem; border: 1px solid #d4c5b0; border-radius: 8px; font-size: .9rem; font-family: 'Lato', sans-serif; }
+    .form-group textarea { min-height: 80px; resize: vertical; }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #b8860b; box-shadow: 0 0 0 3px rgba(184,134,11,.1); }
+    .form-hint { font-size: .75rem; color: #9a8a7a; margin-top: .2rem; }
 
-    .toast { position: fixed; bottom: 2rem; right: 2rem; background: #27ae60; color: #fff; padding: .75rem 1.5rem; border-radius: 8px; font-weight: 700; box-shadow: 0 4px 16px rgba(0,0,0,.15); display: none; z-index: 200; }
+    /* Fields editor in collection modal */
+    .field-rows { margin-top: .5rem; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr 120px 36px; gap: .4rem; margin-bottom: .4rem; align-items: center; }
+    .field-row input, .field-row select { padding: .45rem .6rem; font-size: .82rem; }
+    .field-header { display: grid; grid-template-columns: 1fr 1fr 120px 36px; gap: .4rem; margin-bottom: .25rem; }
+    .field-header span { font-size: .7rem; font-weight: 700; text-transform: uppercase; color: #9a8a7a; }
+    .remove-btn { background: none; border: none; color: #ccc; font-size: 1.2rem; cursor: pointer; text-align: center; }
+    .remove-btn:hover { color: #e74c3c; }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 1.5rem; right: 1.5rem; padding: .75rem 1.5rem; border-radius: 10px; font-weight: 700; font-size: .9rem; box-shadow: 0 4px 20px rgba(0,0,0,.15); display: none; z-index: 200; color: #fff; }
+    .toast.success { background: #27ae60; }
     .toast.error { background: #e74c3c; }
     .toast.active { display: block; }
+
+    /* Collections view */
+    .coll-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .coll-card { background: #fff; border-radius: 12px; padding: 1.25rem; box-shadow: 0 2px 12px rgba(0,0,0,.05); cursor: pointer; transition: all .15s; border: 2px solid transparent; }
+    .coll-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+    .coll-card h3 { font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: .25rem; }
+    .coll-card p { font-size: .82rem; color: #9a8a7a; margin-bottom: .75rem; }
+    .coll-card .coll-actions { display: flex; gap: .4rem; }
   </style>
 </head>
 <body>
@@ -85,238 +140,434 @@ export const prerender = false;
     </div>
   </div>
 
-  <!-- Dashboard -->
-  <div class="dashboard" id="dashboard">
-    <div class="dash-header">
-      <h1>Collections</h1>
-      <div class="links">
-        <a href="/admin">Open CMS</a>
+  <!-- App Shell -->
+  <div class="shell" id="shell">
+    <div class="topbar">
+      <h1>SPIGADOLCE</h1>
+      <div class="topbar-links">
+        <a href="/" target="_blank">View Site</a>
+        <a href="/admin" target="_blank">Sveltia CMS</a>
       </div>
     </div>
-    <div class="coll-list" id="collList"></div>
-    <button class="btn btn-primary btn-add" onclick="openAddModal()">+ Add Collection</button>
+
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="content" id="content">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
   </div>
 
-  <!-- Modal -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal" id="modal">
-      <h2 id="modalTitle">Add Collection</h2>
-      <label>Name (slug)</label>
-      <input type="text" id="collName" placeholder="e.g. events" />
-      <label>Label</label>
-      <input type="text" id="collLabel" placeholder="e.g. Events" />
-      <label>Content Folder</label>
-      <input type="text" id="collFolder" placeholder="e.g. src/content/events" />
-
-      <div class="fields-section">
-        <h3>Fields</h3>
-        <div class="field-header">
-          <span>Label</span><span>Name</span><span>Widget</span><span></span>
-        </div>
-        <div id="fieldsContainer"></div>
-        <button class="btn btn-outline" onclick="addFieldRow()" style="margin-top:.5rem;">+ Add Field</button>
+  <!-- Entry Modal -->
+  <div class="modal-overlay" id="entryModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2 id="entryModalTitle">Edit Entry</h2>
+        <button class="modal-close" onclick="closeEntryModal()">&times;</button>
       </div>
-
-      <div class="modal-actions">
-        <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
-        <button class="btn btn-danger" id="btnDelete" onclick="deleteCollection()" style="display:none;">Delete</button>
-        <button class="btn btn-primary" id="btnSave" onclick="saveCollection()">Save</button>
+      <div class="modal-body" id="entryModalBody"></div>
+      <div class="modal-foot">
+        <button class="btn btn-outline" onclick="closeEntryModal()">Cancel</button>
+        <button class="btn btn-danger" id="entryDeleteBtn" onclick="deleteEntry()" style="display:none">Delete</button>
+        <button class="btn btn-primary" id="entrySaveBtn" onclick="saveEntry()">Save</button>
       </div>
     </div>
   </div>
 
-  <!-- Toast -->
+  <!-- Collection Modal -->
+  <div class="modal-overlay" id="collModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2 id="collModalTitle">Add Collection</h2>
+        <button class="modal-close" onclick="closeCollModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="collModalBody"></div>
+      <div class="modal-foot">
+        <button class="btn btn-outline" onclick="closeCollModal()">Cancel</button>
+        <button class="btn btn-danger" id="collDeleteBtn" onclick="deleteColl()" style="display:none">Delete Collection</button>
+        <button class="btn btn-primary" onclick="saveColl()">Save</button>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <script is:inline>
     let password = '';
     let collections = [];
-    let sha = '';
-    let editingIndex = -1;
+    let collSha = '';
+    let currentView = null; // { type: 'entries', index: 0 } or { type: 'collections' }
+    let entries = [];
+    let editingEntry = null; // { index, path, sha } or null for new
 
-    const WIDGETS = ['string','text','number','datetime','image','select','list','object','markdown','boolean','hidden'];
+    const WIDGETS = ['string','text','number','datetime','image','select','list','object','boolean','hidden'];
 
+    // --- Auth ---
     function doLogin() {
       password = document.getElementById('loginPassword').value;
       loadCollections();
     }
+    document.getElementById('loginPassword').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 
-    document.getElementById('loginPassword').addEventListener('keydown', e => {
-      if (e.key === 'Enter') doLogin();
-    });
-
-    async function api(method, body) {
+    async function api(url, method, body) {
       const opts = { method, headers: { 'Authorization': 'Bearer ' + password, 'Content-Type': 'application/json' } };
       if (body) opts.body = JSON.stringify(body);
-      const res = await fetch('/api/collections', opts);
-      return res;
+      return fetch(url, opts);
     }
 
+    // --- Load collections ---
     async function loadCollections() {
-      const res = await api('GET');
-      if (!res.ok) {
-        document.getElementById('loginError').style.display = 'block';
-        return;
-      }
+      const res = await api('/api/collections', 'GET');
+      if (!res.ok) { document.getElementById('loginError').style.display = 'block'; return; }
       const data = await res.json();
       collections = data.collections;
-      sha = data.sha;
+      collSha = data.sha;
       document.getElementById('loginWrap').style.display = 'none';
-      document.getElementById('dashboard').classList.add('active');
-      render();
+      document.getElementById('shell').classList.add('active');
+      renderSidebar();
+      if (collections.length > 0) selectCollection(0);
+      else showCollectionsView();
     }
 
-    function render() {
-      const list = document.getElementById('collList');
-      list.innerHTML = collections.map((c, i) => {
-        const isFile = !!c.files;
-        const fieldCount = isFile ? (c.files[0]?.fields?.length || 0) : (c.fields?.length || 0);
-        const folder = c.folder || (c.files ? 'File collection' : '');
-        return `<div class="coll-card">
-          <div class="info">
-            <h3>${c.label || c.name}</h3>
-            <p>${folder} &middot; ${fieldCount} fields</p>
+    // --- Sidebar ---
+    function renderSidebar() {
+      const sb = document.getElementById('sidebar');
+      sb.innerHTML = `
+        <div class="sidebar-title">Content</div>
+        ${collections.filter(c => c.folder).map((c, i) => `
+          <div class="sidebar-item ${currentView?.type === 'entries' && currentView.index === i ? 'active' : ''}" onclick="selectCollection(${i})">
+            <span class="name">${c.label || c.name}</span>
+            <span class="count" id="count-${i}">...</span>
           </div>
-          <div class="actions">
-            <button class="btn btn-outline" onclick="openEditModal(${i})">Edit</button>
+        `).join('')}
+        <div class="sidebar-sep"></div>
+        <div class="sidebar-title">Settings</div>
+        <div class="sidebar-item settings ${currentView?.type === 'collections' ? 'active' : ''}" onclick="showCollectionsView()">
+          <span class="name">Manage Collections</span>
+        </div>
+      `;
+    }
+
+    // --- Select collection (show entries) ---
+    async function selectCollection(index) {
+      currentView = { type: 'entries', index };
+      renderSidebar();
+      const c = collections[index];
+      const content = document.getElementById('content');
+      content.innerHTML = `
+        <div class="content-header">
+          <h2>${c.label || c.name}</h2>
+          <div class="content-actions">
+            <button class="btn btn-primary" onclick="openNewEntry()">+ New ${c.label || c.name}</button>
           </div>
-        </div>`;
+        </div>
+        <div class="loading"><div class="spinner"></div> Loading entries...</div>
+      `;
+
+      const res = await api('/api/entries?folder=' + encodeURIComponent(c.folder), 'GET');
+      const data = await res.json();
+      entries = data.entries || [];
+
+      const countEl = document.getElementById('count-' + index);
+      if (countEl) countEl.textContent = entries.length;
+
+      if (entries.length === 0) {
+        content.innerHTML = `
+          <div class="content-header">
+            <h2>${c.label || c.name}</h2>
+            <div class="content-actions">
+              <button class="btn btn-primary" onclick="openNewEntry()">+ New ${c.label || c.name}</button>
+            </div>
+          </div>
+          <div class="empty-state">
+            <h3>No entries yet</h3>
+            <p>Create your first entry to get started.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const sorted = [...entries].sort((a, b) => (a.order || 999) - (b.order || 999));
+      entries = sorted;
+
+      content.innerHTML = `
+        <div class="content-header">
+          <h2>${c.label || c.name}</h2>
+          <div class="content-actions">
+            <button class="btn btn-primary" onclick="openNewEntry()">+ New ${c.label || c.name}</button>
+          </div>
+        </div>
+        <div class="entries-grid">
+          ${sorted.map((e, i) => {
+            const img = e.image ? `<img class="entry-img" src="${e.image}" alt="" onerror="this.outerHTML='<div class=entry-img-placeholder>No image</div>'" />` : '<div class="entry-img-placeholder">No image</div>';
+            const date = e.date || '';
+            const excerpt = e.excerpt || e.description || '';
+            return `<div class="entry-card" onclick="openEditEntry(${i})">
+              ${img}
+              <div class="entry-body">
+                <div class="entry-title">${e.title || e.name || e.slug || 'Untitled'}</div>
+                <div class="entry-meta">
+                  ${date ? `<span>${date}</span>` : ''}
+                  ${e.order != null ? `<span>Order: ${e.order}</span>` : ''}
+                  ${e.category ? `<span>${e.category}</span>` : ''}
+                </div>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // --- Entry modal ---
+    function getCollFields() {
+      const c = collections[currentView.index];
+      return c.fields || [];
+    }
+
+    function openNewEntry() {
+      editingEntry = null;
+      document.getElementById('entryModalTitle').textContent = 'New Entry';
+      document.getElementById('entryDeleteBtn').style.display = 'none';
+      renderEntryForm({});
+      document.getElementById('entryModal').classList.add('active');
+    }
+
+    function openEditEntry(i) {
+      const e = entries[i];
+      editingEntry = { index: i, path: e.path, sha: e.sha };
+      document.getElementById('entryModalTitle').textContent = 'Edit: ' + (e.title || e.slug || 'Entry');
+      document.getElementById('entryDeleteBtn').style.display = 'inline-flex';
+      renderEntryForm(e);
+      document.getElementById('entryModal').classList.add('active');
+    }
+
+    function renderEntryForm(data) {
+      const fields = getCollFields();
+      const body = document.getElementById('entryModalBody');
+      body.innerHTML = fields.map(f => {
+        const val = data[f.name] ?? f.default ?? '';
+        if (f.widget === 'text' || f.widget === 'markdown') {
+          const textVal = Array.isArray(val) ? val.join('\n\n') : (val || '');
+          return `<div class="form-group"><label>${f.label}</label><textarea data-field="${f.name}" data-widget="${f.widget}">${textVal}</textarea>${f.hint ? `<div class="form-hint">${f.hint}</div>` : ''}</div>`;
+        }
+        if (f.widget === 'number') {
+          return `<div class="form-group"><label>${f.label}</label><input type="number" data-field="${f.name}" data-widget="number" value="${val}" />${f.hint ? `<div class="form-hint">${f.hint}</div>` : ''}</div>`;
+        }
+        if (f.widget === 'datetime') {
+          return `<div class="form-group"><label>${f.label}</label><input type="date" data-field="${f.name}" data-widget="datetime" value="${val}" /></div>`;
+        }
+        if (f.widget === 'select' && f.options) {
+          const opts = f.options.map(o => `<option value="${o}" ${o === val ? 'selected' : ''}>${o}</option>`).join('');
+          return `<div class="form-group"><label>${f.label}</label><select data-field="${f.name}" data-widget="select"><option value="">— Select —</option>${opts}</select></div>`;
+        }
+        if (f.widget === 'list') {
+          const items = Array.isArray(val) ? val : [];
+          return `<div class="form-group"><label>${f.label}</label><div class="list-field" data-field="${f.name}" data-widget="list">${items.map((item, idx) => `<div style="display:flex;gap:.4rem;margin-bottom:.4rem;"><input value="${String(item).replace(/"/g, '&quot;')}" style="flex:1" /><button class="remove-btn" onclick="this.parentElement.remove()">&times;</button></div>`).join('')}</div><button class="btn btn-outline btn-sm" onclick="addListItem('${f.name}')" style="margin-top:.4rem;">+ Add</button></div>`;
+        }
+        if (f.widget === 'image') {
+          return `<div class="form-group"><label>${f.label}</label><input type="text" data-field="${f.name}" data-widget="image" value="${val}" placeholder="/images/..." /><div class="form-hint">Path to image (e.g. /images/blog/photo.jpg)</div></div>`;
+        }
+        return `<div class="form-group"><label>${f.label}</label><input type="text" data-field="${f.name}" data-widget="string" value="${String(val).replace(/"/g, '&quot;')}" /></div>`;
       }).join('');
     }
 
-    function openAddModal() {
-      editingIndex = -1;
-      document.getElementById('modalTitle').textContent = 'Add Collection';
-      document.getElementById('collName').value = '';
-      document.getElementById('collLabel').value = '';
-      document.getElementById('collFolder').value = '';
-      document.getElementById('collName').disabled = false;
-      document.getElementById('btnDelete').style.display = 'none';
-      document.getElementById('fieldsContainer').innerHTML = '';
-      addFieldRow('Slug', 'slug', 'string');
-      addFieldRow('Title', 'title', 'string');
-      addFieldRow('Date', 'date', 'datetime');
-      addFieldRow('Image', 'image', 'image');
-      addFieldRow('Order', 'order', 'number');
-      document.getElementById('modalOverlay').classList.add('active');
+    function addListItem(fieldName) {
+      const container = document.querySelector(`.list-field[data-field="${fieldName}"]`);
+      const div = document.createElement('div');
+      div.style.cssText = 'display:flex;gap:.4rem;margin-bottom:.4rem;';
+      div.innerHTML = '<input value="" style="flex:1" /><button class="remove-btn" onclick="this.parentElement.remove()">&times;</button>';
+      container.appendChild(div);
     }
 
-    function openEditModal(index) {
-      editingIndex = index;
-      const c = collections[index];
-      document.getElementById('modalTitle').textContent = 'Edit: ' + (c.label || c.name);
-      document.getElementById('collName').value = c.name;
-      document.getElementById('collLabel').value = c.label || '';
-      document.getElementById('collFolder').value = c.folder || '';
-      document.getElementById('collName').disabled = true;
-      document.getElementById('btnDelete').style.display = 'inline-block';
-      document.getElementById('fieldsContainer').innerHTML = '';
+    function collectFormData() {
+      const fields = getCollFields();
+      const data = {};
+      fields.forEach(f => {
+        if (f.widget === 'list') {
+          const container = document.querySelector(`.list-field[data-field="${f.name}"]`);
+          if (container) {
+            data[f.name] = [...container.querySelectorAll('input')].map(inp => inp.value).filter(v => v);
+          }
+        } else {
+          const el = document.querySelector(`[data-field="${f.name}"]`);
+          if (!el) return;
+          let val = el.value;
+          if (f.widget === 'number') val = val ? Number(val) : 0;
+          if (f.widget === 'text' && f.name === 'body') val = val.split(/\n\n+/).filter(p => p.trim());
+          data[f.name] = val;
+        }
+      });
+      return data;
+    }
+
+    async function saveEntry() {
+      const data = collectFormData();
+      const c = collections[currentView.index];
+      document.getElementById('entrySaveBtn').disabled = true;
+
+      if (editingEntry) {
+        const res = await api('/api/entries', 'PUT', { path: editingEntry.path, sha: editingEntry.sha, content: data });
+        if (!res.ok) { toast('Failed to save', true); document.getElementById('entrySaveBtn').disabled = false; return; }
+      } else {
+        const slug = data.slug || data.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '') || 'entry-' + Date.now();
+        if (!data.slug) data.slug = slug;
+        const filename = slug + '.json';
+        const res = await api('/api/entries', 'POST', { folder: c.folder, filename, content: data });
+        if (!res.ok) { toast('Failed to create', true); document.getElementById('entrySaveBtn').disabled = false; return; }
+      }
+
+      closeEntryModal();
+      toast('Saved!');
+      document.getElementById('entrySaveBtn').disabled = false;
+      selectCollection(currentView.index);
+    }
+
+    async function deleteEntry() {
+      if (!editingEntry) return;
+      if (!confirm('Delete this entry permanently?')) return;
+      const res = await api('/api/entries', 'DELETE', { path: editingEntry.path, sha: editingEntry.sha });
+      if (!res.ok) { toast('Failed to delete', true); return; }
+      closeEntryModal();
+      toast('Deleted');
+      selectCollection(currentView.index);
+    }
+
+    function closeEntryModal() { document.getElementById('entryModal').classList.remove('active'); }
+
+    // --- Collections management view ---
+    function showCollectionsView() {
+      currentView = { type: 'collections' };
+      renderSidebar();
+      const content = document.getElementById('content');
+      content.innerHTML = `
+        <div class="content-header">
+          <h2>Manage Collections</h2>
+          <div class="content-actions">
+            <button class="btn btn-primary" onclick="openAddColl()">+ Add Collection</button>
+          </div>
+        </div>
+        <div class="coll-grid">
+          ${collections.map((c, i) => {
+            const isFile = !!c.files;
+            const fieldCount = isFile ? (c.files[0]?.fields?.length || 0) : (c.fields?.length || 0);
+            return `<div class="coll-card">
+              <h3>${c.label || c.name}</h3>
+              <p>${c.folder || 'File collection'} &middot; ${fieldCount} fields</p>
+              <div class="coll-actions">
+                <button class="btn btn-outline btn-sm" onclick="openEditColl(${i})">Edit</button>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // --- Collection modal ---
+    let editingColl = -1;
+
+    function openAddColl() {
+      editingColl = -1;
+      document.getElementById('collModalTitle').textContent = 'Add Collection';
+      document.getElementById('collDeleteBtn').style.display = 'none';
+      renderCollForm({});
+      document.getElementById('collModal').classList.add('active');
+    }
+
+    function openEditColl(i) {
+      editingColl = i;
+      const c = collections[i];
+      document.getElementById('collModalTitle').textContent = 'Edit: ' + (c.label || c.name);
+      document.getElementById('collDeleteBtn').style.display = 'inline-flex';
+      renderCollForm(c);
+      document.getElementById('collModal').classList.add('active');
+    }
+
+    function renderCollForm(c) {
       const fields = c.fields || (c.files && c.files[0]?.fields) || [];
-      fields.forEach(f => addFieldRow(f.label, f.name, f.widget));
-      document.getElementById('modalOverlay').classList.add('active');
+      document.getElementById('collModalBody').innerHTML = `
+        <div class="form-group"><label>Name (slug)</label><input type="text" id="cf-name" value="${c.name || ''}" ${editingColl >= 0 ? 'disabled' : ''} /></div>
+        <div class="form-group"><label>Label</label><input type="text" id="cf-label" value="${c.label || ''}" /></div>
+        <div class="form-group"><label>Content Folder</label><input type="text" id="cf-folder" value="${c.folder || ''}" placeholder="src/content/..." /></div>
+        <div class="form-group"><label>Fields</label>
+          <div class="field-header"><span>Label</span><span>Name</span><span>Widget</span><span></span></div>
+          <div class="field-rows" id="cfFields">
+            ${fields.map(f => `<div class="field-row">
+              <input value="${f.label || ''}" /><input value="${f.name || ''}" />
+              <select>${WIDGETS.map(w => `<option ${w === f.widget ? 'selected' : ''}>${w}</option>`).join('')}</select>
+              <button class="remove-btn" onclick="this.parentElement.remove()">&times;</button>
+            </div>`).join('')}
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="addCollField()" style="margin-top:.5rem">+ Add Field</button>
+        </div>
+      `;
     }
 
-    function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('active');
-    }
-
-    function addFieldRow(label, name, widget) {
-      const container = document.getElementById('fieldsContainer');
+    function addCollField() {
+      const container = document.getElementById('cfFields');
       const row = document.createElement('div');
       row.className = 'field-row';
-      row.innerHTML = `
-        <input type="text" placeholder="Label" value="${label || ''}" />
-        <input type="text" placeholder="name" value="${name || ''}" />
-        <select>${WIDGETS.map(w => `<option value="${w}" ${w === (widget||'string') ? 'selected' : ''}>${w}</option>`).join('')}</select>
-        <button class="btn btn-danger" onclick="this.parentElement.remove()" title="Remove">&times;</button>
-      `;
+      row.innerHTML = `<input placeholder="Label" /><input placeholder="name" /><select>${WIDGETS.map(w => `<option>${w}</option>`).join('')}</select><button class="remove-btn" onclick="this.parentElement.remove()">&times;</button>`;
       container.appendChild(row);
     }
 
-    function getFieldsFromModal() {
-      const rows = document.querySelectorAll('#fieldsContainer .field-row');
-      const fields = [];
-      rows.forEach(row => {
-        const inputs = row.querySelectorAll('input, select');
-        const label = inputs[0].value.trim();
-        const name = inputs[1].value.trim();
-        const widget = inputs[2].value;
-        if (label && name) {
-          const f = { label, name, widget };
-          if (widget === 'datetime') {
-            f.format = 'YYYY-MM-DD';
-            f.date_format = 'YYYY-MM-DD';
-            f.time_format = false;
-          }
-          if (widget === 'list') {
-            f.field = { label: label + ' Item', name: 'item', widget: 'text' };
-          }
-          fields.push(f);
-        }
-      });
-      return fields;
-    }
+    async function saveColl() {
+      const name = document.getElementById('cf-name').value.trim();
+      const label = document.getElementById('cf-label').value.trim();
+      const folder = document.getElementById('cf-folder').value.trim();
+      const fieldRows = document.querySelectorAll('#cfFields .field-row');
+      const fields = [...fieldRows].map(r => {
+        const inputs = r.querySelectorAll('input, select');
+        const fl = inputs[0].value.trim(), fn = inputs[1].value.trim(), fw = inputs[2].value;
+        if (!fl || !fn) return null;
+        const f = { label: fl, name: fn, widget: fw };
+        if (fw === 'datetime') { f.format = 'YYYY-MM-DD'; f.date_format = 'YYYY-MM-DD'; f.time_format = false; }
+        if (fw === 'list') { f.field = { label: fl + ' Item', name: 'item', widget: 'text' }; }
+        return f;
+      }).filter(Boolean);
 
-    async function saveCollection() {
-      const name = document.getElementById('collName').value.trim();
-      const label = document.getElementById('collLabel').value.trim();
-      const folder = document.getElementById('collFolder').value.trim();
-      const fields = getFieldsFromModal();
+      if (!name || !label) { toast('Name and label required', true); return; }
 
-      if (!name || !label) { showToast('Name and label are required', true); return; }
-      if (fields.length === 0) { showToast('Add at least one field', true); return; }
-
-      if (editingIndex === -1) {
-        if (collections.some(c => c.name === name)) { showToast('Collection name already exists', true); return; }
-        collections.push({
-          name, label,
-          folder: folder || `src/content/${name}`,
-          create: true, delete: true,
-          extension: 'json', format: 'json',
-          slug: '{{slug}}',
-          sortable_fields: { fields: ['order', 'date', 'title'], default: { field: 'order' } },
-          fields
-        });
+      if (editingColl === -1) {
+        collections.push({ name, label, folder: folder || `src/content/${name}`, create: true, delete: true, extension: 'json', format: 'json', slug: '{{slug}}', sortable_fields: { fields: ['order','date','title'], default: { field: 'order' } }, fields });
       } else {
-        const c = collections[editingIndex];
+        const c = collections[editingColl];
         c.label = label;
         if (folder) c.folder = folder;
         if (c.fields) c.fields = fields;
         else if (c.files && c.files[0]) c.files[0].fields = fields;
       }
 
-      await saveToGitHub();
-    }
-
-    async function deleteCollection() {
-      if (editingIndex < 0) return;
-      const c = collections[editingIndex];
-      if (!confirm(`Delete collection "${c.label || c.name}"? This only removes it from the CMS — content files are not deleted.`)) return;
-      collections.splice(editingIndex, 1);
-      await saveToGitHub();
-    }
-
-    async function saveToGitHub() {
-      document.getElementById('btnSave').disabled = true;
-      const res = await api('PUT', { collections, sha });
-      if (!res.ok) {
-        showToast('Failed to save. Try again.', true);
-        document.getElementById('btnSave').disabled = false;
-        return;
-      }
+      const res = await api('/api/collections', 'PUT', { collections, sha: collSha });
+      if (!res.ok) { toast('Failed to save', true); return; }
       const data = await res.json();
-      sha = data.sha;
-      closeModal();
-      render();
-      showToast('Saved! CMS will update on next deploy.');
-      document.getElementById('btnSave').disabled = false;
+      collSha = data.sha;
+      closeCollModal();
+      renderSidebar();
+      showCollectionsView();
+      toast('Collection saved! CMS updates on next deploy.');
     }
 
-    function showToast(msg, isError) {
+    async function deleteColl() {
+      if (editingColl < 0) return;
+      if (!confirm('Remove this collection from the CMS? Content files are not deleted.')) return;
+      collections.splice(editingColl, 1);
+      const res = await api('/api/collections', 'PUT', { collections, sha: collSha });
+      if (!res.ok) { toast('Failed to delete', true); return; }
+      const data = await res.json();
+      collSha = data.sha;
+      closeCollModal();
+      renderSidebar();
+      showCollectionsView();
+      toast('Collection removed');
+    }
+
+    function closeCollModal() { document.getElementById('collModal').classList.remove('active'); }
+
+    // --- Toast ---
+    function toast(msg, isError) {
       const t = document.getElementById('toast');
       t.textContent = msg;
-      t.className = 'toast active' + (isError ? ' error' : '');
-      setTimeout(() => t.classList.remove('active'), 3500);
+      t.className = 'toast active ' + (isError ? 'error' : 'success');
+      setTimeout(() => t.classList.remove('active'), 3000);
     }
   </script>
 </body>
