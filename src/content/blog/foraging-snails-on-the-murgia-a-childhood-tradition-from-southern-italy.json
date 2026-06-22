@@ -2,6 +2,7 @@
   "slug": "foraging-snails-on-the-murgia-a-childhood-tradition-from-southern-italy",
   "title": "Foraging Snails on the Murgia: A Childhood Tradition from Southern Italy",
   "date": "2026-06-22",
+  "collection": "Blog",
   "image": "/images/blog/cornus-aspersum-cervoni-1782131789035.jpg",
   "imageCaption": "Cervone",
   "body": [
@@ -14,6 +15,5 @@
       "src": "/images/blog/teba-pisana-ciamarchid-1782133563160.jpg",
       "caption": "monachelle"
     }
-  ],
-  "order": 1
+  ]
 }
