@@ -377,6 +377,7 @@ export const prerender = false;
       const body = document.getElementById('entryModalBody');
       body.innerHTML = fields.map(f => {
         const val = data[f.name] ?? f.default ?? '';
+        if (f.name === 'imageCaption') return '';
         if (f.widget === 'hidden') {
           return `<input type="hidden" data-field="${f.name}" data-widget="hidden" value="${String(val).replace(/"/g, '&quot;')}" />`;
         }
@@ -412,6 +413,7 @@ export const prerender = false;
           const hasImg = val && val.length > 0;
           const previewSrc = hasImg && val.startsWith('/images') ? 'https://raw.githubusercontent.com/riccardinaburdo/spigadolce/main/public' + val : val;
           const previewHtml = hasImg ? `<div class="img-preview"><img src="${previewSrc}" alt="" /><button class="img-remove" onclick="clearImage('${f.name}')">&times;</button><div class="img-path">${val}</div></div>` : '';
+          const captionField = f.name === 'image' ? `<div class="form-group" style="margin-top:.5rem"><label>Image Caption</label><input type="text" data-field="imageCaption" data-widget="string" value="${(data.imageCaption || '').replace(/"/g, '&quot;')}" placeholder="Caption / Legend" /></div>` : '';
           return `<div class="form-group"><label>${f.label}</label>
             <input type="hidden" data-field="${f.name}" data-widget="image" value="${val}" />
             <div class="img-dropzone" id="dz-${f.name}" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event,'${f.name}')">
@@ -420,6 +422,7 @@ export const prerender = false;
             </div>
             <div id="preview-${f.name}">${previewHtml}</div>
             <div id="uploading-${f.name}"></div>
+            ${captionField}
           </div>`;
         }
         return `<div class="form-group"><label>${f.label}</label><input type="text" data-field="${f.name}" data-widget="string" value="${String(val).replace(/"/g, '&quot;')}" /></div>`;

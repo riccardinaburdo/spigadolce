@@ -15,6 +15,7 @@
       { "label": "Date", "name": "date", "widget": "datetime", "format": "YYYY-MM-DD", "date_format": "YYYY-MM-DD", "time_format": false },
       { "label": "Short Description", "name": "excerpt", "widget": "string" },
       { "label": "Image", "name": "image", "widget": "image" },
+      { "label": "Image Caption", "name": "imageCaption", "widget": "string", "required": false },
       { "label": "Body", "name": "body", "widget": "list", "field": { "label": "Paragraph", "name": "paragraph", "widget": "text" } },
       { "label": "Order", "name": "order", "widget": "number", "hint": "Lower numbers appear first. Use 10, 20, 30... to leave room for reordering." }
     ]
