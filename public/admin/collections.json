@@ -10,7 +10,7 @@
     "slug": "{{slug}}",
     "sortable_fields": { "fields": ["order", "date", "title"], "default": { "field": "order" } },
     "fields": [
-      { "label": "Slug", "name": "slug", "widget": "string" },
+      { "label": "Slug", "name": "slug", "widget": "hidden" },
       { "label": "Title", "name": "title", "widget": "string" },
       { "label": "Date", "name": "date", "widget": "datetime", "format": "YYYY-MM-DD", "date_format": "YYYY-MM-DD", "time_format": false },
       { "label": "Short Description", "name": "excerpt", "widget": "string" },

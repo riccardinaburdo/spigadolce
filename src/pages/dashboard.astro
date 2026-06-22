@@ -356,6 +356,9 @@ export const prerender = false;
       const body = document.getElementById('entryModalBody');
       body.innerHTML = fields.map(f => {
         const val = data[f.name] ?? f.default ?? '';
+        if (f.widget === 'hidden') {
+          return `<input type="hidden" data-field="${f.name}" data-widget="hidden" value="${String(val).replace(/"/g, '&quot;')}" />`;
+        }
         if (f.widget === 'text' || f.widget === 'markdown') {
           const textVal = Array.isArray(val) ? val.join('\n\n') : (val || '');
           return `<div class="form-group"><label>${f.label}</label><textarea data-field="${f.name}" data-widget="${f.widget}">${textVal}</textarea>${f.hint ? `<div class="form-hint">${f.hint}</div>` : ''}</div>`;
@@ -417,6 +420,10 @@ export const prerender = false;
           data[f.name] = val;
         }
       });
+      // Auto-generate slug from title if empty
+      if (data.title && (!data.slug || data.slug === '')) {
+        data.slug = data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      }
       return data;
     }
 
