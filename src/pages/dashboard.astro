@@ -46,6 +46,9 @@ export const prerender = false;
     .sidebar-item.active .count { background: #b8860b; color: #fff; }
     .sidebar-sep { height: 1px; background: #e8e0d4; margin: .75rem 1.25rem; }
     .sidebar-item.settings .name { color: #9a8a7a; font-size: .85rem; }
+    .sidebar-sub { padding-left: 2.25rem !important; }
+    .sidebar-sub .name { font-size: .8rem !important; color: #9a8a7a; }
+    .sidebar-sub .count { font-size: .7rem; }
 
     /* Content */
     .content { overflow-y: auto; padding: 1.5rem 2rem; background: #f5f0eb; }
@@ -280,6 +283,10 @@ export const prerender = false;
             <span class="name">${c.label || c.name}</span>
             <span class="count" id="count-${i}">...</span>
           </div>
+          <div class="sidebar-item sidebar-sub ${currentView?.type === 'categories' && currentView.index === i ? 'active' : ''}" onclick="showCategoriesView(${i})">
+            <span class="name">Categories</span>
+            <span class="count">${(c.categories || []).length}</span>
+          </div>
         `).join('')}
         <div class="sidebar-sep"></div>
         <div class="sidebar-title">Settings</div>
@@ -366,7 +373,7 @@ export const prerender = false;
                 <div class="entry-title">${e.title || e.name || e.slug || 'Untitled'}</div>
                 <div class="entry-meta">
                   ${date ? `<span>${date}</span>` : ''}
-                  ${e.collection ? `<span>${e.collection}</span>` : ''}
+                  ${e.category ? `<span>${e.category}</span>` : ''}
                   ${e.category ? `<span>${e.category}</span>` : ''}
                 </div>
               </div>
@@ -418,8 +425,13 @@ export const prerender = false;
         if (f.widget === 'datetime') {
           return `<div class="form-group"><label>${f.label}</label><input type="date" data-field="${f.name}" data-widget="datetime" value="${val}" /></div>`;
         }
-        if (f.widget === 'select' && f.options) {
-          const opts = f.options.map(o => `<option value="${o}" ${o === val ? 'selected' : ''}>${o}</option>`).join('');
+        if (f.widget === 'select') {
+          let optionsList = f.options || [];
+          if (f.name === 'category' && currentView?.index != null) {
+            const coll = collections[currentView.index];
+            if (coll.categories && coll.categories.length > 0) optionsList = coll.categories;
+          }
+          const opts = optionsList.map(o => `<option value="${o}" ${o === val ? 'selected' : ''}>${o}</option>`).join('');
           return `<div class="form-group"><label>${f.label}</label><select data-field="${f.name}" data-widget="select"><option value="">— Select —</option>${opts}</select></div>`;
         }
         if (f.widget === 'list' && f.name === 'body') {
@@ -657,6 +669,72 @@ export const prerender = false;
     function closeEntryModal() { document.getElementById('entryModal').classList.remove('active'); }
 
     // --- Collections management view ---
+    // --- Categories management ---
+    function showCategoriesView(collIndex) {
+      currentView = { type: 'categories', index: collIndex };
+      renderSidebar();
+      updateViewSiteLink();
+      const c = collections[collIndex];
+      const cats = c.categories || [];
+      const content = document.getElementById('content');
+      content.innerHTML = `
+        <div class="content-header">
+          <h2>${c.label} — Categories</h2>
+        </div>
+        <div class="coll-grid" id="catGrid">
+          ${cats.map((cat, i) => `
+            <div class="coll-card" style="display:flex;align-items:center;justify-content:space-between;">
+              <h3 style="font-family:'Lato',sans-serif;font-size:.95rem;">${cat}</h3>
+              <button class="btn btn-danger btn-sm" onclick="removeCategory(${collIndex},${i})">Remove</button>
+            </div>
+          `).join('')}
+          ${cats.length === 0 ? '<div class="empty-state" style="padding:2rem"><h3>No categories yet</h3><p>Add your first category below.</p></div>' : ''}
+        </div>
+        <div style="display:flex;gap:.5rem;margin-top:1rem;align-items:center;">
+          <input type="text" id="newCatInput" placeholder="New category name" style="flex:1;padding:.55rem .75rem;border:1px solid #d4c5b0;border-radius:8px;font-size:.9rem;" />
+          <button class="btn btn-primary" onclick="addCategory(${collIndex})">Add</button>
+        </div>
+      `;
+      document.getElementById('newCatInput').addEventListener('keydown', e => { if (e.key === 'Enter') addCategory(collIndex); });
+    }
+
+    async function addCategory(collIndex) {
+      const input = document.getElementById('newCatInput');
+      const name = input.value.trim();
+      if (!name) return;
+      const c = collections[collIndex];
+      if (!c.categories) c.categories = [];
+      if (c.categories.includes(name)) { toast('Category already exists', true); return; }
+      c.categories.push(name);
+      // Also update the category select field options if it exists
+      syncCategoryOptions(c);
+      const res = await api('/api/collections', 'PUT', { collections, sha: collSha });
+      if (!res.ok) { toast('Failed to save', true); c.categories.pop(); return; }
+      const data = await res.json();
+      collSha = data.sha;
+      renderSidebar();
+      showCategoriesView(collIndex);
+      toast('Category added!');
+    }
+
+    async function removeCategory(collIndex, catIndex) {
+      const c = collections[collIndex];
+      const removed = c.categories.splice(catIndex, 1);
+      syncCategoryOptions(c);
+      const res = await api('/api/collections', 'PUT', { collections, sha: collSha });
+      if (!res.ok) { toast('Failed to save', true); c.categories.splice(catIndex, 0, ...removed); return; }
+      const data = await res.json();
+      collSha = data.sha;
+      renderSidebar();
+      showCategoriesView(collIndex);
+      toast('Category removed');
+    }
+
+    function syncCategoryOptions(c) {
+      const catField = (c.fields || []).find(f => f.name === 'category' && f.widget === 'select');
+      if (catField) catField.options = [...(c.categories || [])];
+    }
+
     function showCollectionsView() {
       currentView = { type: 'collections' };
       renderSidebar();
