@@ -5,6 +5,15 @@ import path from 'node:path';
 
 const blogDir = path.join(process.cwd(), 'src/content/blog');
 const blogFiles = fs.readdirSync(blogDir).filter(f => f.endsWith('.json'));
+function getCoverImage(article: any): string {
+  if (article.image) return article.image;
+  if (Array.isArray(article.body)) {
+    const imgBlock = article.body.find((b: any) => typeof b === 'object' && b.type === 'image' && b.src);
+    if (imgBlock) return imgBlock.src;
+  }
+  return '';
+}
+
 const articles = blogFiles
   .map(f => JSON.parse(fs.readFileSync(path.join(blogDir, f), 'utf-8')))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -20,7 +29,7 @@ const articles = blogFiles
     <div class="blog-grid">
       {articles.map((a) => (
         <div class="blog-card">
-          <img src={a.image} alt={a.title} />
+          <img src={getCoverImage(a)} alt={a.title} />
           <div class="blog-card-body">
             <h3>{a.title}</h3>
             <p class="date">{new Date(a.date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>

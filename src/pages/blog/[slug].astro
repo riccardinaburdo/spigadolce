@@ -13,6 +13,17 @@ export function getStaticPaths() {
 }
 
 const { article } = Astro.props;
+
+function getCoverImage(a: any): string {
+  if (a.image) return a.image;
+  if (Array.isArray(a.body)) {
+    const imgBlock = a.body.find((b: any) => typeof b === 'object' && b.type === 'image' && b.src);
+    if (imgBlock) return imgBlock.src;
+  }
+  return '';
+}
+
+const coverImage = getCoverImage(article);
 ---
 
 <BaseLayout title={`${article.title} | Spigadolce`} currentPath="/blog">
@@ -24,7 +35,7 @@ const { article } = Astro.props;
     <p class="date" style="text-align: center; margin-bottom: 2rem; color: #888;">
       {new Date(article.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
     </p>
-    <img src={article.image} alt={article.title} style="width: 100%; max-height: 500px; object-fit: cover; margin-bottom: 2rem;" />
+    {coverImage && <img src={coverImage} alt={article.title} style="width: 100%; max-height: 500px; object-fit: cover; margin-bottom: 2rem;" />}
     {article.body.map((block: any) => {
       if (typeof block === 'string') {
         return <p>{block}</p>;

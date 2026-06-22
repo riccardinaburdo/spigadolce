@@ -574,6 +574,11 @@ export const prerender = false;
       if (data.title && (!data.slug || data.slug === '')) {
         data.slug = data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
       }
+      // Auto-fill cover image from first body image if empty
+      if (!data.image && Array.isArray(data.body)) {
+        const firstImg = data.body.find(b => b.type === 'image' && b.src);
+        if (firstImg) data.image = firstImg.src;
+      }
       return data;
     }
 
