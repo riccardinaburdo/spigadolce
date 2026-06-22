@@ -343,7 +343,7 @@ export const prerender = false;
                 <div class="entry-title">${e.title || e.name || e.slug || 'Untitled'}</div>
                 <div class="entry-meta">
                   ${date ? `<span>${date}</span>` : ''}
-                  ${e.order != null ? `<span>Order: ${e.order}</span>` : ''}
+                  ${e.collection ? `<span>${e.collection}</span>` : ''}
                   ${e.category ? `<span>${e.category}</span>` : ''}
                 </div>
               </div>

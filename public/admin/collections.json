@@ -8,15 +8,15 @@
     "extension": "json",
     "format": "json",
     "slug": "{{slug}}",
-    "sortable_fields": { "fields": ["order", "date", "title"], "default": { "field": "order" } },
+    "sortable_fields": { "fields": ["date", "title", "collection"], "default": { "field": "date" } },
     "fields": [
       { "label": "Slug", "name": "slug", "widget": "hidden" },
       { "label": "Title", "name": "title", "widget": "string" },
       { "label": "Date", "name": "date", "widget": "datetime", "format": "YYYY-MM-DD", "date_format": "YYYY-MM-DD", "time_format": false },
+      { "label": "Collection", "name": "collection", "widget": "select", "options": ["Blog", "Recipes", "Cooking Classes"], "required": false },
       { "label": "Cover Image", "name": "image", "widget": "image" },
       { "label": "Image Caption", "name": "imageCaption", "widget": "string", "required": false },
-      { "label": "Body", "name": "body", "widget": "list", "field": { "label": "Paragraph", "name": "paragraph", "widget": "text" } },
-      { "label": "Order", "name": "order", "widget": "number", "hint": "Lower numbers appear first. Use 10, 20, 30... to leave room for reordering." }
+      { "label": "Body", "name": "body", "widget": "list", "field": { "label": "Paragraph", "name": "paragraph", "widget": "text" } }
     ]
   },
   {
