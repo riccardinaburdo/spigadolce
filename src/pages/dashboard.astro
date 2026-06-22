@@ -309,7 +309,8 @@ export const prerender = false;
         </div>
         <div class="entries-grid">
           ${sorted.map((e, i) => {
-            const img = e.image ? `<img class="entry-img" src="${e.image}" alt="" onerror="this.outerHTML='<div class=entry-img-placeholder>No image</div>'" />` : '<div class="entry-img-placeholder">No image</div>';
+            const imgSrc = e.image ? (e.image.startsWith('/images') ? 'https://raw.githubusercontent.com/riccardinaburdo/spigadolce/main/public' + e.image : e.image) : '';
+            const img = imgSrc ? `<img class="entry-img" src="${imgSrc}" alt="" onerror="this.outerHTML='<div class=entry-img-placeholder>No image</div>'" />` : '<div class="entry-img-placeholder">No image</div>';
             const date = e.date || '';
             const excerpt = e.excerpt || e.description || '';
             return `<div class="entry-card" onclick="openEditEntry(${i})">
@@ -379,7 +380,8 @@ export const prerender = false;
         }
         if (f.widget === 'image') {
           const hasImg = val && val.length > 0;
-          const previewHtml = hasImg ? `<div class="img-preview"><img src="${val}" alt="" /><button class="img-remove" onclick="clearImage('${f.name}')">&times;</button><div class="img-path">${val}</div></div>` : '';
+          const previewSrc = hasImg && val.startsWith('/images') ? 'https://raw.githubusercontent.com/riccardinaburdo/spigadolce/main/public' + val : val;
+          const previewHtml = hasImg ? `<div class="img-preview"><img src="${previewSrc}" alt="" /><button class="img-remove" onclick="clearImage('${f.name}')">&times;</button><div class="img-path">${val}</div></div>` : '';
           return `<div class="form-group"><label>${f.label}</label>
             <input type="hidden" data-field="${f.name}" data-widget="image" value="${val}" />
             <div class="img-dropzone" id="dz-${f.name}" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event,'${f.name}')">
