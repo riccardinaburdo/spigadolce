@@ -1,0 +1,91 @@
+[
+  {
+    "name": "blog",
+    "label": "Blog",
+    "folder": "src/content/blog",
+    "create": true,
+    "delete": true,
+    "extension": "json",
+    "format": "json",
+    "slug": "{{slug}}",
+    "sortable_fields": { "fields": ["order", "date", "title"], "default": { "field": "order" } },
+    "fields": [
+      { "label": "Slug", "name": "slug", "widget": "string" },
+      { "label": "Title", "name": "title", "widget": "string" },
+      { "label": "Date", "name": "date", "widget": "datetime", "format": "YYYY-MM-DD", "date_format": "YYYY-MM-DD", "time_format": false },
+      { "label": "Excerpt", "name": "excerpt", "widget": "string" },
+      { "label": "Image", "name": "image", "widget": "image" },
+      { "label": "Body", "name": "body", "widget": "list", "field": { "label": "Paragraph", "name": "paragraph", "widget": "text" } },
+      { "label": "Order", "name": "order", "widget": "number", "hint": "Lower numbers appear first. Use 10, 20, 30... to leave room for reordering." }
+    ]
+  },
+  {
+    "name": "recipes",
+    "label": "Recipes",
+    "folder": "src/content/recipes",
+    "create": true,
+    "delete": true,
+    "extension": "json",
+    "format": "json",
+    "slug": "{{slug}}",
+    "sortable_fields": { "fields": ["order", "date", "title", "category"], "default": { "field": "order" } },
+    "fields": [
+      { "label": "Slug", "name": "slug", "widget": "string" },
+      { "label": "Title", "name": "title", "widget": "string" },
+      { "label": "Category", "name": "category", "widget": "select", "options": ["Cavatelli", "Focaccia", "Lagane", "Orecchiette", "Taralli", "Troccoli"] },
+      { "label": "Description", "name": "description", "widget": "text" },
+      { "label": "Servings", "name": "servings", "widget": "string" },
+      { "label": "Prep Time", "name": "prepTime", "widget": "string" },
+      { "label": "Cook Time", "name": "cookTime", "widget": "string" },
+      { "label": "Image", "name": "image", "widget": "image" },
+      { "label": "Ingredients", "name": "ingredients", "widget": "list", "field": { "label": "Ingredient", "name": "ingredient", "widget": "string" } },
+      { "label": "Steps", "name": "steps", "widget": "list", "field": { "label": "Step", "name": "step", "widget": "text" } },
+      { "label": "Notes", "name": "notes", "widget": "text", "required": false },
+      { "label": "Order", "name": "order", "widget": "number" },
+      { "label": "Date", "name": "date", "widget": "datetime", "format": "YYYY-MM-DD", "date_format": "YYYY-MM-DD", "time_format": false }
+    ]
+  },
+  {
+    "name": "cooking-classes",
+    "label": "Cooking Classes",
+    "folder": "src/content/cooking-classes",
+    "create": true,
+    "delete": true,
+    "extension": "json",
+    "format": "json",
+    "slug": "{{slug}}",
+    "sortable_fields": { "fields": ["order", "date", "title"], "default": { "field": "order" } },
+    "fields": [
+      { "label": "Slug", "name": "slug", "widget": "string" },
+      { "label": "Title", "name": "title", "widget": "string" },
+      { "label": "Date", "name": "date", "widget": "datetime", "format": "YYYY-MM-DD", "date_format": "YYYY-MM-DD", "time_format": false },
+      { "label": "Price", "name": "price", "widget": "number" },
+      { "label": "Currency", "name": "currency", "widget": "string", "default": "GBP" },
+      { "label": "Location", "name": "location", "widget": "string" },
+      { "label": "Description", "name": "description", "widget": "text" },
+      { "label": "Includes", "name": "includes", "widget": "list", "field": { "label": "Item", "name": "item", "widget": "string" } },
+      { "label": "Image", "name": "image", "widget": "image" },
+      { "label": "Status", "name": "status", "widget": "select", "options": ["upcoming", "past"] },
+      { "label": "Order", "name": "order", "widget": "number" }
+    ]
+  },
+  {
+    "name": "pages",
+    "label": "Pages",
+    "files": [{
+      "label": "Booking",
+      "name": "booking",
+      "file": "src/content/pages/booking.json",
+      "fields": [
+        { "label": "Platform", "name": "platform", "widget": "object", "fields": [
+          { "label": "Name", "name": "name", "widget": "string" },
+          { "label": "URL", "name": "url", "widget": "string", "required": false },
+          { "label": "Description", "name": "description", "widget": "text" },
+          { "label": "Icon", "name": "icon", "widget": "string" }
+        ]},
+        { "label": "Fallback Message", "name": "fallbackMessage", "widget": "string" },
+        { "label": "Fallback URL", "name": "fallbackUrl", "widget": "string" }
+      ]
+    }]
+  }
+]

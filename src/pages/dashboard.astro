@@ -1,0 +1,323 @@
+---
+export const prerender = false;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Spigadolce — Collections Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Lato', sans-serif; background: #f5f0eb; color: #3a2a1a; min-height: 100vh; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    /* Login */
+    .login-wrap { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-box { background: #fff; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,.08); max-width: 380px; width: 100%; }
+    .login-box h1 { font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
+    .login-box input { width: 100%; padding: .75rem 1rem; border: 1px solid #d4c5b0; border-radius: 8px; font-size: 1rem; margin-bottom: 1rem; }
+    .login-box button { width: 100%; padding: .75rem; background: #b8860b; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+    .login-box button:hover { background: #9a7209; }
+    .login-error { color: #c0392b; font-size: .875rem; margin-bottom: .75rem; display: none; }
+
+    /* Dashboard */
+    .dashboard { display: none; max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .dashboard.active { display: block; }
+    .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+    .dash-header h1 { font-size: 1.75rem; }
+    .dash-header .links a { margin-left: 1rem; color: #b8860b; text-decoration: none; font-weight: 700; }
+    .dash-header .links a:hover { text-decoration: underline; }
+
+    /* Collection cards */
+    .coll-list { display: grid; gap: 1rem; }
+    .coll-card { background: #fff; border-radius: 10px; padding: 1.25rem 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,.06); display: flex; align-items: center; justify-content: space-between; }
+    .coll-card .info h3 { font-size: 1.1rem; font-family: 'Lato', sans-serif; font-weight: 700; }
+    .coll-card .info p { font-size: .85rem; color: #7a6a5a; margin-top: .25rem; }
+    .coll-card .actions { display: flex; gap: .5rem; flex-shrink: 0; }
+
+    /* Buttons */
+    .btn { padding: .5rem 1rem; border: none; border-radius: 6px; font-size: .875rem; font-weight: 700; cursor: pointer; }
+    .btn-primary { background: #b8860b; color: #fff; }
+    .btn-primary:hover { background: #9a7209; }
+    .btn-outline { background: transparent; border: 1.5px solid #b8860b; color: #b8860b; }
+    .btn-outline:hover { background: #fdf6e8; }
+    .btn-danger { background: #e74c3c; color: #fff; }
+    .btn-danger:hover { background: #c0392b; }
+    .btn-add { margin-top: 1rem; }
+
+    /* Modal */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.4); z-index: 100; align-items: center; justify-content: center; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: #fff; border-radius: 12px; padding: 2rem; max-width: 700px; width: 95%; max-height: 85vh; overflow-y: auto; box-shadow: 0 8px 40px rgba(0,0,0,.15); }
+    .modal h2 { margin-bottom: 1.5rem; font-size: 1.3rem; }
+    .modal label { display: block; font-weight: 700; margin-bottom: .25rem; margin-top: 1rem; font-size: .9rem; }
+    .modal input, .modal select { width: 100%; padding: .6rem .75rem; border: 1px solid #d4c5b0; border-radius: 6px; font-size: .9rem; }
+    .modal select { background: #fff; }
+    .modal-actions { display: flex; gap: .75rem; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee; }
+
+    /* Fields table */
+    .fields-section { margin-top: 1.5rem; }
+    .fields-section h3 { font-size: 1rem; margin-bottom: .75rem; font-family: 'Lato', sans-serif; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: .5rem; align-items: end; margin-bottom: .5rem; }
+    .field-row input, .field-row select { font-size: .85rem; padding: .5rem; }
+    .field-row .btn { padding: .4rem .6rem; font-size: .8rem; }
+    .field-header { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: .5rem; margin-bottom: .25rem; }
+    .field-header span { font-size: .75rem; font-weight: 700; color: #7a6a5a; text-transform: uppercase; }
+
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: #27ae60; color: #fff; padding: .75rem 1.5rem; border-radius: 8px; font-weight: 700; box-shadow: 0 4px 16px rgba(0,0,0,.15); display: none; z-index: 200; }
+    .toast.error { background: #e74c3c; }
+    .toast.active { display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="login-wrap" id="loginWrap">
+    <div class="login-box">
+      <h1>Dashboard</h1>
+      <div class="login-error" id="loginError">Wrong password</div>
+      <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" />
+      <button onclick="doLogin()">Enter</button>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard">
+    <div class="dash-header">
+      <h1>Collections</h1>
+      <div class="links">
+        <a href="/admin">Open CMS</a>
+      </div>
+    </div>
+    <div class="coll-list" id="collList"></div>
+    <button class="btn btn-primary btn-add" onclick="openAddModal()">+ Add Collection</button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <h2 id="modalTitle">Add Collection</h2>
+      <label>Name (slug)</label>
+      <input type="text" id="collName" placeholder="e.g. events" />
+      <label>Label</label>
+      <input type="text" id="collLabel" placeholder="e.g. Events" />
+      <label>Content Folder</label>
+      <input type="text" id="collFolder" placeholder="e.g. src/content/events" />
+
+      <div class="fields-section">
+        <h3>Fields</h3>
+        <div class="field-header">
+          <span>Label</span><span>Name</span><span>Widget</span><span></span>
+        </div>
+        <div id="fieldsContainer"></div>
+        <button class="btn btn-outline" onclick="addFieldRow()" style="margin-top:.5rem;">+ Add Field</button>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-danger" id="btnDelete" onclick="deleteCollection()" style="display:none;">Delete</button>
+        <button class="btn btn-primary" id="btnSave" onclick="saveCollection()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let password = '';
+    let collections = [];
+    let sha = '';
+    let editingIndex = -1;
+
+    const WIDGETS = ['string','text','number','datetime','image','select','list','object','markdown','boolean','hidden'];
+
+    function doLogin() {
+      password = document.getElementById('loginPassword').value;
+      loadCollections();
+    }
+
+    document.getElementById('loginPassword').addEventListener('keydown', e => {
+      if (e.key === 'Enter') doLogin();
+    });
+
+    async function api(method, body) {
+      const opts = { method, headers: { 'Authorization': 'Bearer ' + password, 'Content-Type': 'application/json' } };
+      if (body) opts.body = JSON.stringify(body);
+      const res = await fetch('/api/collections', opts);
+      return res;
+    }
+
+    async function loadCollections() {
+      const res = await api('GET');
+      if (!res.ok) {
+        document.getElementById('loginError').style.display = 'block';
+        return;
+      }
+      const data = await res.json();
+      collections = data.collections;
+      sha = data.sha;
+      document.getElementById('loginWrap').style.display = 'none';
+      document.getElementById('dashboard').classList.add('active');
+      render();
+    }
+
+    function render() {
+      const list = document.getElementById('collList');
+      list.innerHTML = collections.map((c, i) => {
+        const isFile = !!c.files;
+        const fieldCount = isFile ? (c.files[0]?.fields?.length || 0) : (c.fields?.length || 0);
+        const folder = c.folder || (c.files ? 'File collection' : '');
+        return `<div class="coll-card">
+          <div class="info">
+            <h3>${c.label || c.name}</h3>
+            <p>${folder} &middot; ${fieldCount} fields</p>
+          </div>
+          <div class="actions">
+            <button class="btn btn-outline" onclick="openEditModal(${i})">Edit</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function openAddModal() {
+      editingIndex = -1;
+      document.getElementById('modalTitle').textContent = 'Add Collection';
+      document.getElementById('collName').value = '';
+      document.getElementById('collLabel').value = '';
+      document.getElementById('collFolder').value = '';
+      document.getElementById('collName').disabled = false;
+      document.getElementById('btnDelete').style.display = 'none';
+      document.getElementById('fieldsContainer').innerHTML = '';
+      addFieldRow('Slug', 'slug', 'string');
+      addFieldRow('Title', 'title', 'string');
+      addFieldRow('Date', 'date', 'datetime');
+      addFieldRow('Image', 'image', 'image');
+      addFieldRow('Order', 'order', 'number');
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    function openEditModal(index) {
+      editingIndex = index;
+      const c = collections[index];
+      document.getElementById('modalTitle').textContent = 'Edit: ' + (c.label || c.name);
+      document.getElementById('collName').value = c.name;
+      document.getElementById('collLabel').value = c.label || '';
+      document.getElementById('collFolder').value = c.folder || '';
+      document.getElementById('collName').disabled = true;
+      document.getElementById('btnDelete').style.display = 'inline-block';
+      document.getElementById('fieldsContainer').innerHTML = '';
+      const fields = c.fields || (c.files && c.files[0]?.fields) || [];
+      fields.forEach(f => addFieldRow(f.label, f.name, f.widget));
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    function addFieldRow(label, name, widget) {
+      const container = document.getElementById('fieldsContainer');
+      const row = document.createElement('div');
+      row.className = 'field-row';
+      row.innerHTML = `
+        <input type="text" placeholder="Label" value="${label || ''}" />
+        <input type="text" placeholder="name" value="${name || ''}" />
+        <select>${WIDGETS.map(w => `<option value="${w}" ${w === (widget||'string') ? 'selected' : ''}>${w}</option>`).join('')}</select>
+        <button class="btn btn-danger" onclick="this.parentElement.remove()" title="Remove">&times;</button>
+      `;
+      container.appendChild(row);
+    }
+
+    function getFieldsFromModal() {
+      const rows = document.querySelectorAll('#fieldsContainer .field-row');
+      const fields = [];
+      rows.forEach(row => {
+        const inputs = row.querySelectorAll('input, select');
+        const label = inputs[0].value.trim();
+        const name = inputs[1].value.trim();
+        const widget = inputs[2].value;
+        if (label && name) {
+          const f = { label, name, widget };
+          if (widget === 'datetime') {
+            f.format = 'YYYY-MM-DD';
+            f.date_format = 'YYYY-MM-DD';
+            f.time_format = false;
+          }
+          if (widget === 'list') {
+            f.field = { label: label + ' Item', name: 'item', widget: 'text' };
+          }
+          fields.push(f);
+        }
+      });
+      return fields;
+    }
+
+    async function saveCollection() {
+      const name = document.getElementById('collName').value.trim();
+      const label = document.getElementById('collLabel').value.trim();
+      const folder = document.getElementById('collFolder').value.trim();
+      const fields = getFieldsFromModal();
+
+      if (!name || !label) { showToast('Name and label are required', true); return; }
+      if (fields.length === 0) { showToast('Add at least one field', true); return; }
+
+      if (editingIndex === -1) {
+        if (collections.some(c => c.name === name)) { showToast('Collection name already exists', true); return; }
+        collections.push({
+          name, label,
+          folder: folder || `src/content/${name}`,
+          create: true, delete: true,
+          extension: 'json', format: 'json',
+          slug: '{{slug}}',
+          sortable_fields: { fields: ['order', 'date', 'title'], default: { field: 'order' } },
+          fields
+        });
+      } else {
+        const c = collections[editingIndex];
+        c.label = label;
+        if (folder) c.folder = folder;
+        if (c.fields) c.fields = fields;
+        else if (c.files && c.files[0]) c.files[0].fields = fields;
+      }
+
+      await saveToGitHub();
+    }
+
+    async function deleteCollection() {
+      if (editingIndex < 0) return;
+      const c = collections[editingIndex];
+      if (!confirm(`Delete collection "${c.label || c.name}"? This only removes it from the CMS — content files are not deleted.`)) return;
+      collections.splice(editingIndex, 1);
+      await saveToGitHub();
+    }
+
+    async function saveToGitHub() {
+      document.getElementById('btnSave').disabled = true;
+      const res = await api('PUT', { collections, sha });
+      if (!res.ok) {
+        showToast('Failed to save. Try again.', true);
+        document.getElementById('btnSave').disabled = false;
+        return;
+      }
+      const data = await res.json();
+      sha = data.sha;
+      closeModal();
+      render();
+      showToast('Saved! CMS will update on next deploy.');
+      document.getElementById('btnSave').disabled = false;
+    }
+
+    function showToast(msg, isError) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'toast active' + (isError ? ' error' : '');
+      setTimeout(() => t.classList.remove('active'), 3500);
+    }
+  </script>
+</body>
+</html>
