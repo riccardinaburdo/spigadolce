@@ -761,6 +761,7 @@ export const prerender = false;
       const file = files[0];
       if (!file || !file.type.startsWith('image/')) { toast('Please select an image file', true); return; }
 
+      const dz = document.getElementById('dz-' + fieldName);
       const uploadDiv = document.getElementById('uploading-' + fieldName);
       uploadDiv.innerHTML = '<div class="img-uploading"><div class="spinner" style="width:16px;height:16px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:.5rem;"></div>Uploading...</div>';
 
@@ -779,19 +780,31 @@ export const prerender = false;
 
       uploadDiv.innerHTML = '';
 
+      // Reset file input so the same file can be re-selected
+      const fileInput = dz ? dz.querySelector('input[type="file"]') : null;
+      if (fileInput) fileInput.value = '';
+
       if (!res.ok) { toast('Upload failed', true); return; }
 
       const data = await res.json();
-      const path = data.path;
+      const imgPath = data.path;
+      const previewSrc = 'https://raw.githubusercontent.com/riccardinaburdo/spigadolce/main/public' + imgPath;
 
-      document.querySelector(`[data-field="${fieldName}"]`).value = path;
-      document.getElementById('preview-' + fieldName).innerHTML = `<div class="img-preview"><img src="${path}" alt="" /><button class="img-remove" onclick="clearImage('${fieldName}')">&times;</button><div class="img-path">${path}</div></div>`;
+      document.querySelector(`[data-field="${fieldName}"]`).value = imgPath;
+      document.getElementById('preview-' + fieldName).innerHTML = `<div class="img-preview"><img src="${previewSrc}" alt="" /><button class="img-remove" onclick="clearImage('${fieldName}')">&times;</button><div class="img-path">${imgPath}</div></div>`;
+      if (dz) dz.querySelector('.dz-text').innerHTML = '<strong>Change image</strong> — drop or click';
       toast('Image uploaded!');
     }
 
     function clearImage(fieldName) {
       document.querySelector(`[data-field="${fieldName}"]`).value = '';
       document.getElementById('preview-' + fieldName).innerHTML = '';
+      const dz = document.getElementById('dz-' + fieldName);
+      if (dz) {
+        dz.querySelector('.dz-text').innerHTML = '<strong>Drop image here</strong> or click to browse';
+        const fileInput = dz.querySelector('input[type="file"]');
+        if (fileInput) fileInput.value = '';
+      }
     }
 
     function toast(msg, isError) {
