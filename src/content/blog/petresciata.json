@@ -1,19 +1,46 @@
 {
   "slug": "petresciata",
-  "title": "A Rain of Sweet Memories in Andria — La Petresciata and the Tender Magic of My Hometown",
+  "title": "A Rain of Sweet Memories in Andria : La Petresciata and the Tender Magic of My Hometown",
   "date": "2026-02-14",
   "excerpt": "What better time than Carnival to bring a little joy and lightheartedness to these cold, gray winter days?",
   "image": "/images/blog/petresciata.jpg",
   "body": [
-    "What better time than Carnival to bring a little joy and lightheartedness to these cold, gray winter days?",
-    "In Andria, there's a deeply evocative local tradition linked to tenerelli, the famous small, colorful sugar-coated sweets known as La Petresciata.",
-    "Long ago, during Carnival, families would go to visit relatives... and let a joyful shower of colorful sweets fall on their doorstep.",
-    "I still remember, as a child, the emotion of that moment: as soon as our relatives opened the door, those little colorful sweets were thrown into the air as a surprise. We children would rush in, laughing, trying to collect as many as possible.",
-    "It was the only time of year when we were allowed to indulge in pure, unbridled sweetness.",
-    "Afterward, we would all sit together with the rest of the family: moments filled with warmth, stories, and laughter, and precious opportunities to reconnect with relatives we rarely had the chance to see. Even today, tenerelli are lovingly made in abundance and in countless variations. They have also become a symbol of good wishes for every special occasion: births, weddings, anniversaries, and more.",
-    "Filled with liqueur, candied fruit, hazelnuts or almonds, marzipan... there's truly something for everyone.",
-    "To discover how rich and delicious this tradition is, just stop by Mario Mucci's Confetti Museum: a small and colorful journey through one of Andria's sweetest stories.",
-    "For me, this tradition is even more special, because Andria is my hometown — a beautiful city in Puglia, in the heart of Italy."
+    {
+      "type": "text",
+      "content": "What better time than Carnival to bring a little joy and lightheartedness to these cold, gray winter days?"
+    },
+    {
+      "type": "text",
+      "content": "In Andria, there's a deeply evocative local tradition linked to tenerelli, the famous small, colorful sugar-coated sweets known as La Petresciata."
+    },
+    {
+      "type": "text",
+      "content": "Long ago, during Carnival, families would go to visit relatives... and let a joyful shower of colorful sweets fall on their doorstep."
+    },
+    {
+      "type": "text",
+      "content": "I still remember, as a child, the emotion of that moment: as soon as our relatives opened the door, those little colorful sweets were thrown into the air as a surprise. We children would rush in, laughing, trying to collect as many as possible."
+    },
+    {
+      "type": "text",
+      "content": "It was the only time of year when we were allowed to indulge in pure, unbridled sweetness."
+    },
+    {
+      "type": "text",
+      "content": "Afterward, we would all sit together with the rest of the family: moments filled with warmth, stories, and laughter, and precious opportunities to reconnect with relatives we rarely had the chance to see. Even today, tenerelli are lovingly made in abundance and in countless variations. They have also become a symbol of good wishes for every special occasion: births, weddings, anniversaries, and more."
+    },
+    {
+      "type": "text",
+      "content": "Filled with liqueur, candied fruit, hazelnuts or almonds, marzipan... there's truly something for everyone."
+    },
+    {
+      "type": "text",
+      "content": "To discover how rich and delicious this tradition is, just stop by Mario Mucci's Confetti Museum: a small and colorful journey through one of Andria's sweetest stories."
+    },
+    {
+      "type": "text",
+      "content": "For me, this tradition is even more special, because Andria is my hometown â a beautiful city in Puglia, in the heart of Italy."
+    }
   ],
   "order": 1
 }
