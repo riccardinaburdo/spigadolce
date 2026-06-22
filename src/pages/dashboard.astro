@@ -76,6 +76,18 @@ export const prerender = false;
     .entry-meta { font-size: .75rem; color: #9a8a7a; display: flex; gap: .6rem; flex-wrap: wrap; }
     .entry-meta span { display: inline-flex; align-items: center; gap: .2rem; }
 
+    /* Image upload */
+    .img-dropzone { border: 2px dashed #d4c5b0; border-radius: 10px; padding: 1.25rem; text-align: center; cursor: pointer; transition: all .2s; background: #faf8f5; position: relative; }
+    .img-dropzone:hover, .img-dropzone.dragover { border-color: #b8860b; background: #fdf6e8; }
+    .img-dropzone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .img-dropzone .dz-text { color: #9a8a7a; font-size: .85rem; pointer-events: none; }
+    .img-dropzone .dz-text strong { color: #b8860b; }
+    .img-preview { margin-top: .75rem; position: relative; display: inline-block; }
+    .img-preview img { max-height: 120px; border-radius: 8px; display: block; }
+    .img-preview .img-path { font-size: .75rem; color: #7a6a5a; margin-top: .3rem; word-break: break-all; }
+    .img-preview .img-remove { position: absolute; top: -6px; right: -6px; background: #e74c3c; color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px; font-size: .8rem; cursor: pointer; line-height: 22px; text-align: center; }
+    .img-uploading { color: #b8860b; font-size: .85rem; padding: .5rem 0; }
+
     /* Empty state */
     .empty-state { text-align: center; padding: 4rem 2rem; color: #9a8a7a; }
     .empty-state h3 { font-family: 'Lato', sans-serif; font-size: 1.1rem; margin-bottom: .5rem; color: #7a6a5a; }
@@ -363,7 +375,17 @@ export const prerender = false;
           return `<div class="form-group"><label>${f.label}</label><div class="list-field" data-field="${f.name}" data-widget="list">${items.map((item, idx) => `<div style="display:flex;gap:.4rem;margin-bottom:.4rem;"><input value="${String(item).replace(/"/g, '&quot;')}" style="flex:1" /><button class="remove-btn" onclick="this.parentElement.remove()">&times;</button></div>`).join('')}</div><button class="btn btn-outline btn-sm" onclick="addListItem('${f.name}')" style="margin-top:.4rem;">+ Add</button></div>`;
         }
         if (f.widget === 'image') {
-          return `<div class="form-group"><label>${f.label}</label><input type="text" data-field="${f.name}" data-widget="image" value="${val}" placeholder="/images/..." /><div class="form-hint">Path to image (e.g. /images/blog/photo.jpg)</div></div>`;
+          const hasImg = val && val.length > 0;
+          const previewHtml = hasImg ? `<div class="img-preview"><img src="${val}" alt="" /><button class="img-remove" onclick="clearImage('${f.name}')">&times;</button><div class="img-path">${val}</div></div>` : '';
+          return `<div class="form-group"><label>${f.label}</label>
+            <input type="hidden" data-field="${f.name}" data-widget="image" value="${val}" />
+            <div class="img-dropzone" id="dz-${f.name}" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event,'${f.name}')">
+              <input type="file" accept="image/*" onchange="handleFileSelect(this.files,'${f.name}')" />
+              <div class="dz-text"><strong>Drop image here</strong> or click to browse</div>
+            </div>
+            <div id="preview-${f.name}">${previewHtml}</div>
+            <div id="uploading-${f.name}"></div>
+          </div>`;
         }
         return `<div class="form-group"><label>${f.label}</label><input type="text" data-field="${f.name}" data-widget="string" value="${String(val).replace(/"/g, '&quot;')}" /></div>`;
       }).join('');
@@ -562,6 +584,51 @@ export const prerender = false;
     function closeCollModal() { document.getElementById('collModal').classList.remove('active'); }
 
     // --- Toast ---
+    // --- Image upload ---
+    function handleDrop(e, fieldName) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('dragover');
+      const files = e.dataTransfer.files;
+      if (files.length > 0) handleFileSelect(files, fieldName);
+    }
+
+    async function handleFileSelect(files, fieldName) {
+      const file = files[0];
+      if (!file || !file.type.startsWith('image/')) { toast('Please select an image file', true); return; }
+
+      const uploadDiv = document.getElementById('uploading-' + fieldName);
+      uploadDiv.innerHTML = '<div class="img-uploading"><div class="spinner" style="width:16px;height:16px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:.5rem;"></div>Uploading...</div>';
+
+      const c = collections[currentView.index];
+      const folderName = c.name || 'blog';
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('folder', folderName);
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + password },
+        body: formData,
+      });
+
+      uploadDiv.innerHTML = '';
+
+      if (!res.ok) { toast('Upload failed', true); return; }
+
+      const data = await res.json();
+      const path = data.path;
+
+      document.querySelector(`[data-field="${fieldName}"]`).value = path;
+      document.getElementById('preview-' + fieldName).innerHTML = `<div class="img-preview"><img src="${path}" alt="" /><button class="img-remove" onclick="clearImage('${fieldName}')">&times;</button><div class="img-path">${path}</div></div>`;
+      toast('Image uploaded!');
+    }
+
+    function clearImage(fieldName) {
+      document.querySelector(`[data-field="${fieldName}"]`).value = '';
+      document.getElementById('preview-' + fieldName).innerHTML = '';
+    }
+
     function toast(msg, isError) {
       const t = document.getElementById('toast');
       t.textContent = msg;
