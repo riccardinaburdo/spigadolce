@@ -25,9 +25,23 @@ const { article } = Astro.props;
       {new Date(article.date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
     </p>
     <img src={article.image} alt={article.title} style="width: 100%; max-height: 500px; object-fit: cover; margin-bottom: 2rem;" />
-    {article.body.map((paragraph: string) => (
-      <p>{paragraph}</p>
-    ))}
+    {article.body.map((block: any) => {
+      if (typeof block === 'string') {
+        return <p>{block}</p>;
+      }
+      if (block.type === 'text') {
+        return <p>{block.content}</p>;
+      }
+      if (block.type === 'image') {
+        return (
+          <figure class="blog-figure">
+            <img src={block.src} alt={block.caption || ''} />
+            {block.caption && <figcaption>{block.caption}</figcaption>}
+          </figure>
+        );
+      }
+      return null;
+    })}
     <div style="text-align: center; margin-top: 3rem;">
       <a href="/blog" class="btn-primary">Back to Blog</a>
     </div>

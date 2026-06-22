@@ -76,6 +76,26 @@ export const prerender = false;
     .entry-meta { font-size: .75rem; color: #9a8a7a; display: flex; gap: .6rem; flex-wrap: wrap; }
     .entry-meta span { display: inline-flex; align-items: center; gap: .2rem; }
 
+    /* Block editor */
+    .block-editor { margin-top: .5rem; }
+    .block-item { background: #faf8f5; border: 1px solid #e8e0d4; border-radius: 8px; padding: .75rem; margin-bottom: .6rem; position: relative; }
+    .block-item .block-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
+    .block-item .block-type { font-size: .7rem; font-weight: 700; text-transform: uppercase; color: #9a8a7a; letter-spacing: .5px; }
+    .block-item .block-controls { display: flex; gap: .3rem; }
+    .block-item .block-controls button { background: none; border: none; cursor: pointer; color: #bbb; font-size: 1rem; padding: .1rem .3rem; }
+    .block-item .block-controls button:hover { color: #e74c3c; }
+    .block-item textarea { width: 100%; min-height: 70px; border: 1px solid #d4c5b0; border-radius: 6px; padding: .5rem .65rem; font-size: .9rem; font-family: 'Lato', sans-serif; resize: vertical; }
+    .block-item textarea:focus { outline: none; border-color: #b8860b; }
+    .block-img-row { display: flex; gap: .5rem; align-items: flex-start; }
+    .block-img-row .block-img-fields { flex: 1; }
+    .block-img-row .block-img-fields input { width: 100%; padding: .45rem .6rem; border: 1px solid #d4c5b0; border-radius: 6px; font-size: .85rem; margin-bottom: .4rem; }
+    .block-img-row .block-img-fields input:focus { outline: none; border-color: #b8860b; }
+    .block-img-thumb { width: 80px; height: 60px; object-fit: cover; border-radius: 6px; background: #eee; flex-shrink: 0; }
+    .block-img-dz { border: 1.5px dashed #d4c5b0; border-radius: 6px; padding: .5rem; text-align: center; cursor: pointer; position: relative; font-size: .75rem; color: #9a8a7a; transition: border-color .15s; }
+    .block-img-dz:hover { border-color: #b8860b; }
+    .block-img-dz input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .block-add-btns { display: flex; gap: .5rem; margin-top: .5rem; }
+
     /* Image upload */
     .img-dropzone { border: 2px dashed #d4c5b0; border-radius: 10px; padding: 1.25rem; text-align: center; cursor: pointer; transition: all .2s; background: #faf8f5; position: relative; }
     .img-dropzone:hover, .img-dropzone.dragover { border-color: #b8860b; background: #fdf6e8; }
@@ -374,6 +394,16 @@ export const prerender = false;
           const opts = f.options.map(o => `<option value="${o}" ${o === val ? 'selected' : ''}>${o}</option>`).join('');
           return `<div class="form-group"><label>${f.label}</label><select data-field="${f.name}" data-widget="select"><option value="">— Select —</option>${opts}</select></div>`;
         }
+        if (f.widget === 'list' && f.name === 'body') {
+          const blocks = Array.isArray(val) ? val : [];
+          return `<div class="form-group"><label>${f.label}</label>
+            <div class="block-editor" id="blockEditor">${blocks.map((b, idx) => renderBlock(b, idx)).join('')}</div>
+            <div class="block-add-btns">
+              <button class="btn btn-outline btn-sm" onclick="addTextBlock()">+ Text</button>
+              <button class="btn btn-outline btn-sm" onclick="addImageBlock()">+ Image</button>
+            </div>
+          </div>`;
+        }
         if (f.widget === 'list') {
           const items = Array.isArray(val) ? val : [];
           return `<div class="form-group"><label>${f.label}</label><div class="list-field" data-field="${f.name}" data-widget="list">${items.map((item, idx) => `<div style="display:flex;gap:.4rem;margin-bottom:.4rem;"><input value="${String(item).replace(/"/g, '&quot;')}" style="flex:1" /><button class="remove-btn" onclick="this.parentElement.remove()">&times;</button></div>`).join('')}</div><button class="btn btn-outline btn-sm" onclick="addListItem('${f.name}')" style="margin-top:.4rem;">+ Add</button></div>`;
@@ -396,6 +426,120 @@ export const prerender = false;
       }).join('');
     }
 
+    // --- Block editor for body ---
+    let blockCounter = 0;
+
+    function renderBlock(block, idx) {
+      const id = 'blk-' + (blockCounter++);
+      if (typeof block === 'string') {
+        return `<div class="block-item" data-block-type="text" id="${id}">
+          <div class="block-head"><span class="block-type">Text</span><div class="block-controls"><button onclick="moveBlock(this,-1)" title="Move up">&uarr;</button><button onclick="moveBlock(this,1)" title="Move down">&darr;</button><button onclick="this.closest('.block-item').remove()" title="Remove">&times;</button></div></div>
+          <textarea>${block.replace(/</g, '&lt;')}</textarea>
+        </div>`;
+      }
+      if (block.type === 'image') {
+        const thumbSrc = block.src && block.src.startsWith('/images') ? 'https://raw.githubusercontent.com/riccardinaburdo/spigadolce/main/public' + block.src : (block.src || '');
+        const thumbHtml = thumbSrc ? `<img class="block-img-thumb" src="${thumbSrc}" alt="" />` : '';
+        return `<div class="block-item" data-block-type="image" id="${id}">
+          <div class="block-head"><span class="block-type">Image</span><div class="block-controls"><button onclick="moveBlock(this,-1)" title="Move up">&uarr;</button><button onclick="moveBlock(this,1)" title="Move down">&darr;</button><button onclick="this.closest('.block-item').remove()" title="Remove">&times;</button></div></div>
+          <div class="block-img-row">
+            ${thumbHtml}
+            <div class="block-img-fields">
+              <input type="hidden" class="block-img-src" value="${block.src || ''}" />
+              <div class="block-img-dz" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleBlockImgDrop(event,this)">
+                <input type="file" accept="image/*" onchange="handleBlockImgSelect(this.files,this)" />
+                ${block.src ? 'Change image' : 'Drop image or click'}
+              </div>
+              <input type="text" class="block-img-caption" placeholder="Caption / Legend" value="${(block.caption || '').replace(/"/g, '&quot;')}" />
+            </div>
+          </div>
+        </div>`;
+      }
+      // Default: text block from object
+      return `<div class="block-item" data-block-type="text" id="${id}">
+        <div class="block-head"><span class="block-type">Text</span><div class="block-controls"><button onclick="moveBlock(this,-1)" title="Move up">&uarr;</button><button onclick="moveBlock(this,1)" title="Move down">&darr;</button><button onclick="this.closest('.block-item').remove()" title="Remove">&times;</button></div></div>
+        <textarea>${(block.content || '').replace(/</g, '&lt;')}</textarea>
+      </div>`;
+    }
+
+    function addTextBlock() {
+      const editor = document.getElementById('blockEditor');
+      const div = document.createElement('div');
+      div.innerHTML = renderBlock({ type: 'text', content: '' }, 0);
+      editor.appendChild(div.firstElementChild);
+    }
+
+    function addImageBlock() {
+      const editor = document.getElementById('blockEditor');
+      const div = document.createElement('div');
+      div.innerHTML = renderBlock({ type: 'image', src: '', caption: '' }, 0);
+      editor.appendChild(div.firstElementChild);
+    }
+
+    function moveBlock(btn, dir) {
+      const block = btn.closest('.block-item');
+      const editor = block.parentElement;
+      if (dir === -1 && block.previousElementSibling) {
+        editor.insertBefore(block, block.previousElementSibling);
+      } else if (dir === 1 && block.nextElementSibling) {
+        editor.insertBefore(block.nextElementSibling, block);
+      }
+    }
+
+    function handleBlockImgDrop(e, dz) {
+      e.preventDefault();
+      dz.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) handleBlockImgSelect(e.dataTransfer.files, dz);
+    }
+
+    async function handleBlockImgSelect(files, el) {
+      const file = files[0];
+      if (!file || !file.type.startsWith('image/')) return;
+      const blockItem = el.closest('.block-item');
+      const dz = blockItem.querySelector('.block-img-dz');
+      dz.innerHTML = '<input type="file" accept="image/*" onchange="handleBlockImgSelect(this.files,this)" /><div class="img-uploading" style="font-size:.75rem"><div class="spinner" style="width:14px;height:14px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:.4rem"></div>Uploading...</div>';
+
+      const c = collections[currentView.index];
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('folder', c.name || 'blog');
+
+      const res = await fetch('/api/upload', { method: 'POST', headers: { 'Authorization': 'Bearer ' + password }, body: formData });
+      if (!res.ok) { toast('Upload failed', true); return; }
+      const data = await res.json();
+
+      blockItem.querySelector('.block-img-src').value = data.path;
+      const thumbSrc = 'https://raw.githubusercontent.com/riccardinaburdo/spigadolce/main/public' + data.path;
+      // Update thumb
+      let thumb = blockItem.querySelector('.block-img-thumb');
+      if (!thumb) {
+        thumb = document.createElement('img');
+        thumb.className = 'block-img-thumb';
+        blockItem.querySelector('.block-img-row').prepend(thumb);
+      }
+      thumb.src = thumbSrc;
+      dz.innerHTML = '<input type="file" accept="image/*" onchange="handleBlockImgSelect(this.files,this)" />Change image';
+      toast('Image uploaded!');
+    }
+
+    function collectBlocks() {
+      const editor = document.getElementById('blockEditor');
+      if (!editor) return null;
+      const blocks = [];
+      editor.querySelectorAll('.block-item').forEach(item => {
+        const type = item.dataset.blockType;
+        if (type === 'text') {
+          const content = item.querySelector('textarea').value.trim();
+          if (content) blocks.push({ type: 'text', content });
+        } else if (type === 'image') {
+          const src = item.querySelector('.block-img-src').value;
+          const caption = item.querySelector('.block-img-caption').value.trim();
+          if (src) blocks.push({ type: 'image', src, caption });
+        }
+      });
+      return blocks;
+    }
+
     function addListItem(fieldName) {
       const container = document.querySelector(`.list-field[data-field="${fieldName}"]`);
       const div = document.createElement('div');
@@ -408,6 +552,11 @@ export const prerender = false;
       const fields = getCollFields();
       const data = {};
       fields.forEach(f => {
+        if (f.widget === 'list' && f.name === 'body') {
+          const blocks = collectBlocks();
+          if (blocks) data[f.name] = blocks;
+          return;
+        }
         if (f.widget === 'list') {
           const container = document.querySelector(`.list-field[data-field="${f.name}"]`);
           if (container) {
@@ -418,7 +567,6 @@ export const prerender = false;
           if (!el) return;
           let val = el.value;
           if (f.widget === 'number') val = val ? Number(val) : 0;
-          if (f.widget === 'text' && f.name === 'body') val = val.split(/\n\n+/).filter(p => p.trim());
           data[f.name] = val;
         }
       });

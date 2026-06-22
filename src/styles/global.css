@@ -690,6 +690,25 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1.2rem;
 }
 
+.blog-figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.blog-figure img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.blog-figure figcaption {
+  font-size: 0.9rem;
+  color: #888;
+  font-style: italic;
+  margin-top: 0.6rem;
+}
+
 .blog-card img {
   width: 220px;
   height: 180px;
