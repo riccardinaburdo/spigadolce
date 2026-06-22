@@ -317,7 +317,10 @@ export const prerender = false;
         return;
       }
 
-      const sorted = [...entries].sort((a, b) => (a.order || 999) - (b.order || 999));
+      const sorted = [...entries].sort((a, b) => {
+        const da = a.date || ''; const db = b.date || '';
+        return db.localeCompare(da);
+      });
       entries = sorted;
 
       content.innerHTML = `
