@@ -248,7 +248,12 @@ export const prerender = false;
     // --- Load collections ---
     async function loadCollections() {
       const res = await api('/api/collections', 'GET');
-      if (!res.ok) { document.getElementById('loginError').style.display = 'block'; return; }
+      if (!res.ok) {
+        sessionStorage.removeItem('dashPwd');
+        document.getElementById('loginError').style.display = 'block';
+        return;
+      }
+      sessionStorage.setItem('dashPwd', password);
       const data = await res.json();
       collections = data.collections;
       collSha = data.sha;
@@ -258,6 +263,12 @@ export const prerender = false;
       if (collections.length > 0) selectCollection(0);
       else showCollectionsView();
     }
+
+    // Auto-login from session
+    (function() {
+      const saved = sessionStorage.getItem('dashPwd');
+      if (saved) { password = saved; loadCollections(); }
+    })();
 
     // --- Sidebar ---
     function renderSidebar() {
