@@ -33,7 +33,7 @@ const articles = blogFiles
           <div class="blog-card-body">
             <h3>{a.title}</h3>
             <p class="date">{new Date(a.date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-            <p>{a.excerpt}</p>
+            {a.excerpt && <p>{a.excerpt}</p>}
             <a href={`/blog/${a.slug}`} class="btn-read-more">Read More</a>
           </div>
         </div>
