@@ -500,29 +500,39 @@ export const prerender = false;
       if (!file || !file.type.startsWith('image/')) return;
       const blockItem = el.closest('.block-item');
       const dz = blockItem.querySelector('.block-img-dz');
+      const hasSrc = blockItem.querySelector('.block-img-src').value;
+      const dzResetText = hasSrc ? 'Change image' : 'Drop image or click';
       dz.innerHTML = '<input type="file" accept="image/*" onchange="handleBlockImgSelect(this.files,this)" /><div class="img-uploading" style="font-size:.75rem"><div class="spinner" style="width:14px;height:14px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:.4rem"></div>Uploading...</div>';
 
-      const c = collections[currentView.index];
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('folder', c.name || 'blog');
+      try {
+        const c = collections[currentView.index];
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('folder', c.name || 'blog');
 
-      const res = await fetch('/api/upload', { method: 'POST', headers: { 'Authorization': 'Bearer ' + password }, body: formData });
-      if (!res.ok) { toast('Upload failed', true); return; }
-      const data = await res.json();
+        const res = await fetch('/api/upload', { method: 'POST', headers: { 'Authorization': 'Bearer ' + password }, body: formData });
+        if (!res.ok) {
+          dz.innerHTML = '<input type="file" accept="image/*" onchange="handleBlockImgSelect(this.files,this)" />' + dzResetText;
+          toast('Upload failed', true);
+          return;
+        }
+        const data = await res.json();
 
-      blockItem.querySelector('.block-img-src').value = data.path;
-      const thumbSrc = 'https://raw.githubusercontent.com/riccardinaburdo/spigadolce/main/public' + data.path;
-      // Update thumb
-      let thumb = blockItem.querySelector('.block-img-thumb');
-      if (!thumb) {
-        thumb = document.createElement('img');
-        thumb.className = 'block-img-thumb';
-        blockItem.querySelector('.block-img-row').prepend(thumb);
+        blockItem.querySelector('.block-img-src').value = data.path;
+        const thumbSrc = 'https://raw.githubusercontent.com/riccardinaburdo/spigadolce/main/public' + data.path;
+        let thumb = blockItem.querySelector('.block-img-thumb');
+        if (!thumb) {
+          thumb = document.createElement('img');
+          thumb.className = 'block-img-thumb';
+          blockItem.querySelector('.block-img-row').prepend(thumb);
+        }
+        thumb.src = thumbSrc;
+        dz.innerHTML = '<input type="file" accept="image/*" onchange="handleBlockImgSelect(this.files,this)" />Change image';
+        toast('Image uploaded!');
+      } catch (err) {
+        dz.innerHTML = '<input type="file" accept="image/*" onchange="handleBlockImgSelect(this.files,this)" />' + dzResetText;
+        toast('Upload error: ' + err.message, true);
       }
-      thumb.src = thumbSrc;
-      dz.innerHTML = '<input type="file" accept="image/*" onchange="handleBlockImgSelect(this.files,this)" />Change image';
-      toast('Image uploaded!');
     }
 
     function collectBlocks() {
