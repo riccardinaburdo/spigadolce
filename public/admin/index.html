@@ -20,8 +20,9 @@
         public_folder: "/images",
         collections: [
           {
-            name: "blog", label: "Blog", folder: "src/content/blog", create: true,
+            name: "blog", label: "Blog", folder: "src/content/blog", create: true, delete: true,
             extension: "json", format: "json", slug: "{{slug}}",
+            sortable_fields: { fields: ["order", "date", "title"], default: { field: "order" } },
             fields: [
               { label: "Slug", name: "slug", widget: "string" },
               { label: "Title", name: "title", widget: "string" },
@@ -29,12 +30,13 @@
               { label: "Excerpt", name: "excerpt", widget: "string" },
               { label: "Image", name: "image", widget: "image" },
               { label: "Body", name: "body", widget: "list", field: { label: "Paragraph", name: "paragraph", widget: "text" } },
-              { label: "Order", name: "order", widget: "number" }
+              { label: "Order", name: "order", widget: "number", hint: "Lower numbers appear first. Use 10, 20, 30... to leave room for reordering." }
             ]
           },
           {
-            name: "recipes", label: "Recipes", folder: "src/content/recipes", create: true,
+            name: "recipes", label: "Recipes", folder: "src/content/recipes", create: true, delete: true,
             extension: "json", format: "json", slug: "{{slug}}",
+            sortable_fields: { fields: ["order", "date", "title", "category"], default: { field: "order" } },
             fields: [
               { label: "Slug", name: "slug", widget: "string" },
               { label: "Title", name: "title", widget: "string" },
@@ -52,8 +54,9 @@
             ]
           },
           {
-            name: "cooking-classes", label: "Cooking Classes", folder: "src/content/cooking-classes", create: true,
+            name: "cooking-classes", label: "Cooking Classes", folder: "src/content/cooking-classes", create: true, delete: true,
             extension: "json", format: "json", slug: "{{slug}}",
+            sortable_fields: { fields: ["order", "date", "title"], default: { field: "order" } },
             fields: [
               { label: "Slug", name: "slug", widget: "string" },
               { label: "Title", name: "title", widget: "string" },
