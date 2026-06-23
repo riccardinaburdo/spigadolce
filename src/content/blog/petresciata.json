@@ -1,10 +1,9 @@
 {
   "slug": "petresciata",
-  "title": "A Rain of Sweet Memories in Andria : La Petresciata and the Tender Magic of My Hometown",
+  "title": "A Rain of Sweet Memories in Andria — La Petresciata and the Tender Magic of My Hometown",
   "date": "2026-02-14",
-  "category": "",
+  "excerpt": "What better time than Carnival to bring a little joy and lightheartedness to these cold, gray winter days?",
   "image": "/images/blog/petresciata.jpg",
-  "imageCaption": "",
   "body": [
     {
       "type": "text",
@@ -40,7 +39,8 @@
     },
     {
       "type": "text",
-      "content": "For me, this tradition is even more special, because Andria is my hometown Ã¢ÂÂ a beautiful city in Puglia, in the heart of Italy."
+      "content": "For me, this tradition is even more special, because Andria is my hometown — a beautiful city in Puglia, in the heart of Italy."
     }
-  ]
+  ],
+  "order": 1
 }

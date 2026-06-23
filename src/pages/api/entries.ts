@@ -55,7 +55,7 @@ export const GET: APIRoute = async ({ request }) => {
       if (!fileRes.ok) return null;
       const fileData = await fileRes.json();
       try {
-        const content = JSON.parse(atob(fileData.content));
+        const content = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
         return { path: f.path, sha: fileData.sha, name: f.name, ...content };
       } catch {
         return null;

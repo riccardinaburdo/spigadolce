@@ -32,7 +32,7 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   const data = await res.json();
-  const content = JSON.parse(atob(data.content));
+  const content = JSON.parse(decodeURIComponent(escape(atob(data.content))));
   return new Response(JSON.stringify({ collections: content, sha: data.sha }), {
     headers: { 'Content-Type': 'application/json' },
   });
