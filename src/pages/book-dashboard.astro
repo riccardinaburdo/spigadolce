@@ -366,6 +366,7 @@ export const prerender = false;
             <h2>${isNew ? 'New Recipe' : 'Edit: ' + (data.title || 'Untitled')}</h2>
             <div class="editor-actions">
               <button class="btn btn-outline" onclick="backToList()">Back</button>
+              ${!isNew && data.published && data.slug ? `<a class="btn btn-outline" href="/book/${data.slug}" target="_blank">Preview</a>` : ''}
               ${!isNew ? `<button class="btn btn-danger" onclick="deleteRecipe()">Delete</button>` : ''}
               <button class="btn btn-primary" id="saveBtn" onclick="saveRecipe()">Save</button>
             </div>
