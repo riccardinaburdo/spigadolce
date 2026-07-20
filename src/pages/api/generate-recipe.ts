@@ -69,7 +69,7 @@ Return ONLY valid JSON, no markdown, no explanation.`;
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-3-haiku-20240307',
         max_tokens: 4000,
         messages: [{ role: 'user', content: prompt }]
       })
