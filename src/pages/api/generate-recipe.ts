@@ -88,12 +88,26 @@ Return ONLY valid JSON, no markdown, no explanation.`;
     try {
       generated = JSON.parse(text);
     } catch {
-      // Try to extract JSON from the response
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        generated = JSON.parse(jsonMatch[0]);
+      // Try to extract JSON from markdown code blocks
+      const codeBlockMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+      if (codeBlockMatch) {
+        try {
+          generated = JSON.parse(codeBlockMatch[1].trim());
+        } catch {
+          return new Response(JSON.stringify({ error: 'Failed to parse AI response from code block', raw: text.substring(0, 500) }), { status: 500 });
+        }
       } else {
-        return new Response(JSON.stringify({ error: 'Failed to parse AI response', raw: text }), { status: 500 });
+        // Try to extract raw JSON object
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          try {
+            generated = JSON.parse(jsonMatch[0]);
+          } catch {
+            return new Response(JSON.stringify({ error: 'Failed to parse extracted JSON', raw: text.substring(0, 500) }), { status: 500 });
+          }
+        } else {
+          return new Response(JSON.stringify({ error: 'No JSON found in AI response', raw: text.substring(0, 500) }), { status: 500 });
+        }
       }
     }
 
