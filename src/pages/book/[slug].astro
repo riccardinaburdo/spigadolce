@@ -1001,8 +1001,12 @@ const { recipe } = Astro.props;
     <p style="margin-top: 0.5rem;"><a href="https://spigadolce.com">spigadolce.com</a></p>
   </div>
 
-  <script define:vars={{ mediaItems: recipe.media, ingredients: recipe.ingredients, baseServings: recipe.baseServings }}>
-    const BASE_SERVINGS = baseServings;
+  <script id="recipe-data" type="application/json" set:html={JSON.stringify({ media: recipe.media, ingredients: recipe.ingredients, baseServings: recipe.baseServings || 4 })}></script>
+  <script>
+    const _data = JSON.parse(document.getElementById('recipe-data').textContent);
+    const mediaItems = _data.media;
+    const ingredients = _data.ingredients;
+    const BASE_SERVINGS = _data.baseServings;
     let currentServings = BASE_SERVINGS;
 
     function renderIngredients() {
