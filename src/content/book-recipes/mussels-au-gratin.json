@@ -3,7 +3,7 @@
   "title": "Mussels au gratin",
   "bookPage": 8,
   "coverImage": "/images/book/mussels-au-gratin-hr-1784554893601.png",
-  "published": false,
+  "published": true,
   "date": "2026-07-20",
   "media": [
     {
@@ -177,7 +177,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-07-20T14:41:00.753Z"
+    "lastGenerated": "2026-07-20T19:37:55.150Z"
   },
   "_manualEdits": []
 }
