@@ -71,7 +71,6 @@ Return ONLY valid JSON, no markdown, no explanation.`;
       body: JSON.stringify({
         model: 'claude-sonnet-5',
         max_tokens: 4000,
-        temperature: 0,
         thinking: { type: 'disabled' },
         messages: [
           { role: 'user', content: prompt },
