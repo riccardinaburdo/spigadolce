@@ -73,8 +73,7 @@ Return ONLY valid JSON, no markdown, no explanation.`;
         max_tokens: 4000,
         thinking: { type: 'disabled' },
         messages: [
-          { role: 'user', content: prompt },
-          { role: 'assistant', content: '{' }
+          { role: 'user', content: prompt }
         ]
       })
     });
@@ -89,8 +88,8 @@ Return ONLY valid JSON, no markdown, no explanation.`;
     const textBlock = result.content?.find((b: any) => b.type === 'text');
     const text = textBlock?.text || result.content?.[0]?.text || '';
 
-    // Parse the JSON from Claude's response (prefilled with '{')
-    const fullJson = '{' + text;
+    // Parse the JSON from Claude's response
+    const fullJson = text;
     let generated;
     try {
       generated = JSON.parse(fullJson);
