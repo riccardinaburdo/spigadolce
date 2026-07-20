@@ -1,0 +1,183 @@
+{
+  "slug": "mussels-au-gratin",
+  "title": "Mussels au gratin",
+  "bookPage": null,
+  "coverImage": "/images/book/mussels-au-gratin-hr-1784554893601.png",
+  "published": false,
+  "date": "2026-07-20",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1784554913235.jpg",
+      "caption": "Fresh mussels being cleaned and scrubbed under running water"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1784554918286.jpg",
+      "caption": "Mussels opened on a tray, ready to be filled"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/03-1784554925666.jpg",
+      "caption": "Bread, garlic, and parsley being finely chopped for the topping"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/04-1784554940572.jpeg",
+      "caption": "Breadcrumb mixture combined with olive oil, garlic, and parsley"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/05-1784554945056.jpg",
+      "caption": "Mussels topped generously with the breadcrumb mixture"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/06-1784554949631.jpeg",
+      "caption": "Stuffed mussels arranged in a baking dish before going into the oven"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/07-1784554954571.jpeg",
+      "caption": "Golden, gratinated mussels fresh out of the oven, ready to serve"
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 1,
+      "unit": "kg",
+      "name": "mussels"
+    },
+    {
+      "qty": 1,
+      "unit": "tbsp",
+      "name": "chopped parsley"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "slice of stale bread"
+    },
+    {
+      "qty": 1,
+      "unit": "clove",
+      "name": "garlic"
+    },
+    {
+      "qty": 3,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "pepper (optional)"
+    }
+  ],
+  "nutrition": {
+    "calories": 180,
+    "protein": 14,
+    "carbs": 8,
+    "fat": 10,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "180 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "10 g"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.5 g",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "6.5 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "8 g"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "0.8 g",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "0.5 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "14 g"
+      },
+      {
+        "name": "Sodium",
+        "value": "320 mg (13% DV)"
+      },
+      {
+        "name": "Vitamin B12",
+        "value": "180% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "25% DV"
+      },
+      {
+        "name": "Selenium",
+        "value": "60% DV"
+      },
+      {
+        "name": "Zinc",
+        "value": "20% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🦪",
+      "title": "Rich in Vitamin B12",
+      "text": "Mussels are one of the richest natural sources of vitamin B12, essential for nerve function and red blood cell formation."
+    },
+    {
+      "icon": "💪",
+      "title": "High-Quality Protein",
+      "text": "Mussels provide lean, complete protein that supports muscle repair and growth with minimal saturated fat."
+    },
+    {
+      "icon": "❤️",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil supplies monounsaturated fats and antioxidants that support cardiovascular health."
+    },
+    {
+      "icon": "🧠",
+      "title": "Omega-3 Fatty Acids",
+      "text": "Mussels contain omega-3s that contribute to brain function and help reduce inflammation."
+    },
+    {
+      "icon": "🧄",
+      "title": "Immune Support",
+      "text": "Garlic contains allicin, a compound known for its antibacterial and immune-boosting properties."
+    },
+    {
+      "icon": "🩸",
+      "title": "Good Source of Iron",
+      "text": "Mussels offer a notable amount of iron, important for oxygen transport and preventing fatigue."
+    }
+  ],
+  "_ingredientsText": "1 kg mussels\n• 1 tablespoon chopped parsley\n• 1 slice of stale bread\n• 1 clove of garlic\n• 3 tablespoons extra virgin olive oil\n• pepper (optional)",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-07-20T14:33:44.344Z"
+  },
+  "_manualEdits": []
+}
