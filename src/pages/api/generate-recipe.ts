@@ -1,0 +1,106 @@
+import type { APIRoute } from 'astro';
+
+const ADMIN_PASSWORD = import.meta.env.ADMIN_PASSWORD;
+const ANTHROPIC_API_KEY = import.meta.env.ANTHROPIC_API_KEY;
+
+export const POST: APIRoute = async ({ request }) => {
+  const auth = request.headers.get('Authorization');
+  if (!auth || auth !== `Bearer ${ADMIN_PASSWORD}`) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
+  }
+
+  const body = await request.json();
+  const { title, ingredientsText, mediaFiles, baseServings } = body;
+
+  // Build prompt for Claude
+  const prompt = `You are a professional chef and nutritionist specializing in traditional Pugliese cuisine.
+
+Given this recipe information, generate structured data in JSON format.
+
+Recipe title: ${title}
+Base servings: ${baseServings || 4}
+Ingredients (raw text from the user):
+${ingredientsText}
+
+Media files uploaded (generate captions for each):
+${mediaFiles?.map((f: any, i: number) => `${i + 1}. ${f.filename} (${f.type})`).join('\n') || 'None yet'}
+
+Generate a JSON object with these fields:
+
+1. "ingredients": array of objects with { "qty": number|null, "unit": string, "name": string }
+   - Parse the raw text into structured ingredients
+   - qty should be a number (e.g., 1.5) or null for "to taste"
+   - unit should be: "g", "kg", "ml", "l", "tbsp", "tsp", "clove", "" (empty for count items)
+   - name should be the ingredient name in English
+
+2. "mediaCaptions": array of strings, one caption per media file (short, descriptive, in English)
+
+3. "nutrition": object with:
+   - "calories": number (kcal per serving)
+   - "protein": number (grams)
+   - "carbs": number (grams)
+   - "fat": number (grams)
+   - "detail": array of { "name": string, "value": string, "sub": boolean? }
+     Include: Calories, Total Fat, Saturated Fat (sub), Monounsaturated Fat (sub), Carbohydrates, Dietary Fibre (sub), Sugars (sub), Protein, Sodium, and relevant vitamins/minerals with %DV
+
+4. "healthBenefits": array of 4-6 objects with { "icon": string (emoji), "title": string, "text": string }
+   - Focus on specific health benefits of the key ingredients in this recipe
+   - Be factual and concise
+
+Return ONLY valid JSON, no markdown, no explanation.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 4000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!response.ok) {
+      const err = await response.text();
+      return new Response(JSON.stringify({ error: 'AI API error', details: err }), { status: 500 });
+    }
+
+    const result = await response.json();
+    const text = result.content?.[0]?.text || '';
+
+    // Parse the JSON from Claude's response
+    let generated;
+    try {
+      generated = JSON.parse(text);
+    } catch {
+      // Try to extract JSON from the response
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        generated = JSON.parse(jsonMatch[0]);
+      } else {
+        return new Response(JSON.stringify({ error: 'Failed to parse AI response', raw: text }), { status: 500 });
+      }
+    }
+
+    return new Response(JSON.stringify({
+      ok: true,
+      generated,
+      _aiGenerated: {
+        mediaCaptions: true,
+        ingredients: true,
+        nutrition: true,
+        healthBenefits: true,
+        lastGenerated: new Date().toISOString()
+      }
+    }), {
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+  } catch (err: any) {
+    return new Response(JSON.stringify({ error: 'Server error', message: err.message }), { status: 500 });
+  }
+};

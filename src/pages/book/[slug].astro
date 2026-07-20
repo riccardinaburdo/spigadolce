@@ -1,0 +1,1125 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+export function getStaticPaths() {
+  const dir = path.join(process.cwd(), 'src/content/book-recipes');
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
+  return files
+    .map(f => {
+      const data = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf-8'));
+      return { params: { slug: data.slug }, props: { recipe: data } };
+    })
+    .filter(entry => entry.props.recipe.published === true);
+}
+
+const { recipe } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{recipe.title} | Spigadolce Book</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-gold: #f5c211;
+      --color-dark: #3B1A0E;
+      --color-dark-bg: #2C1208;
+      --color-warm: #f6f5f4;
+      --color-cream: #fdf9f5;
+      --color-white: #FFFFFF;
+      --color-text: #3d3846;
+      --color-accent: #ff7800;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Lato', sans-serif;
+      --max-width: 900px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--color-text); line-height: 1.7; background: var(--color-white); }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.3; font-weight: 400; }
+
+    /* ===== PLACEHOLDER IMAGES ===== */
+    .placeholder-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: linear-gradient(135deg, #d4a574 0%, #c4956a 40%, #b8845e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ===== BOOK HEADER ===== */
+    .book-header {
+      background: var(--color-accent);
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    .book-logo {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .book-badge {
+      display: inline-block;
+      background: var(--color-dark-bg);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.25rem 0.8rem;
+      border-radius: 20px;
+      margin-top: 0.5rem;
+    }
+
+    /* ===== HERO ===== */
+    .recipe-hero {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #d4a574 0%, #a07050 50%, #7a5540 100%);
+    }
+    .recipe-hero .placeholder-img {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.3);
+    }
+    .recipe-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 40%, rgba(0,0,0,0.7));
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: center;
+      padding: 2.5rem;
+    }
+    .recipe-hero-overlay .category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-gold);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .recipe-hero-overlay h1 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .recipe-hero-overlay .tagline {
+      font-style: italic;
+      color: rgba(255,255,255,0.85);
+      font-size: 1.05rem;
+    }
+    .book-ref {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* ===== META BAR ===== */
+    .recipe-meta-bar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1.2rem 2rem;
+      background: var(--color-cream);
+      border-bottom: 1px solid rgba(200,169,110,0.25);
+      flex-wrap: wrap;
+    }
+    .meta-item { text-align: center; }
+    .meta-item .label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--color-gold);
+      font-weight: 700;
+    }
+    .meta-item .value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-dark);
+    }
+
+    /* ===== CONTENT WRAPPER ===== */
+    .content-wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-title {
+      font-size: 1.8rem;
+      color: var(--color-dark);
+      margin: 3rem 0 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--color-gold);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-title .icon { font-size: 1.4rem; }
+
+    /* ===== INGREDIENTS COVER ===== */
+    .ingredients-cover {
+      margin-top: 2.5rem;
+    }
+    .ingredients-cover-inner {
+      background: #e8f5e0;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+    .ingredients-cover-inner h3 {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #3a3a3a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.2rem;
+    }
+    .ic-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.8rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .ic-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .ic-item svg {
+      width: 60px;
+      height: 60px;
+    }
+    .ic-item span {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #3a3a3a;
+      text-align: center;
+    }
+    @media (max-width: 480px) {
+      .ic-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .ic-item svg { width: 55px; height: 55px; }
+    }
+
+    /* ===== MEDIA GALLERY ===== */
+    .media-section { margin-top: 2rem; }
+
+    .media-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.6rem;
+    }
+    .media-thumb {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .media-thumb:hover { transform: scale(1.03); border-color: var(--color-accent); }
+    .media-thumb .thumb-placeholder {
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(135deg, #c4956a, #a07050);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .media-thumb img.thumb-img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+    .media-thumb .thumb-video-placeholder {
+      width: 100%;
+      height: 120px;
+      position: relative;
+    }
+    .media-thumb .thumb-video-placeholder .thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .thumb-play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,120,0,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 3px;
+    }
+    .media-thumb .thumb-ingredients-placeholder {
+      width: 100%;
+      height: 120px;
+      background: #e8f5e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.5rem;
+    }
+    .media-thumb .thumb-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 0.3rem 0.5rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    /* ===== LIGHTBOX POPUP ===== */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .lightbox-overlay.open { display: flex; }
+    .lightbox-box {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .lightbox-box img {
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 8px;
+      display: none;
+    }
+    .lightbox-box video {
+      max-width: 100%;
+      max-height: 75vh;
+      border-radius: 8px;
+      display: none;
+      background: #000;
+    }
+    .lightbox-box iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+      border-radius: 8px;
+      display: none;
+    }
+    .lightbox-box img.visible,
+    .lightbox-box video.visible,
+    .lightbox-box iframe.visible { display: block; }
+    .lightbox-caption {
+      color: #fff;
+      font-size: 0.9rem;
+      margin-top: 0.8rem;
+      text-align: center;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      line-height: 1;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
+    .lightbox-prev { left: -55px; }
+    .lightbox-next { right: -55px; }
+    .lightbox-counter {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+    }
+    /* Lightbox ingredients panel */
+    .lb-ingredients {
+      display: none;
+      background: #e8f5e0;
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      max-width: 520px;
+      width: 100%;
+    }
+    .lb-ingredients.visible { display: block; }
+    .lb-ingredients h3 {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #3a3a3a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.5rem;
+    }
+    .lb-ing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem 1.5rem;
+    }
+    .lb-ing-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .lb-ing-item svg {
+      width: 80px;
+      height: 80px;
+    }
+    .lb-ing-item span {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #3a3a3a;
+    }
+    @media (max-width: 480px) {
+      .lb-ing-grid { grid-template-columns: repeat(2, 1fr); }
+      .lb-ing-item svg { width: 65px; height: 65px; }
+    }
+
+    @media (max-width: 768px) {
+      .lightbox-prev { left: 5px; }
+      .lightbox-next { right: 5px; }
+      .lightbox-nav { width: 36px; height: 36px; font-size: 1.4rem; }
+    }
+    .media-thumb .thumb-number {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .media-thumb .thumb-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+    .media-thumb .thumb-badge.video {
+      background: var(--color-accent);
+    }
+    .media-thumb .thumb-badge.photo {
+      background: var(--color-gold);
+    }
+
+    /* ===== INGREDIENTS WITH CALCULATOR ===== */
+    .ingredients-section { margin-top: 1rem; }
+    .servings-calculator {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--color-cream);
+      border: 1px solid rgba(200,169,110,0.3);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .servings-calculator .calc-label {
+      font-size: 0.9rem;
+      color: var(--color-dark);
+      font-weight: 600;
+    }
+    .servings-controls {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 2px solid var(--color-accent);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .servings-controls button {
+      width: 42px;
+      height: 42px;
+      border: none;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .servings-controls button:hover { background: #e66100; }
+    .servings-controls .servings-value {
+      width: 60px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      background: #fff;
+      border: none;
+      font-family: var(--font-body);
+    }
+    .servings-calculator .calc-note {
+      font-size: 0.8rem;
+      color: #999;
+      font-style: italic;
+    }
+
+    .ingredients-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .ingredient-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: background 0.2s;
+      border-radius: 6px;
+    }
+    .ingredient-item:hover { background: var(--color-cream); }
+    .ing-qty { font-weight: 700; color: var(--color-dark); min-width: 80px; font-size: 0.95rem; }
+    .ing-name { flex: 1; font-size: 0.95rem; color: #555; }
+    .ing-info-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-gold);
+      background: none;
+      color: var(--color-gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      font-family: var(--font-heading);
+      font-style: italic;
+    }
+    .ing-info-btn:hover { background: var(--color-gold); color: #fff; }
+
+    /* ===== INGREDIENT DETAIL PANEL ===== */
+    .ingredient-detail {
+      display: none;
+      background: var(--color-cream);
+      border: 1px solid rgba(200,169,110,0.25);
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin: 0.5rem 0 0.8rem 0;
+      animation: slideDown 0.3s ease;
+    }
+    .ingredient-detail.open { display: block; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .ing-detail-header {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .ing-detail-photo {
+      width: 180px;
+      height: 140px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .ing-detail-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .ingredient-detail h4 {
+      font-size: 1.3rem;
+      color: var(--color-dark);
+      margin: 0;
+      border-bottom: 2px solid var(--color-gold);
+      padding-bottom: 0.4rem;
+    }
+    .ing-detail-section-title {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin: 1rem 0 0.4rem;
+    }
+    .ing-detail-section-title:first-of-type { margin-top: 0; }
+    .ingredient-detail p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.75;
+      margin: 0;
+    }
+    /* Origin area */
+    .ing-origin-area {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    .ing-origin-area p {
+      font-size: 0.85rem;
+    }
+    .ing-map-puglia {
+      flex-shrink: 0;
+    }
+    /* Season wheel */
+    .ing-season-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .season-wheel {
+      width: 130px;
+      height: 130px;
+      flex-shrink: 0;
+    }
+    .season-wheel-label {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    /* Variants */
+    .ing-variants {
+      margin-top: 1rem;
+    }
+    .ing-variant-item {
+      display: flex;
+      gap: 0.6rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      align-items: flex-start;
+    }
+    .ing-variant-item:last-child { border-bottom: none; }
+    .ing-variant-bullet {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+    }
+    .ing-variant-item strong {
+      font-size: 0.88rem;
+      color: var(--color-dark);
+    }
+    .ing-variant-item span {
+      font-size: 0.82rem;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .ing-detail-header { flex-direction: column; }
+      .ing-detail-photo { width: 100%; height: 180px; }
+      .ing-season-block { flex-direction: column; align-items: center; }
+      .ing-origin-area { flex-direction: column; align-items: center; }
+    }
+
+    /* ===== NUTRITIONAL INFO ===== */
+    .nutrition-section { margin-top: 1rem; }
+    .nutrition-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .nutrition-card {
+      background: var(--color-cream);
+      border: 1px solid rgba(200,169,110,0.25);
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .nutrition-card .nut-value { font-size: 1.6rem; font-weight: 700; color: var(--color-dark); line-height: 1; }
+    .nutrition-card .nut-unit { font-size: 0.7rem; font-weight: 400; color: #999; }
+    .nutrition-card .nut-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-gold);
+      font-weight: 700;
+      margin-top: 0.4rem;
+    }
+    .nutrition-detail { background: var(--color-cream); border-radius: 12px; padding: 1.5rem; }
+    .nutrition-detail h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-gold);
+      font-weight: 700;
+      font-family: var(--font-body);
+      margin-bottom: 1rem;
+    }
+    .nut-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      font-size: 0.9rem;
+    }
+    .nut-row:last-child { border-bottom: none; }
+    .nut-row .nut-name { color: #555; }
+    .nut-row .nut-val { font-weight: 600; color: var(--color-dark); }
+    .nut-row.sub { padding-left: 1.2rem; }
+    .nut-row.sub .nut-name { font-size: 0.85rem; color: #888; }
+    .nutrition-note {
+      font-size: 0.8rem;
+      color: #999;
+      font-style: italic;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* ===== HEALTH BENEFITS ===== */
+    .health-benefits {
+      margin-top: 1.5rem;
+      background: var(--color-cream);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .health-benefits h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-gold);
+      font-weight: 700;
+      font-family: var(--font-body);
+      margin-bottom: 1rem;
+    }
+    .benefit-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .benefit-item:last-child { border-bottom: none; }
+    .benefit-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(51,209,122,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+    .benefit-text { flex: 1; }
+    .benefit-text strong {
+      font-size: 0.9rem;
+      color: var(--color-dark);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+    .benefit-text span {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.6;
+    }
+    .benefit-source {
+      display: inline-block;
+      font-size: 0.7rem;
+      color: #999;
+      font-style: italic;
+      margin-left: 0.3rem;
+    }
+
+    /* ===== FOOTER ===== */
+    .book-footer {
+      background: #1a1a1a;
+      color: #888;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      margin-top: 3rem;
+    }
+    .book-footer a { color: var(--color-gold); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .recipe-hero { height: 280px; }
+      .recipe-hero-overlay h1 { font-size: 1.6rem; }
+      .recipe-hero-overlay { padding: 1.2rem; }
+      .nutrition-grid { grid-template-columns: repeat(2, 1fr); }
+      .servings-calculator {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        gap: 0.6rem;
+      }
+      .servings-calculator .calc-note { width: 100%; }
+      .content-wrap { padding: 0 1rem; }
+      .section-title { font-size: 1.4rem; margin: 2rem 0 1rem; }
+      .media-thumbnails { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+      .media-thumb .thumb-label { font-size: 0.6rem; padding: 0.2rem 0.3rem; }
+      .media-thumb .thumb-number { width: 20px; height: 20px; font-size: 0.6rem; }
+      .media-thumb img.thumb-img,
+      .media-thumb .thumb-video-placeholder { height: 100px; }
+      .lightbox-box img, .lightbox-box video { max-height: 65vh; }
+      .lightbox-box iframe { max-height: 40vh; }
+      .lightbox-caption { font-size: 0.8rem; }
+      .ingredient-item { padding: 0.6rem 0.5rem; gap: 0.6rem; }
+      .ing-qty { min-width: 65px; font-size: 0.88rem; }
+      .ing-name { font-size: 0.88rem; }
+      .nutrition-detail { padding: 1rem; }
+      .nut-row { font-size: 0.82rem; }
+      .health-benefits { padding: 1rem; }
+      .benefit-item { gap: 0.7rem; }
+      .benefit-text strong { font-size: 0.85rem; }
+      .benefit-text span { font-size: 0.8rem; }
+      .book-header { padding: 0.8rem 1rem; }
+      .book-footer { padding: 1.5rem 1rem; }
+    }
+    @media (max-width: 480px) {
+      .recipe-hero { height: 220px; }
+      .recipe-hero-overlay h1 { font-size: 1.3rem; }
+      .nutrition-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+      .nutrition-card { padding: 0.8rem 0.6rem; }
+      .nutrition-card .nut-value { font-size: 1.3rem; }
+      .media-thumbnails { grid-template-columns: repeat(2, 1fr); }
+      .media-thumb img.thumb-img,
+      .media-thumb .thumb-video-placeholder { height: 110px; }
+      .section-title { font-size: 1.2rem; }
+      .servings-controls button { width: 38px; height: 38px; font-size: 1.1rem; }
+      .servings-controls .servings-value { width: 48px; font-size: 1rem; }
+      .lightbox-prev { left: 3px; }
+      .lightbox-next { right: 3px; }
+      .lightbox-nav { width: 32px; height: 32px; font-size: 1.2rem; }
+      .lightbox-close { top: -32px; font-size: 1.6rem; }
+      .lightbox-overlay { padding: 0.8rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div class="book-header">
+    <a href="https://spigadolce.com" class="book-logo">Spigadolce</a>
+    <br>
+    <span class="book-badge">Exclusive Book Content</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="recipe-hero">
+    <img src={recipe.coverImage} alt={recipe.title} style="width:100%;height:100%;object-fit:cover;">
+    <div class="recipe-hero-overlay">
+      <h1>{recipe.title}</h1>
+    </div>
+  </div>
+
+  <div class="content-wrap">
+
+    <!-- ===== MEDIA GALLERY ===== -->
+    <div class="media-section">
+      <h2 class="section-title"><span class="icon">&#9654;</span> Photo &amp; Video Gallery</h2>
+      <div class="media-thumbnails" id="media-thumbnails">
+        <!-- Generated via JS -->
+      </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox-overlay" id="lightbox">
+      <div class="lightbox-box">
+        <button class="lightbox-close" id="lb-close">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lb-prev">&#8249;</button>
+        <button class="lightbox-nav lightbox-next" id="lb-next">&#8250;</button>
+        <img id="lb-img" src="" alt="">
+        <video id="lb-video" controls playsinline preload="metadata"></video>
+        <iframe id="lb-youtube" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        <div class="lb-ingredients" id="lb-ingredients">
+          <h3>What You'll Need</h3>
+          <div class="lb-ing-grid" id="lb-ing-grid">
+          </div>
+        </div>
+        <div class="lightbox-caption" id="lb-caption"></div>
+        <div class="lightbox-counter" id="lb-counter"></div>
+      </div>
+    </div>
+
+    <!-- ===== INGREDIENTS WITH CALCULATOR ===== -->
+    <div class="ingredients-section">
+      <h2 class="section-title"><span class="icon">&#127860;</span> Ingredients</h2>
+
+      <div class="servings-calculator">
+        <span class="calc-label">Adjust for</span>
+        <div class="servings-controls">
+          <button id="servings-minus">&minus;</button>
+          <input type="text" class="servings-value" id="servings-input" value={recipe.baseServings} readonly>
+          <button id="servings-plus">+</button>
+        </div>
+        <span class="calc-label">people</span>
+        <span class="calc-note">(original recipe: {recipe.baseServings} servings)</span>
+      </div>
+
+      <ul class="ingredients-list" id="ingredients-list"></ul>
+    </div>
+
+    <!-- ===== NUTRITIONAL INFO ===== -->
+    <div class="nutrition-section">
+      <h2 class="section-title"><span class="icon">&#127823;</span> Nutritional Information</h2>
+
+      <div class="nutrition-grid">
+        <div class="nutrition-card">
+          <div class="nut-value">{recipe.nutrition.calories} <span class="nut-unit">kcal</span></div>
+          <div class="nut-label">Calories</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nut-value">{recipe.nutrition.protein} <span class="nut-unit">g</span></div>
+          <div class="nut-label">Protein</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nut-value">{recipe.nutrition.carbs} <span class="nut-unit">g</span></div>
+          <div class="nut-label">Carbs</div>
+        </div>
+        <div class="nutrition-card">
+          <div class="nut-value">{recipe.nutrition.fat} <span class="nut-unit">g</span></div>
+          <div class="nut-label">Fat</div>
+        </div>
+      </div>
+
+      <div class="nutrition-detail">
+        <h4>Per serving (1 of {recipe.baseServings})</h4>
+        {recipe.nutrition.detail.map((row: any) => (
+          <div class={`nut-row${row.sub ? ' sub' : ''}`}>
+            <span class="nut-name">{row.name}</span>
+            <span class="nut-val">{row.value}</span>
+          </div>
+        ))}
+      </div>
+      <p class="nutrition-note">* Values are estimates based on typical ingredients. Actual values may vary.</p>
+
+      <div class="health-benefits">
+        <h4>Health Benefits</h4>
+        {recipe.healthBenefits.map((benefit: any) => (
+          <div class="benefit-item">
+            <div class="benefit-icon">{benefit.icon}</div>
+            <div class="benefit-text">
+              <strong>{benefit.title}</strong>
+              <span>{benefit.text}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="book-footer">
+    <p>&copy; 2026 Spigadolce. This content is exclusively for book owners.</p>
+    <p style="margin-top: 0.5rem;"><a href="https://spigadolce.com">spigadolce.com</a></p>
+  </div>
+
+  <script define:vars={{ mediaItems: recipe.media, ingredients: recipe.ingredients, baseServings: recipe.baseServings }}>
+    const BASE_SERVINGS = baseServings;
+    let currentServings = BASE_SERVINGS;
+
+    function renderIngredients() {
+      const list = document.getElementById('ingredients-list');
+      list.innerHTML = '';
+      const ratio = currentServings / BASE_SERVINGS;
+
+      ingredients.forEach((ing, i) => {
+        const li = document.createElement('li');
+        li.className = 'ingredient-item';
+        const adjustedQty = ing.qty !== null ? (ing.qty * ratio) : null;
+        let qtyDisplay = '';
+        if (adjustedQty !== null) {
+          qtyDisplay = adjustedQty % 1 === 0 ? adjustedQty.toString() : adjustedQty.toFixed(1);
+          qtyDisplay += ing.unit ? ' ' + ing.unit : '';
+        }
+        li.innerHTML = `
+          <span class="ing-qty">${qtyDisplay}</span>
+          <span class="ing-name">${ing.name}</span>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    function updateServings(newVal) {
+      currentServings = Math.max(1, Math.min(20, newVal));
+      document.getElementById('servings-input').value = currentServings;
+      renderIngredients();
+    }
+
+    document.getElementById('servings-minus').addEventListener('click', () => updateServings(currentServings - 1));
+    document.getElementById('servings-plus').addEventListener('click', () => updateServings(currentServings + 1));
+    renderIngredients();
+
+    // ===== MEDIA GALLERY =====
+    const thumbsContainer = document.getElementById('media-thumbnails');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbVideo = document.getElementById('lb-video');
+    const lbYoutube = document.getElementById('lb-youtube');
+    const lbIngredients = document.getElementById('lb-ingredients');
+    const lbCaption = document.getElementById('lb-caption');
+    const lbCounter = document.getElementById('lb-counter');
+    let currentLb = 0;
+
+    function openLightbox(index) {
+      currentLb = index;
+      const item = mediaItems[index];
+
+      // Hide all
+      lbImg.classList.remove('visible');
+      lbVideo.classList.remove('visible');
+      lbVideo.pause();
+      lbYoutube.classList.remove('visible');
+      lbYoutube.src = '';
+      lbIngredients.classList.remove('visible');
+
+      if (item.type === 'photo') {
+        lbImg.src = item.src;
+        lbImg.alt = item.caption;
+        lbImg.classList.add('visible');
+      } else if (item.type === 'youtube') {
+        lbYoutube.src = item.src + '&autoplay=1';
+        lbYoutube.classList.add('visible');
+      } else {
+        lbVideo.src = item.src;
+        lbVideo.classList.add('visible');
+        lbVideo.play();
+      }
+
+      lbCaption.textContent = item.caption;
+      lbCounter.textContent = (index + 1) + ' / ' + mediaItems.length;
+      lightbox.classList.add('open');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lbVideo.pause();
+      lbYoutube.src = '';
+    }
+
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.getElementById('lb-prev').addEventListener('click', () => openLightbox((currentLb - 1 + mediaItems.length) % mediaItems.length));
+    document.getElementById('lb-next').addEventListener('click', () => openLightbox((currentLb + 1) % mediaItems.length));
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') openLightbox((currentLb - 1 + mediaItems.length) % mediaItems.length);
+      if (e.key === 'ArrowRight') openLightbox((currentLb + 1) % mediaItems.length);
+    });
+
+    // Render thumbnails
+    mediaItems.forEach((item, i) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'media-thumb';
+      const isVideo = (item.type === 'youtube' || item.type === 'video');
+      let thumbContent;
+      if (isVideo) {
+        const thumbSrc = item.thumbnail || '';
+        thumbContent = `<div class="thumb-video-placeholder">
+          <img class="thumb-img" src="${thumbSrc}" alt="${item.caption}">
+          <div class="thumb-play-icon"><svg viewBox="0 0 24 24" width="24" height="24"><polygon points="5,3 19,12 5,21" fill="#fff"/></svg></div>
+        </div>`;
+      } else {
+        thumbContent = `<img class="thumb-img" src="${item.src}" alt="${item.caption}">`;
+      }
+      thumb.innerHTML = `
+        ${thumbContent}
+        <span class="thumb-number">${i + 1}</span>
+        ${isVideo ? '<span class="thumb-badge video">Video</span>' : ''}
+        <div class="thumb-label">${item.caption}</div>
+      `;
+      thumb.addEventListener('click', () => openLightbox(i));
+      thumbsContainer.appendChild(thumb);
+    });
+  </script>
+
+</body>
+</html>

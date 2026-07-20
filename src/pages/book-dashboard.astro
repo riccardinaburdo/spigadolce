@@ -1,0 +1,1014 @@
+---
+export const prerender = false;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Spigadolce — Book Recipes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style is:global>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Lato', sans-serif; background: #f5f0eb; color: #3a2a1a; min-height: 100vh; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+    /* Login */
+    .login-wrap { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-box { background: #fff; padding: 2.5rem; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.08); max-width: 380px; width: 90%; }
+    .login-box h1 { font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
+    .login-box input { width: 100%; padding: .75rem 1rem; border: 1px solid #d4c5b0; border-radius: 8px; font-size: 1rem; margin-bottom: 1rem; }
+    .login-box button { width: 100%; padding: .75rem; background: #2e8b57; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .2s; }
+    .login-box button:hover { background: #256e46; }
+    .login-error { color: #c0392b; font-size: .875rem; margin-bottom: .75rem; display: none; text-align: center; }
+
+    /* Top bar */
+    .topbar { background: #3a2a1a; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; height: 56px; }
+    .topbar h1 { font-size: 1.1rem; font-family: 'Lato', sans-serif; font-weight: 700; letter-spacing: .5px; }
+    .topbar-links a { color: #d4a849; text-decoration: none; font-size: .85rem; font-weight: 700; margin-left: 1.25rem; }
+    .topbar-links a:hover { color: #f0c050; }
+
+    /* Content */
+    .content { padding: 1.5rem 2rem; background: #f5f0eb; min-height: calc(100vh - 56px); }
+    .content-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: .5rem; }
+    .content-header h2 { font-size: 1.5rem; }
+
+    /* Buttons */
+    .btn { padding: .5rem 1.1rem; border: none; border-radius: 8px; font-size: .85rem; font-weight: 700; cursor: pointer; transition: all .15s; display: inline-flex; align-items: center; gap: .4rem; }
+    .btn-primary { background: #2e8b57; color: #fff; }
+    .btn-primary:hover { background: #256e46; }
+    .btn-outline { background: #fff; border: 1.5px solid #d4c5b0; color: #3a2a1a; }
+    .btn-outline:hover { border-color: #b8860b; color: #b8860b; }
+    .btn-danger { background: #e74c3c; color: #fff; }
+    .btn-danger:hover { background: #c0392b; }
+    .btn-gold { background: #b8860b; color: #fff; }
+    .btn-gold:hover { background: #9a7209; }
+    .btn-sm { padding: .35rem .75rem; font-size: .8rem; }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    /* Entry cards grid */
+    .entries-grid { display: grid; grid-template-columns: repeat(auto-fill, 230px); gap: 1rem; justify-content: start; }
+    .entry-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.05); overflow: hidden; cursor: pointer; transition: transform .15s, box-shadow .15s; border: 2px solid transparent; position: relative; }
+    .entry-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+    .entry-img { width: 100%; height: 140px; object-fit: cover; background: #eee; display: block; }
+    .entry-img-placeholder { width: 100%; height: 140px; background: linear-gradient(135deg, #e8e0d4, #d4c5b0); display: flex; align-items: center; justify-content: center; color: #9a8a7a; font-size: .8rem; }
+    .entry-body { padding: .75rem 1rem; }
+    .entry-title { font-size: .88rem; font-weight: 700; margin-bottom: .3rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .entry-meta { font-size: .75rem; color: #9a8a7a; display: flex; gap: .6rem; flex-wrap: wrap; }
+    .entry-meta span { display: inline-flex; align-items: center; gap: .2rem; }
+    .entry-badge { position: absolute; top: 8px; right: 8px; padding: .15rem .5rem; border-radius: 10px; font-size: .65rem; font-weight: 700; text-transform: uppercase; }
+    .entry-badge.published { background: #2e8b57; color: #fff; }
+    .entry-badge.draft { background: #e8e0d4; color: #7a6a5a; }
+
+    /* Empty & loading states */
+    .empty-state { text-align: center; padding: 4rem 2rem; color: #9a8a7a; }
+    .empty-state h3 { font-family: 'Lato', sans-serif; font-size: 1.1rem; margin-bottom: .5rem; color: #7a6a5a; }
+    .loading { text-align: center; padding: 3rem; color: #9a8a7a; }
+    .spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid #e8e0d4; border-top-color: #b8860b; border-radius: 50%; animation: spin .6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Form */
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-weight: 700; font-size: .85rem; margin-bottom: .3rem; color: #5a4a3a; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: .6rem .75rem; border: 1px solid #d4c5b0; border-radius: 8px; font-size: .9rem; font-family: 'Lato', sans-serif; }
+    .form-group textarea { min-height: 80px; resize: vertical; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #b8860b; box-shadow: 0 0 0 3px rgba(184,134,11,.1); }
+    .form-hint { font-size: .75rem; color: #9a8a7a; margin-top: .2rem; }
+
+    /* Editor layout */
+    .editor-wrap { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,.05); padding: 2rem; max-width: 900px; }
+    .editor-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: .75rem; }
+    .editor-topbar h2 { font-size: 1.3rem; }
+    .editor-actions { display: flex; gap: .5rem; align-items: center; }
+
+    /* Image upload */
+    .img-dropzone { border: 2px dashed #d4c5b0; border-radius: 10px; padding: 1.25rem; text-align: center; cursor: pointer; transition: all .2s; background: #faf8f5; position: relative; }
+    .img-dropzone:hover, .img-dropzone.dragover { border-color: #b8860b; background: #fdf6e8; }
+    .img-dropzone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .img-dropzone .dz-text { color: #9a8a7a; font-size: .85rem; pointer-events: none; }
+    .img-dropzone .dz-text strong { color: #b8860b; }
+    .img-dropzone.disabled { opacity: .4; pointer-events: none; }
+    .img-preview { margin-top: .75rem; position: relative; display: inline-block; }
+    .img-preview img { max-height: 120px; border-radius: 8px; display: block; }
+    .img-preview .img-remove { position: absolute; top: 6px; left: 6px; background: #e74c3c; color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px; font-size: .8rem; cursor: pointer; line-height: 22px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+
+    /* Media gallery editor */
+    .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .75rem; margin-bottom: .75rem; }
+    .media-card { background: #faf8f5; border: 1px solid #e8e0d4; border-radius: 10px; overflow: hidden; position: relative; }
+    .media-card .media-thumb { width: 100%; height: 110px; object-fit: cover; display: block; background: #eee; }
+    .media-card .media-thumb-placeholder { width: 100%; height: 110px; background: linear-gradient(135deg, #e8e0d4, #d4c5b0); display: flex; align-items: center; justify-content: center; color: #9a8a7a; font-size: .75rem; }
+    .media-card-body { padding: .5rem .65rem; }
+    .media-card-body select, .media-card-body input { width: 100%; padding: .35rem .5rem; border: 1px solid #d4c5b0; border-radius: 6px; font-size: .78rem; margin-bottom: .35rem; font-family: 'Lato', sans-serif; }
+    .media-card-body select:focus, .media-card-body input:focus { outline: none; border-color: #b8860b; }
+    .media-card-controls { display: flex; gap: .25rem; justify-content: flex-end; padding: 0 .5rem .5rem; }
+    .media-card-controls button { background: none; border: none; cursor: pointer; color: #bbb; font-size: .95rem; padding: .1rem .25rem; }
+    .media-card-controls button:hover { color: #e74c3c; }
+    .media-card .media-order { position: absolute; top: 6px; left: 6px; background: rgba(0,0,0,.6); color: #fff; width: 22px; height: 22px; border-radius: 50%; font-size: .7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+    /* Sections */
+    .section-card { background: #faf8f5; border: 1px solid #e8e0d4; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem; }
+    .section-card h3 { font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: .75rem; display: flex; align-items: center; gap: .5rem; }
+    .section-card h3 .section-badge { font-size: .65rem; padding: .15rem .5rem; border-radius: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; }
+    .section-card h3 .section-badge.ai { background: #e8d5f5; color: #7b2d8e; }
+    .section-card h3 .section-badge.edited { background: #fdf0d5; color: #b8860b; }
+
+    /* Ingredient rows */
+    .ing-row { display: grid; grid-template-columns: 70px 70px 1fr 36px; gap: .4rem; margin-bottom: .4rem; align-items: center; }
+    .ing-row input { padding: .4rem .5rem; border: 1px solid #d4c5b0; border-radius: 6px; font-size: .82rem; font-family: 'Lato', sans-serif; }
+    .ing-row input:focus { outline: none; border-color: #b8860b; }
+    .ing-header { display: grid; grid-template-columns: 70px 70px 1fr 36px; gap: .4rem; margin-bottom: .3rem; }
+    .ing-header span { font-size: .7rem; font-weight: 700; text-transform: uppercase; color: #9a8a7a; }
+    .remove-btn { background: none; border: none; color: #ccc; font-size: 1.2rem; cursor: pointer; text-align: center; }
+    .remove-btn:hover { color: #e74c3c; }
+
+    /* Nutrition rows */
+    .nut-row-edit { display: grid; grid-template-columns: 1fr 120px 50px 36px; gap: .4rem; margin-bottom: .4rem; align-items: center; }
+    .nut-row-edit input { padding: .4rem .5rem; border: 1px solid #d4c5b0; border-radius: 6px; font-size: .82rem; font-family: 'Lato', sans-serif; }
+    .nut-row-edit input:focus { outline: none; border-color: #b8860b; }
+    .nut-row-edit label { font-size: .78rem; color: #9a8a7a; display: flex; align-items: center; gap: .2rem; }
+    .nut-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; margin-bottom: 1rem; }
+    .nut-summary-card { background: #fff; border: 1px solid #e8e0d4; border-radius: 8px; padding: .75rem .5rem; text-align: center; }
+    .nut-summary-card input { width: 70px; border: 1px solid #d4c5b0; border-radius: 6px; padding: .3rem; text-align: center; font-size: 1rem; font-weight: 700; font-family: 'Lato', sans-serif; }
+    .nut-summary-card input:focus { outline: none; border-color: #b8860b; }
+    .nut-summary-card .nut-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .5px; color: #b8860b; font-weight: 700; margin-top: .3rem; }
+
+    /* Benefits rows */
+    .benefit-row { display: grid; grid-template-columns: 50px 140px 1fr 36px; gap: .4rem; margin-bottom: .5rem; align-items: start; }
+    .benefit-row input { padding: .4rem .5rem; border: 1px solid #d4c5b0; border-radius: 6px; font-size: .82rem; font-family: 'Lato', sans-serif; }
+    .benefit-row input:focus { outline: none; border-color: #b8860b; }
+    .benefit-row textarea { padding: .4rem .5rem; border: 1px solid #d4c5b0; border-radius: 6px; font-size: .82rem; font-family: 'Lato', sans-serif; min-height: 50px; resize: vertical; }
+    .benefit-row textarea:focus { outline: none; border-color: #b8860b; }
+
+    /* Toggle */
+    .toggle-wrap { display: flex; align-items: center; gap: .75rem; }
+    .toggle { position: relative; width: 44px; height: 24px; cursor: pointer; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle .slider { position: absolute; inset: 0; background: #ccc; border-radius: 24px; transition: .3s; }
+    .toggle .slider:before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: .3s; }
+    .toggle input:checked + .slider { background: #2e8b57; }
+    .toggle input:checked + .slider:before { transform: translateX(20px); }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 1.5rem; right: 1.5rem; padding: .75rem 1.5rem; border-radius: 10px; font-weight: 700; font-size: .9rem; box-shadow: 0 4px 20px rgba(0,0,0,.15); display: none; z-index: 200; color: #fff; }
+    .toast.success { background: #27ae60; }
+    .toast.error { background: #e74c3c; }
+    .toast.active { display: block; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .content { padding: 1rem; }
+      .editor-wrap { padding: 1.25rem; }
+      .entries-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .media-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+      .nut-summary { grid-template-columns: repeat(2, 1fr); }
+      .ing-row { grid-template-columns: 60px 60px 1fr 30px; }
+      .benefit-row { grid-template-columns: 40px 1fr 36px; }
+      .benefit-row textarea { grid-column: 1 / -2; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="login-wrap" id="loginWrap">
+    <div class="login-box">
+      <h1>Book Recipes</h1>
+      <div class="login-error" id="loginError">Wrong password</div>
+      <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" />
+      <button onclick="doLogin()">Enter</button>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div id="app" style="display:none">
+    <div class="topbar">
+      <h1>SPIGADOLCE &mdash; Book Recipes</h1>
+      <div class="topbar-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/" target="_blank">View Site</a>
+      </div>
+    </div>
+    <div class="content" id="content">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script is:inline>
+    const FOLDER = 'src/content/book-recipes';
+    const UPLOAD_FOLDER = 'book';
+    let password = '';
+    let entries = [];
+    let editingEntry = null; // { path, sha, data } or null for new
+    let currentView = 'list'; // 'list' or 'editor'
+
+    // Track AI generation state per section
+    let aiState = {
+      ingredients: false,
+      nutrition: false,
+      healthBenefits: false,
+      mediaCaptions: false
+    };
+    let manualEdits = [];
+
+    // --- Auth ---
+    function doLogin() {
+      password = document.getElementById('loginPassword').value;
+      verifyAndLoad();
+    }
+    document.getElementById('loginPassword').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+    async function api(url, method, body) {
+      const opts = { method, headers: { 'Authorization': 'Bearer ' + password, 'Content-Type': 'application/json' } };
+      if (body) opts.body = JSON.stringify(body);
+      return fetch(url, opts);
+    }
+
+    async function verifyAndLoad() {
+      const res = await api('/api/entries?folder=' + encodeURIComponent(FOLDER), 'GET');
+      if (!res.ok) {
+        sessionStorage.removeItem('dashPwd');
+        document.getElementById('loginError').style.display = 'block';
+        return;
+      }
+      sessionStorage.setItem('dashPwd', password);
+      document.getElementById('loginWrap').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      const data = await res.json();
+      entries = data.entries || [];
+      showList();
+    }
+
+    // Auto-login
+    (function() {
+      const saved = sessionStorage.getItem('dashPwd');
+      if (saved) { password = saved; verifyAndLoad(); }
+    })();
+
+    // --- Toast ---
+    function toast(msg, isError) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'toast active ' + (isError ? 'error' : 'success');
+      setTimeout(() => t.classList.remove('active'), 3000);
+    }
+
+    // --- Upload helper ---
+    async function uploadFile(file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('folder', UPLOAD_FOLDER);
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + password },
+        body: formData
+      });
+      if (!res.ok) throw new Error('Upload failed');
+      return (await res.json()).path;
+    }
+
+    function imgSrc(path) {
+      if (!path) return '';
+      if (path.startsWith('/images')) return 'https://raw.githubusercontent.com/riccardinaburdo/spigadolce/main/public' + path;
+      return path;
+    }
+
+    // ================================================================
+    // LIST VIEW
+    // ================================================================
+    function showList() {
+      currentView = 'list';
+      const sorted = [...entries].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      entries = sorted;
+      const content = document.getElementById('content');
+
+      if (entries.length === 0) {
+        content.innerHTML = `
+          <div class="content-header">
+            <h2>Book Recipes</h2>
+            <button class="btn btn-primary" onclick="openNewRecipe()">+ New Recipe</button>
+          </div>
+          <div class="empty-state"><h3>No recipes yet</h3><p>Create your first book recipe.</p></div>
+        `;
+        return;
+      }
+
+      content.innerHTML = `
+        <div class="content-header">
+          <h2>Book Recipes</h2>
+          <button class="btn btn-primary" onclick="openNewRecipe()">+ New Recipe</button>
+        </div>
+        <div class="entries-grid">
+          ${sorted.map((e, i) => {
+            const src = e.coverImage ? imgSrc(e.coverImage) : '';
+            const img = src
+              ? `<img class="entry-img" src="${src}" alt="" onerror="this.outerHTML='<div class=entry-img-placeholder>No image</div>'" />`
+              : '<div class="entry-img-placeholder">No image</div>';
+            return `<div class="entry-card" onclick="openEditRecipe(${i})">
+              ${img}
+              <span class="entry-badge ${e.published ? 'published' : 'draft'}">${e.published ? 'Published' : 'Draft'}</span>
+              <div class="entry-body">
+                <div class="entry-title">${e.title || 'Untitled'}</div>
+                <div class="entry-meta">
+                  ${e.bookPage ? `<span>p.${e.bookPage}</span>` : ''}
+                  ${e.ingredients ? `<span>${e.ingredients.length} ingredients</span>` : ''}
+                  ${e.media ? `<span>${e.media.length} media</span>` : ''}
+                </div>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // ================================================================
+    // EDITOR VIEW
+    // ================================================================
+    function openNewRecipe() {
+      editingEntry = null;
+      aiState = { ingredients: false, nutrition: false, healthBenefits: false, mediaCaptions: false };
+      manualEdits = [];
+      showEditor({
+        title: '', slug: '', bookPage: '', coverImage: '', published: false,
+        date: new Date().toISOString().split('T')[0],
+        media: [], baseServings: 4, ingredients: [],
+        nutrition: { calories: '', protein: '', carbs: '', fat: '', detail: [] },
+        healthBenefits: [],
+        _aiGenerated: {}, _manualEdits: []
+      });
+    }
+
+    function openEditRecipe(i) {
+      const e = entries[i];
+      editingEntry = { path: e.path, sha: e.sha };
+      aiState = {
+        ingredients: e._aiGenerated?.ingredients || false,
+        nutrition: e._aiGenerated?.nutrition || false,
+        healthBenefits: e._aiGenerated?.healthBenefits || false,
+        mediaCaptions: e._aiGenerated?.mediaCaptions || false
+      };
+      manualEdits = e._manualEdits || [];
+      showEditor(e);
+    }
+
+    function showEditor(data) {
+      currentView = 'editor';
+      const content = document.getElementById('content');
+      const isNew = !editingEntry;
+
+      content.innerHTML = `
+        <div class="editor-wrap">
+          <div class="editor-topbar">
+            <h2>${isNew ? 'New Recipe' : 'Edit: ' + (data.title || 'Untitled')}</h2>
+            <div class="editor-actions">
+              <button class="btn btn-outline" onclick="backToList()">Back</button>
+              ${!isNew ? `<button class="btn btn-danger" onclick="deleteRecipe()">Delete</button>` : ''}
+              <button class="btn btn-primary" id="saveBtn" onclick="saveRecipe()">Save</button>
+            </div>
+          </div>
+
+          <!-- Basic fields -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" id="f-title" value="${esc(data.title)}" />
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;">
+              <div class="form-group">
+                <label>Page #</label>
+                <input type="number" id="f-bookPage" value="${data.bookPage || ''}" />
+              </div>
+              <div class="form-group">
+                <label>Servings</label>
+                <input type="number" id="f-baseServings" value="${data.baseServings || 4}" min="1" />
+              </div>
+              <div class="form-group">
+                <label>Published</label>
+                <div class="toggle-wrap" style="margin-top:.35rem">
+                  <label class="toggle">
+                    <input type="checkbox" id="f-published" ${data.published ? 'checked' : ''} />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cover image -->
+          <div class="form-group">
+            <label>Cover Image</label>
+            <input type="hidden" id="f-coverImage" value="${esc(data.coverImage)}" />
+            <div class="img-dropzone ${data.coverImage ? 'disabled' : ''}" id="dz-cover"
+              ondragover="event.preventDefault();this.classList.add('dragover')"
+              ondragleave="this.classList.remove('dragover')"
+              ondrop="handleCoverDrop(event)">
+              <input type="file" accept="image/*" onchange="handleCoverFile(this.files)" />
+              <div class="dz-text"><strong>Drop cover image</strong> or click to browse</div>
+            </div>
+            <div id="cover-preview">${data.coverImage ? `<div class="img-preview"><img src="${imgSrc(data.coverImage)}" alt="" /><button class="img-remove" onclick="clearCover()">&times;</button></div>` : ''}</div>
+            <div id="cover-uploading"></div>
+          </div>
+
+          <!-- Media gallery -->
+          <div class="section-card">
+            <h3>Media Gallery ${sectionBadge('mediaCaptions')}</h3>
+            <div class="media-grid" id="mediaGrid">${renderMediaCards(data.media || [])}</div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+              <div class="img-dropzone" style="flex:1;min-width:200px;padding:.75rem;" id="dz-media"
+                ondragover="event.preventDefault();this.classList.add('dragover')"
+                ondragleave="this.classList.remove('dragover')"
+                ondrop="handleMediaDrop(event)">
+                <input type="file" accept="image/*,video/*" multiple onchange="handleMediaFiles(this.files)" />
+                <div class="dz-text"><strong>Add photos/videos</strong></div>
+              </div>
+              <div style="flex:1;min-width:200px;">
+                <div style="display:flex;gap:.4rem;">
+                  <input type="text" id="youtubeUrl" placeholder="YouTube embed URL" style="flex:1;padding:.5rem .65rem;border:1px solid #d4c5b0;border-radius:8px;font-size:.85rem;" />
+                  <button class="btn btn-outline btn-sm" onclick="addYouTube()">Add</button>
+                </div>
+                <div class="form-hint">e.g. https://www.youtube.com/embed/xxxxx</div>
+              </div>
+            </div>
+            <div id="media-uploading"></div>
+          </div>
+
+          <!-- Ingredients -->
+          <div class="section-card">
+            <h3>Ingredients ${sectionBadge('ingredients')}</h3>
+            <div class="form-group">
+              <label>Raw ingredients text (for AI parsing)</label>
+              <textarea id="f-ingredientsText" placeholder="Paste your ingredient list here, e.g.:\n1.5 kg cime di rapa\n4 tbsp olive oil\nsalt to taste">${data._ingredientsText || ''}</textarea>
+              <button class="btn btn-gold btn-sm" style="margin-top:.5rem" onclick="generateIngredients()">Generate with AI</button>
+            </div>
+            <div id="ingredientsEditor">
+              ${data.ingredients && data.ingredients.length > 0 ? renderIngredientsEditor(data.ingredients) : '<p style="color:#9a8a7a;font-size:.85rem;">No ingredients yet. Type above and click "Generate with AI" or add manually below.</p>'}
+            </div>
+            <button class="btn btn-outline btn-sm" style="margin-top:.5rem" onclick="addIngredientRow()">+ Add Ingredient</button>
+          </div>
+
+          <!-- Nutrition -->
+          <div class="section-card">
+            <h3>Nutrition ${sectionBadge('nutrition')}</h3>
+            <div id="nutritionEditor">${renderNutritionEditor(data.nutrition || {})}</div>
+          </div>
+
+          <!-- Health Benefits -->
+          <div class="section-card">
+            <h3>Health Benefits ${sectionBadge('healthBenefits')}</h3>
+            <div id="benefitsEditor">${renderBenefitsEditor(data.healthBenefits || [])}</div>
+            <button class="btn btn-outline btn-sm" style="margin-top:.5rem" onclick="addBenefitRow()">+ Add Benefit</button>
+          </div>
+
+          <!-- AI Generate All -->
+          <div style="text-align:center;margin:1.5rem 0;">
+            <button class="btn btn-gold" onclick="generateAll()" id="generateAllBtn" style="padding:.75rem 2rem;font-size:1rem;">
+              Generate All with AI
+            </button>
+            <div class="form-hint" style="margin-top:.4rem;">Fills ingredients, nutrition, health benefits, and media captions</div>
+          </div>
+
+          <!-- Bottom save -->
+          <div style="display:flex;justify-content:flex-end;gap:.75rem;margin-top:1rem;padding-top:1rem;border-top:1px solid #e8e0d4;">
+            <button class="btn btn-outline" onclick="backToList()">Cancel</button>
+            ${!isNew ? `<button class="btn btn-danger" onclick="deleteRecipe()">Delete</button>` : ''}
+            <button class="btn btn-primary" onclick="saveRecipe()">Save Recipe</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function esc(s) { return (s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+
+    function sectionBadge(key) {
+      if (aiState[key] && manualEdits.includes(key)) return '<span class="section-badge edited">Edited</span>';
+      if (aiState[key]) return '<span class="section-badge ai">AI</span>';
+      return '';
+    }
+
+    function backToList() {
+      if (currentView === 'editor' && !confirm('Leave editor? Unsaved changes will be lost.')) return;
+      showList();
+    }
+
+    // --- Media cards ---
+    function renderMediaCards(media) {
+      if (!media || media.length === 0) return '';
+      return media.map((m, i) => {
+        const isYT = m.type === 'youtube';
+        const isVideo = m.type === 'video';
+        let thumbHtml;
+        if (isYT) {
+          const thumbUrl = m.thumbnail ? imgSrc(m.thumbnail) : '';
+          thumbHtml = thumbUrl ? `<img class="media-thumb" src="${thumbUrl}" alt="" />` : '<div class="media-thumb-placeholder">YouTube</div>';
+        } else if (isVideo) {
+          const thumbUrl = m.thumbnail ? imgSrc(m.thumbnail) : '';
+          thumbHtml = thumbUrl ? `<img class="media-thumb" src="${thumbUrl}" alt="" />` : '<div class="media-thumb-placeholder">Video</div>';
+        } else {
+          const src = m.src ? imgSrc(m.src) : '';
+          thumbHtml = src ? `<img class="media-thumb" src="${src}" alt="" onerror="this.outerHTML='<div class=media-thumb-placeholder>No image</div>'" />` : '<div class="media-thumb-placeholder">No image</div>';
+        }
+        return `<div class="media-card" data-media-idx="${i}">
+          <span class="media-order">${i + 1}</span>
+          ${thumbHtml}
+          <div class="media-card-body">
+            <select onchange="updateMediaField(${i},'type',this.value)">
+              <option value="photo" ${m.type === 'photo' ? 'selected' : ''}>Photo</option>
+              <option value="youtube" ${m.type === 'youtube' ? 'selected' : ''}>YouTube</option>
+              <option value="video" ${m.type === 'video' ? 'selected' : ''}>Video</option>
+            </select>
+            <input type="text" value="${esc(m.caption)}" placeholder="Caption" onchange="updateMediaField(${i},'caption',this.value)" />
+            ${isYT ? `<input type="text" value="${esc(m.src)}" placeholder="Embed URL" onchange="updateMediaField(${i},'src',this.value)" style="font-size:.72rem;" />` : ''}
+          </div>
+          <div class="media-card-controls">
+            <button onclick="moveMedia(${i},-1)" title="Move left">&larr;</button>
+            <button onclick="moveMedia(${i},1)" title="Move right">&rarr;</button>
+            <button onclick="removeMedia(${i})" title="Remove">&times;</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // Media state stored in DOM - collect on save
+    let mediaItems = [];
+
+    function syncMediaFromEditor() {
+      // Collect current media state from the stored array
+      return [...mediaItems];
+    }
+
+    function initMediaFromData(media) {
+      mediaItems = (media || []).map(m => ({...m}));
+    }
+
+    function refreshMediaGrid() {
+      const grid = document.getElementById('mediaGrid');
+      if (grid) grid.innerHTML = renderMediaCards(mediaItems);
+    }
+
+    function updateMediaField(i, field, value) {
+      if (mediaItems[i]) {
+        mediaItems[i][field] = value;
+        if (field === 'caption') markManualEdit('mediaCaptions');
+      }
+    }
+
+    function moveMedia(i, dir) {
+      const newI = i + dir;
+      if (newI < 0 || newI >= mediaItems.length) return;
+      [mediaItems[i], mediaItems[newI]] = [mediaItems[newI], mediaItems[i]];
+      refreshMediaGrid();
+    }
+
+    function removeMedia(i) {
+      mediaItems.splice(i, 1);
+      refreshMediaGrid();
+    }
+
+    function addYouTube() {
+      const input = document.getElementById('youtubeUrl');
+      const url = input.value.trim();
+      if (!url) return;
+      mediaItems.push({ type: 'youtube', src: url, caption: '', thumbnail: '' });
+      input.value = '';
+      refreshMediaGrid();
+    }
+
+    // Cover image handlers
+    function handleCoverDrop(e) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) handleCoverFile(e.dataTransfer.files);
+    }
+
+    async function handleCoverFile(files) {
+      const file = files[0];
+      if (!file || !file.type.startsWith('image/')) return;
+      const el = document.getElementById('cover-uploading');
+      el.innerHTML = '<div style="color:#b8860b;font-size:.85rem;padding:.5rem 0"><div class="spinner" style="width:16px;height:16px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:.5rem;"></div>Uploading...</div>';
+      try {
+        const path = await uploadFile(file);
+        document.getElementById('f-coverImage').value = path;
+        document.getElementById('cover-preview').innerHTML = `<div class="img-preview"><img src="${imgSrc(path)}" alt="" /><button class="img-remove" onclick="clearCover()">&times;</button></div>`;
+        document.getElementById('dz-cover').classList.add('disabled');
+        el.innerHTML = '';
+        toast('Cover uploaded!');
+      } catch (err) {
+        el.innerHTML = '';
+        toast('Upload failed', true);
+      }
+    }
+
+    function clearCover() {
+      document.getElementById('f-coverImage').value = '';
+      document.getElementById('cover-preview').innerHTML = '';
+      const dz = document.getElementById('dz-cover');
+      dz.classList.remove('disabled');
+      const fi = dz.querySelector('input[type="file"]');
+      if (fi) fi.value = '';
+    }
+
+    // Media file upload
+    function handleMediaDrop(e) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) handleMediaFiles(e.dataTransfer.files);
+    }
+
+    async function handleMediaFiles(files) {
+      const el = document.getElementById('media-uploading');
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const isVideo = file.type.startsWith('video/');
+        el.innerHTML = `<div style="color:#b8860b;font-size:.85rem;padding:.5rem 0"><div class="spinner" style="width:16px;height:16px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:.5rem;"></div>Uploading ${i + 1}/${files.length}...</div>`;
+        try {
+          const path = await uploadFile(file);
+          mediaItems.push({ type: isVideo ? 'video' : 'photo', src: path, caption: '' });
+          refreshMediaGrid();
+        } catch (err) {
+          toast('Failed to upload ' + file.name, true);
+        }
+      }
+      el.innerHTML = '';
+      // Reset file input
+      const fi = document.getElementById('dz-media')?.querySelector('input[type="file"]');
+      if (fi) fi.value = '';
+      toast('Media uploaded!');
+    }
+
+    // --- Ingredients editor ---
+    function renderIngredientsEditor(ingredients) {
+      if (!ingredients || ingredients.length === 0) return '';
+      return `
+        <div class="ing-header"><span>Qty</span><span>Unit</span><span>Name</span><span></span></div>
+        <div id="ingRows">
+          ${ingredients.map((ing, i) => `<div class="ing-row">
+            <input type="text" value="${ing.qty !== null && ing.qty !== undefined ? ing.qty : ''}" data-ing-qty placeholder="qty" onchange="markManualEdit('ingredients')" />
+            <input type="text" value="${esc(ing.unit)}" data-ing-unit placeholder="unit" onchange="markManualEdit('ingredients')" />
+            <input type="text" value="${esc(ing.name)}" data-ing-name placeholder="Ingredient name" onchange="markManualEdit('ingredients')" />
+            <button class="remove-btn" onclick="this.parentElement.remove()">&times;</button>
+          </div>`).join('')}
+        </div>
+      `;
+    }
+
+    function addIngredientRow() {
+      let container = document.getElementById('ingRows');
+      if (!container) {
+        const editor = document.getElementById('ingredientsEditor');
+        editor.innerHTML = `
+          <div class="ing-header"><span>Qty</span><span>Unit</span><span>Name</span><span></span></div>
+          <div id="ingRows"></div>
+        `;
+        container = document.getElementById('ingRows');
+      }
+      const row = document.createElement('div');
+      row.className = 'ing-row';
+      row.innerHTML = `
+        <input type="text" value="" data-ing-qty placeholder="qty" onchange="markManualEdit('ingredients')" />
+        <input type="text" value="" data-ing-unit placeholder="unit" onchange="markManualEdit('ingredients')" />
+        <input type="text" value="" data-ing-name placeholder="Ingredient name" onchange="markManualEdit('ingredients')" />
+        <button class="remove-btn" onclick="this.parentElement.remove()">&times;</button>
+      `;
+      container.appendChild(row);
+    }
+
+    function collectIngredients() {
+      const rows = document.querySelectorAll('#ingRows .ing-row');
+      return [...rows].map(r => {
+        const qtyVal = r.querySelector('[data-ing-qty]').value.trim();
+        const qty = qtyVal === '' ? null : parseFloat(qtyVal);
+        const unit = r.querySelector('[data-ing-unit]').value.trim();
+        const name = r.querySelector('[data-ing-name]').value.trim();
+        if (!name) return null;
+        return { qty: isNaN(qty) ? null : qty, unit, name };
+      }).filter(Boolean);
+    }
+
+    // --- Nutrition editor ---
+    function renderNutritionEditor(nut) {
+      const cal = nut.calories || '';
+      const prot = nut.protein || '';
+      const carbs = nut.carbs || '';
+      const fat = nut.fat || '';
+      const detail = nut.detail || [];
+
+      return `
+        <div class="nut-summary">
+          <div class="nut-summary-card">
+            <input type="number" id="nut-calories" value="${cal}" onchange="markManualEdit('nutrition')" />
+            <div class="nut-label">Calories (kcal)</div>
+          </div>
+          <div class="nut-summary-card">
+            <input type="number" id="nut-protein" value="${prot}" onchange="markManualEdit('nutrition')" />
+            <div class="nut-label">Protein (g)</div>
+          </div>
+          <div class="nut-summary-card">
+            <input type="number" id="nut-carbs" value="${carbs}" onchange="markManualEdit('nutrition')" />
+            <div class="nut-label">Carbs (g)</div>
+          </div>
+          <div class="nut-summary-card">
+            <input type="number" id="nut-fat" value="${fat}" onchange="markManualEdit('nutrition')" />
+            <div class="nut-label">Fat (g)</div>
+          </div>
+        </div>
+        <label style="font-weight:700;font-size:.85rem;color:#5a4a3a;display:block;margin-bottom:.4rem;">Detail rows</label>
+        <div id="nutDetailRows">
+          ${detail.map((d, i) => `<div class="nut-row-edit">
+            <input type="text" value="${esc(d.name)}" data-nut-name placeholder="Name" onchange="markManualEdit('nutrition')" />
+            <input type="text" value="${esc(d.value)}" data-nut-value placeholder="Value" onchange="markManualEdit('nutrition')" />
+            <label><input type="checkbox" data-nut-sub ${d.sub ? 'checked' : ''} onchange="markManualEdit('nutrition')" /> Sub</label>
+            <button class="remove-btn" onclick="this.parentElement.remove()">&times;</button>
+          </div>`).join('')}
+        </div>
+        <button class="btn btn-outline btn-sm" style="margin-top:.5rem" onclick="addNutDetailRow()">+ Add Detail Row</button>
+      `;
+    }
+
+    function addNutDetailRow() {
+      const container = document.getElementById('nutDetailRows');
+      const row = document.createElement('div');
+      row.className = 'nut-row-edit';
+      row.innerHTML = `
+        <input type="text" value="" data-nut-name placeholder="Name" onchange="markManualEdit('nutrition')" />
+        <input type="text" value="" data-nut-value placeholder="Value" onchange="markManualEdit('nutrition')" />
+        <label><input type="checkbox" data-nut-sub onchange="markManualEdit('nutrition')" /> Sub</label>
+        <button class="remove-btn" onclick="this.parentElement.remove()">&times;</button>
+      `;
+      container.appendChild(row);
+    }
+
+    function collectNutrition() {
+      const detailRows = document.querySelectorAll('#nutDetailRows .nut-row-edit');
+      const detail = [...detailRows].map(r => {
+        const name = r.querySelector('[data-nut-name]').value.trim();
+        const value = r.querySelector('[data-nut-value]').value.trim();
+        const sub = r.querySelector('[data-nut-sub]').checked;
+        if (!name) return null;
+        const row = { name, value };
+        if (sub) row.sub = true;
+        return row;
+      }).filter(Boolean);
+
+      return {
+        calories: parseInt(document.getElementById('nut-calories').value) || 0,
+        protein: parseInt(document.getElementById('nut-protein').value) || 0,
+        carbs: parseInt(document.getElementById('nut-carbs').value) || 0,
+        fat: parseInt(document.getElementById('nut-fat').value) || 0,
+        detail
+      };
+    }
+
+    // --- Health Benefits editor ---
+    function renderBenefitsEditor(benefits) {
+      if (!benefits || benefits.length === 0) return '<p style="color:#9a8a7a;font-size:.85rem;">No health benefits yet. Click "Generate with AI" or add manually.</p>';
+      return `
+        <div class="ing-header" style="grid-template-columns:50px 140px 1fr 36px;"><span>Icon</span><span>Title</span><span>Description</span><span></span></div>
+        <div id="benefitRows">
+          ${benefits.map((b, i) => `<div class="benefit-row">
+            <input type="text" value="${esc(b.icon)}" data-ben-icon placeholder="Emoji" style="text-align:center;font-size:1.2rem;" onchange="markManualEdit('healthBenefits')" />
+            <input type="text" value="${esc(b.title)}" data-ben-title placeholder="Title" onchange="markManualEdit('healthBenefits')" />
+            <textarea data-ben-text onchange="markManualEdit('healthBenefits')">${b.text || ''}</textarea>
+            <button class="remove-btn" onclick="this.parentElement.remove()">&times;</button>
+          </div>`).join('')}
+        </div>
+      `;
+    }
+
+    function addBenefitRow() {
+      let container = document.getElementById('benefitRows');
+      if (!container) {
+        const editor = document.getElementById('benefitsEditor');
+        editor.innerHTML = `
+          <div class="ing-header" style="grid-template-columns:50px 140px 1fr 36px;"><span>Icon</span><span>Title</span><span>Description</span><span></span></div>
+          <div id="benefitRows"></div>
+        `;
+        container = document.getElementById('benefitRows');
+      }
+      const row = document.createElement('div');
+      row.className = 'benefit-row';
+      row.innerHTML = `
+        <input type="text" value="" data-ben-icon placeholder="Emoji" style="text-align:center;font-size:1.2rem;" onchange="markManualEdit('healthBenefits')" />
+        <input type="text" value="" data-ben-title placeholder="Title" onchange="markManualEdit('healthBenefits')" />
+        <textarea data-ben-text onchange="markManualEdit('healthBenefits')"></textarea>
+        <button class="remove-btn" onclick="this.parentElement.remove()">&times;</button>
+      `;
+      container.appendChild(row);
+    }
+
+    function collectBenefits() {
+      const rows = document.querySelectorAll('#benefitRows .benefit-row');
+      return [...rows].map(r => {
+        const icon = r.querySelector('[data-ben-icon]').value.trim();
+        const title = r.querySelector('[data-ben-title]').value.trim();
+        const text = r.querySelector('[data-ben-text]').value.trim();
+        if (!title) return null;
+        return { icon, title, text };
+      }).filter(Boolean);
+    }
+
+    // --- Manual edit tracking ---
+    function markManualEdit(section) {
+      if (aiState[section] && !manualEdits.includes(section)) {
+        manualEdits.push(section);
+      }
+      // Update badge in heading
+      updateSectionBadges();
+    }
+
+    function updateSectionBadges() {
+      // Re-render badges by finding section headings
+      document.querySelectorAll('.section-card h3 .section-badge').forEach(b => b.remove());
+      const sections = { ingredients: 'Ingredients', nutrition: 'Nutrition', healthBenefits: 'Health Benefits', mediaCaptions: 'Media Gallery' };
+      document.querySelectorAll('.section-card h3').forEach(h3 => {
+        const text = h3.textContent.trim();
+        for (const [key, label] of Object.entries(sections)) {
+          if (text.startsWith(label)) {
+            if (aiState[key] && manualEdits.includes(key)) {
+              h3.insertAdjacentHTML('beforeend', ' <span class="section-badge edited">Edited</span>');
+            } else if (aiState[key]) {
+              h3.insertAdjacentHTML('beforeend', ' <span class="section-badge ai">AI</span>');
+            }
+          }
+        }
+      });
+    }
+
+    // ================================================================
+    // AI GENERATION
+    // ================================================================
+    async function generateIngredients() {
+      const title = document.getElementById('f-title').value.trim();
+      const ingredientsText = document.getElementById('f-ingredientsText').value.trim();
+      if (!title || !ingredientsText) {
+        toast('Please enter a title and ingredient text first', true);
+        return;
+      }
+      await callGenerate({ title, ingredientsText, baseServings: parseInt(document.getElementById('f-baseServings').value) || 4 }, ['ingredients']);
+    }
+
+    async function generateAll() {
+      const title = document.getElementById('f-title').value.trim();
+      const ingredientsText = document.getElementById('f-ingredientsText').value.trim();
+      if (!title) { toast('Please enter a title first', true); return; }
+
+      const mediaFiles = mediaItems.map((m, i) => ({
+        filename: m.src ? m.src.split('/').pop() : `media-${i + 1}`,
+        type: m.type
+      }));
+
+      await callGenerate({
+        title,
+        ingredientsText: ingredientsText || 'Generate typical ingredients for this recipe',
+        baseServings: parseInt(document.getElementById('f-baseServings').value) || 4,
+        mediaFiles
+      }, ['ingredients', 'nutrition', 'healthBenefits', 'mediaCaptions']);
+    }
+
+    async function callGenerate(body, sections) {
+      const btn = document.getElementById('generateAllBtn');
+      const origText = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Generating...'; }
+
+      try {
+        const res = await api('/api/generate-recipe', 'POST', body);
+        if (!res.ok) {
+          const err = await res.json();
+          toast('AI generation failed: ' + (err.error || 'Unknown error'), true);
+          return;
+        }
+        const data = await res.json();
+        const gen = data.generated;
+
+        if (sections.includes('ingredients') && gen.ingredients) {
+          aiState.ingredients = true;
+          // Remove ingredients from manual edits since it's freshly generated
+          manualEdits = manualEdits.filter(e => e !== 'ingredients');
+          document.getElementById('ingredientsEditor').innerHTML = renderIngredientsEditor(gen.ingredients);
+        }
+
+        if (sections.includes('nutrition') && gen.nutrition) {
+          aiState.nutrition = true;
+          manualEdits = manualEdits.filter(e => e !== 'nutrition');
+          document.getElementById('nutritionEditor').innerHTML = renderNutritionEditor(gen.nutrition);
+        }
+
+        if (sections.includes('healthBenefits') && gen.healthBenefits) {
+          aiState.healthBenefits = true;
+          manualEdits = manualEdits.filter(e => e !== 'healthBenefits');
+          document.getElementById('benefitsEditor').innerHTML = renderBenefitsEditor(gen.healthBenefits);
+        }
+
+        if (sections.includes('mediaCaptions') && gen.mediaCaptions) {
+          aiState.mediaCaptions = true;
+          manualEdits = manualEdits.filter(e => e !== 'mediaCaptions');
+          gen.mediaCaptions.forEach((cap, i) => {
+            if (mediaItems[i]) mediaItems[i].caption = cap;
+          });
+          refreshMediaGrid();
+        }
+
+        updateSectionBadges();
+        toast('AI generation complete!');
+      } catch (err) {
+        toast('Generation error: ' + err.message, true);
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = origText || 'Generate All with AI'; }
+      }
+    }
+
+    // ================================================================
+    // SAVE / DELETE
+    // ================================================================
+    function collectFormData() {
+      const title = document.getElementById('f-title').value.trim();
+      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const data = {
+        slug,
+        title,
+        bookPage: parseInt(document.getElementById('f-bookPage').value) || null,
+        coverImage: document.getElementById('f-coverImage').value,
+        published: document.getElementById('f-published').checked,
+        date: new Date().toISOString().split('T')[0],
+        media: [...mediaItems],
+        baseServings: parseInt(document.getElementById('f-baseServings').value) || 4,
+        ingredients: collectIngredients(),
+        nutrition: collectNutrition(),
+        healthBenefits: collectBenefits(),
+        _ingredientsText: document.getElementById('f-ingredientsText').value,
+        _aiGenerated: {
+          ingredients: aiState.ingredients,
+          nutrition: aiState.nutrition,
+          healthBenefits: aiState.healthBenefits,
+          mediaCaptions: aiState.mediaCaptions,
+          lastGenerated: new Date().toISOString()
+        },
+        _manualEdits: [...manualEdits]
+      };
+      return data;
+    }
+
+    async function saveRecipe() {
+      const data = collectFormData();
+      if (!data.title) { toast('Title is required', true); return; }
+
+      const saveBtn = document.getElementById('saveBtn');
+      if (saveBtn) saveBtn.disabled = true;
+
+      try {
+        if (editingEntry) {
+          const res = await api('/api/entries', 'PUT', { path: editingEntry.path, sha: editingEntry.sha, content: data });
+          if (!res.ok) { toast('Failed to save', true); return; }
+          const result = await res.json();
+          editingEntry.sha = result.sha;
+        } else {
+          const filename = data.slug + '.json';
+          const res = await api('/api/entries', 'POST', { folder: FOLDER, filename, content: data });
+          if (!res.ok) { toast('Failed to create', true); return; }
+          const result = await res.json();
+          editingEntry = { path: FOLDER + '/' + filename, sha: result.sha };
+        }
+        toast('Saved!');
+        // Reload entries
+        const res = await api('/api/entries?folder=' + encodeURIComponent(FOLDER), 'GET');
+        const d = await res.json();
+        entries = d.entries || [];
+      } catch (err) {
+        toast('Save error: ' + err.message, true);
+      } finally {
+        if (saveBtn) saveBtn.disabled = false;
+      }
+    }
+
+    async function deleteRecipe() {
+      if (!editingEntry) return;
+      if (!confirm('Delete this recipe permanently?')) return;
+      try {
+        const res = await api('/api/entries', 'DELETE', { path: editingEntry.path, sha: editingEntry.sha });
+        if (!res.ok) { toast('Failed to delete', true); return; }
+        toast('Deleted');
+        // Reload and go to list
+        const r = await api('/api/entries?folder=' + encodeURIComponent(FOLDER), 'GET');
+        const d = await r.json();
+        entries = d.entries || [];
+        showList();
+      } catch (err) {
+        toast('Delete error: ' + err.message, true);
+      }
+    }
+
+    // ================================================================
+    // Override showEditor to also init media
+    // ================================================================
+    const _origShowEditor = showEditor;
+    showEditor = function(data) {
+      initMediaFromData(data.media);
+      _origShowEditor(data);
+      refreshMediaGrid();
+    };
+  </script>
+</body>
+</html>
