@@ -71,7 +71,12 @@ Return ONLY valid JSON, no markdown, no explanation.`;
       body: JSON.stringify({
         model: 'claude-sonnet-5',
         max_tokens: 4000,
-        messages: [{ role: 'user', content: prompt }]
+        temperature: 0,
+        thinking: { type: 'disabled' },
+        messages: [
+          { role: 'user', content: prompt },
+          { role: 'assistant', content: '{' }
+        ]
       })
     });
 
@@ -81,33 +86,30 @@ Return ONLY valid JSON, no markdown, no explanation.`;
     }
 
     const result = await response.json();
-    const text = result.content?.[0]?.text || '';
+    // Handle thinking models: find the text block (not thinking block)
+    const textBlock = result.content?.find((b: any) => b.type === 'text');
+    const text = textBlock?.text || result.content?.[0]?.text || '';
 
-    // Parse the JSON from Claude's response
+    // Parse the JSON from Claude's response (prefilled with '{')
+    const fullJson = '{' + text;
     let generated;
     try {
-      generated = JSON.parse(text);
+      generated = JSON.parse(fullJson);
     } catch {
-      // Try to extract JSON from markdown code blocks
-      const codeBlockMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+      // Try to extract JSON from the combined text
+      const searchText = fullJson + '\n' + text;
+      const codeBlockMatch = searchText.match(/```(?:json)?\s*([\s\S]*?)```/);
+      const jsonMatch = searchText.match(/\{[\s\S]*\}/);
       if (codeBlockMatch) {
-        try {
-          generated = JSON.parse(codeBlockMatch[1].trim());
-        } catch {
-          return new Response(JSON.stringify({ error: 'Failed to parse AI response from code block', raw: text.substring(0, 500) }), { status: 500 });
+        try { generated = JSON.parse(codeBlockMatch[1].trim()); } catch {
+          return new Response(JSON.stringify({ error: 'Failed to parse AI JSON', raw: fullJson.substring(0, 800) }), { status: 500 });
+        }
+      } else if (jsonMatch) {
+        try { generated = JSON.parse(jsonMatch[0]); } catch {
+          return new Response(JSON.stringify({ error: 'Failed to parse extracted JSON', raw: fullJson.substring(0, 800) }), { status: 500 });
         }
       } else {
-        // Try to extract raw JSON object
-        const jsonMatch = text.match(/\{[\s\S]*\}/);
-        if (jsonMatch) {
-          try {
-            generated = JSON.parse(jsonMatch[0]);
-          } catch {
-            return new Response(JSON.stringify({ error: 'Failed to parse extracted JSON', raw: text.substring(0, 500) }), { status: 500 });
-          }
-        } else {
-          return new Response(JSON.stringify({ error: 'No JSON found in AI response', raw: text.substring(0, 500) }), { status: 500 });
-        }
+        return new Response(JSON.stringify({ error: 'No JSON found in AI response', raw: fullJson.substring(0, 800) }), { status: 500 });
       }
     }
 
