@@ -1,15 +1,26 @@
 import type { APIRoute } from 'astro';
 
-const ADMIN_PASSWORD = import.meta.env.ADMIN_PASSWORD;
-const ANTHROPIC_API_KEY = import.meta.env.ANTHROPIC_API_KEY;
+export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
+  const ADMIN_PASSWORD = import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
+  const ANTHROPIC_API_KEY = import.meta.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY;
+
   const auth = request.headers.get('Authorization');
   if (!auth || auth !== `Bearer ${ADMIN_PASSWORD}`) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
   }
 
-  const body = await request.json();
+  if (!ANTHROPIC_API_KEY) {
+    return new Response(JSON.stringify({ error: 'ANTHROPIC_API_KEY not configured on server' }), { status: 500 });
+  }
+
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(JSON.stringify({ error: 'Invalid JSON in request body' }), { status: 400 });
+  }
   const { title, ingredientsText, mediaFiles, baseServings } = body;
 
   // Build prompt for Claude
