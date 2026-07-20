@@ -69,15 +69,15 @@ Return ONLY valid JSON, no markdown, no explanation.`;
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-3-5-sonnet-20241022',
         max_tokens: 4000,
         messages: [{ role: 'user', content: prompt }]
       })
     });
 
     if (!response.ok) {
-      const err = await response.text();
-      return new Response(JSON.stringify({ error: 'AI API error', details: err }), { status: 500 });
+      const errText = await response.text();
+      return new Response(JSON.stringify({ error: `AI API error (${response.status}): ${errText}` }), { status: 500 });
     }
 
     const result = await response.json();
