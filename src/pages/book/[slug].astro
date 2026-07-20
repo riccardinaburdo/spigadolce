@@ -189,54 +189,6 @@ const { recipe } = Astro.props;
     }
     .section-title .icon { font-size: 1.4rem; }
 
-    /* ===== INGREDIENTS COVER ===== */
-    .ingredients-cover {
-      margin-top: 2.5rem;
-    }
-    .ingredients-cover-inner {
-      background: #e8f5e0;
-      border-radius: 12px;
-      padding: 2rem;
-      text-align: center;
-    }
-    .ingredients-cover-inner h3 {
-      font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 700;
-      color: #3a3a3a;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 1.2rem;
-    }
-    .ic-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 0.8rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .ic-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    .ic-item svg {
-      width: 60px;
-      height: 60px;
-    }
-    .ic-item span {
-      font-family: var(--font-body);
-      font-size: 0.68rem;
-      font-weight: 600;
-      color: #3a3a3a;
-      text-align: center;
-    }
-    @media (max-width: 480px) {
-      .ic-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-      .ic-item svg { width: 55px; height: 55px; }
-    }
-
     /* ===== MEDIA GALLERY ===== */
     .media-section { margin-top: 2rem; }
 
@@ -290,16 +242,6 @@ const { recipe } = Astro.props;
       align-items: center;
       justify-content: center;
       padding-left: 3px;
-    }
-    .media-thumb .thumb-ingredients-placeholder {
-      width: 100%;
-      height: 120px;
-      background: #e8f5e0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      padding: 0.5rem;
     }
     .media-thumb .thumb-label {
       position: absolute;
@@ -406,52 +348,6 @@ const { recipe } = Astro.props;
       font-size: 0.75rem;
       margin-top: 0.4rem;
     }
-    /* Lightbox ingredients panel */
-    .lb-ingredients {
-      display: none;
-      background: #e8f5e0;
-      border-radius: 12px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      max-width: 520px;
-      width: 100%;
-    }
-    .lb-ingredients.visible { display: block; }
-    .lb-ingredients h3 {
-      font-family: var(--font-body);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #3a3a3a;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 1.5rem;
-    }
-    .lb-ing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem 1.5rem;
-    }
-    .lb-ing-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .lb-ing-item svg {
-      width: 80px;
-      height: 80px;
-    }
-    .lb-ing-item span {
-      font-family: var(--font-body);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #3a3a3a;
-    }
-    @media (max-width: 480px) {
-      .lb-ing-grid { grid-template-columns: repeat(2, 1fr); }
-      .lb-ing-item svg { width: 65px; height: 65px; }
-    }
-
     @media (max-width: 768px) {
       .lightbox-prev { left: 5px; }
       .lightbox-next { right: 5px; }
@@ -565,145 +461,6 @@ const { recipe } = Astro.props;
     .ingredient-item:hover { background: var(--color-cream); }
     .ing-qty { font-weight: 700; color: var(--color-dark); min-width: 80px; font-size: 0.95rem; }
     .ing-name { flex: 1; font-size: 0.95rem; color: #555; }
-    .ing-info-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 1.5px solid var(--color-gold);
-      background: none;
-      color: var(--color-gold);
-      font-size: 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      flex-shrink: 0;
-      font-family: var(--font-heading);
-      font-style: italic;
-    }
-    .ing-info-btn:hover { background: var(--color-gold); color: #fff; }
-
-    /* ===== INGREDIENT DETAIL PANEL ===== */
-    .ingredient-detail {
-      display: none;
-      background: var(--color-cream);
-      border: 1px solid rgba(200,169,110,0.25);
-      border-radius: 12px;
-      padding: 1.8rem;
-      margin: 0.5rem 0 0.8rem 0;
-      animation: slideDown 0.3s ease;
-    }
-    .ingredient-detail.open { display: block; }
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .ing-detail-header {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 1.2rem;
-    }
-    .ing-detail-photo {
-      width: 180px;
-      height: 140px;
-      border-radius: 8px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-    .ing-detail-right {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-    .ingredient-detail h4 {
-      font-size: 1.3rem;
-      color: var(--color-dark);
-      margin: 0;
-      border-bottom: 2px solid var(--color-gold);
-      padding-bottom: 0.4rem;
-    }
-    .ing-detail-section-title {
-      font-family: var(--font-heading);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--color-dark);
-      margin: 1rem 0 0.4rem;
-    }
-    .ing-detail-section-title:first-of-type { margin-top: 0; }
-    .ingredient-detail p {
-      font-size: 0.88rem;
-      color: #555;
-      line-height: 1.75;
-      margin: 0;
-    }
-    /* Origin area */
-    .ing-origin-area {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.8rem;
-    }
-    .ing-origin-area p {
-      font-size: 0.85rem;
-    }
-    .ing-map-puglia {
-      flex-shrink: 0;
-    }
-    /* Season wheel */
-    .ing-season-block {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-    .season-wheel {
-      width: 130px;
-      height: 130px;
-      flex-shrink: 0;
-    }
-    .season-wheel-label {
-      font-size: 0.85rem;
-      color: #555;
-      line-height: 1.6;
-    }
-    /* Variants */
-    .ing-variants {
-      margin-top: 1rem;
-    }
-    .ing-variant-item {
-      display: flex;
-      gap: 0.6rem;
-      padding: 0.6rem 0;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      align-items: flex-start;
-    }
-    .ing-variant-item:last-child { border-bottom: none; }
-    .ing-variant-bullet {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--color-accent);
-      flex-shrink: 0;
-      margin-top: 0.45rem;
-    }
-    .ing-variant-item strong {
-      font-size: 0.88rem;
-      color: var(--color-dark);
-    }
-    .ing-variant-item span {
-      font-size: 0.82rem;
-      color: #777;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 768px) {
-      .ing-detail-header { flex-direction: column; }
-      .ing-detail-photo { width: 100%; height: 180px; }
-      .ing-season-block { flex-direction: column; align-items: center; }
-      .ing-origin-area { flex-direction: column; align-items: center; }
-    }
-
     /* ===== NUTRITIONAL INFO ===== */
     .nutrition-section { margin-top: 1rem; }
     .nutrition-grid {
@@ -917,11 +674,6 @@ const { recipe } = Astro.props;
         <img id="lb-img" src="" alt="">
         <video id="lb-video" controls playsinline preload="metadata"></video>
         <iframe id="lb-youtube" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        <div class="lb-ingredients" id="lb-ingredients">
-          <h3>What You'll Need</h3>
-          <div class="lb-ing-grid" id="lb-ing-grid">
-          </div>
-        </div>
         <div class="lightbox-caption" id="lb-caption"></div>
         <div class="lightbox-counter" id="lb-counter"></div>
       </div>
@@ -1047,7 +799,6 @@ const { recipe } = Astro.props;
     const lbImg = document.getElementById('lb-img');
     const lbVideo = document.getElementById('lb-video');
     const lbYoutube = document.getElementById('lb-youtube');
-    const lbIngredients = document.getElementById('lb-ingredients');
     const lbCaption = document.getElementById('lb-caption');
     const lbCounter = document.getElementById('lb-counter');
     let currentLb = 0;
@@ -1062,7 +813,6 @@ const { recipe } = Astro.props;
       lbVideo.pause();
       lbYoutube.classList.remove('visible');
       lbYoutube.src = '';
-      lbIngredients.classList.remove('visible');
 
       if (item.type === 'photo') {
         lbImg.src = item.src;
