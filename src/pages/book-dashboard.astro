@@ -378,14 +378,10 @@ export const prerender = false;
               <label>Title</label>
               <input type="text" id="f-title" value="${esc(data.title)}" />
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
               <div class="form-group">
                 <label>Page #</label>
                 <input type="number" id="f-bookPage" value="${data.bookPage || ''}" />
-              </div>
-              <div class="form-group">
-                <label>Servings</label>
-                <input type="number" id="f-baseServings" value="${data.baseServings || 4}" min="1" />
               </div>
               <div class="form-group">
                 <label>Published</label>
@@ -439,7 +435,14 @@ export const prerender = false;
 
           <!-- Ingredients -->
           <div class="section-card">
-            <h3>Ingredients</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;">
+              <h3 style="margin:0;">Ingredients</h3>
+              <div style="display:flex;align-items:center;gap:.5rem;">
+                <label style="font-size:.85rem;color:#6a5a4a;margin:0;">Serves</label>
+                <input type="number" id="f-baseServings" value="${data.baseServings || 4}" min="1" style="width:60px;text-align:center;" />
+                <span style="font-size:.82rem;color:#9a8a7a;">people</span>
+              </div>
+            </div>
             <div id="ingredientsEditor">
               ${data.ingredients && data.ingredients.length > 0 ? renderIngredientsEditor(data.ingredients) : '<p style="color:#9a8a7a;font-size:.85rem;">No ingredients yet. Add manually below.</p>'}
             </div>
