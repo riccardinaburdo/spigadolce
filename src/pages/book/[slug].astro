@@ -584,56 +584,71 @@ const { recipe } = Astro.props;
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
-      .recipe-hero { height: 280px; }
-      .recipe-hero-overlay h1 { font-size: 1.6rem; }
+      .recipe-hero { height: 260px; }
+      .recipe-hero-overlay h1 { font-size: 1.5rem; }
       .recipe-hero-overlay { padding: 1.2rem; }
       .nutrition-grid { grid-template-columns: repeat(2, 1fr); }
       .servings-calculator {
         flex-wrap: wrap;
         justify-content: center;
         text-align: center;
-        gap: 0.6rem;
+        gap: 0.5rem;
+        padding: 0.8rem 1rem;
       }
-      .servings-calculator .calc-note { width: 100%; }
+      .servings-calculator .calc-note { width: 100%; font-size: 0.72rem; }
       .content-wrap { padding: 0 1rem; }
-      .section-title { font-size: 1.4rem; margin: 2rem 0 1rem; }
+      .section-title { font-size: 1.3rem; margin: 2rem 0 0.8rem; }
       .media-thumbnails { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
       .media-thumb .thumb-label { font-size: 0.6rem; padding: 0.2rem 0.3rem; }
       .media-thumb .thumb-number { width: 20px; height: 20px; font-size: 0.6rem; }
       .media-thumb img.thumb-img,
       .media-thumb .thumb-video-placeholder { height: 100px; }
-      .lightbox-box img, .lightbox-box video { max-height: 65vh; }
-      .lightbox-box iframe { max-height: 40vh; }
+      .lightbox-box img, .lightbox-box video { max-height: 70vh; }
+      .lightbox-box iframe { max-height: 45vh; }
       .lightbox-caption { font-size: 0.8rem; }
+      .lightbox-prev { left: 5px; }
+      .lightbox-next { right: 5px; }
+      .lightbox-nav { width: 36px; height: 36px; font-size: 1.4rem; background: rgba(0,0,0,0.4); }
       .ingredient-item { padding: 0.6rem 0.5rem; gap: 0.6rem; }
-      .ing-qty { min-width: 65px; font-size: 0.88rem; }
+      .ing-qty { min-width: 60px; font-size: 0.88rem; }
       .ing-name { font-size: 0.88rem; }
       .nutrition-detail { padding: 1rem; }
-      .nut-row { font-size: 0.82rem; }
+      .nutrition-detail h4 { font-size: 0.75rem; }
+      .nut-row { font-size: 0.82rem; padding: 0.4rem 0; }
       .health-benefits { padding: 1rem; }
-      .benefit-item { gap: 0.7rem; }
+      .benefit-item { gap: 0.6rem; padding: 0.6rem 0; }
+      .benefit-icon { width: 32px; height: 32px; font-size: 1rem; }
       .benefit-text strong { font-size: 0.85rem; }
       .benefit-text span { font-size: 0.8rem; }
-      .book-header { padding: 0.8rem 1rem; }
-      .book-footer { padding: 1.5rem 1rem; }
+      .book-header { padding: 0.7rem 1rem; }
+      .book-logo { font-size: 1.5rem; }
+      .book-badge { font-size: 0.58rem; padding: 0.2rem 0.6rem; }
+      .book-footer { padding: 1.5rem 1rem; font-size: 0.75rem; }
     }
     @media (max-width: 480px) {
-      .recipe-hero { height: 220px; }
-      .recipe-hero-overlay h1 { font-size: 1.3rem; }
-      .nutrition-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
-      .nutrition-card { padding: 0.8rem 0.6rem; }
-      .nutrition-card .nut-value { font-size: 1.3rem; }
-      .media-thumbnails { grid-template-columns: repeat(2, 1fr); }
+      .recipe-hero { height: 200px; }
+      .recipe-hero-overlay h1 { font-size: 1.2rem; }
+      .recipe-hero-overlay { padding: 1rem; }
+      .nutrition-grid { gap: 0.5rem; }
+      .nutrition-card { padding: 0.7rem 0.5rem; }
+      .nutrition-card .nut-value { font-size: 1.2rem; }
+      .nutrition-card .nut-label { font-size: 0.65rem; }
+      .media-thumbnails { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
       .media-thumb img.thumb-img,
-      .media-thumb .thumb-video-placeholder { height: 110px; }
-      .section-title { font-size: 1.2rem; }
-      .servings-controls button { width: 38px; height: 38px; font-size: 1.1rem; }
-      .servings-controls .servings-value { width: 48px; font-size: 1rem; }
+      .media-thumb .thumb-video-placeholder { height: 120px; }
+      .section-title { font-size: 1.1rem; margin: 1.5rem 0 0.6rem; }
+      .servings-calculator { padding: 0.7rem 0.8rem; }
+      .servings-controls button { width: 36px; height: 36px; font-size: 1.1rem; }
+      .servings-controls .servings-value { width: 44px; font-size: 1rem; }
+      .servings-calculator .calc-label { font-size: 0.82rem; }
       .lightbox-prev { left: 3px; }
       .lightbox-next { right: 3px; }
       .lightbox-nav { width: 32px; height: 32px; font-size: 1.2rem; }
       .lightbox-close { top: -32px; font-size: 1.6rem; }
-      .lightbox-overlay { padding: 0.8rem; }
+      .lightbox-overlay { padding: 0.5rem; }
+      .lightbox-box img, .lightbox-box video { max-height: 75vh; }
+      .ingredient-item { padding: 0.5rem 0.3rem; }
+      .nutrition-note { font-size: 0.72rem; }
     }
   </style>
 </head>
