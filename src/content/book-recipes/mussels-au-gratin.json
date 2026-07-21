@@ -171,12 +171,13 @@
       "text": "Mussels offer a notable amount of iron, important for oxygen transport and preventing fatigue."
     }
   ],
+  "_ingredientsText": "",
   "_aiGenerated": {
     "ingredients": true,
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-07-21T11:12:39.960Z"
+    "lastGenerated": "2026-07-21T11:35:06.653Z"
   },
   "_manualEdits": []
 }
