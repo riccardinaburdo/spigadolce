@@ -433,6 +433,15 @@ export const prerender = false;
             <div id="media-uploading"></div>
           </div>
 
+          <!-- Preparation steps (for AI context) -->
+          <div class="section-card">
+            <h3>Preparation Steps</h3>
+            <div class="form-group">
+              <label>Paste the recipe steps here — used by AI to generate accurate photo captions</label>
+              <textarea id="f-preparationText" rows="6" placeholder="e.g.:\n1. Trim and wash the green beans\n2. Boil in salted water for 5 minutes\n3. Drain and toss with olive oil, garlic and fresh mint">${data._preparationText || ''}</textarea>
+            </div>
+          </div>
+
           <!-- Ingredients -->
           <div class="section-card">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;">
@@ -846,6 +855,7 @@ export const prerender = false;
     async function generateAll() {
       const title = document.getElementById('f-title').value.trim();
       const ingredientsText = document.getElementById('f-ingredientsText').value.trim();
+      const preparationText = document.getElementById('f-preparationText').value.trim();
       if (!title) { toast('Please enter a title first', true); return; }
 
       const mediaFiles = mediaItems.map((m, i) => ({
@@ -856,6 +866,7 @@ export const prerender = false;
       await callGenerate({
         title,
         ingredientsText: ingredientsText || 'Generate typical ingredients for this recipe',
+        preparationText,
         baseServings: parseInt(document.getElementById('f-baseServings').value) || 4,
         mediaFiles
       }, ['ingredients', 'nutrition', 'healthBenefits', 'mediaCaptions']);
@@ -932,6 +943,7 @@ export const prerender = false;
         nutrition: collectNutrition(),
         healthBenefits: collectBenefits(),
         _ingredientsText: document.getElementById('f-ingredientsText').value,
+        _preparationText: document.getElementById('f-preparationText').value,
         _aiGenerated: {
           ingredients: aiState.ingredients,
           nutrition: aiState.nutrition,

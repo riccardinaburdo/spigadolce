@@ -21,7 +21,7 @@ export const POST: APIRoute = async ({ request }) => {
   } catch {
     return new Response(JSON.stringify({ error: 'Invalid JSON in request body' }), { status: 400 });
   }
-  const { title, ingredientsText, mediaFiles, baseServings } = body;
+  const { title, ingredientsText, preparationText, mediaFiles, baseServings } = body;
 
   // Build prompt for Claude
   const prompt = `You are a professional chef and nutritionist specializing in traditional Pugliese cuisine.
@@ -32,8 +32,8 @@ Recipe title: ${title}
 Base servings: ${baseServings || 4}
 Ingredients (raw text from the user):
 ${ingredientsText}
-
-Media files uploaded (generate captions for each):
+${preparationText ? `\nPreparation steps:\n${preparationText}\n` : ''}
+Media files uploaded (generate captions for each — use the preparation steps to match each photo to the correct step):
 ${mediaFiles?.map((f: any, i: number) => `${i + 1}. ${f.filename} (${f.type})`).join('\n') || 'None yet'}
 
 Generate a JSON object with these fields:
@@ -45,6 +45,8 @@ Generate a JSON object with these fields:
    - name should be the ingredient name in English
 
 2. "mediaCaptions": array of strings, one caption per media file (short, descriptive, in English)
+   - Use the preparation steps to infer what each photo shows based on its position in the sequence
+   - Photos are typically uploaded in chronological order matching the preparation steps
 
 3. "nutrition": object with:
    - "calories": number (kcal per serving)
