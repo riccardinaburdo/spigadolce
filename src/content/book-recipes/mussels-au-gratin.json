@@ -4,7 +4,7 @@
   "bookPage": 8,
   "coverImage": "/images/book/mussels-au-gratin-hr-1784554893601.png",
   "published": true,
-  "date": "2026-07-20",
+  "date": "2026-07-21",
   "media": [
     {
       "type": "photo",
@@ -171,13 +171,12 @@
       "text": "Mussels offer a notable amount of iron, important for oxygen transport and preventing fatigue."
     }
   ],
-  "_ingredientsText": "1 kg mussels\n• 1 tablespoon chopped parsley\n• 1 slice of stale bread\n• 1 clove of garlic\n• 3 tablespoons extra virgin olive oil\n• pepper (optional)",
   "_aiGenerated": {
     "ingredients": true,
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-07-20T19:37:55.150Z"
+    "lastGenerated": "2026-07-21T11:12:39.960Z"
   },
   "_manualEdits": []
 }
