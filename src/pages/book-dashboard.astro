@@ -439,14 +439,9 @@ export const prerender = false;
 
           <!-- Ingredients -->
           <div class="section-card">
-            <h3>Ingredients ${sectionBadge('ingredients')}</h3>
-            <div class="form-group">
-              <label>Raw ingredients text (for AI parsing)</label>
-              <textarea id="f-ingredientsText" placeholder="Paste your ingredient list here, e.g.:\n1.5 kg cime di rapa\n4 tbsp olive oil\nsalt to taste">${data._ingredientsText || ''}</textarea>
-              <button class="btn btn-gold btn-sm" style="margin-top:.5rem" onclick="generateIngredients()">Generate with AI</button>
-            </div>
+            <h3>Ingredients</h3>
             <div id="ingredientsEditor">
-              ${data.ingredients && data.ingredients.length > 0 ? renderIngredientsEditor(data.ingredients) : '<p style="color:#9a8a7a;font-size:.85rem;">No ingredients yet. Type above and click "Generate with AI" or add manually below.</p>'}
+              ${data.ingredients && data.ingredients.length > 0 ? renderIngredientsEditor(data.ingredients) : '<p style="color:#9a8a7a;font-size:.85rem;">No ingredients yet. Add manually below.</p>'}
             </div>
             <button class="btn btn-outline btn-sm" style="margin-top:.5rem" onclick="addIngredientRow()">+ Add Ingredient</button>
           </div>
@@ -841,20 +836,14 @@ export const prerender = false;
     // ================================================================
     // AI GENERATION
     // ================================================================
-    async function generateIngredients() {
-      const title = document.getElementById('f-title').value.trim();
-      const ingredientsText = document.getElementById('f-ingredientsText').value.trim();
-      if (!title || !ingredientsText) {
-        toast('Please enter a title and ingredient text first', true);
-        return;
-      }
-      await callGenerate({ title, ingredientsText, baseServings: parseInt(document.getElementById('f-baseServings').value) || 4 }, ['ingredients']);
-    }
-
     async function generateAll() {
       const title = document.getElementById('f-title').value.trim();
-      const ingredientsText = document.getElementById('f-ingredientsText').value.trim();
       if (!title) { toast('Please enter a title first', true); return; }
+
+      const ings = collectIngredients();
+      const ingredientsText = ings.length > 0
+        ? ings.map(i => `${i.qty || ''} ${i.unit || ''} ${i.name}`.trim()).join('\n')
+        : 'Generate typical ingredients for this recipe';
 
       const mediaFiles = mediaItems.map((m, i) => ({
         filename: m.src ? m.src.split('/').pop() : `media-${i + 1}`,
@@ -863,10 +852,10 @@ export const prerender = false;
 
       await callGenerate({
         title,
-        ingredientsText: ingredientsText || 'Generate typical ingredients for this recipe',
+        ingredientsText,
         baseServings: parseInt(document.getElementById('f-baseServings').value) || 4,
         mediaFiles
-      }, ['ingredients', 'nutrition', 'healthBenefits', 'mediaCaptions']);
+      }, ['nutrition', 'healthBenefits', 'mediaCaptions']);
     }
 
     async function callGenerate(body, sections) {
@@ -939,7 +928,6 @@ export const prerender = false;
         ingredients: collectIngredients(),
         nutrition: collectNutrition(),
         healthBenefits: collectBenefits(),
-        _ingredientsText: document.getElementById('f-ingredientsText').value,
         _aiGenerated: {
           ingredients: aiState.ingredients,
           nutrition: aiState.nutrition,
