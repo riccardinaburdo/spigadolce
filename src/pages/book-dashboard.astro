@@ -436,15 +436,19 @@ export const prerender = false;
           <!-- Ingredients -->
           <div class="section-card">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;">
-              <h3 style="margin:0;">Ingredients</h3>
+              <h3 style="margin:0;">Ingredients ${sectionBadge('ingredients')}</h3>
               <div style="display:flex;align-items:center;gap:.5rem;">
                 <label style="font-size:.85rem;color:#6a5a4a;margin:0;">Serves</label>
                 <input type="number" id="f-baseServings" value="${data.baseServings || 4}" min="1" style="width:60px;text-align:center;" />
                 <span style="font-size:.82rem;color:#9a8a7a;">people</span>
               </div>
             </div>
+            <div class="form-group">
+              <label>Raw ingredients text (for AI parsing)</label>
+              <textarea id="f-ingredientsText" placeholder="Paste your ingredient list here, e.g.:\n1.5 kg cime di rapa\n4 tbsp olive oil\nsalt to taste">${data._ingredientsText || ''}</textarea>
+            </div>
             <div id="ingredientsEditor">
-              ${data.ingredients && data.ingredients.length > 0 ? renderIngredientsEditor(data.ingredients) : '<p style="color:#9a8a7a;font-size:.85rem;">No ingredients yet. Add manually below.</p>'}
+              ${data.ingredients && data.ingredients.length > 0 ? renderIngredientsEditor(data.ingredients) : '<p style="color:#9a8a7a;font-size:.85rem;">No ingredients yet. Type above and click "Generate All with AI" or add manually below.</p>'}
             </div>
             <button class="btn btn-outline btn-sm" style="margin-top:.5rem" onclick="addIngredientRow()">+ Add Ingredient</button>
           </div>
@@ -841,12 +845,8 @@ export const prerender = false;
     // ================================================================
     async function generateAll() {
       const title = document.getElementById('f-title').value.trim();
+      const ingredientsText = document.getElementById('f-ingredientsText').value.trim();
       if (!title) { toast('Please enter a title first', true); return; }
-
-      const ings = collectIngredients();
-      const ingredientsText = ings.length > 0
-        ? ings.map(i => `${i.qty || ''} ${i.unit || ''} ${i.name}`.trim()).join('\n')
-        : 'Generate typical ingredients for this recipe';
 
       const mediaFiles = mediaItems.map((m, i) => ({
         filename: m.src ? m.src.split('/').pop() : `media-${i + 1}`,
@@ -855,10 +855,10 @@ export const prerender = false;
 
       await callGenerate({
         title,
-        ingredientsText,
+        ingredientsText: ingredientsText || 'Generate typical ingredients for this recipe',
         baseServings: parseInt(document.getElementById('f-baseServings').value) || 4,
         mediaFiles
-      }, ['nutrition', 'healthBenefits', 'mediaCaptions']);
+      }, ['ingredients', 'nutrition', 'healthBenefits', 'mediaCaptions']);
     }
 
     async function callGenerate(body, sections) {
@@ -931,6 +931,7 @@ export const prerender = false;
         ingredients: collectIngredients(),
         nutrition: collectNutrition(),
         healthBenefits: collectBenefits(),
+        _ingredientsText: document.getElementById('f-ingredientsText').value,
         _aiGenerated: {
           ingredients: aiState.ingredients,
           nutrition: aiState.nutrition,
