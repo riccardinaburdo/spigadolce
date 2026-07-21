@@ -3,7 +3,7 @@
   "title": "French Beans with Mint",
   "bookPage": 10,
   "coverImage": "/images/book/fagiolini-alla-menta-hr-1784641108424.png",
-  "published": false,
+  "published": true,
   "date": "2026-07-21",
   "media": [
     {
@@ -202,7 +202,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-07-21T13:41:18.495Z"
+    "lastGenerated": "2026-07-21T13:41:26.237Z"
   },
   "_manualEdits": [
     "mediaCaptions"
