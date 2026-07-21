@@ -1,0 +1,210 @@
+{
+  "slug": "french-beans-with-mint",
+  "title": "French Beans with Mint",
+  "bookPage": 10,
+  "coverImage": "/images/book/fagiolini-alla-menta-hr-1784641108424.png",
+  "published": false,
+  "date": "2026-07-21",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/1-1784641138991.jpeg",
+      "caption": "Fresh green beans being cleaned and trimmed before cooking"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/2-1784641141842.jpg",
+      "caption": "Ingredients"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/3-1784641146532.jpg",
+      "caption": "Drained, cooked green beans set aside"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/4-1784641161179.jpeg",
+      "caption": "Chopped onion frying in olive oil"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/5-1784641168706.jpeg",
+      "caption": "Green beans added to the pan with onions"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/6-1784641173820.jpeg",
+      "caption": "Breadcrumbs, mint, parsley, and lemon juice added to the beans"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/7-1784641178695.jpeg",
+      "caption": "Beans cooking together with the seasoning and breadcrumbs"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/8-1784641183511.jpeg",
+      "caption": "Finished French beans with mint served on a plate, garnished with fresh mint leaves"
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 1,
+      "unit": "kg",
+      "name": "green beans"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "onion, chopped"
+    },
+    {
+      "qty": 1,
+      "unit": "tbsp",
+      "name": "parsley, chopped"
+    },
+    {
+      "qty": 1.5,
+      "unit": "tbsp",
+      "name": "bread crumbs"
+    },
+    {
+      "qty": 1,
+      "unit": "tbsp",
+      "name": "mint or thyme, chopped"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "lemon, juiced"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "pepper (optional)"
+    }
+  ],
+  "nutrition": {
+    "calories": 145,
+    "protein": 4,
+    "carbs": 17,
+    "fat": 8,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "145 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "8 g (12% DV)"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.2 g (6% DV)",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "5.5 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "17 g (6% DV)"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "5 g (18% DV)",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "4 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "4 g (8% DV)"
+      },
+      {
+        "name": "Sodium",
+        "value": "290 mg (12% DV)"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "25% DV"
+      },
+      {
+        "name": "Vitamin A",
+        "value": "18% DV"
+      },
+      {
+        "name": "Vitamin K",
+        "value": "35% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "8% DV"
+      },
+      {
+        "name": "Potassium",
+        "value": "10% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🫘",
+      "title": "Rich in Fiber",
+      "text": "Green beans provide dietary fiber that supports digestion and helps maintain healthy blood sugar levels."
+    },
+    {
+      "icon": "🍋",
+      "title": "Vitamin C Boost",
+      "text": "Lemon juice and green beans supply vitamin C, supporting immune function and collagen production."
+    },
+    {
+      "icon": "🌿",
+      "title": "Anti-inflammatory Herbs",
+      "text": "Mint and parsley contain antioxidants and volatile oils that may help reduce inflammation and aid digestion."
+    },
+    {
+      "icon": "🫒",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil provides monounsaturated fats that support cardiovascular health."
+    },
+    {
+      "icon": "🧅",
+      "title": "Onion Benefits",
+      "text": "Onions contain sulfur compounds and antioxidants like quercetin, which may support heart health and reduce inflammation."
+    },
+    {
+      "icon": "🥗",
+      "title": "Low Calorie, Nutrient Dense",
+      "text": "This dish is naturally low in calories while offering vitamins, minerals, and fiber, making it a wholesome side dish."
+    }
+  ],
+  "_ingredientsText": "1 Kg of green beans\n• 1 onion, chopped\n• 1 tablespoon parsley, chopped\n• 1 1⁄2 tablespoons bread crumbs\n• 1 tablespoon chopped mint or thyme\n• juice of 1 lemon\n• 2 tablespoons extra virgin olive oil\n• salt\n• pepper (optional)",
+  "_preparationText": "Clean the beans and boil them in salted water for 15 minutes. As soon as they are cooked, drain and set aside.\n2. In a pan, add the olive oil, fry the chopped onion, and then add the green beans. Cook for 3 minutes, adding the cooking water used to cook the beans if necessary.\n3. Immediately add the breadcrumbs, mint, parsley, lemon juice, and pepper. Cook for 2 minutes.\n4. Serve on individual plates adding fresh mint leaves for garnish.",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-07-21T13:41:18.495Z"
+  },
+  "_manualEdits": [
+    "mediaCaptions"
+  ]
+}
