@@ -3,7 +3,7 @@
   "title": "Octopus Salad",
   "bookPage": 12,
   "coverImage": "/images/book/insalata-di-polpo-hr-1784744254115.png",
-  "published": false,
+  "published": true,
   "date": "2026-07-22",
   "media": [
     {
@@ -193,7 +193,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-07-22T18:18:35.663Z"
+    "lastGenerated": "2026-07-22T18:18:41.608Z"
   },
   "_manualEdits": []
 }
