@@ -141,32 +141,32 @@
   },
   "healthBenefits": [
     {
-      "icon": "🦪",
+      "icon": "\ud83e\uddaa",
       "title": "Rich in Vitamin B12",
       "text": "Mussels are one of the richest natural sources of vitamin B12, essential for nerve function and red blood cell formation."
     },
     {
-      "icon": "💪",
+      "icon": "\ud83d\udcaa",
       "title": "High-Quality Protein",
       "text": "Mussels provide lean, complete protein that supports muscle repair and growth with minimal saturated fat."
     },
     {
-      "icon": "❤️",
+      "icon": "\u2764\ufe0f",
       "title": "Heart-Healthy Fats",
       "text": "Extra virgin olive oil supplies monounsaturated fats and antioxidants that support cardiovascular health."
     },
     {
-      "icon": "🧠",
+      "icon": "\ud83e\udde0",
       "title": "Omega-3 Fatty Acids",
       "text": "Mussels contain omega-3s that contribute to brain function and help reduce inflammation."
     },
     {
-      "icon": "🧄",
+      "icon": "\ud83e\uddc4",
       "title": "Immune Support",
       "text": "Garlic contains allicin, a compound known for its antibacterial and immune-boosting properties."
     },
     {
-      "icon": "🩸",
+      "icon": "\ud83e\ude78",
       "title": "Good Source of Iron",
       "text": "Mussels offer a notable amount of iron, important for oxygen transport and preventing fatigue."
     }
@@ -179,5 +179,6 @@
     "mediaCaptions": true,
     "lastGenerated": "2026-07-21T11:35:06.653Z"
   },
-  "_manualEdits": []
+  "_manualEdits": [],
+  "book": "august"
 }

@@ -49,6 +49,12 @@ export const prerender = false;
     .btn-sm { padding: .35rem .75rem; font-size: .8rem; }
     .btn:disabled { opacity: .5; cursor: not-allowed; }
 
+    /* Book groups */
+    .book-group { margin-bottom: 2rem; }
+    .book-group-header { display: flex; align-items: center; gap: .75rem; margin-bottom: .75rem; padding-bottom: .5rem; border-bottom: 2px solid #d4c5b0; }
+    .book-group-header h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #3a2a1a; }
+    .book-group-header .book-count { font-size: .75rem; color: #9a8a7a; background: #e8e0d4; padding: .15rem .6rem; border-radius: 10px; }
+
     /* Entry cards grid */
     .entries-grid { display: grid; grid-template-columns: repeat(auto-fill, 230px); gap: 1rem; justify-content: start; }
     .entry-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.05); overflow: hidden; cursor: pointer; transition: transform .15s, box-shadow .15s; border: 2px solid transparent; position: relative; }
@@ -62,6 +68,8 @@ export const prerender = false;
     .entry-badge { position: absolute; top: 8px; right: 8px; padding: .15rem .5rem; border-radius: 10px; font-size: .65rem; font-weight: 700; text-transform: uppercase; }
     .entry-badge.published { background: #2e8b57; color: #fff; }
     .entry-badge.draft { background: #e8e0d4; color: #7a6a5a; }
+    .entry-preview { position: absolute; top: 8px; left: 8px; width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,.55); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: .8rem; text-decoration: none; backdrop-filter: blur(4px); transition: background .2s; z-index: 2; }
+    .entry-preview:hover { background: rgba(184,134,11,.85); }
 
     /* Empty & loading states */
     .empty-state { text-align: center; padding: 4rem 2rem; color: #9a8a7a; }
@@ -280,9 +288,41 @@ export const prerender = false;
     // ================================================================
     // LIST VIEW
     // ================================================================
+    const BOOK_MONTHS = [
+      { id: 'january', label: 'January' }, { id: 'february', label: 'February' },
+      { id: 'march', label: 'March' }, { id: 'april', label: 'April' },
+      { id: 'may', label: 'May' }, { id: 'june', label: 'June' },
+      { id: 'july', label: 'July' }, { id: 'august', label: 'August' },
+      { id: 'september', label: 'September' }, { id: 'october', label: 'October' },
+      { id: 'november', label: 'November' }, { id: 'december', label: 'December' }
+    ];
+
+    function renderCard(e, i) {
+      const src = e.coverImage ? imgSrc(e.coverImage) : '';
+      const img = src
+        ? `<img class="entry-img" src="${src}" alt="" onerror="this.outerHTML='<div class=entry-img-placeholder>No image</div>'" />`
+        : '<div class="entry-img-placeholder">No image</div>';
+      const previewBtn = e.published && e.slug
+        ? `<a class="entry-preview" href="/book/${e.slug}" target="_blank" title="Preview" onclick="event.stopPropagation()">&#9654;</a>`
+        : '';
+      return `<div class="entry-card" onclick="openEditRecipe(${i})">
+        ${img}
+        ${previewBtn}
+        <span class="entry-badge ${e.published ? 'published' : 'draft'}">${e.published ? 'Published' : 'Draft'}</span>
+        <div class="entry-body">
+          <div class="entry-title">${e.title || 'Untitled'}</div>
+          <div class="entry-meta">
+            ${e.bookPage ? `<span>p.${e.bookPage}</span>` : ''}
+            ${e.ingredients ? `<span>${e.ingredients.length} ing.</span>` : ''}
+            ${e.media ? `<span>${e.media.length} media</span>` : ''}
+          </div>
+        </div>
+      </div>`;
+    }
+
     function showList() {
       currentView = 'list';
-      const sorted = [...entries].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      const sorted = [...entries].sort((a, b) => (a.bookPage || 999) - (b.bookPage || 999));
       entries = sorted;
       const content = document.getElementById('content');
 
@@ -297,31 +337,58 @@ export const prerender = false;
         return;
       }
 
+      // Group by book (month)
+      const groups = {};
+      const unassigned = [];
+      sorted.forEach((e, i) => {
+        e._listIndex = i;
+        const book = e.book || '';
+        if (book) {
+          if (!groups[book]) groups[book] = [];
+          groups[book].push(e);
+        } else {
+          unassigned.push(e);
+        }
+      });
+
+      // Render grouped by month order
+      let groupsHtml = '';
+      for (const month of BOOK_MONTHS) {
+        const recipes = groups[month.id];
+        if (!recipes || recipes.length === 0) continue;
+        groupsHtml += `
+          <div class="book-group">
+            <div class="book-group-header">
+              <h3>${month.label}</h3>
+              <span class="book-count">${recipes.length} recipe${recipes.length > 1 ? 's' : ''}</span>
+            </div>
+            <div class="entries-grid">
+              ${recipes.map(e => renderCard(e, e._listIndex)).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      if (unassigned.length > 0) {
+        groupsHtml += `
+          <div class="book-group">
+            <div class="book-group-header">
+              <h3>Unassigned</h3>
+              <span class="book-count">${unassigned.length}</span>
+            </div>
+            <div class="entries-grid">
+              ${unassigned.map(e => renderCard(e, e._listIndex)).join('')}
+            </div>
+          </div>
+        `;
+      }
+
       content.innerHTML = `
         <div class="content-header">
           <h2>Book Recipes</h2>
           <button class="btn btn-primary" onclick="openNewRecipe()">+ New Recipe</button>
         </div>
-        <div class="entries-grid">
-          ${sorted.map((e, i) => {
-            const src = e.coverImage ? imgSrc(e.coverImage) : '';
-            const img = src
-              ? `<img class="entry-img" src="${src}" alt="" onerror="this.outerHTML='<div class=entry-img-placeholder>No image</div>'" />`
-              : '<div class="entry-img-placeholder">No image</div>';
-            return `<div class="entry-card" onclick="openEditRecipe(${i})">
-              ${img}
-              <span class="entry-badge ${e.published ? 'published' : 'draft'}">${e.published ? 'Published' : 'Draft'}</span>
-              <div class="entry-body">
-                <div class="entry-title">${e.title || 'Untitled'}</div>
-                <div class="entry-meta">
-                  ${e.bookPage ? `<span>p.${e.bookPage}</span>` : ''}
-                  ${e.ingredients ? `<span>${e.ingredients.length} ingredients</span>` : ''}
-                  ${e.media ? `<span>${e.media.length} media</span>` : ''}
-                </div>
-              </div>
-            </div>`;
-          }).join('')}
-        </div>
+        ${groupsHtml}
       `;
     }
 
@@ -333,7 +400,7 @@ export const prerender = false;
       aiState = { ingredients: false, nutrition: false, healthBenefits: false, mediaCaptions: false };
       manualEdits = [];
       showEditor({
-        title: '', slug: '', bookPage: '', coverImage: '', published: false,
+        title: '', slug: '', book: '', bookPage: '', coverImage: '', published: false,
         date: new Date().toISOString().split('T')[0],
         media: [], baseServings: 4, ingredients: [],
         nutrition: { calories: '', protein: '', carbs: '', fat: '', detail: [] },
@@ -378,7 +445,14 @@ export const prerender = false;
               <label>Title</label>
               <input type="text" id="f-title" value="${esc(data.title)}" />
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;">
+              <div class="form-group">
+                <label>Book</label>
+                <select id="f-book">
+                  <option value="">— Select month —</option>
+                  ${BOOK_MONTHS.map(m => `<option value="${m.id}" ${data.book === m.id ? 'selected' : ''}>${m.label}</option>`).join('')}
+                </select>
+              </div>
               <div class="form-group">
                 <label>Page #</label>
                 <input type="number" id="f-bookPage" value="${data.bookPage || ''}" />
@@ -933,6 +1007,7 @@ export const prerender = false;
       const data = {
         slug,
         title,
+        book: document.getElementById('f-book').value || null,
         bookPage: parseInt(document.getElementById('f-bookPage').value) || null,
         coverImage: document.getElementById('f-coverImage').value,
         published: document.getElementById('f-published').checked,

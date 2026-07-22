@@ -156,37 +156,37 @@
   },
   "healthBenefits": [
     {
-      "icon": "🐙",
+      "icon": "\ud83d\udc19",
       "title": "Lean Protein Source",
       "text": "Octopus is low in fat and rich in high-quality protein, supporting muscle repair and growth."
     },
     {
-      "icon": "🥔",
+      "icon": "\ud83e\udd54",
       "title": "Energizing Carbohydrates",
       "text": "Potatoes provide complex carbohydrates and potassium, helping maintain energy levels and healthy blood pressure."
     },
     {
-      "icon": "🫘",
+      "icon": "\ud83e\uded8",
       "title": "Fiber-Rich Vegetables",
       "text": "Green beans add dietary fiber and vitamins A and C, supporting digestion and immune function."
     },
     {
-      "icon": "🍋",
+      "icon": "\ud83c\udf4b",
       "title": "Vitamin C Boost",
       "text": "Lemon juice enhances iron absorption and provides a strong dose of immune-supporting vitamin C."
     },
     {
-      "icon": "🫒",
+      "icon": "\ud83e\uded2",
       "title": "Heart-Healthy Fats",
       "text": "Extra virgin olive oil contributes monounsaturated fats and antioxidants that support cardiovascular health."
     },
     {
-      "icon": "🌿",
+      "icon": "\ud83c\udf3f",
       "title": "Digestive Aid",
       "text": "Mint and garlic offer digestive benefits and natural antimicrobial properties."
     }
   ],
-  "_ingredientsText": "1 octopus (about 700 g)\n• 3 potatoes, diced into cubes\n• 300 g of green beans, cleaned\n• juice of 1 lemon\n• 1 clove of garlic, chopped or crushed\n• 10 mint leaves, chopped\n• 3 tablespoons extra virgin olive oil\n• salt",
+  "_ingredientsText": "1 octopus (about 700 g)\n\u2022 3 potatoes, diced into cubes\n\u2022 300 g of green beans, cleaned\n\u2022 juice of 1 lemon\n\u2022 1 clove of garlic, chopped or crushed\n\u2022 10 mint leaves, chopped\n\u2022 3 tablespoons extra virgin olive oil\n\u2022 salt",
   "_preparationText": "Wash the octopus in cold water, then put it in a pot of cold water. Let it cook for 30 minutes, adding salt after it is finished cooking.\n2. Drain the octopus and let it cool on a plate. Then cut it into small pieces.\n3. Separately, wash the green beans and boil them in salted water for about 8 minutes.\n4. Remove the green beans from the cooking water with a strainer spoon, then, in the same cooking water, add the diced potatoes and cook for 10 minutes.\n5. Drain and let cool.\n6. In a large bowl, put the rest of the\ningredients together: pieces of octopus, vegetables, lemon juice, garlic (either crushed or diced), grated lemon peel, mint leaves and olive oil.",
   "_aiGenerated": {
     "ingredients": true,
@@ -195,5 +195,6 @@
     "mediaCaptions": true,
     "lastGenerated": "2026-07-22T18:18:45.361Z"
   },
-  "_manualEdits": []
+  "_manualEdits": [],
+  "book": "august"
 }

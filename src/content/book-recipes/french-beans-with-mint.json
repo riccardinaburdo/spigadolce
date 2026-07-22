@@ -165,37 +165,37 @@
   },
   "healthBenefits": [
     {
-      "icon": "🫘",
+      "icon": "\ud83e\uded8",
       "title": "Rich in Fiber",
       "text": "Green beans provide dietary fiber that supports digestion and helps maintain healthy blood sugar levels."
     },
     {
-      "icon": "🍋",
+      "icon": "\ud83c\udf4b",
       "title": "Vitamin C Boost",
       "text": "Lemon juice and green beans supply vitamin C, supporting immune function and collagen production."
     },
     {
-      "icon": "🌿",
+      "icon": "\ud83c\udf3f",
       "title": "Anti-inflammatory Herbs",
       "text": "Mint and parsley contain antioxidants and volatile oils that may help reduce inflammation and aid digestion."
     },
     {
-      "icon": "🫒",
+      "icon": "\ud83e\uded2",
       "title": "Heart-Healthy Fats",
       "text": "Extra virgin olive oil provides monounsaturated fats that support cardiovascular health."
     },
     {
-      "icon": "🧅",
+      "icon": "\ud83e\uddc5",
       "title": "Onion Benefits",
       "text": "Onions contain sulfur compounds and antioxidants like quercetin, which may support heart health and reduce inflammation."
     },
     {
-      "icon": "🥗",
+      "icon": "\ud83e\udd57",
       "title": "Low Calorie, Nutrient Dense",
       "text": "This dish is naturally low in calories while offering vitamins, minerals, and fiber, making it a wholesome side dish."
     }
   ],
-  "_ingredientsText": "1 Kg of green beans\n• 1 onion, chopped\n• 1 tablespoon parsley, chopped\n• 1 1⁄2 tablespoons bread crumbs\n• 1 tablespoon chopped mint or thyme\n• juice of 1 lemon\n• 2 tablespoons extra virgin olive oil\n• salt\n• pepper (optional)",
+  "_ingredientsText": "1 Kg of green beans\n\u2022 1 onion, chopped\n\u2022 1 tablespoon parsley, chopped\n\u2022 1 1\u20442 tablespoons bread crumbs\n\u2022 1 tablespoon chopped mint or thyme\n\u2022 juice of 1 lemon\n\u2022 2 tablespoons extra virgin olive oil\n\u2022 salt\n\u2022 pepper (optional)",
   "_preparationText": "Clean the beans and boil them in salted water for 15 minutes. As soon as they are cooked, drain and set aside.\n2. In a pan, add the olive oil, fry the chopped onion, and then add the green beans. Cook for 3 minutes, adding the cooking water used to cook the beans if necessary.\n3. Immediately add the breadcrumbs, mint, parsley, lemon juice, and pepper. Cook for 2 minutes.\n4. Serve on individual plates adding fresh mint leaves for garnish.",
   "_aiGenerated": {
     "ingredients": true,
@@ -206,5 +206,6 @@
   },
   "_manualEdits": [
     "mediaCaptions"
-  ]
+  ],
+  "book": "august"
 }
