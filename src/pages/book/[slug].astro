@@ -2,18 +2,22 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-export function getStaticPaths() {
-  const dir = path.join(process.cwd(), 'src/content/book-recipes');
-  const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
-  return files
-    .map(f => {
-      const data = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf-8'));
-      return { params: { slug: data.slug }, props: { recipe: data } };
-    })
-    .filter(entry => entry.props.recipe.published === true);
-}
+export const prerender = false;
 
-const { recipe } = Astro.props;
+const { slug } = Astro.params;
+const dir = path.join(process.cwd(), 'src/content/book-recipes');
+const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
+let recipe = null;
+for (const f of files) {
+  const data = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf-8'));
+  if (data.slug === slug && data.published) {
+    recipe = data;
+    break;
+  }
+}
+if (!recipe) {
+  return Astro.redirect('/404');
+}
 ---
 
 <!DOCTYPE html>
