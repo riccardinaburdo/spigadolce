@@ -303,7 +303,7 @@ export const prerender = false;
         ? `<img class="entry-img" src="${src}" alt="" onerror="this.outerHTML='<div class=entry-img-placeholder>No image</div>'" />`
         : '<div class="entry-img-placeholder">No image</div>';
       const previewBtn = e.published && e.slug
-        ? `<a class="entry-preview" href="/book/${e.slug}" target="_blank" title="Preview" onclick="event.stopPropagation()">&#9654;</a>`
+        ? `<a class="entry-preview" href="/book/${e.slug}" target="_blank" title="Preview" onclick="event.stopPropagation()">&#128065;</a>`
         : '';
       return `<div class="entry-card" onclick="openEditRecipe(${i})">
         ${img}
