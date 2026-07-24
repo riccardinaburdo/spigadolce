@@ -1,20 +1,33 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
-
 export const prerender = false;
 
+const REPO = 'riccardinaburdo/spigadolce';
+const BRANCH = 'main';
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+
 const { slug } = Astro.params;
-const dir = path.join(process.cwd(), 'src/content/book-recipes');
-const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
+
+// Fetch recipe list from GitHub API for instant updates
 let recipe = null;
-for (const f of files) {
-  const data = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf-8'));
-  if (data.slug === slug && data.published) {
-    recipe = data;
-    break;
+try {
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/src/content/book-recipes?ref=${BRANCH}`, {
+    headers: { Authorization: `token ${GITHUB_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+  });
+  if (res.ok) {
+    const files = await res.json();
+    for (const file of files) {
+      if (!file.name.endsWith('.json')) continue;
+      const fileRes = await fetch(file.download_url);
+      if (!fileRes.ok) continue;
+      const data = await fileRes.json();
+      if (data.slug === slug && data.published) {
+        recipe = data;
+        break;
+      }
+    }
   }
-}
+} catch (e) {}
+
 if (!recipe) {
   return Astro.redirect('/404');
 }
