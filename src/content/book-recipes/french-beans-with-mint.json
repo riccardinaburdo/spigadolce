@@ -1,15 +1,16 @@
 {
   "slug": "french-beans-with-mint",
   "title": "French Beans with Mint",
+  "book": "august",
   "bookPage": 10,
   "coverImage": "/images/book/fagiolini-alla-menta-hr-1784641108424.png",
   "published": true,
-  "date": "2026-07-21",
+  "date": "2026-07-24",
   "media": [
     {
       "type": "photo",
       "src": "/images/book/1-1784641138991.jpeg",
-      "caption": "Fresh green beans being cleaned and trimmed before cooking"
+      "caption": "Green beans"
     },
     {
       "type": "photo",
@@ -19,32 +20,32 @@
     {
       "type": "photo",
       "src": "/images/book/3-1784641146532.jpg",
-      "caption": "Drained, cooked green beans set aside"
+      "caption": "Trimming the ends of the green beans"
     },
     {
       "type": "photo",
       "src": "/images/book/4-1784641161179.jpeg",
-      "caption": "Chopped onion frying in olive oil"
+      "caption": "Boiling"
     },
     {
       "type": "photo",
       "src": "/images/book/5-1784641168706.jpeg",
-      "caption": "Green beans added to the pan with onions"
+      "caption": "Draining the water"
     },
     {
       "type": "photo",
       "src": "/images/book/6-1784641173820.jpeg",
-      "caption": "Breadcrumbs, mint, parsley, and lemon juice added to the beans"
+      "caption": "Sautéing in a pan with onions and oil"
     },
     {
       "type": "photo",
       "src": "/images/book/7-1784641178695.jpeg",
-      "caption": "Beans cooking together with the seasoning and breadcrumbs"
+      "caption": "Adding bread crumbs and parsley"
     },
     {
       "type": "photo",
       "src": "/images/book/8-1784641183511.jpeg",
-      "caption": "Finished French beans with mint served on a plate, garnished with fresh mint leaves"
+      "caption": "Adding lemon juice"
     }
   ],
   "baseServings": 4,
@@ -96,22 +97,22 @@
     }
   ],
   "nutrition": {
-    "calories": 145,
+    "calories": 140,
     "protein": 4,
-    "carbs": 17,
+    "carbs": 16,
     "fat": 8,
     "detail": [
       {
         "name": "Calories",
-        "value": "145 kcal"
+        "value": "140 kcal"
       },
       {
         "name": "Total Fat",
-        "value": "8 g (12% DV)"
+        "value": "8 g"
       },
       {
         "name": "Saturated Fat",
-        "value": "1.2 g (6% DV)",
+        "value": "1.2 g",
         "sub": true
       },
       {
@@ -121,25 +122,25 @@
       },
       {
         "name": "Carbohydrates",
-        "value": "17 g (6% DV)"
+        "value": "16 g"
       },
       {
         "name": "Dietary Fibre",
-        "value": "5 g (18% DV)",
+        "value": "5 g",
         "sub": true
       },
       {
         "name": "Sugars",
-        "value": "4 g",
+        "value": "5 g",
         "sub": true
       },
       {
         "name": "Protein",
-        "value": "4 g (8% DV)"
+        "value": "4 g"
       },
       {
         "name": "Sodium",
-        "value": "290 mg (12% DV)"
+        "value": "180 mg (8% DV)"
       },
       {
         "name": "Vitamin C",
@@ -165,47 +166,44 @@
   },
   "healthBenefits": [
     {
-      "icon": "\ud83e\uded8",
-      "title": "Rich in Fiber",
-      "text": "Green beans provide dietary fiber that supports digestion and helps maintain healthy blood sugar levels."
+      "icon": "🫘",
+      "title": "Rich in Fibre",
+      "text": "Green beans provide a good amount of dietary fibre, supporting digestion and helping maintain healthy blood sugar levels."
     },
     {
-      "icon": "\ud83c\udf4b",
+      "icon": "🍋",
       "title": "Vitamin C Boost",
-      "text": "Lemon juice and green beans supply vitamin C, supporting immune function and collagen production."
+      "text": "Lemon juice adds a strong dose of vitamin C, supporting immune function and skin health."
     },
     {
-      "icon": "\ud83c\udf3f",
-      "title": "Anti-inflammatory Herbs",
-      "text": "Mint and parsley contain antioxidants and volatile oils that may help reduce inflammation and aid digestion."
-    },
-    {
-      "icon": "\ud83e\uded2",
+      "icon": "🫒",
       "title": "Heart-Healthy Fats",
-      "text": "Extra virgin olive oil provides monounsaturated fats that support cardiovascular health."
+      "text": "Extra virgin olive oil contributes monounsaturated fats that help support healthy cholesterol levels."
     },
     {
-      "icon": "\ud83e\uddc5",
-      "title": "Onion Benefits",
-      "text": "Onions contain sulfur compounds and antioxidants like quercetin, which may support heart health and reduce inflammation."
+      "icon": "🧅",
+      "title": "Antioxidant Support",
+      "text": "Onions contain quercetin and other antioxidants that help reduce inflammation and oxidative stress."
     },
     {
-      "icon": "\ud83e\udd57",
-      "title": "Low Calorie, Nutrient Dense",
-      "text": "This dish is naturally low in calories while offering vitamins, minerals, and fiber, making it a wholesome side dish."
+      "icon": "🌿",
+      "title": "Digestive Aid",
+      "text": "Fresh mint or thyme can help soothe digestion and add antimicrobial properties to the dish."
+    },
+    {
+      "icon": "💪",
+      "title": "Low-Calorie, Nutrient-Dense",
+      "text": "This dish is naturally low in calories while providing vitamins A, C, and K, making it a nutritious side option."
     }
   ],
-  "_ingredientsText": "1 Kg of green beans\n\u2022 1 onion, chopped\n\u2022 1 tablespoon parsley, chopped\n\u2022 1 1\u20442 tablespoons bread crumbs\n\u2022 1 tablespoon chopped mint or thyme\n\u2022 juice of 1 lemon\n\u2022 2 tablespoons extra virgin olive oil\n\u2022 salt\n\u2022 pepper (optional)",
-  "_preparationText": "Clean the beans and boil them in salted water for 15 minutes. As soon as they are cooked, drain and set aside.\n2. In a pan, add the olive oil, fry the chopped onion, and then add the green beans. Cook for 3 minutes, adding the cooking water used to cook the beans if necessary.\n3. Immediately add the breadcrumbs, mint, parsley, lemon juice, and pepper. Cook for 2 minutes.\n4. Serve on individual plates adding fresh mint leaves for garnish.",
+  "_ingredientsText": "1 Kg of green beans\n• 1 onion, chopped\n• 1 tablespoon parsley, chopped\n• 1 1⁄2 tablespoons bread crumbs\n• 1 tablespoon chopped mint or thyme\n• juice of 1 lemon\n• 2 tablespoons extra virgin olive oil\n• salt\n• pepper (optional)",
+  "_preparationText": "1. Fagiolini\n2.ingredienti\n3.pulizia delle estremità dei fagiolini\n4. bollitura\n5. scolare l'acqua\n6.saltare in padella con cipolle e olio\n7.aggiunta di pangrattato e prezzemolo\n8.aggiunta di succo di limone\n\n",
   "_aiGenerated": {
     "ingredients": true,
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-07-21T13:41:26.237Z"
+    "lastGenerated": "2026-07-24T09:33:39.928Z"
   },
-  "_manualEdits": [
-    "mediaCaptions"
-  ],
-  "book": "august"
+  "_manualEdits": []
 }
