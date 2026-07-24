@@ -1,50 +1,51 @@
 {
   "slug": "octopus-salad",
   "title": "Octopus Salad",
+  "book": "august",
   "bookPage": 12,
   "coverImage": "/images/book/insalata-di-polpo-hr-1784744254115.png",
   "published": true,
-  "date": "2026-07-22",
+  "date": "2026-07-24",
   "media": [
     {
       "type": "photo",
       "src": "/images/book/01-1784744265709.jpg",
-      "caption": "Fresh octopus rinsed under cold water before cooking"
+      "caption": "The octopus before preparation."
     },
     {
       "type": "photo",
       "src": "/images/book/02-1784744268616.jpg",
-      "caption": "Octopus simmering in a pot of cold water"
+      "caption": "Cleaning the head."
     },
     {
       "type": "photo",
       "src": "/images/book/03-1784744271757.jpg",
-      "caption": "Cooked octopus cooling on a plate"
+      "caption": "Removing the eyes."
     },
     {
       "type": "photo",
       "src": "/images/book/04-1784744274912.jpg",
-      "caption": "Octopus cut into bite-sized pieces"
+      "caption": "Removing the skin."
     },
     {
       "type": "photo",
       "src": "/images/book/05-1784744277513.jpg",
-      "caption": "Green beans boiling in salted water"
+      "caption": "Boiling in boiling water."
     },
     {
       "type": "photo",
       "src": "/images/book/06-1784744281076.jpg",
-      "caption": "Diced potatoes cooking in the same water as the green beans"
+      "caption": "Preparing with boiled potatoes and green beans."
     },
     {
       "type": "photo",
       "src": "/images/book/07-1784744284197.jpg",
-      "caption": "Cooked potatoes and green beans draining and cooling"
+      "caption": "Adding the octopus cut into pieces."
     },
     {
       "type": "photo",
       "src": "/images/book/08-1784744287109.jpg",
-      "caption": "All ingredients combined in a large bowl with lemon juice, garlic, mint and olive oil"
+      "caption": "Adding chopped lemon zest."
     }
   ],
   "baseServings": 4,
@@ -91,32 +92,32 @@
     }
   ],
   "nutrition": {
-    "calories": 290,
+    "calories": 320,
     "protein": 28,
-    "carbs": 20,
-    "fat": 11,
+    "carbs": 22,
+    "fat": 13,
     "detail": [
       {
         "name": "Calories",
-        "value": "290 kcal"
+        "value": "320 kcal"
       },
       {
         "name": "Total Fat",
-        "value": "11 g"
+        "value": "13 g"
       },
       {
         "name": "Saturated Fat",
-        "value": "1.7 g",
+        "value": "2 g",
         "sub": true
       },
       {
         "name": "Monounsaturated Fat",
-        "value": "7.5 g",
+        "value": "9 g",
         "sub": true
       },
       {
         "name": "Carbohydrates",
-        "value": "20 g"
+        "value": "22 g"
       },
       {
         "name": "Dietary Fibre",
@@ -134,7 +135,7 @@
       },
       {
         "name": "Sodium",
-        "value": "480 mg (20% DV)"
+        "value": "420 mg (18% DV)"
       },
       {
         "name": "Vitamin C",
@@ -142,7 +143,7 @@
       },
       {
         "name": "Vitamin B12",
-        "value": "180% DV"
+        "value": "90% DV"
       },
       {
         "name": "Iron",
@@ -156,45 +157,44 @@
   },
   "healthBenefits": [
     {
-      "icon": "\ud83d\udc19",
+      "icon": "🐙",
       "title": "Lean Protein Source",
-      "text": "Octopus is low in fat and rich in high-quality protein, supporting muscle repair and growth."
+      "text": "Octopus is high in protein and low in fat, supporting muscle repair and satiety."
     },
     {
-      "icon": "\ud83e\udd54",
-      "title": "Energizing Carbohydrates",
-      "text": "Potatoes provide complex carbohydrates and potassium, helping maintain energy levels and healthy blood pressure."
+      "icon": "🧠",
+      "title": "Rich in Vitamin B12",
+      "text": "Octopus provides significant B12, essential for nerve function and red blood cell formation."
     },
     {
-      "icon": "\ud83e\uded8",
-      "title": "Fiber-Rich Vegetables",
-      "text": "Green beans add dietary fiber and vitamins A and C, supporting digestion and immune function."
+      "icon": "🥔",
+      "title": "Energy from Potatoes",
+      "text": "Potatoes offer complex carbohydrates and potassium, supporting sustained energy and heart health."
     },
     {
-      "icon": "\ud83c\udf4b",
+      "icon": "🫘",
+      "title": "Fiber-Rich Green Beans",
+      "text": "Green beans add dietary fiber and vitamins A and C, aiding digestion and immunity."
+    },
+    {
+      "icon": "🍋",
       "title": "Vitamin C Boost",
-      "text": "Lemon juice enhances iron absorption and provides a strong dose of immune-supporting vitamin C."
+      "text": "Lemon juice enhances iron absorption and provides antioxidant support."
     },
     {
-      "icon": "\ud83e\uded2",
+      "icon": "🫒",
       "title": "Heart-Healthy Fats",
-      "text": "Extra virgin olive oil contributes monounsaturated fats and antioxidants that support cardiovascular health."
-    },
-    {
-      "icon": "\ud83c\udf3f",
-      "title": "Digestive Aid",
-      "text": "Mint and garlic offer digestive benefits and natural antimicrobial properties."
+      "text": "Extra virgin olive oil supplies monounsaturated fats that promote cardiovascular health."
     }
   ],
-  "_ingredientsText": "1 octopus (about 700 g)\n\u2022 3 potatoes, diced into cubes\n\u2022 300 g of green beans, cleaned\n\u2022 juice of 1 lemon\n\u2022 1 clove of garlic, chopped or crushed\n\u2022 10 mint leaves, chopped\n\u2022 3 tablespoons extra virgin olive oil\n\u2022 salt",
-  "_preparationText": "Wash the octopus in cold water, then put it in a pot of cold water. Let it cook for 30 minutes, adding salt after it is finished cooking.\n2. Drain the octopus and let it cool on a plate. Then cut it into small pieces.\n3. Separately, wash the green beans and boil them in salted water for about 8 minutes.\n4. Remove the green beans from the cooking water with a strainer spoon, then, in the same cooking water, add the diced potatoes and cook for 10 minutes.\n5. Drain and let cool.\n6. In a large bowl, put the rest of the\ningredients together: pieces of octopus, vegetables, lemon juice, garlic (either crushed or diced), grated lemon peel, mint leaves and olive oil.",
+  "_ingredientsText": "1 octopus (about 700 g)\n• 3 potatoes, diced into cubes\n• 300 g of green beans, cleaned\n• juice of 1 lemon\n• 1 clove of garlic, chopped or crushed\n• 10 mint leaves, chopped\n• 3 tablespoons extra virgin olive oil\n• salt",
+  "_preparationText": "1. polpo prima della preparazione\n2.pulizia della testa \n3.eliminazione degli occhi\n4.rimozione della pelle\n5.bollitura in acqua bollente\n6.preparazione con patate lesse e fagiolini\n7.aggiunta del polpo tagliato in pezzi\n8.aggiunta di buccia di limone tritata\n",
   "_aiGenerated": {
     "ingredients": true,
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-07-22T18:18:45.361Z"
+    "lastGenerated": "2026-07-24T09:41:40.153Z"
   },
-  "_manualEdits": [],
-  "book": "august"
+  "_manualEdits": []
 }
