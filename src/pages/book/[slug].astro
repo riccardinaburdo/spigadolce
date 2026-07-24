@@ -849,6 +849,7 @@ if (!recipe) {
       lbCaption.textContent = item.caption;
       lbCounter.textContent = (index + 1) + ' / ' + mediaItems.length;
       lightbox.classList.add('open');
+      updateNav();
     }
 
     function closeLightbox() {
@@ -857,15 +858,20 @@ if (!recipe) {
       lbYoutube.src = '';
     }
 
+    function updateNav() {
+      document.getElementById('lb-prev').style.visibility = currentLb === 0 ? 'hidden' : 'visible';
+      document.getElementById('lb-next').style.visibility = currentLb === mediaItems.length - 1 ? 'hidden' : 'visible';
+    }
+
     document.getElementById('lb-close').addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-    document.getElementById('lb-prev').addEventListener('click', () => openLightbox((currentLb - 1 + mediaItems.length) % mediaItems.length));
-    document.getElementById('lb-next').addEventListener('click', () => openLightbox((currentLb + 1) % mediaItems.length));
+    document.getElementById('lb-prev').addEventListener('click', () => { if (currentLb > 0) openLightbox(currentLb - 1); });
+    document.getElementById('lb-next').addEventListener('click', () => { if (currentLb < mediaItems.length - 1) openLightbox(currentLb + 1); });
     document.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('open')) return;
       if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') openLightbox((currentLb - 1 + mediaItems.length) % mediaItems.length);
-      if (e.key === 'ArrowRight') openLightbox((currentLb + 1) % mediaItems.length);
+      if (e.key === 'ArrowLeft' && currentLb > 0) openLightbox(currentLb - 1);
+      if (e.key === 'ArrowRight' && currentLb < mediaItems.length - 1) openLightbox(currentLb + 1);
     });
 
     // Render thumbnails
