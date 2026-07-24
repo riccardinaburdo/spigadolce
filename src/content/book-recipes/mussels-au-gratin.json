@@ -1,125 +1,136 @@
 {
   "slug": "mussels-au-gratin",
   "title": "Mussels au gratin",
+  "book": "august",
   "bookPage": 8,
   "coverImage": "/images/book/mussels-au-gratin-hr-1784554893601.png",
   "published": true,
-  "date": "2026-07-21",
+  "date": "2026-07-24",
   "media": [
     {
       "type": "photo",
       "src": "/images/book/01-1784554913235.jpg",
-      "caption": "Fresh mussels being cleaned and scrubbed under running water"
+      "caption": "Cleaning the mussels"
     },
     {
       "type": "photo",
       "src": "/images/book/02-1784554918286.jpg",
-      "caption": "Mussels opened on a tray, ready to be filled"
+      "caption": "Removing the beard (byssus)"
     },
     {
       "type": "photo",
       "src": "/images/book/03-1784554925666.jpg",
-      "caption": "Bread, garlic, and parsley being finely chopped for the topping"
+      "caption": "Searing in a pan to open and select the mussels"
     },
     {
       "type": "photo",
       "src": "/images/book/04-1784554940572.jpeg",
-      "caption": "Breadcrumb mixture combined with olive oil, garlic, and parsley"
+      "caption": "Seasoning with breadcrumbs and parsley"
     },
     {
       "type": "photo",
       "src": "/images/book/05-1784554945056.jpg",
-      "caption": "Mussels topped generously with the breadcrumb mixture"
+      "caption": "Adding extra virgin olive oil"
     },
     {
       "type": "photo",
       "src": "/images/book/06-1784554949631.jpeg",
-      "caption": "Stuffed mussels arranged in a baking dish before going into the oven"
+      "caption": "Baking in the oven"
     },
     {
       "type": "photo",
       "src": "/images/book/07-1784554954571.jpeg",
-      "caption": "Golden, gratinated mussels fresh out of the oven, ready to serve"
+      "caption": "Final preparation"
     }
   ],
   "baseServings": 4,
   "ingredients": [
     {
-      "qty": 1,
+      "qty": 1.5,
       "unit": "kg",
       "name": "mussels"
     },
     {
-      "qty": 1,
-      "unit": "tbsp",
-      "name": "chopped parsley"
+      "qty": 100,
+      "unit": "g",
+      "name": "breadcrumbs"
     },
     {
-      "qty": 1,
-      "unit": "",
-      "name": "slice of stale bread"
-    },
-    {
-      "qty": 1,
+      "qty": 2,
       "unit": "clove",
       "name": "garlic"
     },
     {
-      "qty": 3,
+      "qty": 1,
+      "unit": "tbsp",
+      "name": "fresh parsley, chopped"
+    },
+    {
+      "qty": 4,
       "unit": "tbsp",
       "name": "extra virgin olive oil"
     },
     {
       "qty": null,
       "unit": "",
-      "name": "pepper (optional)"
+      "name": "black pepper"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    },
+    {
+      "qty": 0.5,
+      "unit": "",
+      "name": "lemon"
     }
   ],
   "nutrition": {
-    "calories": 180,
-    "protein": 14,
-    "carbs": 8,
-    "fat": 10,
+    "calories": 245,
+    "protein": 18,
+    "carbs": 14,
+    "fat": 12,
     "detail": [
       {
         "name": "Calories",
-        "value": "180 kcal"
+        "value": "245 kcal"
       },
       {
         "name": "Total Fat",
-        "value": "10 g"
+        "value": "12 g"
       },
       {
         "name": "Saturated Fat",
-        "value": "1.5 g",
+        "value": "2 g",
         "sub": true
       },
       {
         "name": "Monounsaturated Fat",
-        "value": "6.5 g",
+        "value": "8 g",
         "sub": true
       },
       {
         "name": "Carbohydrates",
-        "value": "8 g"
+        "value": "14 g"
       },
       {
         "name": "Dietary Fibre",
-        "value": "0.8 g",
+        "value": "1 g",
         "sub": true
       },
       {
         "name": "Sugars",
-        "value": "0.5 g",
+        "value": "1 g",
         "sub": true
       },
       {
         "name": "Protein",
-        "value": "14 g"
+        "value": "18 g"
       },
       {
         "name": "Sodium",
-        "value": "320 mg (13% DV)"
+        "value": "480 mg"
       },
       {
         "name": "Vitamin B12",
@@ -130,55 +141,55 @@
         "value": "25% DV"
       },
       {
-        "name": "Selenium",
-        "value": "60% DV"
-      },
-      {
         "name": "Zinc",
         "value": "20% DV"
+      },
+      {
+        "name": "Selenium",
+        "value": "60% DV"
       }
     ]
   },
   "healthBenefits": [
     {
-      "icon": "\ud83e\uddaa",
+      "icon": "🦪",
       "title": "Rich in Vitamin B12",
-      "text": "Mussels are one of the richest natural sources of vitamin B12, essential for nerve function and red blood cell formation."
+      "text": "Mussels are an excellent source of vitamin B12, essential for red blood cell formation and neurological function."
     },
     {
-      "icon": "\ud83d\udcaa",
+      "icon": "💪",
       "title": "High-Quality Protein",
-      "text": "Mussels provide lean, complete protein that supports muscle repair and growth with minimal saturated fat."
+      "text": "Mussels provide lean, complete protein that supports muscle maintenance and repair."
     },
     {
-      "icon": "\u2764\ufe0f",
-      "title": "Heart-Healthy Fats",
-      "text": "Extra virgin olive oil supplies monounsaturated fats and antioxidants that support cardiovascular health."
-    },
-    {
-      "icon": "\ud83e\udde0",
+      "icon": "🧠",
       "title": "Omega-3 Fatty Acids",
-      "text": "Mussels contain omega-3s that contribute to brain function and help reduce inflammation."
+      "text": "Mussels contain omega-3 fats that support heart and brain health."
     },
     {
-      "icon": "\ud83e\uddc4",
-      "title": "Immune Support",
-      "text": "Garlic contains allicin, a compound known for its antibacterial and immune-boosting properties."
+      "icon": "🫒",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil provides monounsaturated fats and antioxidants that support cardiovascular health."
     },
     {
-      "icon": "\ud83e\ude78",
-      "title": "Good Source of Iron",
-      "text": "Mussels offer a notable amount of iron, important for oxygen transport and preventing fatigue."
+      "icon": "🦠",
+      "title": "Mineral Boost",
+      "text": "Mussels are rich in iron, zinc, and selenium, supporting immune function and metabolism."
+    },
+    {
+      "icon": "🌿",
+      "title": "Antioxidant Support",
+      "text": "Fresh parsley and garlic add antioxidants and compounds that support immune and cardiovascular health."
     }
   ],
   "_ingredientsText": "",
+  "_preparationText": "1) pulizia delle cozze\n2) estrazione del bisso\n3) scottatura in padella per apertura e selezione delle cozze\n4)condimento con pangrattato e prezzepolo\n5)aggiunta di olio EVO\n6)cottura in forno\n7)preparazione finale",
   "_aiGenerated": {
     "ingredients": true,
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-07-21T11:35:06.653Z"
+    "lastGenerated": "2026-07-24T09:22:41.992Z"
   },
-  "_manualEdits": [],
-  "book": "august"
+  "_manualEdits": []
 }
