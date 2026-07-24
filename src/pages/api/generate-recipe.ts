@@ -44,9 +44,11 @@ Generate a JSON object with these fields:
    - unit should be: "g", "kg", "ml", "l", "tbsp", "tsp", "clove", "" (empty for count items)
    - name should be the ingredient name in English
 
-2. "mediaCaptions": array of strings, one caption per media file (short, descriptive, in English)
-   - Use the preparation steps to infer what each photo shows based on its position in the sequence
-   - Photos are typically uploaded in chronological order matching the preparation steps
+2. "mediaCaptions": array of strings, one caption per media file
+   - Each caption must be the corresponding preparation step translated into English
+   - Match each media file to the preparation step in the same position (photo 1 = step 1, photo 2 = step 2, etc.)
+   - Keep the translation faithful to the original text, just translate it to English
+   - If there are more photos than steps, describe what the remaining photos likely show based on context
 
 3. "nutrition": object with:
    - "calories": number (kcal per serving)
