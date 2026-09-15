@@ -4,7 +4,7 @@
   "book": "august",
   "bookPage": 34,
   "coverImage": "/images/book/linguine-with-monkfish-hr-1789493813089.png",
-  "published": false,
+  "published": true,
   "date": "2026-09-15",
   "media": [
     {
@@ -247,7 +247,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T17:42:09.062Z"
+    "lastGenerated": "2026-09-15T17:42:12.939Z"
   },
   "_manualEdits": []
 }
