@@ -10,12 +10,12 @@
     {
       "type": "photo",
       "src": "/images/book/01-1789468513799.jpg",
-      "caption": "Remove the skin and top of the aubergines, cut them into thin slices lengthways."
+      "caption": "Remove the skin and top of the aubergines"
     },
     {
       "type": "photo",
       "src": "/images/book/02-1789468519841.jpg",
-      "caption": "Cook the aubergine slices on a hot cast iron griddle, turning them several times for even cooking and to prevent burning."
+      "caption": "Cut them into thin slices lengthways."
     },
     {
       "type": "photo",
@@ -179,7 +179,9 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T12:52:49.737Z"
+    "lastGenerated": "2026-09-15T14:48:13.947Z"
   },
-  "_manualEdits": []
+  "_manualEdits": [
+    "mediaCaptions"
+  ]
 }
