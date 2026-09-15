@@ -4,7 +4,7 @@
   "book": "august",
   "bookPage": 22,
   "coverImage": "/images/book/poverella-style-courgettes-hr-1789491081324.png",
-  "published": false,
+  "published": true,
   "date": "2026-09-15",
   "media": [
     {
@@ -183,7 +183,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T16:55:10.819Z"
+    "lastGenerated": "2026-09-15T17:03:23.174Z"
   },
   "_manualEdits": []
 }
