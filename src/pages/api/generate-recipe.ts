@@ -1,6 +1,71 @@
 import type { APIRoute } from 'astro';
+import Anthropic from '@anthropic-ai/sdk';
 
 export const prerender = false;
+
+// Schema the model must fill in. With output_config the response is guaranteed
+// to be valid JSON matching this shape, so no parsing fallbacks are needed.
+const RECIPE_SCHEMA = {
+  type: 'object',
+  properties: {
+    ingredients: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          qty: { type: ['number', 'null'] },
+          unit: { type: 'string', enum: ['g', 'kg', 'ml', 'l', 'tbsp', 'tsp', 'clove', ''] },
+          name: { type: 'string' }
+        },
+        required: ['qty', 'unit', 'name'],
+        additionalProperties: false
+      }
+    },
+    mediaCaptions: {
+      type: 'array',
+      items: { type: 'string' }
+    },
+    nutrition: {
+      type: 'object',
+      properties: {
+        calories: { type: 'number' },
+        protein: { type: 'number' },
+        carbs: { type: 'number' },
+        fat: { type: 'number' },
+        detail: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              name: { type: 'string' },
+              value: { type: 'string' },
+              sub: { type: 'boolean' }
+            },
+            required: ['name', 'value', 'sub'],
+            additionalProperties: false
+          }
+        }
+      },
+      required: ['calories', 'protein', 'carbs', 'fat', 'detail'],
+      additionalProperties: false
+    },
+    healthBenefits: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          icon: { type: 'string' },
+          title: { type: 'string' },
+          text: { type: 'string' }
+        },
+        required: ['icon', 'title', 'text'],
+        additionalProperties: false
+      }
+    }
+  },
+  required: ['ingredients', 'mediaCaptions', 'nutrition', 'healthBenefits'],
+  additionalProperties: false
+};
 
 export const POST: APIRoute = async ({ request }) => {
   const ADMIN_PASSWORD = import.meta.env.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
@@ -23,96 +88,72 @@ export const POST: APIRoute = async ({ request }) => {
   }
   const { title, ingredientsText, preparationText, mediaFiles, baseServings } = body;
 
-  // Build prompt for Claude
   const prompt = `You are a professional chef and nutritionist specializing in traditional Pugliese cuisine.
 
-Given this recipe information, generate structured data in JSON format.
+Given this recipe information, generate structured data.
 
 Recipe title: ${title}
 Base servings: ${baseServings || 4}
 Ingredients (raw text from the user):
 ${ingredientsText}
 ${preparationText ? `\nPreparation steps:\n${preparationText}\n` : ''}
-Media files uploaded (generate captions for each — use the preparation steps to match each photo to the correct step):
+Media files uploaded (generate one caption for each — use the preparation steps to match each photo to the correct step):
 ${mediaFiles?.map((f: any, i: number) => `${i + 1}. ${f.filename} (${f.type})`).join('\n') || 'None yet'}
 
-Generate a JSON object with these fields:
+Field requirements:
 
-1. "ingredients": array of objects with { "qty": number|null, "unit": string, "name": string }
-   - Parse the raw text into structured ingredients
-   - qty should be a number (e.g., 1.5) or null for "to taste"
-   - unit should be: "g", "kg", "ml", "l", "tbsp", "tsp", "clove", "" (empty for count items)
-   - name should be the ingredient name in English
+1. "ingredients": parse the raw text into structured ingredients.
+   - qty is a number (e.g. 1.5), or null for "to taste"
+   - unit is one of: "g", "kg", "ml", "l", "tbsp", "tsp", "clove", "" (empty for count items)
+   - name is the ingredient name in English
 
-2. "mediaCaptions": array of strings, one caption per media file
-   - Each caption must be the corresponding preparation step translated into English
-   - Match each media file to the preparation step in the same position (photo 1 = step 1, photo 2 = step 2, etc.)
-   - Keep the translation faithful to the original text, just translate it to English
+2. "mediaCaptions": exactly ${mediaFiles?.length || 0} captions, one per media file, in the same order.
+   - Each caption is the corresponding preparation step translated into English
+   - Photo 1 = step 1, photo 2 = step 2, and so on
+   - Keep the translation faithful to the original text
    - If there are more photos than steps, describe what the remaining photos likely show based on context
 
-3. "nutrition": object with:
-   - "calories": number (kcal per serving)
-   - "protein": number (grams)
-   - "carbs": number (grams)
-   - "fat": number (grams)
-   - "detail": array of { "name": string, "value": string, "sub": boolean? }
-     Include: Calories, Total Fat, Saturated Fat (sub), Monounsaturated Fat (sub), Carbohydrates, Dietary Fibre (sub), Sugars (sub), Protein, Sodium, and relevant vitamins/minerals with %DV
+3. "nutrition": per serving. In "detail" include Calories, Total Fat, Saturated Fat (sub: true),
+   Monounsaturated Fat (sub: true), Carbohydrates, Dietary Fibre (sub: true), Sugars (sub: true),
+   Protein, Sodium, and relevant vitamins/minerals with %DV. Set "sub" to false for top-level rows.
 
-4. "healthBenefits": array of 4-6 objects with { "icon": string (emoji), "title": string, "text": string }
-   - Focus on specific health benefits of the key ingredients in this recipe
-   - Be factual and concise
+4. "healthBenefits": 4-6 entries focused on the specific health benefits of the key ingredients in
+   this recipe. "icon" is a single emoji. Be factual and concise.`;
 
-Return ONLY valid JSON, no markdown, no explanation.`;
+  const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01'
+    // Streaming keeps the request under the SDK's HTTP timeout on long generations.
+    const stream = client.messages.stream({
+      model: 'claude-sonnet-5',
+      max_tokens: 16000,
+      thinking: { type: 'adaptive' },
+      output_config: {
+        effort: 'medium',
+        format: { type: 'json_schema', schema: RECIPE_SCHEMA }
       },
-      body: JSON.stringify({
-        model: 'claude-sonnet-5',
-        max_tokens: 4000,
-        thinking: { type: 'disabled' },
-        messages: [
-          { role: 'user', content: prompt }
-        ]
-      })
+      messages: [{ role: 'user', content: prompt }]
     });
 
-    if (!response.ok) {
-      const errText = await response.text();
-      return new Response(JSON.stringify({ error: `AI API error (${response.status}): ${errText}` }), { status: 500 });
+    const response = await stream.finalMessage();
+
+    if (response.stop_reason === 'max_tokens') {
+      return new Response(JSON.stringify({
+        error: 'AI response was cut off before finishing. Try again, or shorten the preparation steps.'
+      }), { status: 500 });
     }
 
-    const result = await response.json();
-    // Handle thinking models: find the text block (not thinking block)
-    const textBlock = result.content?.find((b: any) => b.type === 'text');
-    const text = textBlock?.text || result.content?.[0]?.text || '';
+    const textBlock = response.content.find((b) => b.type === 'text');
+    const text = textBlock && textBlock.type === 'text' ? textBlock.text : '';
 
-    // Parse the JSON from Claude's response
-    const fullJson = text;
     let generated;
     try {
-      generated = JSON.parse(fullJson);
+      generated = JSON.parse(text);
     } catch {
-      // Try to extract JSON from the combined text
-      const searchText = fullJson + '\n' + text;
-      const codeBlockMatch = searchText.match(/```(?:json)?\s*([\s\S]*?)```/);
-      const jsonMatch = searchText.match(/\{[\s\S]*\}/);
-      if (codeBlockMatch) {
-        try { generated = JSON.parse(codeBlockMatch[1].trim()); } catch {
-          return new Response(JSON.stringify({ error: 'Failed to parse AI JSON', raw: fullJson.substring(0, 800) }), { status: 500 });
-        }
-      } else if (jsonMatch) {
-        try { generated = JSON.parse(jsonMatch[0]); } catch {
-          return new Response(JSON.stringify({ error: 'Failed to parse extracted JSON', raw: fullJson.substring(0, 800) }), { status: 500 });
-        }
-      } else {
-        return new Response(JSON.stringify({ error: 'No JSON found in AI response', raw: fullJson.substring(0, 800) }), { status: 500 });
-      }
+      return new Response(JSON.stringify({
+        error: 'AI returned malformed JSON',
+        raw: text.substring(0, 800)
+      }), { status: 500 });
     }
 
     return new Response(JSON.stringify({
@@ -130,6 +171,15 @@ Return ONLY valid JSON, no markdown, no explanation.`;
     });
 
   } catch (err: any) {
+    if (err instanceof Anthropic.AuthenticationError) {
+      return new Response(JSON.stringify({ error: 'Anthropic API key rejected (check ANTHROPIC_API_KEY on Vercel)' }), { status: 500 });
+    }
+    if (err instanceof Anthropic.RateLimitError) {
+      return new Response(JSON.stringify({ error: 'Anthropic rate limit reached — wait a moment and try again' }), { status: 503 });
+    }
+    if (err instanceof Anthropic.APIError) {
+      return new Response(JSON.stringify({ error: `Anthropic API error ${err.status}: ${err.message}` }), { status: 500 });
+    }
     return new Response(JSON.stringify({ error: 'Server error', message: err.message }), { status: 500 });
   }
 };

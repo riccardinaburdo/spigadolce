@@ -6,6 +6,6 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://spigadolce.com',
   output: 'static',
-  adapter: vercel(),
+  adapter: vercel({ maxDuration: 60 }),
   integrations: [sitemap()],
 });

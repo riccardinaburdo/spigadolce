@@ -954,8 +954,17 @@ export const prerender = false;
       try {
         const res = await api('/api/generate-recipe', 'POST', body);
         if (!res.ok) {
-          const err = await res.json();
-          toast('AI generation failed: ' + (err.error || 'Unknown error'), true);
+          // A gateway timeout or crash returns HTML, not JSON — don't blow up on it.
+          let msg;
+          try {
+            const err = await res.json();
+            msg = err.error || 'Unknown error';
+          } catch {
+            msg = res.status === 504
+              ? 'the request timed out on the server'
+              : `server returned ${res.status}`;
+          }
+          toast('AI generation failed: ' + msg, true);
           return;
         }
         const data = await res.json();
