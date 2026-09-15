@@ -4,7 +4,7 @@
   "book": "august",
   "bookPage": 54,
   "coverImage": "/images/book/musky-octopus-with-capers-hd-1789496075254.png",
-  "published": false,
+  "published": true,
   "date": "2026-09-15",
   "media": [
     {
@@ -223,7 +223,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T18:18:12.558Z"
+    "lastGenerated": "2026-09-15T18:18:15.185Z"
   },
   "_manualEdits": []
 }
