@@ -1,0 +1,253 @@
+{
+  "slug": "linguine-with-monkfish",
+  "title": "Linguine with Monkfish",
+  "book": "august",
+  "bookPage": 34,
+  "coverImage": "/images/book/linguine-with-monkfish-hr-1789493813089.png",
+  "published": false,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1789493826716.jpg",
+      "caption": "Clean the monkfish, removing the skin and the central bone."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789493829807.jpg",
+      "caption": "Cut the monkfish into pieces and season lightly with salt."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789493832526.jpg",
+      "caption": "Heat the extra virgin olive oil in a large pan and add the crushed garlic clove."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/06-2-1789493835480.jpg",
+      "caption": "Add the halved cherry tomatoes to the pan and let them soften."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/06-1789493838155.jpg",
+      "caption": "Continue sautéing the garlic and tomatoes until fragrant."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/07-1789493840459.jpg",
+      "caption": "Place the monkfish pieces into the pan with the tomatoes and garlic."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/08-1789493842966.jpg",
+      "caption": "Pour in the white wine and let it evaporate over high heat."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/09-1789493845303.jpg",
+      "caption": "Season with salt and pepper, then lower the heat to simmer."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/11-1789493847651.jpg",
+      "caption": "Cover the pan and let the fish cook gently, absorbing the flavors of the sauce."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/12-1789493850013.jpg",
+      "caption": "Turn the fish pieces occasionally to ensure even cooking."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/13-1789493852973.jpg",
+      "caption": "Check the fish for doneness, making sure it flakes easily with a fork."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/14-1789493856094.jpg",
+      "caption": "Add the chopped parsley to the sauce for extra freshness."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/15-1789493858803.jpg",
+      "caption": "When cooked, remove the fish and the cartilaginous bones, but put the flesh of the fish back into the pan, and continue cooking."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/17-1789493861574.jpg",
+      "caption": "Place the drained linguine into the pan with the fish and cook for 1 minute over high heat, tossing to combine."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/18-1789493865482.jpg",
+      "caption": "Plate the linguine with monkfish, garnishing with a little extra parsley and a drizzle of olive oil."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/19-1789493869634.jpg",
+      "caption": "Serve the linguine with monkfish immediately while hot, garnished with fresh parsley."
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 300,
+      "unit": "g",
+      "name": "linguine pasta"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "monkfish, cleaned"
+    },
+    {
+      "qty": 8,
+      "unit": "",
+      "name": "cherry tomatoes, halved"
+    },
+    {
+      "qty": 1,
+      "unit": "clove",
+      "name": "garlic"
+    },
+    {
+      "qty": 1,
+      "unit": "tbsp",
+      "name": "chopped parsley"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": 120,
+      "unit": "ml",
+      "name": "white wine"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt, to taste"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "pepper, to taste (optional)"
+    }
+  ],
+  "nutrition": {
+    "calories": 447,
+    "protein": 28,
+    "carbs": 56,
+    "fat": 8,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "447 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "8 g (10% DV)"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.2 g (6% DV)",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "5 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "56 g (19% DV)"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "2 g (8% DV)",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "3 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "28 g (56% DV)"
+      },
+      {
+        "name": "Sodium",
+        "value": "310 mg (13% DV)"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "10% DV"
+      },
+      {
+        "name": "Vitamin B12",
+        "value": "40% DV"
+      },
+      {
+        "name": "Selenium",
+        "value": "50% DV"
+      },
+      {
+        "name": "Vitamin A",
+        "value": "5% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "8% DV"
+      },
+      {
+        "name": "Potassium",
+        "value": "10% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🐟",
+      "title": "Lean Protein from Monkfish",
+      "text": "Monkfish is a low-fat, high-protein seafood that supports muscle repair and provides essential amino acids without excess saturated fat."
+    },
+    {
+      "icon": "🧠",
+      "title": "Vitamin B12 & Selenium",
+      "text": "Monkfish is rich in vitamin B12 and selenium, nutrients important for nervous system function, thyroid health, and antioxidant defense."
+    },
+    {
+      "icon": "🫒",
+      "title": "Heart-Healthy Olive Oil",
+      "text": "Extra virgin olive oil provides monounsaturated fats and polyphenols that help reduce inflammation and support cardiovascular health."
+    },
+    {
+      "icon": "🍅",
+      "title": "Antioxidant Lycopene",
+      "text": "Cherry tomatoes are a good source of lycopene and vitamin C, antioxidants linked to reduced risk of heart disease and improved skin health."
+    },
+    {
+      "icon": "🧄",
+      "title": "Immune-Supporting Garlic",
+      "text": "Garlic contains allicin, a compound with antimicrobial and cardiovascular benefits that may help lower blood pressure and cholesterol."
+    },
+    {
+      "icon": "🌿",
+      "title": "Fresh Parsley Nutrients",
+      "text": "Parsley adds vitamin K and flavonoids that support bone health and provide additional antioxidant protection."
+    }
+  ],
+  "_ingredientsText": "300 gr of linguine pasta\n1 medium sized monkfish  (cleaned)\n8 cherry tomatoes, halved\n1 clove of garlic \n1 tablespoon chopped parsley \n2 tablespoons extra virgin olive oil \n½ cup white wine \nsalt  \npepper (optional)",
+  "_preparationText": "1 - 14 fasi di preparazione del pesce\n15 - When cooked, remove the fish and the cartilaginous bones, but put the flesh of the fish back into the pan, and continue cooking\n 16 - In a separate pot, cook the linguine pasta in boiling, salted water until it is “al dente” and drain.\nafter Placing the linguine into the pan with the fish and cook for 1 minute over high heat.",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T17:42:09.062Z"
+  },
+  "_manualEdits": []
+}
