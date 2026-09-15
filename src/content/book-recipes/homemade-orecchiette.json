@@ -1,0 +1,132 @@
+{
+  "slug": "homemade-orecchiette",
+  "title": "Homemade Orecchiette",
+  "book": "august",
+  "bookPage": 26,
+  "coverImage": "/images/book/dsc-0439-1789491603141.jpg",
+  "published": false,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "youtube",
+      "src": "https://www.youtube.com/watch?v=5V74cRujMb0",
+      "caption": "Watch this video for all the steps to make orecchiette by hand.",
+      "thumbnail": ""
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 400,
+      "unit": "g",
+      "name": "durum wheat semolina flour"
+    },
+    {
+      "qty": 200,
+      "unit": "ml",
+      "name": "water at room temperature, used as needed"
+    }
+  ],
+  "nutrition": {
+    "calories": 210,
+    "protein": 7,
+    "carbs": 43,
+    "fat": 0,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "210 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "0.6 g"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "0.1 g",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "0.1 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "43 g"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "2.5 g",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "0.3 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "7.2 g"
+      },
+      {
+        "name": "Sodium",
+        "value": "2 mg (0% DV)"
+      },
+      {
+        "name": "Iron",
+        "value": "8% DV"
+      },
+      {
+        "name": "Magnesium",
+        "value": "6% DV"
+      },
+      {
+        "name": "B Vitamins (Niacin, Thiamin)",
+        "value": "10% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🌾",
+      "title": "Slow-Release Energy",
+      "text": "Durum wheat semolina has a lower glycemic index than regular flour, providing sustained energy release."
+    },
+    {
+      "icon": "💪",
+      "title": "Good Plant Protein Source",
+      "text": "Semolina provides a moderate amount of protein, supporting muscle repair and satiety."
+    },
+    {
+      "icon": "🩸",
+      "title": "Rich in Iron",
+      "text": "Durum wheat contains iron, which supports oxygen transport and helps prevent fatigue."
+    },
+    {
+      "icon": "🌿",
+      "title": "Dietary Fibre Content",
+      "text": "The semolina flour retains fibre from the wheat germ, aiding digestion and gut health."
+    },
+    {
+      "icon": "💧",
+      "title": "Low Fat, Low Sodium",
+      "text": "This simple dough recipe is naturally low in fat and sodium, supporting heart health."
+    },
+    {
+      "icon": "🧠",
+      "title": "B Vitamins for Metabolism",
+      "text": "Semolina contains B vitamins like niacin and thiamin, important for energy metabolism and nervous system function."
+    }
+  ],
+  "_ingredientsText": "400 gr of durum wheat semolina flour\n200 gr water at room temperature, used as needed",
+  "_preparationText": "in questo video tutte le fasi per fare le orecchiette a mano ",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T17:02:51.752Z"
+  },
+  "_manualEdits": []
+}
