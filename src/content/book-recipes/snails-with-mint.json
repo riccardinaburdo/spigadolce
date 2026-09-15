@@ -1,0 +1,165 @@
+{
+  "slug": "snails-with-mint",
+  "title": "Snails with mint",
+  "book": "august",
+  "bookPage": 52,
+  "coverImage": "/images/book/snails-with-mint-hd-1789495933651.png",
+  "published": true,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1789495945021.jpg",
+      "caption": "Snails in their natural state"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789495947338.jpg",
+      "caption": "Preparing the snails for cooking"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789495949596.jpg",
+      "caption": "Final presentation with mint leaves"
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 1,
+      "unit": "kg",
+      "name": "land snails"
+    },
+    {
+      "qty": 10,
+      "unit": "",
+      "name": "mint leaves"
+    },
+    {
+      "qty": 1,
+      "unit": "clove",
+      "name": "garlic, chopped"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "lemon"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    }
+  ],
+  "nutrition": {
+    "calories": 180,
+    "protein": 16,
+    "carbs": 4,
+    "fat": 11,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "180 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "11 g (14% DV)"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.6 g (8% DV)",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "8 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "4 g (1% DV)"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "0.5 g (2% DV)",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "0.3 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "16 g (32% DV)"
+      },
+      {
+        "name": "Sodium",
+        "value": "320 mg (14% DV)"
+      },
+      {
+        "name": "Iron",
+        "value": "20% DV"
+      },
+      {
+        "name": "Vitamin E",
+        "value": "15% DV"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "10% DV"
+      },
+      {
+        "name": "Magnesium",
+        "value": "8% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🐌",
+      "title": "Lean Protein Source",
+      "text": "Snails are low in fat and high in protein, supporting muscle maintenance and repair."
+    },
+    {
+      "icon": "🩸",
+      "title": "Rich in Iron",
+      "text": "Snails provide significant iron content, helping prevent anemia and support oxygen transport in the blood."
+    },
+    {
+      "icon": "🌿",
+      "title": "Digestive Aid",
+      "text": "Mint leaves soothe the digestive tract and can help reduce bloating and indigestion."
+    },
+    {
+      "icon": "🧄",
+      "title": "Immune Support",
+      "text": "Garlic contains allicin, a compound with antimicrobial and immune-boosting properties."
+    },
+    {
+      "icon": "🍋",
+      "title": "Vitamin C Boost",
+      "text": "Lemon adds vitamin C, which supports immune function and enhances iron absorption from the snails."
+    },
+    {
+      "icon": "💧",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil provides monounsaturated fats that support cardiovascular health."
+    }
+  ],
+  "_ingredientsText": "1 Kg of snails (land snails)\n 10 mint leaves\n 1 clove of garlic, chopped\n 1 lemon\n 2 tablespoons of extra virgin olive oil\n salt",
+  "_preparationText": "1 - chiocciole in natura\n2 - preparate per la cottura\n3 - presentazione finale con foglioline di menta",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T18:13:51.006Z"
+  },
+  "_manualEdits": []
+}
