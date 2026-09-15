@@ -20,27 +20,27 @@
     {
       "type": "photo",
       "src": "/images/book/03-1789468534525.jpg",
-      "caption": "Once cooked, arrange the aubergine slices in a dish with high sides, alternating with the seasonings."
+      "caption": "cook them on a hot cast iron griddle, turning them several times for even cooking and to prevent burning."
     },
     {
       "type": "photo",
       "src": "/images/book/05-1789468588092.jpeg",
-      "caption": "Continue layering the aubergine slices with garlic, mint, oil, vinegar and salt."
+      "caption": "Once cooked, arrange the aubergine slices in a dish with high sides, alternating with the seasonings. -Oil"
     },
     {
       "type": "photo",
       "src": "/images/book/06-1789468593247.jpeg",
-      "caption": "Once the layers are complete, crush everything with a fork."
+      "caption": "Mint leaves"
     },
     {
       "type": "photo",
       "src": "/images/book/07-1789468597414.jpeg",
-      "caption": "Leave the aubergines to marinate for at least 1 hour."
+      "caption": "Garlic"
     },
     {
       "type": "photo",
       "src": "/images/book/08-1789468602861.jpeg",
-      "caption": "The finished grilled aubergines, ready to be served."
+      "caption": "Once the layers are complete, crush everything with a fork and leave to marinate for at least 1 hour."
     }
   ],
   "baseServings": 4,
@@ -179,7 +179,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T14:48:13.947Z"
+    "lastGenerated": "2026-09-15T14:52:00.219Z"
   },
   "_manualEdits": [
     "mediaCaptions"
