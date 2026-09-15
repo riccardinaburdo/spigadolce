@@ -1,0 +1,224 @@
+{
+  "slug": "tubettini-and-mussels",
+  "title": "Tubettini and Mussels",
+  "book": "august",
+  "bookPage": 32,
+  "coverImage": "/images/book/tubettini-and-mussels-hr-1789492971784.png",
+  "published": false,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789493002834.jpg",
+      "caption": "Remove the byssus (beard) from the mussels"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/05-1789493008173.jpg",
+      "caption": "Rinse thoroughly under plenty of water"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/05-2-1789493005259.jpg",
+      "caption": "Shift the position of one shell, sliding it forward with firm finger pressure until you feel a click"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/06-1789493010740.jpg",
+      "caption": "Insert a short knife, sliding it flush along the inside of the upper shell"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/07-1789493013056.jpg",
+      "caption": "Complete the knife's path around the inside of the mussel"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/08-1789493015296.jpg",
+      "caption": "Open the shells"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/10b-1789493019874.jpg",
+      "caption": "Detach the mussel meat"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/10-1789493017718.jpg",
+      "caption": "The raw shelled mussel meats"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/12-1789493023826.jpg",
+      "caption": "Prepare a sauce with garlic, tomato and parsley"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/13-1789493027617.jpg",
+      "caption": "Add the mussels"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/15-1789493031041.jpg",
+      "caption": "Add the pasta to the pan"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/16-1789493033401.jpg",
+      "caption": "Garnish with parsley leaves"
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 350,
+      "unit": "g",
+      "name": "tubettini pasta"
+    },
+    {
+      "qty": 1,
+      "unit": "kg",
+      "name": "mussels"
+    },
+    {
+      "qty": 1,
+      "unit": "clove",
+      "name": "garlic"
+    },
+    {
+      "qty": 2,
+      "unit": "",
+      "name": "ripe tomatoes"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": 1,
+      "unit": "tbsp",
+      "name": "chopped parsley"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "pepper (optional)"
+    }
+  ],
+  "nutrition": {
+    "calories": 420,
+    "protein": 22,
+    "carbs": 58,
+    "fat": 11,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "420 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "11 g (14% DV)"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.8 g (9% DV)",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "6.5 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "58 g (21% DV)"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "3 g (11% DV)",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "3 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "22 g (44% DV)"
+      },
+      {
+        "name": "Sodium",
+        "value": "520 mg (23% DV)"
+      },
+      {
+        "name": "Vitamin B12",
+        "value": "180% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "35% DV"
+      },
+      {
+        "name": "Zinc",
+        "value": "25% DV"
+      },
+      {
+        "name": "Selenium",
+        "value": "60% DV"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "15% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🦪",
+      "title": "Rich in Vitamin B12",
+      "text": "Mussels are an excellent source of vitamin B12, essential for nerve function and red blood cell formation."
+    },
+    {
+      "icon": "💪",
+      "title": "High-Quality Protein",
+      "text": "Mussels provide lean, complete protein that supports muscle maintenance and repair."
+    },
+    {
+      "icon": "🧠",
+      "title": "Omega-3 Fatty Acids",
+      "text": "Mussels contain omega-3s that support heart and brain health."
+    },
+    {
+      "icon": "🍅",
+      "title": "Antioxidant Boost",
+      "text": "Ripe tomatoes supply lycopene and vitamin C, which help combat oxidative stress."
+    },
+    {
+      "icon": "🫒",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil offers monounsaturated fats that support cardiovascular health."
+    },
+    {
+      "icon": "⚡",
+      "title": "Iron and Zinc Source",
+      "text": "Mussels are rich in iron and zinc, supporting immune function and energy metabolism."
+    }
+  ],
+  "_ingredientsText": "350 gr tubettini pasta (little tubes) \n1 kg of mussels \n1 clove garlic \n2 ripe tomatoes\n2 tablespoons extra virgin olive oil \n1 tablespoon parsley, chopped\nsalt \npepper (optional) ",
+  "_preparationText": "1 - togliere il bisso\n2 - sciacquare con abbondante acqua\n3 - spostare la posizione di una valva traslandola in avanti con una certa pressione delle dita fino a sentire un click\n4 - Infilare un coltellino corto facendolo scorrere aderente all'interno della valva superiore\n5 - Completare il giro del coltellino all'interno della cozza\n6 - Aprire le valve\n7 - Staccare il frutto della cozza\n8 -  i frutti sgusciati a crudo\n9 - Preparare un sugo con aglio, pomodoro e prezzemolo\n10 - Aggiungere le cozze\n11 - Aggiungere la pasta in padella\n12 - guarnire con prezzemolo in foglie",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T17:35:11.091Z"
+  },
+  "_manualEdits": []
+}
