@@ -4,7 +4,7 @@
   "book": "august",
   "bookPage": 32,
   "coverImage": "/images/book/tubettini-and-mussels-hr-1789492971784.png",
-  "published": false,
+  "published": true,
   "date": "2026-09-15",
   "media": [
     {
@@ -218,7 +218,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T17:35:11.091Z"
+    "lastGenerated": "2026-09-15T17:35:31.169Z"
   },
   "_manualEdits": []
 }
