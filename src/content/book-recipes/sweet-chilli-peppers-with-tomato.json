@@ -1,0 +1,199 @@
+{
+  "slug": "sweet-chilli-peppers-with-tomato",
+  "title": "Sweet Chilli Peppers with Tomato",
+  "book": "august",
+  "bookPage": 18,
+  "coverImage": "/images/book/sweet-chilli-peppers-with-tomato-hr-1789490037420.png",
+  "published": false,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1789490049015.jpg",
+      "caption": "Open the chilli peppers and remove the seeds"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789490051664.jpg",
+      "caption": "Cut them into small pieces"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789490054746.jpg",
+      "caption": "Put them in a pan with plenty of olive oil and a few cloves of garlic"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/04-1789490057988.jpg",
+      "caption": "Begin cooking, stirring often"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/05-1789490061847.jpg",
+      "caption": "Remove the garlic and add the chopped tomatoes"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/06-1789490065066.jpg",
+      "caption": "Cook for 5 minutes over medium heat"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/07-1789490068262.jpg",
+      "caption": "Keep the pan covered at all times"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/08-1789490071736.jpg",
+      "caption": "Add salt"
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 20,
+      "unit": "",
+      "name": "sweet green chilli peppers"
+    },
+    {
+      "qty": 5,
+      "unit": "",
+      "name": "ripe tomatoes"
+    },
+    {
+      "qty": 1,
+      "unit": "clove",
+      "name": "garlic"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "hot chilli pepper flakes (optional)"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "basil (optional)"
+    }
+  ],
+  "nutrition": {
+    "calories": 140,
+    "protein": 2,
+    "carbs": 14,
+    "fat": 9,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "140 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "9 g"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.3 g",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "6.2 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "14 g"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "3.5 g",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "8 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "2.8 g"
+      },
+      {
+        "name": "Sodium",
+        "value": "190 mg (8% DV)"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "210% DV"
+      },
+      {
+        "name": "Vitamin A",
+        "value": "35% DV"
+      },
+      {
+        "name": "Vitamin B6",
+        "value": "20% DV"
+      },
+      {
+        "name": "Potassium",
+        "value": "12% DV"
+      },
+      {
+        "name": "Vitamin K",
+        "value": "10% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🌶️",
+      "title": "Rich in Vitamin C",
+      "text": "Sweet chilli peppers are exceptionally high in vitamin C, supporting immune function and collagen production."
+    },
+    {
+      "icon": "🍅",
+      "title": "Antioxidant Lycopene",
+      "text": "Ripe tomatoes provide lycopene, an antioxidant linked to reduced risk of heart disease and certain cancers."
+    },
+    {
+      "icon": "❤️",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil supplies monounsaturated fats that help maintain healthy cholesterol levels."
+    },
+    {
+      "icon": "🧄",
+      "title": "Immune Support",
+      "text": "Garlic contains allicin, a compound with antimicrobial and immune-boosting properties."
+    },
+    {
+      "icon": "🔥",
+      "title": "Metabolism Boost",
+      "text": "Capsaicin in chilli peppers may help increase metabolic rate and reduce inflammation."
+    },
+    {
+      "icon": "🥗",
+      "title": "Low Calorie, Nutrient Dense",
+      "text": "This dish is naturally low in calories while being rich in vitamins, fibre, and antioxidants."
+    }
+  ],
+  "_ingredientsText": "20 sweet green chilli peppers\n5 ripe tomatoes\n1 clove of garlic\n2 tablespoons of extra virgin olive oil\nsalt\na pinch of hot chilli pepper and basil (optional)",
+  "_preparationText": "1 - Aprire i peperoni e eliminare i semi\n2 - Tagliarli in piccoli tocchi\n3 - Versarli in una padella con abbondante olio e alcuni spicchi di aglio\n4 - Iniziare la cottura girando spesso\n5 - Togliere l'aglio e aggiungere dei pomodori a tocchi\n6 - Cucinare per 5 minuti a fuoco medio\n7 - Tenere sempre coperta la padella\n8 - aggiungere il sale",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T16:41:52.075Z"
+  },
+  "_manualEdits": []
+}
