@@ -4,7 +4,7 @@
   "book": "august",
   "bookPage": 18,
   "coverImage": "/images/book/sweet-chilli-peppers-with-tomato-hr-1789490037420.png",
-  "published": false,
+  "published": true,
   "date": "2026-09-15",
   "media": [
     {
@@ -193,7 +193,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T16:41:52.075Z"
+    "lastGenerated": "2026-09-15T16:41:57.201Z"
   },
   "_manualEdits": []
 }
