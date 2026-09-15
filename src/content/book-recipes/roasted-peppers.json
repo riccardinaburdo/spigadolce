@@ -1,0 +1,194 @@
+{
+  "slug": "roasted-peppers",
+  "title": "Roasted Peppers",
+  "book": "august",
+  "bookPage": 20,
+  "coverImage": "/images/book/roasted-peppers-hr-1789490768915.png",
+  "published": true,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1789490780873.jpg",
+      "caption": "Roast the peppers on a cast-iron grill"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789490783489.jpg",
+      "caption": "Cut them in half and remove the seeds"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789490786588.jpg",
+      "caption": "Slice them into small strips"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/04-1789490798742.jpg",
+      "caption": "Dress with olive oil"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/05-1789490813062.jpg",
+      "caption": "Add salt"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/06-1789490821128.jpg",
+      "caption": "Add capers"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/07-1789490827475.jpg",
+      "caption": "Sprinkle with oregano"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/08-1789490831711.jpg",
+      "caption": "Top with washed salted anchovies"
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 2,
+      "unit": "",
+      "name": "yellow and red peppers"
+    },
+    {
+      "qty": 0.5,
+      "unit": "tbsp",
+      "name": "salted capers"
+    },
+    {
+      "qty": 1,
+      "unit": "tsp",
+      "name": "oregano"
+    },
+    {
+      "qty": 3,
+      "unit": "",
+      "name": "salted anchovies"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    }
+  ],
+  "nutrition": {
+    "calories": 140,
+    "protein": 6,
+    "carbs": 8,
+    "fat": 10,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "140 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "10 g (15% DV)"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.5 g (8% DV)",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "7 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "8 g (3% DV)"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "2 g (7% DV)",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "4 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "6 g (12% DV)"
+      },
+      {
+        "name": "Sodium",
+        "value": "520 mg (22% DV)"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "140% DV"
+      },
+      {
+        "name": "Vitamin A",
+        "value": "35% DV"
+      },
+      {
+        "name": "Vitamin E",
+        "value": "10% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "8% DV"
+      },
+      {
+        "name": "Calcium",
+        "value": "4% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🌶️",
+      "title": "Rich in Vitamin C",
+      "text": "Yellow and red peppers are an excellent source of vitamin C, supporting immune function and collagen production."
+    },
+    {
+      "icon": "🫒",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil provides monounsaturated fats that help maintain healthy cholesterol levels and reduce inflammation."
+    },
+    {
+      "icon": "🐟",
+      "title": "Omega-3 Source",
+      "text": "Anchovies contribute omega-3 fatty acids, which support cardiovascular and brain health."
+    },
+    {
+      "icon": "🧂",
+      "title": "Mineral Boost",
+      "text": "Capers and anchovies add trace minerals like iron and calcium, though they also contribute sodium, so portion control is key."
+    },
+    {
+      "icon": "🌿",
+      "title": "Antioxidant Herbs",
+      "text": "Oregano contains antioxidant compounds such as carvacrol, which have antimicrobial and anti-inflammatory properties."
+    },
+    {
+      "icon": "👁️",
+      "title": "Eye Health Support",
+      "text": "The carotenoids in peppers, including beta-carotene, promote healthy vision and skin."
+    }
+  ],
+  "_ingredientsText": "2 yellow and red peppers\n½ tablespoon of salted capers\n1 teaspoon of oregano\n3 salted anchovies\n2 tablespoons of extra virgin olive oil\nsalt",
+  "_preparationText": "1 - Arrostire i peperoni su una griglia di ghisa\n2 - Dividerli eliminando i semi\n3 - tagliali a piccole fette \n4 - condisci con olio\n5 - sale \n6 - capperi\n7 - origano \n8 - acciughe sotto sale lavate ",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T16:50:13.729Z"
+  },
+  "_manualEdits": []
+}
