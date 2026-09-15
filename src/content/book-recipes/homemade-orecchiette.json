@@ -4,7 +4,7 @@
   "book": "august",
   "bookPage": 26,
   "coverImage": "/images/book/dsc-0439-1789491603141.jpg",
-  "published": false,
+  "published": true,
   "date": "2026-09-15",
   "media": [
     {
@@ -126,7 +126,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T17:02:51.752Z"
+    "lastGenerated": "2026-09-15T17:03:07.112Z"
   },
   "_manualEdits": []
 }
