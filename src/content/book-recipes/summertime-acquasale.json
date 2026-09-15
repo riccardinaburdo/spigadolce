@@ -1,0 +1,210 @@
+{
+  "slug": "summertime-acquasale",
+  "title": "Summertime “Acquasale”",
+  "book": "august",
+  "bookPage": 30,
+  "coverImage": "/images/book/summertime-acquasale-1789492517247.png",
+  "published": false,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1789492532016.jpg",
+      "caption": "Ingredients"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789492535307.jpg",
+      "caption": "Place the lemon slices into a bowl."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789492538498.jpg",
+      "caption": "Add the chopped onion."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/04-1789492540229.jpg",
+      "caption": "Sprinkle in the oregano."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/05-1789492542627.jpg",
+      "caption": "Drizzle with the olive oil."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/06-1789492545507.jpg",
+      "caption": "Add the salt."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/07-1789492548153.jpg",
+      "caption": "Add the water and gently stir all of the ingredients together to dissolve the salt."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/08-1789492551271.jpg",
+      "caption": "Tear the bread into small pieces and dip them into the “soup.”"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/09-1789492553010.jpg",
+      "caption": "The finished dish."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/10-1789492555539.jpg",
+      "caption": "The completed plate, ready to be enjoyed."
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 0.5,
+      "unit": "",
+      "name": "cold water (cup)"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "slice of stale or toasted bread"
+    },
+    {
+      "qty": 2,
+      "unit": "",
+      "name": "organic lemon slices"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "oregano"
+    },
+    {
+      "qty": 0.5,
+      "unit": "",
+      "name": "small red onion, chopped"
+    },
+    {
+      "qty": 1,
+      "unit": "clove",
+      "name": "garlic (optional)"
+    },
+    {
+      "qty": 1,
+      "unit": "tsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    }
+  ],
+  "nutrition": {
+    "calories": 95,
+    "protein": 2,
+    "carbs": 14,
+    "fat": 3,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "95 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "3.5 g (4% DV)"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "0.5 g (2% DV)",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "2.5 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "14 g (5% DV)"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "1.5 g (5% DV)",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "2 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "2.5 g (5% DV)"
+      },
+      {
+        "name": "Sodium",
+        "value": "210 mg (9% DV)"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "12% DV"
+      },
+      {
+        "name": "Vitamin E",
+        "value": "6% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "4% DV"
+      },
+      {
+        "name": "Calcium",
+        "value": "2% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🍋",
+      "title": "Vitamin C Boost",
+      "text": "Lemon slices provide antioxidant vitamin C, supporting immune function and skin health."
+    },
+    {
+      "icon": "🧄",
+      "title": "Cardiovascular Support",
+      "text": "Garlic contains allicin, a compound linked to improved heart health and reduced blood pressure."
+    },
+    {
+      "icon": "🫒",
+      "title": "Healthy Fats",
+      "text": "Extra virgin olive oil supplies monounsaturated fats and polyphenols that support heart and anti-inflammatory health."
+    },
+    {
+      "icon": "🧅",
+      "title": "Prebiotic Fiber",
+      "text": "Red onion offers fiber and prebiotics that promote gut health and beneficial bacteria growth."
+    },
+    {
+      "icon": "🍞",
+      "title": "Sustainable Energy",
+      "text": "Stale bread provides complex carbohydrates for steady energy without food waste."
+    },
+    {
+      "icon": "🌿",
+      "title": "Anti-inflammatory Herbs",
+      "text": "Oregano contains antioxidants like carvacrol, which have antimicrobial and anti-inflammatory properties."
+    }
+  ],
+  "_ingredientsText": "        ½ cup of cold water \n\t1 slice of stale bread or toasted bread\n\t2 slices organic lemon \n\toregano \n\t½ small red onion, chopped\n\t1 clove garlic (optional) \n\t1 teaspoon extra virgin olive oil \n\tsalt ",
+  "_preparationText": "1 - ingredienti\n2 - Place the lemon slices into a bowl.\n3 - chopped onion\n4 - oregano\n5 - oil\n6 - salt\n7 - Add the water and gently stir all of the ingredients together to dissolve the salt\n8 - Tear the bread into small pieces and dip them into the “soup,”\n9 - piatto completato\n",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T17:21:37.708Z"
+  },
+  "_manualEdits": []
+}
