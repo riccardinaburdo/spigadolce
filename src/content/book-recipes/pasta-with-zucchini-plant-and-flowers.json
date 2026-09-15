@@ -1,0 +1,170 @@
+{
+  "slug": "pasta-with-zucchini-plant-and-flowers",
+  "title": "Pasta with Zucchini plant and flowers",
+  "book": "august",
+  "bookPage": 38,
+  "coverImage": "/images/book/pasta-with-zucchini-plant-and-flowers-hr-1789494457674.png",
+  "published": false,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/zucchine-2-1789494479378.jpg",
+      "caption": "Remove the softest stalks from the main trunk of the plant."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/zucchine-3-1789494482424.jpg",
+      "caption": "Continue trimming and cleaning the zucchini stalks, removing the tougher outer fibers."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/zucchine-4-1789494485096.jpg",
+      "caption": "Cut the cleaned stalks and tender leaves into smaller, manageable pieces."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/zucchine-5-1789494487792.jpg",
+      "caption": "Wash the prepared zucchini plants and flowers thoroughly under running water."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/zucchine-6-1789494489956.jpg",
+      "caption": "The cleaned and prepped zucchini plants and flowers, ready to be cooked with the pasta."
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 400,
+      "unit": "g",
+      "name": "zucchini plants and flowers, cleaned"
+    },
+    {
+      "qty": 300,
+      "unit": "g",
+      "name": "penne pasta"
+    },
+    {
+      "qty": 1,
+      "unit": "clove",
+      "name": "garlic, chopped"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    }
+  ],
+  "nutrition": {
+    "calories": 390,
+    "protein": 11,
+    "carbs": 68,
+    "fat": 8,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "390 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "8 g (10% DV)"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.2 g (6% DV)",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "5.5 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "68 g (25% DV)"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "4 g (14% DV)",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "3 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "11 g (22% DV)"
+      },
+      {
+        "name": "Sodium",
+        "value": "290 mg (12% DV)"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "18% DV"
+      },
+      {
+        "name": "Vitamin A",
+        "value": "12% DV"
+      },
+      {
+        "name": "Potassium",
+        "value": "8% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "10% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🥒",
+      "title": "Rich in Antioxidants",
+      "text": "Zucchini flowers and tender shoots contain vitamin C and carotenoids that help combat oxidative stress."
+    },
+    {
+      "icon": "🌾",
+      "title": "Sustained Energy",
+      "text": "Penne pasta provides complex carbohydrates for steady, long-lasting energy release."
+    },
+    {
+      "icon": "🧄",
+      "title": "Immune Support",
+      "text": "Garlic contains allicin, a compound with antimicrobial and immune-boosting properties."
+    },
+    {
+      "icon": "🫒",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil is high in monounsaturated fats that support cardiovascular health."
+    },
+    {
+      "icon": "🥗",
+      "title": "Low Calorie, High Fibre",
+      "text": "Zucchini plant greens add fibre and volume to the dish while keeping calories low."
+    },
+    {
+      "icon": "💧",
+      "title": "Hydrating",
+      "text": "Zucchini plants have high water content, contributing to hydration and digestive health."
+    }
+  ],
+  "_ingredientsText": "400 gr of zucchini plants and flowers, cleaned \n300 gr of penne pasta\n1 clove garlic, chopped \nsalt\n2 tablespoons extra virgin olive oil",
+  "_preparationText": "1 - 5 Remove the softest stalks from the main trunk of the plant. varie fasi di preparazione dello stelo delle zucchine",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T17:49:36.477Z"
+  },
+  "_manualEdits": []
+}
