@@ -4,7 +4,7 @@
   "book": "august",
   "bookPage": 30,
   "coverImage": "/images/book/summertime-acquasale-1789492517247.png",
-  "published": false,
+  "published": true,
   "date": "2026-09-15",
   "media": [
     {
@@ -204,7 +204,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T17:21:37.708Z"
+    "lastGenerated": "2026-09-15T17:35:23.373Z"
   },
   "_manualEdits": []
 }
