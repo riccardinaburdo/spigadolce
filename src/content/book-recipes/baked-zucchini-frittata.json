@@ -1,0 +1,189 @@
+{
+  "slug": "baked-zucchini-frittata",
+  "title": "Baked Zucchini frittata",
+  "book": "august",
+  "bookPage": 44,
+  "coverImage": "/images/book/baked-zucchini-frittata-hd-1789494641572.png",
+  "published": true,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1789494654744.jpg",
+      "caption": "Preparing the zucchini."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789494657745.jpg",
+      "caption": "Pre-cooking the zucchini, part 1."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789494660807.jpg",
+      "caption": "Pre-cooking the zucchini, part 2."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/04-1789494663784.jpg",
+      "caption": "Pre-cooking the zucchini, part 3."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/05-1789494666590.jpg",
+      "caption": "In a separate bowl, beat the eggs and then mix with the Canestrato cheese, zucchini and parsley."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/06-1789494668954.jpg",
+      "caption": "Preparing the baking dish for the oven."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/07-1789494672010.jpg",
+      "caption": "The frittata fresh out of the oven, ready to be served."
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 8,
+      "unit": "",
+      "name": "zucchini"
+    },
+    {
+      "qty": 6,
+      "unit": "",
+      "name": "eggs"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "Canestrato cheese, grated (1 cup)"
+    },
+    {
+      "qty": 1,
+      "unit": "tbsp",
+      "name": "parsley, chopped"
+    },
+    {
+      "qty": 4,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    }
+  ],
+  "nutrition": {
+    "calories": 310,
+    "protein": 16,
+    "carbs": 9,
+    "fat": 24,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "310 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "24 g (31% DV)"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "7 g (35% DV)",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "14 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "9 g (3% DV)"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "2.5 g (9% DV)",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "5 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "16 g (32% DV)"
+      },
+      {
+        "name": "Sodium",
+        "value": "420 mg (18% DV)"
+      },
+      {
+        "name": "Vitamin A",
+        "value": "20% DV"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "35% DV"
+      },
+      {
+        "name": "Calcium",
+        "value": "25% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "10% DV"
+      },
+      {
+        "name": "Potassium",
+        "value": "15% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🥒",
+      "title": "Hydration & Low Calories",
+      "text": "Zucchini is over 90% water and low in calories, making this dish light while still filling."
+    },
+    {
+      "icon": "🥚",
+      "title": "High-Quality Protein",
+      "text": "Eggs provide complete protein with all essential amino acids, supporting muscle repair and satiety."
+    },
+    {
+      "icon": "🧀",
+      "title": "Bone Health",
+      "text": "Canestrato cheese is rich in calcium and phosphorus, essential for strong bones and teeth."
+    },
+    {
+      "icon": "🫒",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil supplies monounsaturated fats and antioxidants that support cardiovascular health."
+    },
+    {
+      "icon": "🌿",
+      "title": "Antioxidant Boost",
+      "text": "Parsley adds vitamin C and vitamin K, contributing to immune function and bone metabolism."
+    },
+    {
+      "icon": "💪",
+      "title": "Muscle & Tissue Support",
+      "text": "The combination of eggs and cheese offers a strong protein profile beneficial for muscle maintenance."
+    }
+  ],
+  "_ingredientsText": "8 zucchini\n6 eggs\n1 cup Canestrato cheese, grated\n1 tablespoon parsley, chopped\n4 tablespoons extra virgin olive oil\nsalt",
+  "_preparationText": "1 - preparazione delle zucchine\n2 - 4 precottura delle zucchine\n5 - In a separate bowl, beat the eggs and then mix with the Canestrato cheese, zucchini and parsley.\n6 - preparazione della teglia per il forno",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T17:54:58.773Z"
+  },
+  "_manualEdits": []
+}
