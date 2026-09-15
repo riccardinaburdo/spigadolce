@@ -1,0 +1,66 @@
+{
+  "slug": "grilled-aubergines",
+  "title": "Grilled aubergines",
+  "book": "august",
+  "bookPage": 16,
+  "coverImage": "/images/book/melanzane-grigliate-hr-1789468498793.png",
+  "published": false,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1789468513799.jpg",
+      "caption": ""
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789468519841.jpg",
+      "caption": ""
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789468534525.jpg",
+      "caption": ""
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/05-1789468588092.jpeg",
+      "caption": ""
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/06-1789468593247.jpeg",
+      "caption": ""
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/07-1789468597414.jpeg",
+      "caption": ""
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/08-1789468602861.jpeg",
+      "caption": ""
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [],
+  "nutrition": {
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fat": 0,
+    "detail": []
+  },
+  "healthBenefits": [],
+  "_ingredientsText": "2 aubergines\n• 1 clove of garlic\n• 20 mint leaves\n• extra virgin olive oil\n• white wine vinegar\n• salt",
+  "_preparationText": "Remove the skin and top of the aubergines, cut them into thin slices lengthways and cook them on a hot cast iron griddle, turning them several times for even cooking and to prevent burning.\nOnce cooked, arrange the aubergine slices in a dish with high sides, alternating with the seasonings.\nOnce the layers are complete, crush everything with a fork and leave to marinate for at least 1 hour.",
+  "_aiGenerated": {
+    "ingredients": false,
+    "nutrition": false,
+    "healthBenefits": false,
+    "mediaCaptions": false,
+    "lastGenerated": "2026-09-15T10:36:53.183Z"
+  },
+  "_manualEdits": []
+}
