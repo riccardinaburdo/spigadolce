@@ -4,7 +4,7 @@
   "book": null,
   "bookPage": null,
   "coverImage": "/images/book/horsemeat-cutlets-hd-1789495344490.png",
-  "published": false,
+  "published": true,
   "date": "2026-09-15",
   "media": [
     {
@@ -208,7 +208,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T18:06:53.454Z"
+    "lastGenerated": "2026-09-15T18:06:56.815Z"
   },
   "_manualEdits": []
 }
