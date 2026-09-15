@@ -4,7 +4,7 @@
   "book": "august",
   "bookPage": 38,
   "coverImage": "/images/book/pasta-with-zucchini-plant-and-flowers-hr-1789494457674.png",
-  "published": false,
+  "published": true,
   "date": "2026-09-15",
   "media": [
     {
@@ -164,7 +164,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T17:49:36.477Z"
+    "lastGenerated": "2026-09-15T17:49:41.112Z"
   },
   "_manualEdits": []
 }
