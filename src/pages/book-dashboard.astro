@@ -435,7 +435,7 @@ export const prerender = false;
               <button class="btn btn-outline" onclick="backToList()">Back</button>
               ${!isNew && data.published && data.slug ? `<a class="btn btn-outline" href="/book/${data.slug}" target="_blank">Preview</a>` : ''}
               ${!isNew ? `<button class="btn btn-danger" onclick="deleteRecipe()">Delete</button>` : ''}
-              <button class="btn btn-primary" id="saveBtn" onclick="saveRecipe()">Save</button>
+              <button class="btn btn-primary" data-save-btn onclick="saveRecipe()">Save Recipe</button>
             </div>
           </div>
 
@@ -561,7 +561,7 @@ export const prerender = false;
           <div style="display:flex;justify-content:flex-end;gap:.75rem;margin-top:1rem;padding-top:1rem;border-top:1px solid #e8e0d4;">
             <button class="btn btn-outline" onclick="backToList()">Cancel</button>
             ${!isNew ? `<button class="btn btn-danger" onclick="deleteRecipe()">Delete</button>` : ''}
-            <button class="btn btn-primary" onclick="saveRecipe()">Save Recipe</button>
+            <button class="btn btn-primary" data-save-btn onclick="saveRecipe()">Save Recipe</button>
           </div>
         </div>
       `;
@@ -1044,8 +1044,10 @@ export const prerender = false;
       const data = collectFormData();
       if (!data.title) { toast('Title is required', true); return; }
 
-      const saveBtn = document.getElementById('saveBtn');
-      if (saveBtn) saveBtn.disabled = true;
+      // Both save buttons (top bar and end of form) run this — disable them all,
+      // otherwise a double click on the one that isn't disabled saves twice.
+      const saveBtns = document.querySelectorAll('[data-save-btn]');
+      saveBtns.forEach(b => b.disabled = true);
 
       try {
         if (editingEntry) {
@@ -1068,7 +1070,7 @@ export const prerender = false;
       } catch (err) {
         toast('Save error: ' + err.message, true);
       } finally {
-        if (saveBtn) saveBtn.disabled = false;
+        saveBtns.forEach(b => b.disabled = false);
       }
     }
 
