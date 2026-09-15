@@ -1,0 +1,229 @@
+{
+  "slug": "musky-octopus-with-capers",
+  "title": "Musky octopus with capers",
+  "book": "august",
+  "bookPage": 54,
+  "coverImage": "/images/book/musky-octopus-with-capers-hd-1789496075254.png",
+  "published": false,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1789496086526.jpg",
+      "caption": "Step 1 of cleaning the small octopus: begin by rinsing them thoroughly under cold running water."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789496088602.jpg",
+      "caption": "Step 2 of cleaning: remove the beak and eyes, and carefully turn out the head to remove any innards."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/05-1789496090977.jpg",
+      "caption": "Step 3-5 of cleaning: continue cleaning the octopus, removing the ink sac and rinsing well until the water runs clear."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/09-1789496093136.jpg",
+      "caption": "Step 6-7 of cleaning: finish cleaning the octopus, ensuring the tentacles and mantle are free of any residue, then set aside on a clean tray."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/13-1789496095593.jpg",
+      "caption": "Step 8 of cooking: in a pan, sauté the chopped onion, celery, garlic, parsley, and chili in the extra virgin olive oil until softened."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/14-1789496098076.jpg",
+      "caption": "Step 9 of cooking: add the cleaned octopus to the pan and let it release its liquid over medium heat, stirring occasionally."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/16-1789496100475.jpg",
+      "caption": "Step 10 of cooking: add the chopped capers, anchovy pieces, and water, then cover and let simmer gently until the octopus is tender."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/20-1789496103335.jpg",
+      "caption": "Final appearance: the octopus is now tender and coated in a fragrant sauce of capers, anchovies, and aromatic vegetables."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/21-1789496106451.jpg",
+      "caption": "Final appearance: a close-up of the finished dish, showing the rich, glossy sauce clinging to the octopus pieces."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/23-1789496109886.jpg",
+      "caption": "Final appearance: the dish plated and ready to serve, garnished with a sprinkle of fresh parsley."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/26-1789496112379.jpg",
+      "caption": "Final appearance: an overview of the finished musky octopus with capers, presented in a rustic serving dish."
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 750,
+      "unit": "g",
+      "name": "small musky octopus (moscardini)"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "onion, chopped"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "celery stalk, chopped"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "sprig of parsley, chopped"
+    },
+    {
+      "qty": 1,
+      "unit": "clove",
+      "name": "garlic, chopped"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "small red chili, chopped"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": 15,
+      "unit": "g",
+      "name": "salted capers, chopped"
+    },
+    {
+      "qty": 2,
+      "unit": "",
+      "name": "salted anchovy fillets, cut into pieces"
+    },
+    {
+      "qty": 2,
+      "unit": "",
+      "name": "deciliters of water"
+    }
+  ],
+  "nutrition": {
+    "calories": 210,
+    "protein": 24,
+    "carbs": 6,
+    "fat": 10,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "210 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "10 g (15% DV)"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.5 g (8% DV)",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "6.5 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "6 g (2% DV)"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "1 g (4% DV)",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "1.5 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "24 g (48% DV)"
+      },
+      {
+        "name": "Sodium",
+        "value": "680 mg (28% DV)"
+      },
+      {
+        "name": "Vitamin B12",
+        "value": "180% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "25% DV"
+      },
+      {
+        "name": "Selenium",
+        "value": "90% DV"
+      },
+      {
+        "name": "Zinc",
+        "value": "20% DV"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "10% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🐙",
+      "title": "Lean High-Quality Protein",
+      "text": "Octopus is very low in fat while providing a complete amino acid profile, supporting muscle repair and satiety."
+    },
+    {
+      "icon": "🧠",
+      "title": "Rich in Vitamin B12",
+      "text": "Octopus and anchovies supply exceptional levels of B12, essential for nerve function and red blood cell formation."
+    },
+    {
+      "icon": "❤️",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil provides monounsaturated fats and polyphenols that help reduce inflammation and support cardiovascular health."
+    },
+    {
+      "icon": "🧂",
+      "title": "Mineral-Rich Seafood",
+      "text": "Anchovies and octopus contribute selenium, zinc, and iron, important for immune function and antioxidant defense."
+    },
+    {
+      "icon": "🌶️",
+      "title": "Metabolism Boost",
+      "text": "Chili peppers contain capsaicin, which may support metabolism and have mild anti-inflammatory effects."
+    },
+    {
+      "icon": "🧄",
+      "title": "Antimicrobial Aromatics",
+      "text": "Garlic and onion offer sulfur compounds linked to cardiovascular and immune benefits."
+    }
+  ],
+  "_ingredientsText": " 750 gr of small musky octopus\n 1 onion, chopped\n 1 stalk of celery, chopped\n 1 sprig of parsley, chopped\n 1 clove of garlic, chopped\n 1 small red chili, chopped\n 2 tablespoons extra virgin olive oil\n 15 gr of salted capers, chopped\n 2 salted anchovy fillets, cut into pieces \n 2 dl of water",
+  "_preparationText": "1 - 7 fasi di pulizia dei totani\n8 - 10  fasi di cottura\n11 - aspetto finale",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T18:18:12.558Z"
+  },
+  "_manualEdits": []
+}
