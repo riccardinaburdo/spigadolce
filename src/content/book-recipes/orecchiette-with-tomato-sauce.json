@@ -1,0 +1,165 @@
+{
+  "slug": "orecchiette-with-tomato-sauce",
+  "title": "Orecchiette with tomato sauce",
+  "book": "august",
+  "bookPage": 36,
+  "coverImage": "/images/book/orecchiette-with-tomato-sauce-hr-1789494228774.png",
+  "published": false,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1789494243027.jpg",
+      "caption": "Preparing the orecchiette dough"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789494246267.jpg",
+      "caption": "Fresh orecchiette ready for cooking"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789494249097.jpg",
+      "caption": "Boiling the orecchiette"
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 400,
+      "unit": "g",
+      "name": "orecchiette pasta"
+    },
+    {
+      "qty": 500,
+      "unit": "g",
+      "name": "tomato puree"
+    },
+    {
+      "qty": 80,
+      "unit": "g",
+      "name": "pecorino cheese, grated"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "small onion, chopped"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    }
+  ],
+  "nutrition": {
+    "calories": 430,
+    "protein": 15,
+    "carbs": 68,
+    "fat": 11,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "430 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "11 g"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "3 g",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "6 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "68 g"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "4 g",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "6 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "15 g"
+      },
+      {
+        "name": "Sodium",
+        "value": "480 mg (20% DV)"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "15% DV"
+      },
+      {
+        "name": "Calcium",
+        "value": "20% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "12% DV"
+      },
+      {
+        "name": "Vitamin A",
+        "value": "10% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🍅",
+      "title": "Rich in Lycopene",
+      "text": "Tomato puree provides lycopene, an antioxidant linked to reduced risk of heart disease and certain cancers."
+    },
+    {
+      "icon": "🌾",
+      "title": "Sustained Energy",
+      "text": "Orecchiette pasta offers complex carbohydrates that provide steady, long-lasting energy."
+    },
+    {
+      "icon": "🧀",
+      "title": "Bone Health",
+      "text": "Pecorino cheese is a good source of calcium and phosphorus, supporting strong bones and teeth."
+    },
+    {
+      "icon": "🧄",
+      "title": "Cardiovascular Support",
+      "text": "Onions contain flavonoids like quercetin that may help reduce inflammation and support heart health."
+    },
+    {
+      "icon": "🫒",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil is rich in monounsaturated fats and polyphenols that support cardiovascular health."
+    },
+    {
+      "icon": "💪",
+      "title": "Protein Source",
+      "text": "The combination of pasta and pecorino cheese contributes a moderate amount of protein to support muscle maintenance."
+    }
+  ],
+  "_ingredientsText": "400 gr of orecchiette pasta \n500 gr of tomato puree \n80 gr of pecorino cheese, grated\n1 small onion, chopped\n2 tablespoons extra virgin olive oil \nsalt ",
+  "_preparationText": "1 -fase di preparazione delle orecchiette\n2 - orecchiette fresche pronte per la cottura\n3 -bollitura delle orecchiette",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T17:46:06.088Z"
+  },
+  "_manualEdits": []
+}
