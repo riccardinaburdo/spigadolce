@@ -1,0 +1,209 @@
+{
+  "slug": "pepper-roulade",
+  "title": "Pepper Roulade",
+  "book": "august",
+  "bookPage": 50,
+  "coverImage": "/images/book/pepper-roulade-hd-1789495705544.png",
+  "published": true,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789495717334.jpg",
+      "caption": "Cooking the peppers on a cast-iron griddle."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/04-1789495720045.jpg",
+      "caption": "Preparing the filling."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/09-1789495722477.jpg",
+      "caption": "Continuing to prepare the filling."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/12-1789495724583.jpg",
+      "caption": "Preparing the peppers for filling."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/15-1789495726868.jpg",
+      "caption": "Filling the peppers."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/17-1789495729190.jpg",
+      "caption": "Filling the peppers."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/19-1789495732095.jpg",
+      "caption": "Filling the peppers."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/20-1789495735338.jpg",
+      "caption": "Final appearance with the roulades closed."
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 4,
+      "unit": "",
+      "name": "peppers"
+    },
+    {
+      "qty": 4,
+      "unit": "",
+      "name": "salted anchovies, chopped"
+    },
+    {
+      "qty": 40,
+      "unit": "g",
+      "name": "salted capers"
+    },
+    {
+      "qty": 4,
+      "unit": "",
+      "name": "slices of bread, without crusts"
+    },
+    {
+      "qty": 1.5,
+      "unit": "",
+      "name": "milk (deciliters)"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "sprig of parsley, chopped"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "pepper"
+    }
+  ],
+  "nutrition": {
+    "calories": 210,
+    "protein": 9,
+    "carbs": 18,
+    "fat": 11,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "210 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "11 g"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.8 g",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "6.5 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "18 g"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "3.5 g",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "6 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "9 g"
+      },
+      {
+        "name": "Sodium",
+        "value": "620 mg (27% DV)"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "140% DV"
+      },
+      {
+        "name": "Vitamin A",
+        "value": "35% DV"
+      },
+      {
+        "name": "Vitamin B12",
+        "value": "20% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "10% DV"
+      },
+      {
+        "name": "Calcium",
+        "value": "12% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🌶️",
+      "title": "Peppers boost immunity",
+      "text": "Bell peppers are exceptionally rich in vitamin C and carotenoids, supporting immune function and eye health."
+    },
+    {
+      "icon": "🐟",
+      "title": "Anchovies provide omega-3s",
+      "text": "Salted anchovies deliver heart-healthy omega-3 fatty acids and vitamin B12, supporting cardiovascular and nerve health."
+    },
+    {
+      "icon": "🫒",
+      "title": "Olive oil supports heart health",
+      "text": "Extra virgin olive oil is rich in monounsaturated fats and polyphenols that help reduce inflammation and support cardiovascular health."
+    },
+    {
+      "icon": "🧂",
+      "title": "Capers offer antioxidants",
+      "text": "Capers contain quercetin and rutin, plant compounds with antioxidant and anti-inflammatory properties."
+    },
+    {
+      "icon": "🌿",
+      "title": "Parsley adds micronutrients",
+      "text": "Fresh parsley contributes vitamin K, vitamin C, and antioxidants that support bone and immune health."
+    },
+    {
+      "icon": "🍞",
+      "title": "Bread provides energy",
+      "text": "The bread soaked in milk adds carbohydrates for energy along with calcium and protein from the milk."
+    }
+  ],
+  "_ingredientsText": " 4 peppers\n 4 salted anchovies, chopped\n 40 gr of salted capers\n 4 slices of bread, without crusts\n 1,5 dl of milk\n 1 sprig of parsley, chopped\n 2 tablespoons extra virgin olive oil\n salt\n pepper",
+  "_preparationText": "1 - cottura su piastra di ghisa\n2 - 4 preparazione della farcitura\n5 preparazione dei peperoni alla farcitura\n6 - 7 farcitura\n8 - aspetto finale con chiusura degli involtini",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T18:11:28.358Z"
+  },
+  "_manualEdits": []
+}
