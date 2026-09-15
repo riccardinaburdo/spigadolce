@@ -4,7 +4,7 @@
   "book": "august",
   "bookPage": 36,
   "coverImage": "/images/book/orecchiette-with-tomato-sauce-hr-1789494228774.png",
-  "published": false,
+  "published": true,
   "date": "2026-09-15",
   "media": [
     {
@@ -159,7 +159,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T17:46:06.088Z"
+    "lastGenerated": "2026-09-15T17:46:09.654Z"
   },
   "_manualEdits": []
 }
