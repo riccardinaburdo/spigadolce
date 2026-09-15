@@ -4,7 +4,7 @@
   "book": "august",
   "bookPage": 16,
   "coverImage": "/images/book/melanzane-grigliate-hr-1789468498793.png",
-  "published": false,
+  "published": true,
   "date": "2026-09-15",
   "media": [
     {
@@ -179,7 +179,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T12:52:12.039Z"
+    "lastGenerated": "2026-09-15T12:52:32.687Z"
   },
   "_manualEdits": []
 }
