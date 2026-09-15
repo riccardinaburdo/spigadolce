@@ -1,0 +1,206 @@
+{
+  "slug": "fried-anchovies",
+  "title": "Fried Anchovies",
+  "book": "august",
+  "bookPage": 46,
+  "coverImage": "/images/book/fried-anchovies-hd-1789494944714.png",
+  "published": false,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1789494962551.jpg",
+      "caption": "Cleaning the anchovies"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789494964457.jpg",
+      "caption": "Cleaning the anchovies"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789494966576.jpg",
+      "caption": "Wash and set aside."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/06-1789494969431.jpg",
+      "caption": "Dip the anchovies in the flour"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/07-1789494972709.jpg",
+      "caption": "Dip the anchovies in the flour"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/09-1789494975598.jpg",
+      "caption": "Then dip the anchovies in the egg mixture.\n"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/10-1789494979071.jpg",
+      "caption": "Then dip the anchovies in the egg mixture."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/12-1789494982475.jpg",
+      "caption": "Turn the anchovies during frying to ensure even color on both sides."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/13-1789494985789.jpg",
+      "caption": "Remove the fried anchovies and drain them on paper towels to remove excess oil."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/14-1789494988466.jpg",
+      "caption": "Serve the fried anchovies hot, sprinkled with salt and a squeeze of lemon juice."
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 600,
+      "unit": "g",
+      "name": "large anchovies"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "flour for breading"
+    },
+    {
+      "qty": 3,
+      "unit": "",
+      "name": "eggs"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "extra virgin olive oil for frying"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "lemon, juiced (optional)"
+    }
+  ],
+  "nutrition": {
+    "calories": 320,
+    "protein": 28,
+    "carbs": 12,
+    "fat": 18,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "320 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "18 g"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "3 g",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "11 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "12 g"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "0.5 g",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "0.3 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "28 g"
+      },
+      {
+        "name": "Sodium",
+        "value": "480 mg (20% DV)"
+      },
+      {
+        "name": "Vitamin B12",
+        "value": "90% DV"
+      },
+      {
+        "name": "Vitamin D",
+        "value": "25% DV"
+      },
+      {
+        "name": "Calcium",
+        "value": "8% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "10% DV"
+      },
+      {
+        "name": "Selenium",
+        "value": "60% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🐟",
+      "title": "Rich in Omega-3",
+      "text": "Anchovies are packed with omega-3 fatty acids that support heart health and reduce inflammation."
+    },
+    {
+      "icon": "💪",
+      "title": "High-Quality Protein",
+      "text": "This dish provides a substantial amount of lean protein, essential for muscle repair and growth."
+    },
+    {
+      "icon": "🦴",
+      "title": "Bone Support",
+      "text": "Anchovies contain calcium and vitamin D, both important for maintaining strong bones."
+    },
+    {
+      "icon": "🧠",
+      "title": "Brain Function",
+      "text": "Vitamin B12 found in anchovies supports nervous system health and cognitive function."
+    },
+    {
+      "icon": "🍋",
+      "title": "Vitamin C Boost",
+      "text": "A squeeze of lemon juice adds vitamin C, which aids iron absorption and supports immunity."
+    },
+    {
+      "icon": "🫒",
+      "title": "Healthy Fats",
+      "text": "Frying in extra virgin olive oil provides monounsaturated fats beneficial for cardiovascular health."
+    }
+  ],
+  "_ingredientsText": "600 gr of large anchovies \nflour for breading \n3 eggs\nsalt\nextra virgin olive oil for frying\njuice of 1 lemon (optional)",
+  "_preparationText": "1 - 3 pulizia delle acciughe\n4 - 7 preparazione della frittata\n8 -10 fasi della friggitura",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T18:01:44.420Z"
+  },
+  "_manualEdits": [
+    "mediaCaptions"
+  ]
+}
