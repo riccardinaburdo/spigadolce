@@ -10,57 +10,176 @@
     {
       "type": "photo",
       "src": "/images/book/01-1789468513799.jpg",
-      "caption": ""
+      "caption": "Remove the skin and top of the aubergines, cut them into thin slices lengthways."
     },
     {
       "type": "photo",
       "src": "/images/book/02-1789468519841.jpg",
-      "caption": ""
+      "caption": "Cook the aubergine slices on a hot cast iron griddle, turning them several times for even cooking and to prevent burning."
     },
     {
       "type": "photo",
       "src": "/images/book/03-1789468534525.jpg",
-      "caption": ""
+      "caption": "Once cooked, arrange the aubergine slices in a dish with high sides, alternating with the seasonings."
     },
     {
       "type": "photo",
       "src": "/images/book/05-1789468588092.jpeg",
-      "caption": ""
+      "caption": "Continue layering the aubergine slices with garlic, mint, oil, vinegar and salt."
     },
     {
       "type": "photo",
       "src": "/images/book/06-1789468593247.jpeg",
-      "caption": ""
+      "caption": "Once the layers are complete, crush everything with a fork."
     },
     {
       "type": "photo",
       "src": "/images/book/07-1789468597414.jpeg",
-      "caption": ""
+      "caption": "Leave the aubergines to marinate for at least 1 hour."
     },
     {
       "type": "photo",
       "src": "/images/book/08-1789468602861.jpeg",
-      "caption": ""
+      "caption": "The finished grilled aubergines, ready to be served."
     }
   ],
   "baseServings": 4,
-  "ingredients": [],
+  "ingredients": [
+    {
+      "qty": 2,
+      "unit": "",
+      "name": "aubergines"
+    },
+    {
+      "qty": 1,
+      "unit": "clove",
+      "name": "garlic"
+    },
+    {
+      "qty": 20,
+      "unit": "",
+      "name": "mint leaves"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "white wine vinegar"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    }
+  ],
   "nutrition": {
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fat": 0,
-    "detail": []
+    "calories": 120,
+    "protein": 1,
+    "carbs": 8,
+    "fat": 9,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "120 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "9 g"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.3 g",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "6.5 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "8 g"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "3.5 g",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "3 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "1.5 g"
+      },
+      {
+        "name": "Sodium",
+        "value": "150 mg (6% DV)"
+      },
+      {
+        "name": "Vitamin K",
+        "value": "10% DV"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "5% DV"
+      },
+      {
+        "name": "Potassium",
+        "value": "8% DV"
+      },
+      {
+        "name": "Vitamin E",
+        "value": "12% DV"
+      }
+    ]
   },
-  "healthBenefits": [],
+  "healthBenefits": [
+    {
+      "icon": "🍆",
+      "title": "Rich in Antioxidants",
+      "text": "Aubergine skin contains nasunin, an antioxidant that helps protect cells from damage caused by free radicals."
+    },
+    {
+      "icon": "🌿",
+      "title": "Digestive Support",
+      "text": "Mint leaves aid digestion and can help soothe the digestive tract, reducing bloating and discomfort."
+    },
+    {
+      "icon": "🫒",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil is rich in monounsaturated fats, which support cardiovascular health and reduce inflammation."
+    },
+    {
+      "icon": "🧄",
+      "title": "Immune Boosting",
+      "text": "Garlic contains allicin, a compound known for its antimicrobial and immune-supporting properties."
+    },
+    {
+      "icon": "🌾",
+      "title": "High in Fibre",
+      "text": "Aubergines are a good source of dietary fibre, promoting healthy digestion and gut microbiota balance."
+    },
+    {
+      "icon": "🍋",
+      "title": "Low Calorie, Nutrient Dense",
+      "text": "This dish is low in calories while providing essential vitamins and minerals, making it ideal for a balanced diet."
+    }
+  ],
   "_ingredientsText": "2 aubergines\n• 1 clove of garlic\n• 20 mint leaves\n• extra virgin olive oil\n• white wine vinegar\n• salt",
   "_preparationText": "Remove the skin and top of the aubergines, cut them into thin slices lengthways and cook them on a hot cast iron griddle, turning them several times for even cooking and to prevent burning.\nOnce cooked, arrange the aubergine slices in a dish with high sides, alternating with the seasonings.\nOnce the layers are complete, crush everything with a fork and leave to marinate for at least 1 hour.",
   "_aiGenerated": {
-    "ingredients": false,
-    "nutrition": false,
-    "healthBenefits": false,
-    "mediaCaptions": false,
-    "lastGenerated": "2026-09-15T10:36:59.575Z"
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T12:52:08.768Z"
   },
   "_manualEdits": []
 }
