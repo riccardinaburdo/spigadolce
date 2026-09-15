@@ -1,0 +1,214 @@
+{
+  "slug": "horsemeat-cutlets",
+  "title": "Horsemeat cutlets",
+  "book": null,
+  "bookPage": null,
+  "coverImage": "/images/book/horsemeat-cutlets-hd-1789495344490.png",
+  "published": false,
+  "date": "2026-09-15",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789495366899.jpg",
+      "caption": "Lay the slices of horsemeat on a cutting board and on top of the meat place: the garlic, parsley, pecorino cheese, salt and, if desired, a little chili or pepper."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/04-1789495370169.jpg",
+      "caption": "Continue arranging the garlic, parsley, pecorino cheese and salt on top of the meat slices."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/05-1789495373012.jpg",
+      "caption": "Roll up the meat slices and close them with toothpicks."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/07-1789495376120.jpg",
+      "caption": "Finish rolling and securing the meat rolls with toothpicks."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/08-1789495379143.jpg",
+      "caption": "Put the olive oil in a pan and sauté the sliced onion."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/09-1789495383032.jpg",
+      "caption": "Add the meat rolls to the pan with the sautéed onion."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/10-1789495386907.jpg",
+      "caption": "Continue browning the meat rolls with the onion in the pan."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/11-1789495390143.jpg",
+      "caption": "Add the tomato passata to the pan."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/13-1789495393375.jpg",
+      "caption": "Let the cutlets cook in the tomato sauce until done."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/14-1789495395700.jpg",
+      "caption": "Final cooking: the horsemeat cutlets simmered in tomato sauce, ready to be served."
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 4,
+      "unit": "",
+      "name": "slices of horsemeat"
+    },
+    {
+      "qty": 100,
+      "unit": "g",
+      "name": "pecorino cheese, grated"
+    },
+    {
+      "qty": 2,
+      "unit": "",
+      "name": "sprigs of parsley"
+    },
+    {
+      "qty": 3,
+      "unit": "clove",
+      "name": "garlic, chopped"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": 700,
+      "unit": "g",
+      "name": "tomato puree"
+    },
+    {
+      "qty": 1,
+      "unit": "",
+      "name": "onion, sliced"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    }
+  ],
+  "nutrition": {
+    "calories": 410,
+    "protein": 32,
+    "carbs": 10,
+    "fat": 26,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "410 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "26 g (33% DV)"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "9 g (45% DV)",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "13 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "10 g (4% DV)"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "2 g (7% DV)",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "6 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "32 g (64% DV)"
+      },
+      {
+        "name": "Sodium",
+        "value": "620 mg (27% DV)"
+      },
+      {
+        "name": "Iron",
+        "value": "25% DV"
+      },
+      {
+        "name": "Vitamin B12",
+        "value": "60% DV"
+      },
+      {
+        "name": "Calcium",
+        "value": "20% DV"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "15% DV"
+      },
+      {
+        "name": "Potassium",
+        "value": "18% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🥩",
+      "title": "Lean, Iron-Rich Meat",
+      "text": "Horsemeat is naturally lean and exceptionally rich in iron and vitamin B12, supporting healthy red blood cell production and energy metabolism."
+    },
+    {
+      "icon": "🧀",
+      "title": "Calcium from Pecorino",
+      "text": "Pecorino cheese provides a good source of calcium and protein, contributing to bone health and muscle maintenance."
+    },
+    {
+      "icon": "🍅",
+      "title": "Antioxidant Tomato Puree",
+      "text": "Tomato puree is rich in lycopene, a powerful antioxidant linked to reduced risk of heart disease and certain cancers."
+    },
+    {
+      "icon": "🧄",
+      "title": "Immune-Supporting Garlic",
+      "text": "Garlic contains allicin, known for its antimicrobial and cardiovascular benefits, including modest blood pressure reduction."
+    },
+    {
+      "icon": "🌿",
+      "title": "Parsley's Vitamin Boost",
+      "text": "Fresh parsley adds vitamin K and vitamin C, supporting bone health and immune function."
+    },
+    {
+      "icon": "🫒",
+      "title": "Heart-Healthy Olive Oil",
+      "text": "Extra virgin olive oil provides monounsaturated fats that help maintain healthy cholesterol levels and reduce inflammation."
+    }
+  ],
+  "_ingredientsText": "4 slices of horsemeat\n100 gr of pecorino cheese, grated\n 2 sprigs of parsley\n 3 cloves of garlic, chopped\n 2 tablespoons extra virgin olive oil\n 700 gr of tomato puree\n 1 onion, sliced\n salt",
+  "_preparationText": "1 -  2  Lay the slices of horsemeat on a cutting board and on top of the meat place: the garlic, parsley, pecorino cheese, salt and, if desired, a little chili or pepper.\n3 - 4 Roll them up and close them with toothpicks.\n5 - 7 Put the olive oil in a pan and sauté the sliced onion. Then add the meat rolls.\n8 add  tomato passata\n9 cottura finale\n",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-15T18:06:53.454Z"
+  },
+  "_manualEdits": []
+}
