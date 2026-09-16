@@ -2,10 +2,10 @@
   "slug": "pepper-roulade",
   "title": "Pepper Roulade",
   "book": "august",
-  "bookPage": 50,
+  "bookPage": 52,
   "coverImage": "/images/book/pepper-roulade-hd-1789495705544.png",
   "published": true,
-  "date": "2026-09-15",
+  "date": "2026-09-16",
   "media": [
     {
       "type": "photo",
@@ -203,7 +203,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T18:11:28.358Z"
+    "lastGenerated": "2026-09-16T08:49:34.959Z"
   },
   "_manualEdits": []
 }
