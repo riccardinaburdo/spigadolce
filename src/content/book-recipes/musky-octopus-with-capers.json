@@ -2,10 +2,10 @@
   "slug": "musky-octopus-with-capers",
   "title": "Musky octopus with capers",
   "book": "august",
-  "bookPage": 54,
+  "bookPage": 56,
   "coverImage": "/images/book/musky-octopus-with-capers-hd-1789496075254.png",
   "published": true,
-  "date": "2026-09-15",
+  "date": "2026-09-16",
   "media": [
     {
       "type": "photo",
@@ -223,7 +223,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T18:18:15.185Z"
+    "lastGenerated": "2026-09-16T08:49:02.927Z"
   },
   "_manualEdits": []
 }
