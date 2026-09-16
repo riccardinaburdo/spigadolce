@@ -2,10 +2,10 @@
   "slug": "baked-zucchini-frittata",
   "title": "Baked Zucchini frittata",
   "book": "august",
-  "bookPage": 44,
+  "bookPage": 46,
   "coverImage": "/images/book/baked-zucchini-frittata-hd-1789494641572.png",
   "published": true,
-  "date": "2026-09-15",
+  "date": "2026-09-16",
   "media": [
     {
       "type": "photo",
@@ -183,7 +183,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T17:54:58.773Z"
+    "lastGenerated": "2026-09-16T08:50:06.807Z"
   },
   "_manualEdits": []
 }
