@@ -1,0 +1,201 @@
+{
+  "slug": "spaghetti-with-fresh-anchovies",
+  "title": "Spaghetti with fresh Anchovies",
+  "book": "august",
+  "bookPage": 34,
+  "coverImage": "/images/book/spaghetti-with-fresh-anchovies-hd-1789548211902.png",
+  "published": false,
+  "date": "2026-09-16",
+  "media": [
+    {
+      "type": "photo",
+      "src": "/images/book/01-1789548223544.jpg",
+      "caption": "Ingredients"
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/02-1789548226390.jpg",
+      "caption": "In a pan, put the cherry tomatoes cut in half, the crushed garlic, the parsley and the oil."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/03-1789548228728.jpg",
+      "caption": "Clean the anchovies and remove the bone as well. Rinse them and set aside."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/04-1789548231946.jpg",
+      "caption": "Let the wine reduce "
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/05-1789548235535.jpg",
+      "caption": "Cook for a further 5 minutes and remove the garlic."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/06-1789548239575.jpg",
+      "caption": "and add the anchovies cut into small pieces."
+    },
+    {
+      "type": "photo",
+      "src": "/images/book/08-1789548242965.jpg",
+      "caption": "Stir over a high heat for a moment to let the flavours combine, then serve garnished with chopped parsley."
+    }
+  ],
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "qty": 300,
+      "unit": "g",
+      "name": "spaghetti"
+    },
+    {
+      "qty": 300,
+      "unit": "g",
+      "name": "fresh anchovies"
+    },
+    {
+      "qty": 6,
+      "unit": "",
+      "name": "cherry tomatoes"
+    },
+    {
+      "qty": 1,
+      "unit": "tbsp",
+      "name": "chopped parsley"
+    },
+    {
+      "qty": 1,
+      "unit": "clove",
+      "name": "garlic"
+    },
+    {
+      "qty": 2,
+      "unit": "tbsp",
+      "name": "extra virgin olive oil"
+    },
+    {
+      "qty": 0.5,
+      "unit": "",
+      "name": "glass of white wine"
+    },
+    {
+      "qty": null,
+      "unit": "",
+      "name": "salt"
+    }
+  ],
+  "nutrition": {
+    "calories": 430,
+    "protein": 24,
+    "carbs": 58,
+    "fat": 11,
+    "detail": [
+      {
+        "name": "Calories",
+        "value": "430 kcal"
+      },
+      {
+        "name": "Total Fat",
+        "value": "11 g (14% DV)"
+      },
+      {
+        "name": "Saturated Fat",
+        "value": "1.8 g (9% DV)",
+        "sub": true
+      },
+      {
+        "name": "Monounsaturated Fat",
+        "value": "6.5 g",
+        "sub": true
+      },
+      {
+        "name": "Carbohydrates",
+        "value": "58 g (21% DV)"
+      },
+      {
+        "name": "Dietary Fibre",
+        "value": "3 g (11% DV)",
+        "sub": true
+      },
+      {
+        "name": "Sugars",
+        "value": "3 g",
+        "sub": true
+      },
+      {
+        "name": "Protein",
+        "value": "24 g (48% DV)"
+      },
+      {
+        "name": "Sodium",
+        "value": "310 mg (13% DV)"
+      },
+      {
+        "name": "Vitamin B12",
+        "value": "55% DV"
+      },
+      {
+        "name": "Vitamin D",
+        "value": "18% DV"
+      },
+      {
+        "name": "Iron",
+        "value": "15% DV"
+      },
+      {
+        "name": "Calcium",
+        "value": "8% DV"
+      },
+      {
+        "name": "Vitamin C",
+        "value": "12% DV"
+      }
+    ]
+  },
+  "healthBenefits": [
+    {
+      "icon": "🐟",
+      "title": "Rich in Omega-3",
+      "text": "Fresh anchovies are an excellent source of omega-3 fatty acids, supporting heart and brain health."
+    },
+    {
+      "icon": "💪",
+      "title": "High-Quality Protein",
+      "text": "Anchovies provide lean, easily digestible protein essential for muscle repair and growth."
+    },
+    {
+      "icon": "🦴",
+      "title": "Bone Support",
+      "text": "Anchovies contain calcium and vitamin D, contributing to healthy bones and teeth."
+    },
+    {
+      "icon": "🫒",
+      "title": "Heart-Healthy Fats",
+      "text": "Extra virgin olive oil offers monounsaturated fats and antioxidants that help protect cardiovascular health."
+    },
+    {
+      "icon": "🍅",
+      "title": "Antioxidant Boost",
+      "text": "Cherry tomatoes supply vitamin C and lycopene, which help combat oxidative stress."
+    },
+    {
+      "icon": "🌾",
+      "title": "Sustained Energy",
+      "text": "Spaghetti provides complex carbohydrates for steady, long-lasting energy release."
+    }
+  ],
+  "_ingredientsText": "300g spaghetti\n300g fresh anchovies\n6 cherry tomatoes\n1 tablespoon chopped parsley\n1 clove of garlic\n2 tablespoons extra virgin olive oil\n½ glass of white wine\nsalt",
+  "_preparationText": "Clean the anchovies and remove the bone as well. Rinse them and set aside.\nIn a pan, put the cherry tomatoes cut in half, the crushed garlic, the parsley and the oil.\nCook for 10 minutes and add half a glass of white wine.\nLet the wine reduce and add the anchovies cut into small pieces.\nCook for a further 5 minutes and remove the garlic.\nSeparately, cook the pasta, drain it al dente and tip it into the pan.\nStir over a high heat for a moment to let the flavours combine, then serve garnished with chopped parsley.",
+  "_aiGenerated": {
+    "ingredients": true,
+    "nutrition": true,
+    "healthBenefits": true,
+    "mediaCaptions": true,
+    "lastGenerated": "2026-09-16T08:48:22.767Z"
+  },
+  "_manualEdits": [
+    "mediaCaptions"
+  ]
+}
