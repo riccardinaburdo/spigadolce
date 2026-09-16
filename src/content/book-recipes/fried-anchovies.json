@@ -2,10 +2,10 @@
   "slug": "fried-anchovies",
   "title": "Fried Anchovies",
   "book": "august",
-  "bookPage": 46,
+  "bookPage": 48,
   "coverImage": "/images/book/fried-anchovies-hd-1789494944714.png",
   "published": true,
-  "date": "2026-09-15",
+  "date": "2026-09-16",
   "media": [
     {
       "type": "photo",
@@ -198,7 +198,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T18:01:48.316Z"
+    "lastGenerated": "2026-09-16T08:49:56.287Z"
   },
   "_manualEdits": [
     "mediaCaptions"
