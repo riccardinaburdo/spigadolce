@@ -2,10 +2,10 @@
   "slug": "snails-with-mint",
   "title": "Snails with mint",
   "book": "august",
-  "bookPage": 52,
+  "bookPage": 54,
   "coverImage": "/images/book/snails-with-mint-hd-1789495933651.png",
   "published": true,
-  "date": "2026-09-15",
+  "date": "2026-09-16",
   "media": [
     {
       "type": "photo",
@@ -159,7 +159,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T18:13:53.456Z"
+    "lastGenerated": "2026-09-16T08:49:12.934Z"
   },
   "_manualEdits": []
 }
