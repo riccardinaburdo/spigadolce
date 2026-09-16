@@ -246,6 +246,9 @@ if (!recipe) {
       height: 100%;
       object-fit: cover;
     }
+    .media-thumb .thumb-img-empty {
+      background: linear-gradient(135deg, #3a3a3a, #1e1e1e);
+    }
     .thumb-play-icon {
       position: absolute;
       top: 50%;
@@ -835,6 +838,19 @@ if (!recipe) {
     const lbCounter = document.getElementById('lb-counter');
     let currentLb = 0;
 
+    // Accepts any YouTube link shape (watch, youtu.be, embed, shorts, live).
+    // Entries saved before the dashboard normalised URLs hold watch links,
+    // which an iframe refuses to load, so resolve to an id here too.
+    function ytId(url) {
+      const m = String(url || '').match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+      return m ? m[1] : '';
+    }
+    function ytThumb(item) {
+      if (item.thumbnail) return item.thumbnail;
+      const id = ytId(item.src);
+      return id ? 'https://img.youtube.com/vi/' + id + '/hqdefault.jpg' : '';
+    }
+
     function openLightbox(index) {
       currentLb = index;
       const item = mediaItems[index];
@@ -851,7 +867,12 @@ if (!recipe) {
         lbImg.alt = item.caption;
         lbImg.classList.add('visible');
       } else if (item.type === 'youtube') {
-        lbYoutube.src = item.src + '&autoplay=1';
+        const id = ytId(item.src);
+        // Build the embed URL from the id: appending "&autoplay=1" to a bare
+        // /embed/ID made the id itself invalid, and watch URLs never embed.
+        lbYoutube.src = id
+          ? 'https://www.youtube.com/embed/' + id + '?autoplay=1'
+          : item.src;
         lbYoutube.classList.add('visible');
       } else {
         lbVideo.src = item.src;
@@ -894,9 +915,14 @@ if (!recipe) {
       const isVideo = (item.type === 'youtube' || item.type === 'video');
       let thumbContent;
       if (isVideo) {
-        const thumbSrc = item.thumbnail || '';
+        const thumbSrc = item.type === 'youtube' ? ytThumb(item) : (item.thumbnail || '');
+        // An <img> with an empty src renders as a broken icon with the alt
+        // text spilling over the play button — show a plain panel instead.
+        const inner = thumbSrc
+          ? `<img class="thumb-img" src="${thumbSrc}" alt="${item.caption}">`
+          : '<div class="thumb-img thumb-img-empty"></div>';
         thumbContent = `<div class="thumb-video-placeholder">
-          <img class="thumb-img" src="${thumbSrc}" alt="${item.caption}">
+          ${inner}
           <div class="thumb-play-icon"><svg viewBox="0 0 24 24" width="24" height="24"><polygon points="5,3 19,12 5,21" fill="#fff"/></svg></div>
         </div>`;
       } else {

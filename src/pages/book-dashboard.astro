@@ -500,10 +500,10 @@ export const prerender = false;
               </div>
               <div style="flex:1;min-width:200px;">
                 <div style="display:flex;gap:.4rem;">
-                  <input type="text" id="youtubeUrl" placeholder="YouTube embed URL" style="flex:1;padding:.5rem .65rem;border:1px solid #d4c5b0;border-radius:8px;font-size:.85rem;" />
+                  <input type="text" id="youtubeUrl" placeholder="YouTube link" style="flex:1;padding:.5rem .65rem;border:1px solid #d4c5b0;border-radius:8px;font-size:.85rem;" />
                   <button class="btn btn-outline btn-sm" onclick="addYouTube()">Add</button>
                 </div>
-                <div class="form-hint">e.g. https://www.youtube.com/embed/xxxxx</div>
+                <div class="form-hint">Paste any YouTube link — the share link, the address bar URL, or an embed URL</div>
               </div>
             </div>
             <div id="media-uploading"></div>
@@ -590,7 +590,9 @@ export const prerender = false;
         const isVideo = m.type === 'video';
         let thumbHtml;
         if (isYT) {
-          const thumbUrl = m.thumbnail ? imgSrc(m.thumbnail) : '';
+          const ytid = ytId(m.src);
+          const thumbUrl = m.thumbnail ? imgSrc(m.thumbnail)
+            : (ytid ? 'https://img.youtube.com/vi/' + ytid + '/hqdefault.jpg' : '');
           thumbHtml = thumbUrl ? `<img class="media-thumb" src="${thumbUrl}" alt="" />` : '<div class="media-thumb-placeholder">YouTube</div>';
         } else if (isVideo) {
           const thumbUrl = m.thumbnail ? imgSrc(m.thumbnail) : '';
@@ -656,11 +658,26 @@ export const prerender = false;
       refreshMediaGrid();
     }
 
+    // Accepts any YouTube link shape (watch, youtu.be, embed, shorts, live).
+    function ytId(url) {
+      const m = String(url || '').match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+      return m ? m[1] : '';
+    }
+
     function addYouTube() {
       const input = document.getElementById('youtubeUrl');
       const url = input.value.trim();
       if (!url) return;
-      mediaItems.push({ type: 'youtube', src: url, caption: '', thumbnail: '' });
+      const id = ytId(url);
+      if (!id) { toast('That does not look like a YouTube link', true); return; }
+      // Store the embed URL and the poster frame: a watch URL cannot be played
+      // in an iframe, and an empty thumbnail leaves a broken image in the gallery.
+      mediaItems.push({
+        type: 'youtube',
+        src: 'https://www.youtube.com/embed/' + id,
+        caption: '',
+        thumbnail: 'https://img.youtube.com/vi/' + id + '/hqdefault.jpg'
+      });
       input.value = '';
       refreshMediaGrid();
     }
