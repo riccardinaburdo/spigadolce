@@ -2,10 +2,10 @@
   "slug": "horsemeat-cutlets",
   "title": "Horsemeat cutlets",
   "book": "august",
-  "bookPage": 48,
+  "bookPage": 50,
   "coverImage": "/images/book/horsemeat-cutlets-hd-1789495344490.png",
   "published": true,
-  "date": "2026-09-15",
+  "date": "2026-09-16",
   "media": [
     {
       "type": "photo",
@@ -208,7 +208,7 @@
     "nutrition": true,
     "healthBenefits": true,
     "mediaCaptions": true,
-    "lastGenerated": "2026-09-15T18:07:20.902Z"
+    "lastGenerated": "2026-09-16T08:49:46.343Z"
   },
   "_manualEdits": []
 }
