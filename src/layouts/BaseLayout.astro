@@ -10,7 +10,7 @@ interface Props {
   currentPath?: string;
 }
 
-const { title, description = 'Spigadolce — Voluntary demonstrations of handmade Pugliese pasta by Riccardina Burdo. Orecchiette, cavatelli, strascinati and more, shared freely for the love of a living tradition.', image = '/images/general/hero-bg.jpg', currentPath = '' } = Astro.props;
+const { title, description = 'Spigadolce — Hands-on courses in handmade Pugliese pasta with Riccardina Burdo in London. Orecchiette, cavatelli, strascinati and more, shared with joy for the love of a living tradition.', image = '/images/general/hero-bg.jpg', currentPath = '' } = Astro.props;
 const canonicalUrl = `https://spigadolce.com${currentPath}`;
 const imageUrl = image.startsWith('http') ? image : `https://spigadolce.com${image}`;
 ---

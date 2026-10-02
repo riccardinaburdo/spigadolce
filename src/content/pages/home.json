@@ -1,8 +1,8 @@
 {
-  "title": "Spigadolce | Pugliese Pasta Traditions — Voluntary Demonstrations by Riccardina Burdo",
+  "title": "Spigadolce | Pugliese Pasta Traditions — Handmade Pasta Courses by Riccardina Burdo",
   "hero": {
     "heading": "Keeping Pugliese Pasta Traditions Alive",
-    "subheading": "Demonstrations and workshops on handmade Puglian pasta — orecchiette, cavatelli, strascinati and more. Shared freely, for the joy of passing on a living tradition.",
+    "subheading": "Courses and workshops on handmade Puglian pasta — orecchiette, cavatelli, strascinati and more. Shared with joy, for the love of passing on a living tradition.",
     "cta": "About Me",
     "ctaUrl": "/about",
     "backgroundImage": "/images/general/hero-bg.jpg"
@@ -12,7 +12,7 @@
   },
   "howItWorks": {
     "heading": "What to Expect",
-    "subheading": "A hands-on experience in the ancient art of Pugliese pasta-making — shared freely and with joy",
+    "subheading": "A hands-on experience in the ancient art of Pugliese pasta-making — shared with warmth and joy",
     "steps": [
       {
         "icon": "hands",
@@ -33,7 +33,7 @@
   },
   "testimonials": {
     "heading": "What People Say",
-    "subheading": "Stories from people who attended a demonstration",
+    "subheading": "Stories from people who attended a course",
     "items": []
   },
   "newsletter": {

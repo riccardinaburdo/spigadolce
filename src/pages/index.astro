@@ -33,7 +33,7 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
       <div class="next-demo-banner">
         <div class="next-demo-label">Next Course</div>
         <h2 class="next-demo-title">{nextEvent.title}</h2>
-        <p class="next-demo-meta">{nextEvent.date} · {nextEvent.time.replace(/\s*–\s*/, '–')} · {nextEvent.shortVenue || nextEvent.venue}</p>
+        <p class="next-demo-meta">{[nextEvent.date, nextEvent.time?.replace(/\s*–\s*/, '–'), nextEvent.shortVenue || nextEvent.venue].filter(Boolean).join(' · ')}</p>
         {nextEvent.homeSummary && <p class="next-demo-sub">{nextEvent.homeSummary}</p>}
         <a href="/courses" class="btn-primary">Find Out More</a>
       </div>

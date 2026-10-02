@@ -1,5 +1,11 @@
 {
   "title": "Contact",
-  "subtitle": "Get in touch to host a demonstration, collaborate, or simply to say hello.",
-  "fields": ["Name", "Email", "Phone", "Subject", "Message"]
+  "subtitle": "Get in touch to book a course, collaborate, or simply to say hello.",
+  "fields": [
+    "Name",
+    "Email",
+    "Phone",
+    "Subject",
+    "Message"
+  ]
 }
