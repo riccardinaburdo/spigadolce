@@ -7,5 +7,10 @@ export default defineConfig({
   site: 'https://spigadolce.com',
   output: 'static',
   adapter: vercel({ maxDuration: 60 }),
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // keep private/admin pages out of Google
+      filter: (page) => !/\/(dashboard|book-dashboard|book\/|admin)/.test(page),
+    }),
+  ],
 });

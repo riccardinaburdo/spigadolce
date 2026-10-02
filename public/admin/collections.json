@@ -17,6 +17,7 @@
       { "label": "Category", "name": "category", "widget": "select", "options": [], "required": false },
       { "label": "Cover Image", "name": "image", "widget": "image" },
       { "label": "Image Caption", "name": "imageCaption", "widget": "string", "required": false },
+      { "label": "Excerpt (one-line preview shown on the blog list and in Google/social previews)", "name": "excerpt", "widget": "text", "required": false },
       { "label": "Body", "name": "body", "widget": "list", "field": { "label": "Paragraph", "name": "paragraph", "widget": "text" } }
     ]
   },

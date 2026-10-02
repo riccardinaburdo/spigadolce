@@ -15,7 +15,7 @@ export function getStaticPaths() {
 const { recipe } = Astro.props;
 ---
 
-<BaseLayout title={`${recipe.title} | Spigadolce`} currentPath="/recipes">
+<BaseLayout title={`${recipe.title} | Spigadolce`} currentPath={`/recipes/${recipe.slug}`} description={recipe.description || undefined} image={recipe.image || undefined}>
   <div class="page-header">
     <h1>{recipe.title}</h1>
   </div>

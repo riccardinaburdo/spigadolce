@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import home from '../content/pages/home.json';
+import { splitEvents } from '../lib/events';
+
+const { nextEvent } = splitEvents();
 
 const steps = home.howItWorks.steps;
 const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
@@ -24,15 +27,24 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
     <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8; color: var(--color-dark);">{home.intro.text}</p>
   </section>
 
-  <!-- Next Demonstration Banner -->
+  <!-- Next Demonstration Banner (from demonstrations.json) -->
   <section class="section section-cream">
-    <div class="next-demo-banner">
-      <div class="next-demo-label">Next Demonstration</div>
-      <h2 class="next-demo-title">A Taste of Puglia</h2>
-      <p class="next-demo-meta">Saturday 13 June 2026 · 12:00–21:00 · Nag's Head Market, London N7</p>
-      <p class="next-demo-sub">Live orecchiette-making demonstrations at the Puglian Italian Fest, organised by Pugliesi nel Mondo UK</p>
-      <a href="/demonstrations" class="btn-primary">Find Out More</a>
-    </div>
+    {nextEvent ? (
+      <div class="next-demo-banner">
+        <div class="next-demo-label">Next Demonstration</div>
+        <h2 class="next-demo-title">{nextEvent.title}</h2>
+        <p class="next-demo-meta">{nextEvent.date} · {nextEvent.time.replace(/\s*–\s*/, '–')} · {nextEvent.shortVenue || nextEvent.venue}</p>
+        {nextEvent.homeSummary && <p class="next-demo-sub">{nextEvent.homeSummary}</p>}
+        <a href="/demonstrations" class="btn-primary">Find Out More</a>
+      </div>
+    ) : (
+      <div class="next-demo-banner">
+        <div class="next-demo-label">Demonstrations</div>
+        <h2 class="next-demo-title">Invite Me to Your Event</h2>
+        <p class="next-demo-sub">Free, hands-on demonstrations of handmade Pugliese pasta for community events, schools, libraries and private gatherings across London. New dates coming soon.</p>
+        <a href="/contact" class="btn-primary">Get in Touch</a>
+      </div>
+    )}
   </section>
 
   <!-- Pugliesi nel Mondo UK -->
@@ -42,7 +54,7 @@ const stepIcons = { hands: '🤲', cook: '🍳', feast: '🍷' };
       <p class="assoc-eyebrow">Volunteering with</p>
       <h2 class="assoc-title">Pugliesi nel Mondo UK</h2>
       <p class="assoc-text">I am an active volunteer member of Pugliesi nel Mondo UK, a non-profit association promoting the cultural heritage of Apulia in the United Kingdom. I bring my pasta demonstrations to their events — freely and with great joy.</p>
-      <a href="/demonstrations" class="btn-text-link">See upcoming demonstrations &rarr;</a>
+      <a href="/demonstrations" class="btn-text-link">{nextEvent ? 'See upcoming demonstrations' : 'See my demonstrations'} &rarr;</a>
     </div>
   </section>
 

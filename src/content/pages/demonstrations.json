@@ -2,20 +2,26 @@
   "title": "Demonstrations",
   "intro": "I offer voluntary demonstrations and workshops on handmade Pugliese pasta — orecchiette, cavatelli, strascinati, troccoli and other traditional forms — in private homes, at community events, and in cultural settings across London. There is no charge. Spigadolce is not a business; it is an act of love for a tradition I do not want to see disappear.",
   "upcomingHeading": "Upcoming Demonstrations",
+  "noUpcomingText": "New dates will be announced here soon. In the meantime, if you would like a demonstration at your event, school or community group, I would love to hear from you.",
+  "pastHeading": "Past Demonstrations",
   "events": [
     {
       "title": "A Taste of Puglia",
       "festival": "Puglian Italian Fest 2026",
       "date": "Saturday 13 June 2026",
+      "isoDate": "2026-06-13",
       "time": "12:00 – 21:00",
       "venue": "The Upper Place, 1st floor, Nag's Head Market",
+      "shortVenue": "Nag's Head Market, London N7",
       "address": "22 Seven Sisters Road, London N7 6AG",
       "description": "A day entirely dedicated to the flavours of Puglia. I will be giving live orecchiette-making demonstrations throughout the afternoon — come and try your hand at shaping the little ears of durum wheat that generations of Apulian women have made on wooden boards since time immemorial.",
+      "pastDescription": "A day entirely dedicated to the flavours of Puglia. I gave live orecchiette-making demonstrations throughout the afternoon, and visitors tried their hand at shaping the little ears of durum wheat that generations of Apulian women have made on wooden boards since time immemorial.",
       "organiser": "Pugliesi nel Mondo UK",
       "organiserUrl": "https://pugliesinelmondouk.org/eventi/puglian-italian-fest/a-taste-of-puglia",
       "ticketsUrl": "https://pugliesinelmondouk.org/eventi/puglian-italian-fest/a-taste-of-puglia",
       "ticketsNote": "£3.96 entry (free for Pugliesi nel Mondo UK members)",
-      "image": "/images/demonstrations/food-experiences.jpg"
+      "image": "/images/demonstrations/food-experiences.jpg",
+      "homeSummary": "Live orecchiette-making demonstrations at the Puglian Italian Fest, organised by Pugliesi nel Mondo UK"
     }
   ],
   "associationHeading": "Pugliesi nel Mondo UK",

@@ -26,7 +26,7 @@ function getCoverImage(a: any): string {
 const coverImage = getCoverImage(article);
 ---
 
-<BaseLayout title={`${article.title} | Spigadolce`} currentPath="/blog">
+<BaseLayout title={`${article.title} | Spigadolce`} currentPath={`/blog/${article.slug}`} description={article.excerpt || undefined} image={coverImage || undefined}>
   <div class="page-header">
     <h1>{article.title}</h1>
   </div>

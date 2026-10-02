@@ -3,8 +3,18 @@
     {
       "source": "/admin/config.yml",
       "headers": [
-        { "key": "Content-Type", "value": "text/yaml; charset=utf-8" }
+        {
+          "key": "Content-Type",
+          "value": "text/yaml; charset=utf-8"
+        }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-index.xml",
+      "permanent": true
     }
   ]
 }

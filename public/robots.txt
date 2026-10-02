@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /dashboard
+Disallow: /book-dashboard
+Disallow: /book/
 
-Sitemap: https://spigadolce.vercel.app/sitemap-index.xml
+Sitemap: https://spigadolce.com/sitemap-index.xml

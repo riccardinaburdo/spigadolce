@@ -1,9 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import data from '../content/pages/demonstrations.json';
+import { splitEvents } from '../lib/events';
+
+const { upcoming, past } = splitEvents();
 ---
 
-<BaseLayout title="Demonstrations | Spigadolce" currentPath="/demonstrations">
+<BaseLayout title="Demonstrations | Spigadolce" currentPath="/demonstrations" description="Free, voluntary demonstrations of handmade Pugliese pasta in London — orecchiette, cavatelli, troccoli and more — for community events, schools and private gatherings.">
 
   <section class="page-header">
     <h1>{data.title}</h1>
@@ -13,8 +16,9 @@ import data from '../content/pages/demonstrations.json';
   <!-- Upcoming Events -->
   <section class="section">
     <h2>{data.upcomingHeading}</h2>
-    <div class="events-list">
-      {data.events.map((event) => (
+    {upcoming.length > 0 ? (
+      <div class="events-list">
+        {upcoming.map((event) => (
         <div class="event-card">
           {event.image && (
             <div class="event-card-img">
@@ -47,9 +51,51 @@ import data from '../content/pages/demonstrations.json';
             </div>
           </div>
         </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    ) : (
+      <p class="events-empty">{data.noUpcomingText}</p>
+    )}
   </section>
+
+  <!-- Past Events -->
+  {past.length > 0 && (
+    <section class="section section-cream">
+      <h2>{data.pastHeading}</h2>
+      <div class="events-list">
+        {past.map((event) => (
+        <div class="event-card event-card--past">
+          {event.image && (
+            <div class="event-card-img">
+              <img src={event.image} alt={event.title} />
+            </div>
+          )}
+          <div class="event-card-badge event-card-badge--past">Past</div>
+          <div class="event-card-body">
+            <p class="event-festival">{event.festival}</p>
+            <h3 class="event-title">{event.title}</h3>
+            <div class="event-meta">
+              <span class="event-meta-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                {event.date} · {event.time}
+              </span>
+              <span class="event-meta-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                {event.venue} — {event.address}
+              </span>
+            </div>
+            <p class="event-description">{event.pastDescription || event.description}</p>
+            <div class="event-footer">
+              <div class="event-organiser">
+                Organised by <a href={event.organiserUrl} target="_blank" rel="noopener">{event.organiser}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        ))}
+      </div>
+    </section>
+  )}
 
   <!-- Association -->
   <section class="section section-warm">
@@ -88,6 +134,23 @@ import data from '../content/pages/demonstrations.json';
     font-size: 1.05rem;
     line-height: 1.9;
     color: #555;
+  }
+
+  .events-empty {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #555;
+  }
+
+  .event-card--past {
+    border-left-color: #bbb;
+  }
+
+  .event-card-badge--past {
+    background: #8a8a8a !important;
   }
 
   .events-list {
