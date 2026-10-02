@@ -6,8 +6,7 @@
     { "label": "Recipes", "url": "/recipes" },
     { "label": "Blog", "url": "/blog" },
     { "label": "Press", "url": "/reviews" },
-    { "label": "Contact", "url": "/contact" },
-    { "label": "Reserved Area", "url": "/book-dashboard" }
+    { "label": "Contact", "url": "/contact" }
   ],
   "ctaLabel": null,
   "ctaUrl": null
