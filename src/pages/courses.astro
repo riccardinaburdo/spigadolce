@@ -359,6 +359,21 @@ const { upcoming, past } = splitEvents();
     }
   }
 
+  /* Course card: photo across the top, same proportions on every screen */
+  .course-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+  .course-card .event-card-img {
+    grid-row: auto;
+    grid-column: 1;
+    aspect-ratio: 343 / 200;
+    height: auto;
+  }
+  .course-card .event-card-body {
+    padding-top: 1.8rem;
+  }
+
   /* Upcoming course card details */
   .course-card .event-description {
     border-top: none;
