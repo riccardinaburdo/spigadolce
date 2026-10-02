@@ -32,7 +32,7 @@ const { upcoming, past } = splitEvents();
 
             <dl class="course-facts">
               {event.date && (<div><dt>Date</dt><dd>{event.date}</dd></div>)}
-              {event.time && (<div><dt>Time</dt><dd>{event.time}{event.duration && <span class="course-fact-sub"> · {event.duration}</span>}</dd></div>)}
+              {event.time && (<div><dt>Time</dt><dd>{event.time}{event.duration && <span class="course-fact-inline"> · {event.duration}</span>}</dd></div>)}
               {(event.venue || event.address) && (
                 <div class="course-fact-wide"><dt>Where</dt><dd>{event.venue}{event.address && <span class="course-fact-sub">{event.address}</span>}</dd></div>
               )}
@@ -360,14 +360,18 @@ const { upcoming, past } = splitEvents();
   }
 
   /* Upcoming course card details */
+  .course-card .event-description {
+    border-top: none;
+    padding-top: 0;
+  }
   .course-facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.9rem 1.5rem;
     margin: 1.2rem 0 1.4rem;
     padding: 1rem 0;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-top: 1px solid var(--color-warm);
+    border-bottom: 1px solid var(--color-warm);
   }
   .course-facts div { min-width: 0; }
   .course-fact-wide { grid-column: 1 / -1; }
@@ -389,7 +393,10 @@ const { upcoming, past } = splitEvents();
     font-weight: 400;
     color: #666;
   }
-  .course-facts dd .course-fact-sub:first-child { display: inline; }
+  .course-fact-inline {
+    font-weight: 400;
+    color: #666;
+  }
   .course-price { font-size: 1.15rem; color: var(--color-accent) !important; }
   .course-includes { margin: 1.2rem 0; }
   .course-includes h4 {
