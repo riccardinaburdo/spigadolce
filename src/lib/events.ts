@@ -1,4 +1,4 @@
-import data from '../content/pages/demonstrations.json';
+import data from '../content/pages/courses.json';
 
 export type DemoEvent = (typeof data.events)[number];
 

@@ -2,7 +2,7 @@
   "menu": [
     { "label": "Home", "url": "/" },
     { "label": "About Me", "url": "/about" },
-    { "label": "Demonstrations", "url": "/demonstrations" },
+    { "label": "Courses", "url": "/courses" },
     { "label": "Recipes", "url": "/recipes" },
     { "label": "Blog", "url": "/blog" },
     { "label": "Press", "url": "/reviews" },

@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import data from '../content/pages/demonstrations.json';
+import data from '../content/pages/courses.json';
 import { splitEvents } from '../lib/events';
 
 const { upcoming, past } = splitEvents();
 ---
 
-<BaseLayout title="Demonstrations | Spigadolce" currentPath="/demonstrations" description="Free, voluntary demonstrations of handmade Pugliese pasta in London — orecchiette, cavatelli, troccoli and more — for community events, schools and private gatherings.">
+<BaseLayout title="Courses | Spigadolce" currentPath="/courses" description="Hands-on courses in handmade Pugliese pasta in London with Riccardina Burdo — orecchiette, cavatelli, troccoli and more — for groups, events and private gatherings.">
 
   <section class="page-header">
     <h1>{data.title}</h1>

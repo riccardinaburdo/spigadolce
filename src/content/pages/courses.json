@@ -1,9 +1,9 @@
 {
-  "title": "Demonstrations",
-  "intro": "I offer voluntary demonstrations and workshops on handmade Pugliese pasta — orecchiette, cavatelli, strascinati, troccoli and other traditional forms — in private homes, at community events, and in cultural settings across London. There is no charge. Spigadolce is not a business; it is an act of love for a tradition I do not want to see disappear.",
-  "upcomingHeading": "Upcoming Demonstrations",
-  "noUpcomingText": "New dates will be announced here soon. In the meantime, if you would like a demonstration at your event, school or community group, I would love to hear from you.",
-  "pastHeading": "Past Demonstrations",
+  "title": "Courses",
+  "intro": "I offer hands-on courses and workshops on handmade Pugliese pasta — orecchiette, cavatelli, strascinati, troccoli and other traditional forms — in private homes, at community events, and in cultural settings across London. Places are limited. Spigadolce is not just a cooking class; it is an act of love for a tradition I do not want to see disappear.",
+  "upcomingHeading": "Upcoming Courses",
+  "noUpcomingText": "New course dates will be announced here soon. In the meantime, if you would like a private course for your group, event or celebration, I would love to hear from you.",
+  "pastHeading": "Past Courses",
   "events": [
     {
       "title": "A Taste of Puglia",
@@ -27,6 +27,6 @@
   "associationHeading": "Pugliesi nel Mondo UK",
   "associationText": "I am an active volunteer member of Pugliesi nel Mondo UK, a non-profit association dedicated to preserving and promoting the cultural heritage of Apulia within the United Kingdom. The association creates a bridge between Puglia and Britain — through cultural events, community gatherings, and the shared love of a region, its traditions, and its people.",
   "associationUrl": "https://pugliesinelmondouk.org",
-  "inviteHeading": "Invite Me to Your Event",
-  "inviteText": "If you would like to include a Pugliese pasta demonstration at your community event, cultural setting, school, library or private gathering, I would be delighted to hear from you. All demonstrations are offered freely and with no commercial purpose."
+  "inviteHeading": "Book a Private Course",
+  "inviteText": "If you would like a Pugliese pasta course for your group, community event, cultural setting, school, library or private gathering, I would be delighted to hear from you. Each course can be tailored to the size and experience of your group."
 }

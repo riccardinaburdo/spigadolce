@@ -15,6 +15,11 @@
       "source": "/sitemap.xml",
       "destination": "/sitemap-index.xml",
       "permanent": true
+    },
+    {
+      "source": "/demonstrations",
+      "destination": "/courses",
+      "permanent": true
     }
   ]
 }
