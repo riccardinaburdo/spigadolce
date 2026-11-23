@@ -200,6 +200,14 @@ const publishedLine =
   .pc-feature-body {
     max-width: 380px;
     margin-top: 1.6rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  /* keep price and button on the same line across volumes */
+  .pc-feature-text {
+    flex: 1;
   }
   .pc-feature-month {
     font-family: var(--font-heading);
@@ -358,10 +366,14 @@ const publishedLine =
   .pc-apple-grid {
     list-style: none;
     padding: 0;
-    margin: 2.2rem 0 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    margin: 2.2rem auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem 1.6rem;
+  }
+  .pc-apple-grid li {
+    width: 170px;
   }
   .pc-apple {
     display: flex;
@@ -423,8 +435,10 @@ const publishedLine =
       gap: 1.2rem 0.9rem;
     }
     .pc-apple-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1.6rem 1rem;
+    }
+    .pc-apple-grid li {
+      width: calc(50% - 0.5rem);
     }
   }
 </style>
