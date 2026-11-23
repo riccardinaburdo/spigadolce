@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import amazon from '../content/books/amazon.json';
-import appleBooks from '../content/books/books.json';
+import appleBooksData from '../content/books/books.json';
+
+// Books marked "hidden" stay in the data but are not shown (e.g. while still free).
+const appleBooks = appleBooksData.filter((b) => !b.hidden);
 
 const published = amazon.books.filter((b) => b.url);
 const publishedNames = published.map((b) => b.month);

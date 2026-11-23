@@ -5,7 +5,8 @@
     "image": "/images/books/book-agosto.png",
     "url": "https://books.apple.com/us/book/cucina-pugliese/id560154899",
     "price": "Free",
-    "language": "Italiano"
+    "language": "Italiano",
+    "hidden": true
   },
   {
     "title": "Cucina Pugliese - Settembre",
@@ -45,7 +46,8 @@
     "image": "/images/books/book-italian-cuisine.jpg",
     "url": "https://books.apple.com/gb/book/italian-cuisine/id563015953",
     "price": "Free",
-    "language": "English"
+    "language": "English",
+    "hidden": true
   },
   {
     "title": "イタリア料理・8月 (Italian Cuisine — August)",
