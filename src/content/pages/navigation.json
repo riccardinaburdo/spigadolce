@@ -4,6 +4,7 @@
     { "label": "About Me", "url": "/about" },
     { "label": "Courses", "url": "/courses" },
     { "label": "Recipes", "url": "/recipes" },
+    { "label": "Books", "url": "/books" },
     { "label": "Blog", "url": "/blog" },
     { "label": "Press", "url": "/reviews" },
     { "label": "Contact", "url": "/contact" }

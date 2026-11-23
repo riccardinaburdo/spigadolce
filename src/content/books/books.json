@@ -4,48 +4,55 @@
     "author": "Riccardina Burdo",
     "image": "/images/books/book-agosto.png",
     "url": "https://books.apple.com/us/book/cucina-pugliese/id560154899",
-    "price": "Free"
+    "price": "Free",
+    "language": "Italiano"
   },
   {
     "title": "Cucina Pugliese - Settembre",
     "author": "Riccardina Burdo",
     "image": "/images/books/book-settembre.png",
     "url": "https://books.apple.com/us/book/cucina-pugliese-settembre/id568699419",
-    "price": null
+    "price": null,
+    "language": "Italiano"
   },
   {
     "title": "Cucina Pugliese - Ottobre",
     "author": "Riccardina Burdo",
     "image": "/images/books/book-ottobre.png",
     "url": "https://books.apple.com/us/book/cucina-pugliese-ottobre/id578138343",
-    "price": null
+    "price": null,
+    "language": "Italiano"
   },
   {
     "title": "Cucina Pugliese - Novembre",
     "author": "Riccardina Burdo",
     "image": "/images/books/book-novembre.png",
     "url": "https://books.apple.com/us/book/cucina-pugliese-novembre/id588212280",
-    "price": null
+    "price": null,
+    "language": "Italiano"
   },
   {
     "title": "Cucina Pugliese - Dicembre",
     "author": "Riccardina Burdo",
     "image": "/images/books/book-dicembre.png",
     "url": "https://books.apple.com/us/book/cucina-pugliese-dicembre/id629926142",
-    "price": null
+    "price": null,
+    "language": "Italiano"
   },
   {
     "title": "Italian Cuisine — Recipes for August",
     "author": "Riccardina Burdo",
     "image": "/images/books/book-italian-cuisine.jpg",
     "url": "https://books.apple.com/gb/book/italian-cuisine/id563015953",
-    "price": "Free"
+    "price": "Free",
+    "language": "English"
   },
   {
     "title": "イタリア料理・8月 (Italian Cuisine — August)",
     "author": "Riccardina Burdo",
     "image": "/images/books/book-japanese.jpg",
     "url": "https://books.apple.com/gb/book/%E3%82%A4%E3%82%BF%E3%83%AA%E3%82%A2%E6%96%99%E7%90%86-8%E6%9C%88/id1513798448",
-    "price": "£1.49"
+    "price": "£1.49",
+    "language": "日本語"
   }
 ]

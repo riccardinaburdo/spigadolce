@@ -1,0 +1,104 @@
+{
+  "seriesTitle": "Puglian Cuisine",
+  "seriesSubtitle": "Seasonal recipes and memories from Southern Italy",
+  "seriesUrl": "https://www.amazon.co.uk/dp/B0HMJ49V4Q",
+  "format": "Paperback",
+  "books": [
+    {
+      "month": "January",
+      "image": "/images/books/puglian-cuisine/january.jpg",
+      "largeImage": null,
+      "url": null,
+      "price": null,
+      "description": null
+    },
+    {
+      "month": "February",
+      "image": "/images/books/puglian-cuisine/february.jpg",
+      "largeImage": null,
+      "url": null,
+      "price": null,
+      "description": null
+    },
+    {
+      "month": "March",
+      "image": "/images/books/puglian-cuisine/march.jpg",
+      "largeImage": null,
+      "url": null,
+      "price": null,
+      "description": null
+    },
+    {
+      "month": "April",
+      "image": "/images/books/puglian-cuisine/april.jpg",
+      "largeImage": null,
+      "url": null,
+      "price": null,
+      "description": null
+    },
+    {
+      "month": "May",
+      "image": "/images/books/puglian-cuisine/may.jpg",
+      "largeImage": null,
+      "url": null,
+      "price": null,
+      "description": null
+    },
+    {
+      "month": "June",
+      "image": "/images/books/puglian-cuisine/june.jpg",
+      "largeImage": null,
+      "url": null,
+      "price": null,
+      "description": null
+    },
+    {
+      "month": "July",
+      "image": "/images/books/puglian-cuisine/july.jpg",
+      "largeImage": null,
+      "url": null,
+      "price": null,
+      "description": null
+    },
+    {
+      "month": "August",
+      "image": "/images/books/puglian-cuisine/august.jpg",
+      "largeImage": "/images/books/puglian-cuisine/august-large.jpg",
+      "url": "https://www.amazon.co.uk/dp/B0HMJ4D8QZ",
+      "price": "£12.99",
+      "description": "Peppers ripening on the vine, mussels fresh from the Adriatic and tomato sauce simmering since dawn in a courtyard lit by fire. Twenty traditional recipes, from homemade orecchiette to the legendary summer acquasale, woven with memories of a family kitchen in Andria."
+    },
+    {
+      "month": "September",
+      "image": "/images/books/puglian-cuisine/september.jpg",
+      "largeImage": "/images/books/puglian-cuisine/september-large.jpg",
+      "url": "https://www.amazon.co.uk/dp/B0HRPKM31S",
+      "price": "£12.99",
+      "description": "The month of the grape harvest: must simmered into vincotto, almonds drying in the sun along the pavements of Andria. Twenty recipes, from cavatelli with beans and mussels to troccoli with clams and the rice, potato and mussel tiella."
+    },
+    {
+      "month": "October",
+      "image": "/images/books/puglian-cuisine/october.jpg",
+      "largeImage": null,
+      "url": null,
+      "price": null,
+      "description": null
+    },
+    {
+      "month": "November",
+      "image": "/images/books/puglian-cuisine/november.jpg",
+      "largeImage": null,
+      "url": null,
+      "price": null,
+      "description": null
+    },
+    {
+      "month": "December",
+      "image": "/images/books/puglian-cuisine/december.jpg",
+      "largeImage": null,
+      "url": null,
+      "price": null,
+      "description": null
+    }
+  ]
+}
