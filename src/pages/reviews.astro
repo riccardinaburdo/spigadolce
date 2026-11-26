@@ -3,6 +3,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const pressItems = [
   {
+    publication: "ENIT London",
+    date: "24 November 2026",
+    title: "Week of Italian Cuisine in the World: handmade orecchiette at ENIT London",
+    quote: "I demonstrated how to make orecchiette by hand, following a tradition passed down for centuries by women in Puglia — using, of course, my grandmother's rasaul.",
+    video: "/videos/enit-london-2026.mp4",
+    image: "/images/press/enit-london-2026.jpg",
+    credit: "Video by London One Radio",
+    creditUrl: "https://londononeradio.com",
+    story: [
+      "Yesterday, as part of the Week of Italian Cuisine in the World, I had the honour of welcoming several British journalists to a truly special event organised by ENIT London.",
+      "I shared a bit of my personal story, from the trattoria run by my grandparents in Andria to the kitchen of my childhood. I then demonstrated how to make orecchiette by hand, following a tradition passed down for centuries by women in Puglia, using, of course, my grandmother's rasaul (traditional pasta-cutting tool). Some of the journalists were keen to try their hand at making orecchiette themselves, and so did the Consul!",
+      "It was an honour to be visited by the Italian Consul in London, Palma D'Ambrosio, who also hails from Puglia. Sharing her memories and the emotions tied to our homeland made the occasion deeply moving for all of us. A special thank you also goes to Roberto Costa, President of the Chamber of Commerce, and to all the institutional guests who attended.",
+      "Afterwards, we sat down to enjoy the orecchiette I had prepared, served with turnip tops (cime di rapa) and accompanied by focaccia, taralli, olives and wine from Puglia.",
+      "A big thank you to our friends at Altamura Bakehouse, who supplied the cime di rapa and all the delicacies they produce here in London, from focaccia to authentic pane di Altamura and much more, all strictly Puglian.",
+      "I would also like to thank Flavio Zappacosta, Director of the ENIT London office, and Riccardo Pandini, Senior Marketing, PR & Communications Manager of ENIT UK & Ireland (Italian National Tourist Board), for making this event possible and for welcoming us in their beautiful offices on Princes Street in London.",
+      "It was a wonderful experience, met with great enthusiasm by everyone present. More events are coming soon, so stay tuned!",
+      "Heartfelt thanks to everyone who made this possible."
+    ]
+  },
+  {
     publication: "Telebari",
     date: "16 July 2025",
     title: "Dina, the queen of orecchiette: from Puglia to London",
@@ -54,7 +74,7 @@ const pressItems = [
 ];
 ---
 
-<BaseLayout title="Press | Spigadolce" currentPath="/reviews" description="Spigadolce in the media: The Guardian, Gambero Rosso, Telebari, Londra Sera and more on Riccardina Burdo and handmade Pugliese pasta in London.">
+<BaseLayout title="Press | Spigadolce" currentPath="/reviews" description="Spigadolce in the media: ENIT London, The Guardian, Gambero Rosso, Telebari, Londra Sera and more on Riccardina Burdo and handmade Pugliese pasta in London.">
 
   <section class="page-header">
     <h1>Press</h1>
@@ -64,7 +84,12 @@ const pressItems = [
   <section class="section" style="max-width: 800px; margin: 0 auto;">
     <div class="press-list">
       {pressItems.map((item) => (
-        <div class="press-card">
+        <div class:list={['press-card', { 'press-card--video': item.video }]}>
+          {item.video ? (
+            <div class="press-video-wrapper">
+              <video class="press-video" src={item.video} poster={item.image} controls playsinline preload="none" aria-label={item.title}></video>
+            </div>
+          ) : (
           <div class="press-thumb-wrapper">
             <img src={item.image} alt={item.publication} class="press-thumb" />
             {item.isVideo && (
@@ -73,6 +98,7 @@ const pressItems = [
               </a>
             )}
           </div>
+          )}
           <div class="press-body">
             <div class="press-header">
               <span class="press-publication">{item.publication}</span>
@@ -80,7 +106,18 @@ const pressItems = [
             </div>
             <p class="press-title">{item.title}</p>
             <p class="press-quote">"{item.quote}"</p>
-            <a href={item.url} target="_blank" rel="noopener noreferrer" class="press-link">{item.isVideo ? 'Watch the video →' : 'Read the full article →'}</a>
+            {item.story && (
+              <details class="press-story">
+                <summary>Read the full story</summary>
+                {item.story.map((para) => <p>{para}</p>)}
+              </details>
+            )}
+            {item.credit && (
+              <p class="press-credit"><a href={item.creditUrl} target="_blank" rel="noopener noreferrer">{item.credit}</a></p>
+            )}
+            {item.url && (
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="press-link">{item.isVideo ? 'Watch the video →' : 'Read the full article →'}</a>
+            )}
           </div>
         </div>
       ))}
@@ -189,8 +226,60 @@ const pressItems = [
     letter-spacing: 0.02em;
   }
   .press-link:hover { text-decoration: underline; }
+  /* Video entries: vertical (9:16) video beside the text */
+  .press-card--video {
+    align-items: flex-start;
+  }
+  .press-video-wrapper {
+    width: 220px;
+    min-width: 220px;
+    flex-shrink: 0;
+    background: #000;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+  }
+  .press-video {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    display: block;
+    object-fit: cover;
+    background: #000;
+  }
+  .press-story {
+    margin: 0 0 0.8rem;
+  }
+  .press-story summary {
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-gold);
+    letter-spacing: 0.02em;
+    list-style: none;
+  }
+  .press-story summary::-webkit-details-marker { display: none; }
+  .press-story summary::after { content: ' →'; }
+  .press-story[open] summary::after { content: ' ↑'; }
+  .press-story p {
+    margin-top: 0.8rem;
+    font-size: 0.93rem;
+    line-height: 1.75;
+    color: #444;
+  }
+  .press-credit {
+    font-size: 0.8rem;
+    color: #888;
+    margin: 0 0 0.4rem;
+  }
+  .press-credit a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
   @media (max-width: 600px) {
     .press-card { flex-direction: column; align-items: stretch; }
+    .press-video-wrapper { width: 100%; min-width: unset; justify-content: center; }
+    .press-video { max-width: 320px; margin: 0 auto; }
     .press-thumb-wrapper { width: 100%; height: 180px; min-width: unset; }
   }
 </style>
